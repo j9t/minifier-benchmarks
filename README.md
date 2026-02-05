@@ -1,6 +1,6 @@
 # Minifier Benchmarks (Beta)
 
-A collection of regularly updated benchmarks for HTML minifiers ([context](@@)).
+A collection of regularly updated benchmarks for HTML minifiers ([context](@@)). Alpha release.
 
 * **Minifier user?** Compare HTML minifiers [by HTML minification effectiveness](@@) or [by overall “maximum” effectiveness](@@) (all available options checked)
 * **Minifier author?** [Add and configure your minifier and become a co-owner](@@)
