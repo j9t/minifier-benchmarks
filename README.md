@@ -1,10 +1,10 @@
 # Minifier Benchmarks (Beta)
 
-A collection of regularly updated benchmarks for HTML minifiers ([context](@@)). Alpha release.
+A collection of regularly updated benchmarks for HTML minifiers ([context](https://dev.to/j9t/on-the-need-for-neutral-maintained-minifier-metrics-5715)). Alpha release.
 
-* **Minifier user?** Compare HTML minifiers [by HTML minification effectiveness](@@) or [by overall “maximum” effectiveness](@@) (all available options checked)
-* **Minifier author?** [Add and configure your minifier and become a co-owner](@@)
-* **Innocent bystander?** [Please share feedback and suggestions](@@)
+* **Minifier user?** Compare HTML minifiers [by HTML minification effectiveness](#html-minification-compared), [by overall “maximum” effectiveness](#maximum-minification-compared) (all available options checked), and the respective processing times
+* **Minifier author?** [Add and configure your minifier and become a co-owner](https://github.com/j9t/minifier-benchmarks/compare)
+* **Innocent bystander?** [Please share feedback and suggestions](https://github.com/j9t/minifier-benchmarks/issues/new)
 
 <!-- Auto-generated benchmarks, don't edit -->
 Benchmarks last updated: Feb 5, 2026
