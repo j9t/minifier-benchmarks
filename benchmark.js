@@ -345,7 +345,7 @@ async function processFiles() {
 }
 
 async function processFile(fileName) {
-  const filePath = path.join('./input', fileName + '.html');
+  const filePath = path.join(__dirname, 'input', fileName + '.html');
 
   async function processFileInternal(site) {
     const original = {
