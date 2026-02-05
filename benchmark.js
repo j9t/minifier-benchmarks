@@ -880,7 +880,7 @@ const now = new Date();
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 const dateStamp = `${months[now.getMonth()]} ${now.getDate()}, ${now.getFullYear()}`;
 
-const readme = 'README.md';
+const readme = path.join(__dirname, 'README.md');
 let data = await readText(readme);
 
 // Update the single date at the start of the benchmarks section
@@ -911,15 +911,19 @@ if (headerPos !== -1) {
 }
 
 // Find next section or end of file
-let end = data.indexOf('##', start);
-if (end === -1) {
+let end = data.indexOf('\n##', start);
+if (end !== -1) {
+  end = end + 1; // Point to `##`, not the preceding newline
+} else {
   end = data.length;
 }
 
-// Replace table content (content ends with `\n`, add one more for blank line before next section)
+// Replace table content, normalize newlines to avoid double blank lines
 // Add end comment after max table (marks end of auto-generated content)
-const endComment = IS_HTML_ONLY ? '' : '<!-- End auto-generated -->\n';
-const newData = data.slice(0, start) + content + endComment + '\n' + data.slice(end);
+const endComment = IS_HTML_ONLY ? '' : '<!-- End auto-generated -->';
+const trimmedContent = content.trimEnd();
+const separator = endComment ? '\n' + endComment + '\n\n' : '\n\n';
+const newData = data.slice(0, start) + trimmedContent + separator + data.slice(end);
 await writeText(readme, newData);
 
 console.log(`\nUpdated ${modeLabel} README.md section`);
