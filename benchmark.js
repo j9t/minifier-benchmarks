@@ -22,8 +22,20 @@ const { minify: minifyHTML } = minifyHTMLPkg;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// Parse `--mode` argument (`html` or `max`, default: `max`)
+const modeArg = process.argv.find(arg => arg.startsWith('--mode='));
+const MODE = modeArg ? modeArg.split('=')[1] : 'max';
+if (!['html', 'max'].includes(MODE)) {
+  console.error(`Invalid mode: ${MODE}. Use --mode=html or --mode=max`);
+  process.exit(1);
+}
+const IS_HTML_ONLY = MODE === 'html';
+
+// Output directory based on mode
+const outputDir = path.join(__dirname, 'output', MODE);
+
 // Ensure required directories exist for fresh runs
-await fs.mkdir(path.join(__dirname, 'output'), { recursive: true });
+await fs.mkdir(outputDir, { recursive: true });
 await fs.mkdir(path.join(__dirname, 'input'), { recursive: true });
 
 const user_agent = 'html-minifier-next-benchmarks/0.0';
@@ -333,22 +345,22 @@ async function processFiles() {
 }
 
 async function processFile(fileName) {
-  const filePath = path.join('./input', fileName + '.html');
+  const filePath = path.join(__dirname, 'input', fileName + '.html');
 
   async function processFileInternal(site) {
     const original = {
       filePath: filePath,
-      gzFilePath: path.join('./output/', fileName + '.html.gz'),
-      lzFilePath: path.join('./output/', fileName + '.html.lz'),
-      brFilePath: path.join('./output/', fileName + '.html.br')
+      gzFilePath: path.join(outputDir, fileName + '.html.gz'),
+      lzFilePath: path.join(outputDir, fileName + '.html.lz'),
+      brFilePath: path.join(outputDir, fileName + '.html.br')
     };
     const infos = {};
     ['minifier', 'htmlnano', 'swchtml', 'minifyhtml', 'minimize', 'compressor'].forEach(function (name) {
       infos[name] = {
-        filePath: path.join('./output/', fileName + '.' + name + '.html'),
-        gzFilePath: path.join('./output/', fileName + '.' + name + '.html.gz'),
-        lzFilePath: path.join('./output/', fileName + '.' + name + '.html.lz'),
-        brFilePath: path.join('./output/', fileName + '.' + name + '.html.br')
+        filePath: path.join(outputDir, fileName + '.' + name + '.html'),
+        gzFilePath: path.join(outputDir, fileName + '.' + name + '.html.gz'),
+        lzFilePath: path.join(outputDir, fileName + '.' + name + '.html.lz'),
+        brFilePath: path.join(outputDir, fileName + '.' + name + '.html.br')
       };
     });
 
@@ -392,6 +404,15 @@ async function processFile(fileName) {
       try {
         // Load config and add site-specific minifyURLs
         const config = { ...minifierConfig, minifyURLs: site };
+
+        // HTML-only mode: Disable CSS, JS, SVG, and other minification
+        if (IS_HTML_ONLY) {
+          config.minifyCSS = false;
+          config.minifyJS = false;
+          config.minifySVG = false;
+          config.minifyURLs = false;
+        }
+
         const result = await minifyHMN(data, config);
         await writeText(info.filePath, result);
         await readSizes(info);
@@ -411,7 +432,7 @@ async function processFile(fileName) {
         'https://vivaldi.com/'
       ];
 
-      if (SKIP_URLS.includes(site)) {
+      if (!IS_HTML_ONLY && SKIP_URLS.includes(site)) {
         benchmarkErrors.push(`htmlnano skipped for ${fileName} (known Terser crash)`);
         resetSizes(info);
         return;
@@ -422,7 +443,10 @@ async function processFile(fileName) {
       info.startTime = Date.now();
 
       try {
-        const result = await htmlnano.process(data, {}, htmlnano.presets.max);
+        // Use “safe” preset for HTML-only mode (no CSS/JS minification)
+        // Use “max” preset for maximum minification
+        const preset = IS_HTML_ONLY ? htmlnano.presets.safe : htmlnano.presets.max;
+        const result = await htmlnano.process(data, {}, preset);
         await writeText(info.filePath, result.html);
         await readSizes(info);
       } catch (err) {
@@ -440,8 +464,8 @@ async function processFile(fileName) {
       try {
         const result = await minifySWC(data, {
           // Use most aggressive settings that keep HTML valid
-          minify_js: true,
-          minify_css: true,
+          minify_js: !IS_HTML_ONLY,
+          minify_css: !IS_HTML_ONLY,
           collapseWhitespaces: 'all',
           remove_comments: true,
           remove_empty_attributes: true,
@@ -472,8 +496,8 @@ async function processFile(fileName) {
           keep_html_and_head_opening_tags: false,
           keep_input_type_text_attr: false,
           keep_ssi_comments: false,
-          minify_css: true,
-          minify_js: true, // Disable if Rust panics get too frequent
+          minify_css: !IS_HTML_ONLY,
+          minify_js: !IS_HTML_ONLY, // Disable if Rust panics get too frequent
           preserve_brace_template_syntax: false,
           preserve_chevron_percent_template_syntax: false,
           remove_bangs: true,
@@ -626,9 +650,9 @@ async function processFile(fileName) {
           html_strip_quotes: 1,
           minimize_style: 1,
           minimize_events: 1,
-          minimize_js_href: 1,
-          minimize_css: 1,
-          minimize_js: 1,
+          minimize_js_href: IS_HTML_ONLY ? 0 : 1,
+          minimize_css: IS_HTML_ONLY ? 0 : 1,
+          minimize_js: IS_HTML_ONLY ? 0 : 1,
           html_optional_cdata: 1,
           js_engine: 'yui',
           js_fallback: 1,
@@ -824,11 +848,16 @@ async function processFile(fileName) {
   await processFileInternal(site);
 }
 
-// Log concurrency setting
+// Log mode and concurrency settings
+const modeLabel = IS_HTML_ONLY ? 'HTML' : 'max';
+console.error(`\nRunning benchmarks in ${modeLabel} mode (${IS_HTML_ONLY ? 'HTML-only' : 'HTML, CSS, JS, and other available options'})`);
 const actualConcurrency = Math.min(BENCH_CONCURRENCY, fileNames.length);
 if (VERBOSE || BENCH_CONCURRENCY > 1) {
-  console.error(`Running benchmarks with concurrency: ${actualConcurrency} (BENCH_CONCURRENCY=${BENCH_CONCURRENCY})`);
+  console.error(`Concurrency: ${actualConcurrency} (BENCH_CONCURRENCY=${BENCH_CONCURRENCY})`);
 }
+
+// Reset progress bar for this run
+progress.curr = 0;
 
 await processFiles();
 
@@ -846,14 +875,30 @@ if (benchmarkErrors.length > 0) {
 
 const content = generateMarkdownTable();
 
-// Generate date stamp in format “MMM DD, YYYY”
+// Generate date stamp in format “MMM D, YYYY”
 const now = new Date();
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-const dateStamp = `(Last updated: ${months[now.getMonth()]} ${now.getDate()}, ${now.getFullYear()})`;
+const dateStamp = `${months[now.getMonth()]} ${now.getDate()}, ${now.getFullYear()}`;
 
-const readme = 'README.md';
-const data = await readText(readme);
-let start = data.indexOf('## Legacy Minification Comparison');
+const readme = path.join(__dirname, 'README.md');
+let data = await readText(readme);
+
+// Update the single date at the start of the benchmarks section
+const dateLinePattern = /Benchmarks last updated: .+/;
+if (dateLinePattern.test(data)) {
+  data = data.replace(dateLinePattern, `Benchmarks last updated: ${dateStamp}`);
+}
+
+// Target different sections based on mode
+const sectionHeader = IS_HTML_ONLY
+  ? '## HTML Minification Compared'
+  : '## Maximum Minification Compared';
+
+let start = data.indexOf(sectionHeader);
+if (start === -1) {
+  console.error(`Section "${sectionHeader}" not found in README.md`);
+  process.exit(1);
+}
 
 // Use specific table header for more stable anchor
 const tableHeader = '| Site | Original Size (KB) |';
@@ -865,14 +910,20 @@ if (headerPos !== -1) {
   start = data.indexOf('|', start);
 }
 
-let end = data.indexOf('##', start);
-
-// Check if there’s already a date stamp and remove it
-const existingDateStamp = data.slice(start, end).match(/\(Last updated:.*?\)\n*/);
-if (existingDateStamp) {
-  // Move end pointer past the old date stamp so it gets replaced
-  end = start + data.slice(start, end).lastIndexOf(existingDateStamp[0]) + existingDateStamp[0].length;
+// Find next section or end of file
+let end = data.indexOf('\n##', start);
+if (end !== -1) {
+  end = end + 1; // Point to `##`, not the preceding newline
+} else {
+  end = data.length;
 }
 
-const newData = data.slice(0, start) + content + '\n' + dateStamp + '\n' + data.slice(end);
+// Replace table content, normalize newlines to avoid double blank lines
+// Add end comment after max table (marks end of auto-generated content)
+const endComment = IS_HTML_ONLY ? '' : '<!-- End auto-generated -->';
+const trimmedContent = content.trimEnd();
+const separator = endComment ? '\n' + endComment + '\n\n' : '\n\n';
+const newData = data.slice(0, start) + trimmedContent + separator + data.slice(end);
 await writeText(readme, newData);
+
+console.log(`\nUpdated ${modeLabel} README.md section`);
