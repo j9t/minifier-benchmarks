@@ -4,7 +4,7 @@ A collection of regularly updated benchmarks for HTML minifiers ([context](https
 
 **⚠️ Early release, benchmarks are still being checked and fine-tuned.**
 
-* **👩‍💻 Minifier user?** Compare HTML minifiers [by HTML minification effectiveness](#html-minification-compared), [by overall “maximum” effectiveness](#maximum-minification-compared) (all available options checked), and by the respective processing times
+* **👩‍💻 Minifier user?** Compare HTML minifiers [by HTML minification effectiveness](#1-html-minification-compared), [by overall “maximum” effectiveness](#2-maximum-minification-compared) (all available options checked), and by the respective processing times
 * **🧑‍🏭 Minifier author?** [Add and configure your minifier and become a co-owner](https://github.com/j9t/minifier-benchmarks/compare)
 * **💁 Innocent bystander?** [Please share feedback and suggestions](https://github.com/j9t/minifier-benchmarks/issues/new)
 
