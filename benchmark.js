@@ -407,9 +407,12 @@ async function processFile(fileName) {
       try {
         const result = await minifySWC(data, {
           // Use most aggressive settings
+          forceSetHtml5Doctype: true,
           minifyJs: !IS_HTML_ONLY,
           minifyCss: !IS_HTML_ONLY,
           minifyJson: !IS_HTML_ONLY,
+          minifyAdditionalScriptsContent: IS_HTML_ONLY ? [] : [['application/ld+json', 'json']],
+          minifyAdditionalAttributes: IS_HTML_ONLY ? [] : [['style', 'css']],
           collapseWhitespaces: 'all',
           removeComments: true,
           removeEmptyAttributes: true,
@@ -595,20 +598,23 @@ async function processFile(fileName) {
       info.startTime = Date.now();
 
       try {
-        // Always use "max" preset for most aggressive HTML minification
+        // Always use “max” preset for most aggressive HTML minification
         const preset = htmlnano.presets.max;
         const options = IS_HTML_ONLY
           ? {
               collapseWhitespace: 'aggressive',
               removeEmptyElements: true,
+              sortAttributesWithLists: false,
               minifyCss: false,
               minifyJs: false,
+              minifyJson: false,
               minifySvg: false,
               removeUnusedCss: false
             }
           : {
               collapseWhitespace: 'aggressive',
               removeEmptyElements: true,
+              sortAttributesWithLists: false,
               removeUnusedCss: { tool: 'purgeCSS' },
               minifyUrls: site
             };
@@ -941,7 +947,7 @@ const sectionHeader = IS_HTML_ONLY
 
 let start = data.indexOf(sectionHeader);
 if (start === -1) {
-  console.error(`Section "${sectionHeader}" not found in README.md`);
+  console.error(`Section “${sectionHeader}” not found in README.md`);
   process.exit(1);
 }
 
