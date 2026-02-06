@@ -407,9 +407,12 @@ async function processFile(fileName) {
       try {
         const result = await minifySWC(data, {
           // Use most aggressive settings
+          forceSetHtml5Doctype: true,
           minifyJs: !IS_HTML_ONLY,
           minifyCss: !IS_HTML_ONLY,
           minifyJson: !IS_HTML_ONLY,
+          minifyAdditionalScriptsContent: IS_HTML_ONLY ? [] : [['application/ld+json', 'json']],
+          minifyAdditionalAttributes: IS_HTML_ONLY ? [] : [['style', 'css']],
           collapseWhitespaces: 'all',
           removeComments: true,
           removeEmptyAttributes: true,
