@@ -45,14 +45,7 @@ const user_agent = 'html-minifier-next-benchmarks/0.0';
 const urls = JSON.parse(await fs.readFile(path.join(__dirname, 'sites.json'), 'utf8'));
 const fileNames = Object.keys(urls);
 const minifierConfig = JSON.parse(await fs.readFile(path.join(__dirname, 'html-minifier.json'), 'utf8'));
-const minimize = new Minimize({
-  empty: true,
-  cdata: true,
-  comments: true,
-  conditionals: true,
-  ssi: true,
-  spare: true
-});
+const minimize = new Minimize();
 const benchmarkErrors = [];
 
 // Verbose logging flag (run via `VERBOSE=true npm run benchmarks`)
@@ -206,7 +199,7 @@ function generateMarkdownTable() {
     const row = rows[fileName].report;
 
     // Find the best (smallest) size among all minifiers
-    // Minifier results start at index 2 (HTML Minifier Next)
+    // Minifier results start at index 2 (@swc/html)
     const minifierResults = [];
     for (let i = 2; i < row.length; i++) {
       const raw = row[i];
@@ -414,17 +407,17 @@ async function processFile(fileName) {
       try {
         const result = await minifySWC(data, {
           // Use most aggressive settings
-          minify_js: !IS_HTML_ONLY,
-          minify_css: !IS_HTML_ONLY,
+          minifyJs: !IS_HTML_ONLY,
+          minifyCss: !IS_HTML_ONLY,
           minifyJson: !IS_HTML_ONLY,
           collapseWhitespaces: 'all',
-          remove_comments: true,
-          remove_empty_attributes: true,
-          remove_redundant_attributes: 'all',
-          collapse_boolean_attributes: true,
-          normalize_attributes: true,
-          remove_empty_metadata_elements: true,
-          minify_conditional_comments: true,
+          removeComments: true,
+          removeEmptyAttributes: true,
+          removeRedundantAttributes: 'all',
+          collapseBooleanAttributes: true,
+          normalizeAttributes: true,
+          removeEmptyMetadataElements: true,
+          minifyConditionalComments: true,
           tagOmission: true,
           quotes: true
         });
@@ -668,7 +661,7 @@ async function processFile(fileName) {
       info.startTime = Date.now();
 
       return new Promise((resolve) => {
-        minimize.parse(data, function (err, data) {
+        minimize.parse(data, function (err, minified) {
           if (err) {
             benchmarkErrors.push(`Minimize failed for ${fileName}: ${err.message}`);
             resetSizes(info);
@@ -676,7 +669,7 @@ async function processFile(fileName) {
           }
 
           Promise.resolve()
-            .then(() => writeBuffer(info.filePath, data))
+            .then(() => writeBuffer(info.filePath, minified))
             .then(() => readSizes(info))
             .then(() => resolve())
             .catch(err => {
@@ -761,7 +754,13 @@ async function processFile(fileName) {
     progress.tick({ fileName: `Completed ${fileName}` });
   }
 
-  async function get(site) {
+  async function get(site, redirectCount = 0) {
+    const MAX_REDIRECTS = 10;
+    if (redirectCount >= MAX_REDIRECTS) {
+      benchmarkErrors.push(`Too many redirects for ${site}`);
+      return null;
+    }
+
     const url = new URL(site);
 
     await fs.mkdir(path.dirname(filePath), { recursive: true });
@@ -837,7 +836,7 @@ async function processFile(fileName) {
 
         } else if (status >= 300 && status < 400 && res.headers.location) {
           res.resume(); // Consume response to free memory
-          get(new URL(res.headers.location, site)).then(safeResolve);
+          get(new URL(res.headers.location, site), redirectCount + 1).then(safeResolve);
         } else {
           benchmarkErrors.push(`HTTP error ${status} for ${site}`);
           res.resume(); // Consume response to free memory
@@ -862,23 +861,28 @@ async function processFile(fileName) {
   log(`Starting ${fileName}`);
   progress.tick(0, { fileName: `Starting ${fileName}` });
 
-  // Reuse cached input if less than 60 minutes old
+  // Reuse cached input if less than 60 minutes old and valid
   let site = urls[fileName];
   let cached = false;
   try {
     const stats = await fs.stat(filePath);
     if (stats.size > 0 && (Date.now() - stats.mtimeMs) < CACHE_MAX_AGE_MS) {
-      cached = true;
-      log(`${fileName}: Using cached input (${Math.round((Date.now() - stats.mtimeMs) / 1000)}s old)`);
+      const content = await readText(filePath);
+      if (content.includes('<!') || content.includes('</')) {
+        cached = true;
+        log(`${fileName}: Using cached input (${Math.round((Date.now() - stats.mtimeMs) / 1000)}s old)`);
+      }
     }
   } catch {
-    // File doesn’t exist, download it
+    // File doesn’t exist or can’t be read, download it
   }
 
   if (!cached) {
     log(`Downloading ${fileName}…`);
     site = await get(urls[fileName]);
     if (!site) {
+      // Remove any partially written file
+      try { await fs.unlink(filePath); } catch { /* ignore */ }
       benchmarkErrors.push(`Skipping ${fileName} due to download failure`);
       rows[fileName] = null; // Explicitly mark as skipped
       return;
