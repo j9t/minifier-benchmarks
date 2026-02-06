@@ -604,14 +604,17 @@ async function processFile(fileName) {
           ? {
               collapseWhitespace: 'aggressive',
               removeEmptyElements: true,
+              sortAttributesWithLists: false,
               minifyCss: false,
               minifyJs: false,
+              minifyJson: false,
               minifySvg: false,
               removeUnusedCss: false
             }
           : {
               collapseWhitespace: 'aggressive',
               removeEmptyElements: true,
+              sortAttributesWithLists: false,
               removeUnusedCss: { tool: 'purgeCSS' },
               minifyUrls: site
             };
