@@ -31,6 +31,9 @@ if (!['html', 'max'].includes(MODE)) {
 }
 const IS_HTML_ONLY = MODE === 'html';
 
+// Reuse cached input if less than 60 minutes old
+const CACHE_MAX_AGE_MS = 60 * 60 * 1000;
+
 // Output directory based on mode
 const outputDir = path.join(__dirname, 'output', MODE);
 
@@ -75,7 +78,7 @@ const progress = new Progress(':current/:total [:bar] :percent :etas :fileName',
 const BENCH_CONCURRENCY = Math.max(1, parseInt(process.env.BENCH_CONCURRENCY || '1', 10) || 1);
 
 const table = new Table({
-  head: ['File', 'Before', 'HTML Minifier Next', 'htmlnano', '@swc/html', 'minify-html', 'Minimize', 'htmlcompressor.com', 'Savings', 'Time'],
+  head: ['File', 'Before', '@swc/html', 'HTML Minifier Next', 'htmlcompressor.com', 'htmlnano', 'minify-html', 'Minimize', 'Savings', 'Time'],
   colWidths: [fileNames.reduce(function (length, fileName) {
     return Math.max(length, fileName.length);
   }, 0) + 2, 25, 25, 25, 25, 25, 25, 25, 25, 20]
@@ -165,32 +168,32 @@ function promiseLzma(data) {
 
 const rows = {};
 const totalTimes = {
-  minifier: 0,
-  htmlnano: 0,
   swchtml: 0,
+  minifier: 0,
+  compressor: 0,
+  htmlnano: 0,
   minifyhtml: 0,
-  minimize: 0,
-  compressor: 0
+  minimize: 0
 };
 const successCounts = {
-  minifier: 0,
-  htmlnano: 0,
   swchtml: 0,
+  minifier: 0,
+  compressor: 0,
+  htmlnano: 0,
   minifyhtml: 0,
-  minimize: 0,
-  compressor: 0
+  minimize: 0
 };
 
 function generateMarkdownTable() {
   const headers = [
     'Site',
     'Original Size (KB)',
-    '[HTML Minifier Next](https://github.com/j9t/html-minifier-next)<br>[![npm last update](https://img.shields.io/npm/last-update/html-minifier-next)](https://socket.dev/npm/package/html-minifier-next)',
-    '[htmlnano](https://github.com/posthtml/htmlnano)<br>[![npm last update](https://img.shields.io/npm/last-update/htmlnano)](https://socket.dev/npm/package/htmlnano)',
     '[@swc/html](https://github.com/swc-project/swc)<br>[![npm last update](https://img.shields.io/npm/last-update/@swc/html)](https://socket.dev/npm/package/@swc/html)',
+    '[HTML Minifier Next](https://github.com/j9t/html-minifier-next)<br>[![npm last update](https://img.shields.io/npm/last-update/html-minifier-next)](https://socket.dev/npm/package/html-minifier-next)',
+    '[html­com­pressor.­com](https://htmlcompressor.com/)',
+    '[htmlnano](https://github.com/posthtml/htmlnano)<br>[![npm last update](https://img.shields.io/npm/last-update/htmlnano)](https://socket.dev/npm/package/htmlnano)',
     '[minify-html](https://github.com/wilsonzlin/minify-html)<br>[![npm last update](https://img.shields.io/npm/last-update/@minify-html/node)](https://socket.dev/npm/package/@minify-html/node)',
-    '[minimize](https://github.com/Swaagie/minimize)<br>[![npm last update](https://img.shields.io/npm/last-update/minimize)](https://socket.dev/npm/package/minimize)',
-    '[html­com­pressor.­com](https://htmlcompressor.com/)'
+    '[minimize](https://github.com/Swaagie/minimize)<br>[![npm last update](https://img.shields.io/npm/last-update/minimize)](https://socket.dev/npm/package/minimize)'
   ];
 
   fileNames.forEach(function (fileName) {
@@ -245,7 +248,7 @@ function generateMarkdownTable() {
 
   // Add average processing time row
   const timeRow = ['**Average processing time**', ''];
-  const minifierNames = ['minifier', 'htmlnano', 'swchtml', 'minifyhtml', 'minimize', 'compressor'];
+  const minifierNames = ['swchtml', 'minifier', 'compressor', 'htmlnano', 'minifyhtml', 'minimize'];
 
   // Count only sites that were actually processed (not skipped due to download failure)
   const processedSites = fileNames.filter(name => rows[name] && rows[name].report).length;
@@ -295,7 +298,7 @@ function displayTable() {
 
   // Add average processing time row
   const timeRow = ['Average processing time', ''];
-  const minifierNames = ['minifier', 'htmlnano', 'swchtml', 'minifyhtml', 'minimize', 'compressor'];
+  const minifierNames = ['swchtml', 'minifier', 'compressor', 'htmlnano', 'minifyhtml', 'minimize'];
 
   // Count only sites that were actually processed (not skipped due to download failure)
   const processedSites = fileNames.filter(name => rows[name]).length;
@@ -362,7 +365,7 @@ async function processFile(fileName) {
       brFilePath: path.join(outputDir, fileName + '.html.br')
     };
     const infos = {};
-    ['minifier', 'htmlnano', 'swchtml', 'minifyhtml', 'minimize', 'compressor'].forEach(function (name) {
+    ['swchtml', 'minifier', 'compressor', 'htmlnano', 'minifyhtml', 'minimize'].forEach(function (name) {
       infos[name] = {
         filePath: path.join(outputDir, fileName + '.' + name + '.html'),
         gzFilePath: path.join(outputDir, fileName + '.' + name + '.html.gz'),
@@ -402,80 +405,6 @@ async function processFile(fileName) {
       info.size = await readSize(info.filePath);
     }
 
-    // HTML Minifier Next
-    async function testHTMLMinifier() {
-      const data = await readText(filePath);
-      const info = infos.minifier;
-      info.startTime = Date.now();
-
-      try {
-        // Load config and add site-specific minifyURLs
-        const config = { ...minifierConfig, minifyURLs: site };
-
-        // HTML-only mode: Disable CSS, JS, SVG, and other minification
-        if (IS_HTML_ONLY) {
-          config.minifyCSS = false;
-          config.minifyJS = false;
-          config.minifySVG = false;
-          config.minifyURLs = false;
-        }
-
-        const result = await minifyHMN(data, config);
-        await writeText(info.filePath, result);
-        await readSizes(info);
-      } catch (err) {
-        benchmarkErrors.push(`HTML Minifier Next failed for ${fileName}: ${err.message}`);
-        resetSizes(info);
-      }
-    }
-
-    // htmlnano, https://htmlnano.netlify.app/presets
-    async function testhtmlnano() {
-      const info = infos.htmlnano;
-
-      // Temporary workaround for Terser crashes—remove when htmlnano/Terser stability improves
-      // URLs that cause Terser crashes in htmlnano (add more as needed)
-      const SKIP_URLS = [
-        'https://vivaldi.com/'
-      ];
-
-      if (!IS_HTML_ONLY && SKIP_URLS.includes(site)) {
-        benchmarkErrors.push(`htmlnano skipped for ${fileName} (known Terser crash)`);
-        resetSizes(info);
-        return;
-      }
-      // End workaround
-
-      const data = await readText(filePath);
-      info.startTime = Date.now();
-
-      try {
-        // Always use "max" preset for most aggressive HTML minification
-        const preset = htmlnano.presets.max;
-        const options = IS_HTML_ONLY
-          ? {
-              collapseWhitespace: 'aggressive',
-              removeEmptyElements: true,
-              minifyCss: false,
-              minifyJs: false,
-              minifySvg: false,
-              removeUnusedCss: false
-            }
-          : {
-              collapseWhitespace: 'aggressive',
-              removeEmptyElements: true,
-              removeUnusedCss: { tool: 'purgeCSS' },
-              minifyUrls: site
-            };
-        const result = await htmlnano.process(data, options, preset);
-        await writeText(info.filePath, result.html);
-        await readSizes(info);
-      } catch (err) {
-        benchmarkErrors.push(`htmlnano failed for ${fileName}: ${err.message}`);
-        resetSizes(info);
-      }
-    }
-
     // @swc/html, https://swc.rs/docs/usage/html
     async function testSWCHTML() {
       const data = await readText(filePath);
@@ -507,64 +436,31 @@ async function processFile(fileName) {
       }
     }
 
-    // minify-html, https://github.com/wilsonzlin/minify-html
-    async function testMinifyHTML() {
-      const data = await readBuffer(filePath);
-      const info = infos.minifyhtml;
+    // HTML Minifier Next
+    async function testHTMLMinifier() {
+      const data = await readText(filePath);
+      const info = infos.minifier;
       info.startTime = Date.now();
 
       try {
-        const result = minifyHTML(data, {
-          keep_closing_tags: false,
-          keep_comments: false,
-          keep_html_and_head_opening_tags: false,
-          keep_input_type_text_attr: false,
-          keep_ssi_comments: false,
-          minify_css: !IS_HTML_ONLY,
-          minify_js: !IS_HTML_ONLY, // Disable if Rust panics get too frequent
-          preserve_brace_template_syntax: false,
-          preserve_chevron_percent_template_syntax: false,
-          remove_bangs: true,
-          remove_processing_instructions: true,
-          // Possibly non-compliant options (output still works in all browsers):
-          allow_noncompliant_unquoted_attribute_values: true,
-          allow_optimal_entities: true,
-          allow_removing_spaces_between_attributes: true,
-          minify_doctype: true
-        });
-        await writeBuffer(info.filePath, result);
+        // Load config and add site-specific minifyURLs
+        const config = { ...minifierConfig, minifyURLs: site };
+
+        // HTML-only mode: Disable CSS, JS, SVG, and other minification
+        if (IS_HTML_ONLY) {
+          config.minifyCSS = false;
+          config.minifyJS = false;
+          config.minifySVG = false;
+          config.minifyURLs = false;
+        }
+
+        const result = await minifyHMN(data, config);
+        await writeText(info.filePath, result);
         await readSizes(info);
       } catch (err) {
-        benchmarkErrors.push(`minify-html failed for ${fileName}: ${err.message}`);
+        benchmarkErrors.push(`HTML Minifier Next failed for ${fileName}: ${err.message}`);
         resetSizes(info);
       }
-    }
-
-    // Minimize, https://github.com/Swaagie/minimize
-    async function testMinimize() {
-      const data = await readText(filePath);
-      const info = infos.minimize;
-      info.startTime = Date.now();
-
-      return new Promise((resolve) => {
-        minimize.parse(data, function (err, data) {
-          if (err) {
-            benchmarkErrors.push(`Minimize failed for ${fileName}: ${err.message}`);
-            resetSizes(info);
-            return resolve();
-          }
-
-          Promise.resolve()
-            .then(() => writeBuffer(info.filePath, data))
-            .then(() => readSizes(info))
-            .then(() => resolve())
-            .catch(err => {
-              benchmarkErrors.push(`Failed after minimize processing ${fileName}: ${err.message}`);
-              resetSizes(info);
-              resolve();
-            });
-        });
-      });
     }
 
     // htmlcompressor.com, https://htmlcompressor.com/api/#:~:text=HTMLCompressor%20API%20reference
@@ -685,25 +581,132 @@ async function processFile(fileName) {
       });
     }
 
+    // htmlnano, https://htmlnano.netlify.app/presets
+    async function testhtmlnano() {
+      const info = infos.htmlnano;
+
+      // Temporary workaround for Terser crashes—remove when htmlnano/Terser stability improves
+      // URLs that cause Terser crashes in htmlnano (add more as needed)
+      const SKIP_URLS = [
+        'https://vivaldi.com/'
+      ];
+
+      if (!IS_HTML_ONLY && SKIP_URLS.includes(site)) {
+        benchmarkErrors.push(`htmlnano skipped for ${fileName} (known Terser crash)`);
+        resetSizes(info);
+        return;
+      }
+      // End workaround
+
+      const data = await readText(filePath);
+      info.startTime = Date.now();
+
+      try {
+        // Always use "max" preset for most aggressive HTML minification
+        const preset = htmlnano.presets.max;
+        const options = IS_HTML_ONLY
+          ? {
+              collapseWhitespace: 'aggressive',
+              removeEmptyElements: true,
+              minifyCss: false,
+              minifyJs: false,
+              minifySvg: false,
+              removeUnusedCss: false
+            }
+          : {
+              collapseWhitespace: 'aggressive',
+              removeEmptyElements: true,
+              removeUnusedCss: { tool: 'purgeCSS' },
+              minifyUrls: site
+            };
+        const result = await htmlnano.process(data, options, preset);
+        await writeText(info.filePath, result.html);
+        await readSizes(info);
+      } catch (err) {
+        benchmarkErrors.push(`htmlnano failed for ${fileName}: ${err.message}`);
+        resetSizes(info);
+      }
+    }
+
+    // minify-html, https://github.com/wilsonzlin/minify-html
+    async function testMinifyHTML() {
+      const data = await readBuffer(filePath);
+      const info = infos.minifyhtml;
+      info.startTime = Date.now();
+
+      try {
+        const result = minifyHTML(data, {
+          keep_closing_tags: false,
+          keep_comments: false,
+          keep_html_and_head_opening_tags: false,
+          keep_input_type_text_attr: false,
+          keep_ssi_comments: false,
+          minify_css: !IS_HTML_ONLY,
+          minify_js: !IS_HTML_ONLY, // Disable if Rust panics get too frequent
+          preserve_brace_template_syntax: false,
+          preserve_chevron_percent_template_syntax: false,
+          remove_bangs: true,
+          remove_processing_instructions: true,
+          // Possibly non-compliant options (output still works in all browsers):
+          allow_noncompliant_unquoted_attribute_values: true,
+          allow_optimal_entities: true,
+          allow_removing_spaces_between_attributes: true,
+          minify_doctype: true
+        });
+        await writeBuffer(info.filePath, result);
+        await readSizes(info);
+      } catch (err) {
+        benchmarkErrors.push(`minify-html failed for ${fileName}: ${err.message}`);
+        resetSizes(info);
+      }
+    }
+
+    // Minimize, https://github.com/Swaagie/minimize
+    async function testMinimize() {
+      const data = await readText(filePath);
+      const info = infos.minimize;
+      info.startTime = Date.now();
+
+      return new Promise((resolve) => {
+        minimize.parse(data, function (err, data) {
+          if (err) {
+            benchmarkErrors.push(`Minimize failed for ${fileName}: ${err.message}`);
+            resetSizes(info);
+            return resolve();
+          }
+
+          Promise.resolve()
+            .then(() => writeBuffer(info.filePath, data))
+            .then(() => readSizes(info))
+            .then(() => resolve())
+            .catch(err => {
+              benchmarkErrors.push(`Failed after minimize processing ${fileName}: ${err.message}`);
+              resetSizes(info);
+              resolve();
+            });
+        });
+      });
+    }
+
     await readSizes(original);
+
+    log(`${fileName}: Running @swc/html`);
+    await testSWCHTML();
 
     log(`${fileName}: Running HTML Minifier Next`);
     await testHTMLMinifier();
 
+    log(`${fileName}: Running htmlcompressor.com`);
+    await testHTMLCompressor();
+
     log(`${fileName}: Running htmlnano`);
     await testhtmlnano();
-
-    log(`${fileName}: Running @swc/html`);
-    await testSWCHTML();
 
     log(`${fileName}: Running minify-html`);
     await testMinifyHTML();
 
     log(`${fileName}: Running Minimize`);
     await testMinimize();
-
-    log(`${fileName}: Running htmlcompressor.com`);
-    await testHTMLCompressor();
 
     const display = [
       [fileName, '+ gzip', '+ lzma', '+ brotli'].join('\n'),
@@ -857,18 +860,32 @@ async function processFile(fileName) {
   }
 
   log(`Starting ${fileName}`);
-  log(`Downloading ${fileName}…`);
   progress.tick(0, { fileName: `Starting ${fileName}` });
 
-  const site = await get(urls[fileName]);
-  if (!site) {
-    benchmarkErrors.push(`Skipping ${fileName} due to download failure`);
-    rows[fileName] = null; // Explicitly mark as skipped
-    return;
+  // Reuse cached input if less than 60 minutes old
+  let site = urls[fileName];
+  let cached = false;
+  try {
+    const stats = await fs.stat(filePath);
+    if (stats.size > 0 && (Date.now() - stats.mtimeMs) < CACHE_MAX_AGE_MS) {
+      cached = true;
+      log(`${fileName}: Using cached input (${Math.round((Date.now() - stats.mtimeMs) / 1000)}s old)`);
+    }
+  } catch {
+    // File doesn’t exist, download it
+  }
+
+  if (!cached) {
+    log(`Downloading ${fileName}…`);
+    site = await get(urls[fileName]);
+    if (!site) {
+      benchmarkErrors.push(`Skipping ${fileName} due to download failure`);
+      rows[fileName] = null; // Explicitly mark as skipped
+      return;
+    }
   }
 
   log(`Processing ${fileName}…`);
-  log(`${fileName}: Downloaded, starting processing`);
   await processFileInternal(site);
 }
 
@@ -915,8 +932,8 @@ if (dateLinePattern.test(data)) {
 
 // Target different sections based on mode
 const sectionHeader = IS_HTML_ONLY
-  ? '## HTML Minification Compared'
-  : '## Maximum Minification Compared';
+  ? '## 1. HTML Minification Compared'
+  : '## 2. Maximum Minification Compared';
 
 let start = data.indexOf(sectionHeader);
 if (start === -1) {
