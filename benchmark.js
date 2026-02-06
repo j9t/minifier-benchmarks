@@ -595,7 +595,7 @@ async function processFile(fileName) {
       info.startTime = Date.now();
 
       try {
-        // Always use "max" preset for most aggressive HTML minification
+        // Always use “max” preset for most aggressive HTML minification
         const preset = htmlnano.presets.max;
         const options = IS_HTML_ONLY
           ? {
@@ -941,7 +941,7 @@ const sectionHeader = IS_HTML_ONLY
 
 let start = data.indexOf(sectionHeader);
 if (start === -1) {
-  console.error(`Section "${sectionHeader}" not found in README.md`);
+  console.error(`Section “${sectionHeader}” not found in README.md`);
   process.exit(1);
 }
 
