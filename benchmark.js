@@ -42,7 +42,14 @@ const user_agent = 'html-minifier-next-benchmarks/0.0';
 const urls = JSON.parse(await fs.readFile(path.join(__dirname, 'sites.json'), 'utf8'));
 const fileNames = Object.keys(urls);
 const minifierConfig = JSON.parse(await fs.readFile(path.join(__dirname, 'html-minifier.json'), 'utf8'));
-const minimize = new Minimize();
+const minimize = new Minimize({
+  empty: true,
+  cdata: true,
+  comments: true,
+  conditionals: true,
+  ssi: true,
+  spare: true
+});
 const benchmarkErrors = [];
 
 // Verbose logging flag (run via `VERBOSE=true npm run benchmarks`)
@@ -443,10 +450,24 @@ async function processFile(fileName) {
       info.startTime = Date.now();
 
       try {
-        // Use “safe” preset for HTML-only mode (no CSS/JS minification)
-        // Use “max” preset for maximum minification
-        const preset = IS_HTML_ONLY ? htmlnano.presets.safe : htmlnano.presets.max;
-        const result = await htmlnano.process(data, {}, preset);
+        // Always use "max" preset for most aggressive HTML minification
+        const preset = htmlnano.presets.max;
+        const options = IS_HTML_ONLY
+          ? {
+              collapseWhitespace: 'aggressive',
+              removeEmptyElements: true,
+              minifyCss: false,
+              minifyJs: false,
+              minifySvg: false,
+              removeUnusedCss: false
+            }
+          : {
+              collapseWhitespace: 'aggressive',
+              removeEmptyElements: true,
+              removeUnusedCss: { tool: 'purgeCSS' },
+              minifyUrls: site
+            };
+        const result = await htmlnano.process(data, options, preset);
         await writeText(info.filePath, result.html);
         await readSizes(info);
       } catch (err) {
@@ -463,17 +484,20 @@ async function processFile(fileName) {
 
       try {
         const result = await minifySWC(data, {
-          // Use most aggressive settings that keep HTML valid
+          // Use most aggressive settings
           minify_js: !IS_HTML_ONLY,
           minify_css: !IS_HTML_ONLY,
+          minifyJson: !IS_HTML_ONLY,
           collapseWhitespaces: 'all',
           remove_comments: true,
           remove_empty_attributes: true,
-          remove_redundant_attributes: true,
+          remove_redundant_attributes: 'all',
           collapse_boolean_attributes: true,
           normalize_attributes: true,
           remove_empty_metadata_elements: true,
-          minify_conditional_comments: true
+          minify_conditional_comments: true,
+          tagOmission: true,
+          quotes: true
         });
         await writeText(info.filePath, result.code);
         await readSizes(info);
@@ -502,11 +526,11 @@ async function processFile(fileName) {
           preserve_chevron_percent_template_syntax: false,
           remove_bangs: true,
           remove_processing_instructions: true,
-          // Excluded invalidating options:
-          // allow_noncompliant_unquoted_attribute_values
-          // allow_optimal_entities
-          // allow_removing_spaces_between_attributes
-          // minify_doctype
+          // Possibly non-compliant options (output still works in all browsers):
+          allow_noncompliant_unquoted_attribute_values: true,
+          allow_optimal_entities: true,
+          allow_removing_spaces_between_attributes: true,
+          minify_doctype: true
         });
         await writeBuffer(info.filePath, result);
         await readSizes(info);
