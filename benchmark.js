@@ -669,7 +669,7 @@ async function processFile(fileName) {
           }
 
           Promise.resolve()
-            .then(() => writeBuffer(info.filePath, minified))
+            .then(() => writeText(info.filePath, minified))
             .then(() => readSizes(info))
             .then(() => resolve())
             .catch(err => {
