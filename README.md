@@ -36,6 +36,7 @@ Benchmarks last updated: Feb 13, 2026
 | [Google](https://www.google.com/) | 18 | **18** | **18** | **18** | **18** | **18** | **18** |
 | [Ground News](https://ground.news/) | 1489 | 1467 | **1431** | n/a | 1474 | 1465 | 1476 |
 | [HTML 3.2](https://www.w3.org/TR/2018/SPSD-html32-20180315/) | 123 | **119** | **119** | 121 | 124 | **119** | 123 |
+| [HTML Living Standard](https://html.spec.whatwg.org/multipage/) | 149 | 152 | **148** | 149 | 155 | 149 | 155 |
 | [IETF](https://www.ietf.org/) | 82 | 34 | **32** | 34 | 34 | 33 | 34 |
 | [Igalia](https://www.igalia.com/) | 48 | 37 | **34** | 36 | 37 | 36 | 36 |
 | [Ladybird](https://ladybird.org/) | 31 | 29 | **28** | 29 | 29 | 29 | 29 |
@@ -63,7 +64,8 @@ Benchmarks last updated: Feb 13, 2026
 | [UX Collective](https://uxdesign.cc/) | 99 | 143 | **97** | 99 | 98 | 98 | 98 |
 | [Vivaldi](https://vivaldi.com/) | 93 | 85 | **83** | 84 | **83** | **83** | 84 |
 | [W3C](https://www.w3.org/) | 51 | 41 | **40** | 41 | 41 | **40** | 41 |
-| **Average processing time** |  | 32 ms (48/48) | 42 ms (48/48) | 767 ms (38/48) | 35 ms (48/48) | **9 ms (48/48)** | 203 ms (48/48) |
+| [WordPress Blog](https://wordpress.com/blog/) | 194 | 179 | **177** | 181 | 179 | 178 | 181 |
+| **Average processing time** |  | 30 ms (50/50) | 41 ms (50/50) | 778 ms (40/50) | 32 ms (50/50) | **8 ms (50/50)** | 181 ms (50/50) |
 
 ## 2. Maximum Minification Compared
 
@@ -119,7 +121,7 @@ Benchmarks last updated: Feb 13, 2026
 | [Vivaldi](https://vivaldi.com/) | 93 | 81 | **74** | 82 | n/a | 81 | 84 |
 | [W3C](https://www.w3.org/) | 51 | 39 | **36** | 39 | 37 | 38 | 41 |
 | [WordPress Blog](https://wordpress.com/blog/) | 194 | 158 | 149 | 168 | **135** | 165 | 181 |
-| **Average processing time** |  | 36 ms (50/50) | 65 ms (50/50) | 1180 ms (40/50) | 161 ms (48/50) | **10 ms (50/50)** | 181 ms (50/50) |
+| **Average processing time** |  | 34 ms (50/50) | 62 ms (50/50) | 1201 ms (40/50) | 153 ms (48/50) | **10 ms (50/50)** | 181 ms (50/50) |
 <!-- End auto-generated -->
 
 ## Notes
