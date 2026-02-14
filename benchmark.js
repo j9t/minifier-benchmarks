@@ -181,12 +181,12 @@ function generateMarkdownTable() {
   const headers = [
     'Site',
     'Original Size (KB)',
-    '[@swc/html](https://github.com/swc-project/swc)<br>[![npm last update](https://img.shields.io/npm/last-update/@swc/html)](https://socket.dev/npm/package/@swc/html)',
-    '[HTML Minifier Next](https://github.com/j9t/html-minifier-next)<br>[![npm last update](https://img.shields.io/npm/last-update/html-minifier-next)](https://socket.dev/npm/package/html-minifier-next)',
+    '[@swc/html](https://github.com/swc-project/swc)',
+    '[HTML Minifier Next](https://github.com/j9t/html-minifier-next)',
     '[html­com­pressor.­com](https://htmlcompressor.com/)',
-    '[htmlnano](https://github.com/posthtml/htmlnano)<br>[![npm last update](https://img.shields.io/npm/last-update/htmlnano)](https://socket.dev/npm/package/htmlnano)',
-    '[minify-html](https://github.com/wilsonzlin/minify-html)<br>[![npm last update](https://img.shields.io/npm/last-update/@minify-html/node)](https://socket.dev/npm/package/@minify-html/node)',
-    '[minimize](https://github.com/Swaagie/minimize)<br>[![npm last update](https://img.shields.io/npm/last-update/minimize)](https://socket.dev/npm/package/minimize)'
+    '[htmlnano](https://github.com/posthtml/htmlnano)',
+    '[minify-html](https://github.com/wilsonzlin/minify-html)',
+    '[minimize](https://github.com/Swaagie/minimize)'
   ];
 
   fileNames.forEach(function (fileName) {
