@@ -24,122 +24,122 @@ Two tests are run: One exclusively applying [HTML minification](#1-html-minifica
 -->
 
 <!-- Auto-generated benchmarks, don't edit -->
-Benchmarks last updated: Feb 13, 2026
-
 ## 1. HTML Minification Compared
 
 | Site | Original Size (KB) | [@swc/html](https://github.com/swc-project/swc) | [HTML Minifier Next](https://github.com/j9t/html-minifier-next) | [html­com­pressor.­com](https://htmlcompressor.com/) | [htmlnano](https://github.com/posthtml/htmlnano) | [minify-html](https://github.com/wilsonzlin/minify-html) | [minimize](https://github.com/Swaagie/minimize) |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| [Minifier Test](https://hell.meiert.org/core/html/minifier-test.html) | 31 | 26 | 26 | 26 | 26 | **25** | 26 |
-| [A List Apart](https://alistapart.com/) | 63 | 59 | **57** | 58 | 58 | **57** | 58 |
-| [Apple](https://www.apple.com/) | 233 | 214 | **203** | 212 | 211 | 210 | 212 |
-| [BBC](https://www.bbc.co.uk/) | 707 | 701 | 697 | n/a | 700 | **696** | 701 |
-| [Bun](https://bun.sh/) | 461 | 451 | **444** | n/a | 454 | 452 | 455 |
-| [CERN](https://home.cern/) | 150 | 92 | **81** | 95 | 91 | 91 | 92 |
-| [CSS-Tricks](https://css-tricks.com/) | 155 | 143 | 141 | 141 | 141 | **140** | 141 |
-| [DeepSeek](https://www.deepseek.com/) | 104 | 104 | **97** | 103 | 102 | 103 | 103 |
-| [DIN](https://www.din.de/) | 250 | 181 | **176** | 182 | 182 | 179 | 182 |
-| [DLR](https://www.dlr.de/) | 576 | 572 | **570** | n/a | 571 | **570** | 573 |
-| [ECMAScript](https://tc39.es/ecma262/) | 7306 | 6716 | **6494** | n/a | 6679 | 6629 | 6680 |
-| [EDRi](https://edri.org/) | 80 | **73** | **73** | 74 | 74 | **73** | 74 |
-| [EFF](https://www.eff.org/) | 56 | 51 | **49** | 52 | 50 | 50 | 51 |
-| [European Alternatives](https://european-alternatives.eu/) | 48 | **32** | **32** | **32** | **32** | **32** | **32** |
-| [FAZ](https://www.faz.net/aktuell/) | 1587 | 1534 | **1503** | n/a | 1534 | 1522 | 1531 |
-| [French Tech](https://lafrenchtech.gouv.fr/) | 152 | 133 | **131** | 132 | 132 | **131** | 132 |
-| [Front-End Social](https://front-end.social/) | 36 | **34** | **34** | 35 | **34** | **34** | 35 |
-| [Frontend Dogma](https://frontenddogma.com/) | 225 | 233 | 225 | **224** | 240 | 225 | 244 |
-| [Google](https://www.google.com/) | 18 | **18** | **18** | **18** | **18** | **18** | **18** |
-| [Ground News](https://ground.news/) | 1489 | 1467 | **1431** | n/a | 1474 | 1465 | 1476 |
-| [HTML 3.2](https://www.w3.org/TR/2018/SPSD-html32-20180315/) | 123 | **119** | **119** | 121 | 124 | **119** | 123 |
-| [HTML Living Standard](https://html.spec.whatwg.org/multipage/) | 149 | 152 | **148** | 149 | 155 | 149 | 155 |
-| [IETF](https://www.ietf.org/) | 82 | 34 | **32** | 34 | 34 | 33 | 34 |
-| [Igalia](https://www.igalia.com/) | 48 | 37 | **34** | 36 | 37 | 36 | 36 |
-| [Ladybird](https://ladybird.org/) | 31 | 29 | **28** | 29 | 29 | 29 | 29 |
-| [Leanpub](https://leanpub.com/) | 245 | 242 | **238** | 242 | 242 | 240 | 240 |
-| [Legge Stanca](https://www.gazzettaufficiale.it/atto/serie_generale/caricaDettaglioAtto/originario?atto.dataPubblicazioneGazzetta=2004-01-17&atto.codiceRedazionale=004G0015&elenco30giorni=false) | 17 | **12** | **12** | **12** | **12** | **12** | **12** |
-| [Mastodon](https://mastodon.social/explore) | 38 | 37 | 37 | 37 | **36** | **36** | 37 |
-| [MDN](https://developer.mozilla.org/en-US/) | 109 | 67 | **65** | 68 | 67 | **65** | 68 |
-| [Middle East Eye](https://www.middleeasteye.net/) | 220 | 204 | **195** | 201 | 200 | 197 | 200 |
-| [Mistral AI](https://mistral.ai/) | 377 | 369 | **367** | n/a | 372 | 368 | 373 |
-| [Mondoweiss](https://mondoweiss.net/) | 373 | 365 | **354** | n/a | 358 | 357 | 360 |
-| [Mozilla](https://www.mozilla.org/) | 47 | 37 | **35** | 36 | 36 | **35** | 36 |
-| [Nielsen Norman Group](https://www.nngroup.com/) | 97 | 81 | **80** | 81 | 82 | **80** | 81 |
-| [Opera](https://www.opera.com/) | 209 | 153 | **150** | 153 | 152 | 152 | 152 |
-| [OSCE](https://www.osce.org/) | 171 | 144 | 143 | 144 | 144 | **141** | 144 |
-| [Scrum Guide](https://scrumguides.org/scrum-guide.html) | 34 | **31** | **31** | 32 | **31** | **31** | **31** |
-| [Scrum.org](https://www.scrum.org/) | 207 | 177 | **175** | 176 | 177 | **175** | 176 |
-| [SELFHTML](https://wiki.selfhtml.org/) | 21 | 20 | **18** | **18** | **18** | **18** | **18** |
-| [SitePoint](https://www.sitepoint.com/) | 481 | **475** | 477 | n/a | 477 | 476 | 478 |
-| [Smashing Magazine](https://www.smashingmagazine.com/) | 291 | 292 | **290** | 291 | 291 | **290** | 291 |
-| [Startup-Verband](https://startupverband.de/) | 44 | 32 | **31** | 32 | 32 | **31** | 32 |
-| [TAZ](https://taz.de/) | 421 | 399 | **379** | n/a | 391 | 389 | 392 |
-| [TetraLogical](https://tetralogical.com/) | 59 | **53** | 54 | 54 | 54 | **53** | 54 |
-| [TPGi](https://www.tpgi.com/) | 174 | 178 | **168** | 172 | 171 | 170 | 172 |
-| [United Nations](https://www.un.org/en/) | 151 | 130 | **126** | 130 | 129 | 128 | 130 |
-| [UX Collective](https://uxdesign.cc/) | 99 | 143 | **97** | 99 | 98 | 98 | 98 |
-| [Vivaldi](https://vivaldi.com/) | 93 | 85 | **83** | 84 | **83** | **83** | 84 |
-| [W3C](https://www.w3.org/) | 51 | 41 | **40** | 41 | 41 | **40** | 41 |
-| [WordPress Blog](https://wordpress.com/blog/) | 194 | 179 | **177** | 181 | 179 | 178 | 181 |
-| **Average processing time** |  | 30 ms (50/50) | 41 ms (50/50) | 778 ms (40/50) | 32 ms (50/50) | **8 ms (50/50)** | 181 ms (50/50) |
+| [Minifier Test](https://hell.meiert.org/core/html/minifier-test.html) | 31 | 26 (–17.2%) | 26 (–17.4%) | 26 (–17%) | 26 (–16.4%) | ***25 (–19.2%)*** | 26 (–16.3%) |
+| [A List Apart](https://alistapart.com/) | 63 | 59 (–6.4%) | 57 (–8.9%) | 58 (–7.4%) | 58 (–8.2%) | ***57 (–8.9%)*** | 58 (–7.4%) |
+| [Apple](https://www.apple.com/) | 227 | 209 (–8.3%) | ***202 (–11.1%)*** | 207 (–8.8%) | 206 (–9.2%) | 205 (–10.1%) | 207 (–8.9%) |
+| [BBC](https://www.bbc.co.uk/) | 667 | 662 (–0.7%) | 658 (–1.4%) | n/a | 661 (–0.9%) | ***657 (–1.4%)*** | 661 (–0.8%) |
+| [Bun](https://bun.sh/) | 461 | 451 (–2.2%) | ***444 (–3.6%)*** | n/a | 454 (–1.5%) | 452 (–2%) | 455 (–1.3%) |
+| [CERN](https://home.cern/) | 150 | 92 (–38.6%) | ***81 (–46.1%)*** | 95 (–37%) | 91 (–39.3%) | 91 (–39.8%) | 92 (–38.7%) |
+| [CSS-Tricks](https://css-tricks.com/) | 155 | 143 (–7.6%) | 141 (–9%) | 141 (–8.8%) | 141 (–8.8%) | ***140 (–9.3%)*** | 141 (–8.7%) |
+| [DIN](https://www.din.de/) | 250 | 181 (–27.5%) | ***176 (–29.6%)*** | 182 (–27.1%) | 182 (–27.2%) | 179 (–28.5%) | 182 (–27.2%) |
+| [DLR](https://www.dlr.de/) | 576 | 572 (–0.6%) | ***570 (–1%)*** | n/a | 571 (–0.8%) | 570 (–1%) | 573 (–0.5%) |
+| [ECMAScript](https://tc39.es/ecma262/) | 7306 | 6716 (–8.1%) | ***6494 (–11.1%)*** | n/a | 6679 (–8.6%) | 6629 (–9.3%) | 6680 (–8.6%) |
+| [EDRi](https://edri.org/) | 80 | 73 (–8%) | 73 (–8.3%) | 74 (–7%) | 74 (–7.7%) | ***73 (–8.4%)*** | 74 (–7%) |
+| [EFF](https://www.eff.org/) | 56 | 51 (–7.8%) | ***49 (–11.4%)*** | 52 (–7.5%) | 50 (–9.6%) | 50 (–11.2%) | 51 (–9.4%) |
+| [European Alternatives](https://european-alternatives.eu/) | 48 | 32 (–32.5%) | ***32 (–33.1%)*** | 32 (–32.3%) | 32 (–32.3%) | 32 (–33%) | 32 (–32.4%) |
+| [FAZ](https://www.faz.net/aktuell/) | 1590 | 1537 (–3.3%) | ***1506 (–5.3%)*** | n/a | 1538 (–3.3%) | 1526 (–4%) | 1535 (–3.5%) |
+| [French Tech](https://lafrenchtech.gouv.fr/) | 152 | 133 (–13%) | 131 (–14%) | 132 (–13.1%) | 132 (–13.3%) | ***131 (–14%)*** | 132 (–13.1%) |
+| [Front-End Social](https://front-end.social/) | 36 | 34 (–3.7%) | 34 (–3.2%) | 35 (–3.1%) | 34 (–5.5%) | ***34 (–5.6%)*** | 35 (–3.1%) |
+| [Frontend Dogma](https://frontenddogma.com/) | 225 | 233 (+3.5%) | 225 (0%) | ***225 (–0.2%)*** | 240 (+6.6%) | 225 (0%) | 244 (+8.3%) |
+| [Google](https://www.google.com/) | 18 | 18 (–0.6%) | 18 (–2%) | 18 (–0.9%) | ***18 (–2.3%)*** | 18 (–1.9%) | 18 (–0.9%) |
+| [Ground News](https://ground.news/) | 1597 | 1573 (–1.5%) | ***1536 (–3.9%)*** | n/a | 1581 (–1%) | 1572 (–1.6%) | 1584 (–0.8%) |
+| [HTML 3.2](https://www.w3.org/TR/2018/SPSD-html32-20180315/) | 123 | 119 (–3%) | 119 (–3%) | 121 (–1.2%) | 124 (+1.1%) | ***119 (–3.2%)*** | 123 (+0.5%) |
+| [HTML Living Standard](https://html.spec.whatwg.org/multipage/) | 149 | 152 (+1.8%) | ***148 (–0.6%)*** | 149 (–0.2%) | 155 (+3.8%) | 149 (–0.3%) | 155 (+3.8%) |
+| [IETF](https://www.ietf.org/) | 82 | 34 (–58.8%) | ***32 (–61%)*** | 34 (–58.4%) | 34 (–59%) | 33 (–60%) | 34 (–58.8%) |
+| [Igalia](https://www.igalia.com/) | 48 | 37 (–23.5%) | ***34 (–28.9%)*** | 37 (–24.6%) | 37 (–24.5%) | 36 (–25.5%) | 36 (–25%) |
+| [Ladybird](https://ladybird.org/) | 31 | 29 (–4.6%) | ***28 (–9.9%)*** | 29 (–5.8%) | 29 (–5.7%) | 29 (–6.4%) | 29 (–5.9%) |
+| [Leanpub](https://leanpub.com/) | 238 | 235 (–1.1%) | ***231 (–3%)*** | 235 (–1.2%) | 235 (–1.4%) | 233 (–2%) | 233 (–2%) |
+| [Legge Stanca](https://www.gazzettaufficiale.it/atto/serie_generale/caricaDettaglioAtto/originario?atto.dataPubblicazioneGazzetta=2004-01-17&atto.codiceRedazionale=004G0015&elenco30giorni=false) | 17 | 12 (–28.5%) | ***12 (–30.4%)*** | 12 (–27.3%) | 12 (–29.6%) | 12 (–30.2%) | 12 (–27.5%) |
+| [Mastodon](https://mastodon.social/explore) | 38 | 37 (–3.8%) | 37 (–3.4%) | 37 (–3.2%) | 36 (–5.8%) | ***36 (–5.8%)*** | 37 (–3.3%) |
+| [MDN](https://developer.mozilla.org/en-US/) | 107 | 65 (–39%) | ***63 (–40.8%)*** | 67 (–37.6%) | 66 (–38.7%) | 64 (–40.2%) | 67 (–38%) |
+| [Middle East Eye](https://www.middleeasteye.net/) | 220 | 204 (–7.3%) | ***195 (–11.2%)*** | 200 (–8.8%) | 200 (–8.9%) | 197 (–10.3%) | 199 (–9.3%) |
+| [Mistral AI](https://mistral.ai/) | 377 | 369 (–2.1%) | ***367 (–2.6%)*** | n/a | 372 (–1.2%) | 368 (–2.4%) | 373 (–0.9%) |
+| [Mondoweiss](https://mondoweiss.net/) | 373 | 364 (–2.3%) | ***353 (–5.2%)*** | n/a | 357 (–4.2%) | 356 (–4.4%) | 359 (–3.7%) |
+| [Mozilla](https://www.mozilla.org/) | 47 | 37 (–21%) | 35 (–24.3%) | 36 (–22.2%) | 36 (–23.7%) | ***35 (–26.1%)*** | 36 (–23.1%) |
+| [Nielsen Norman Group](https://www.nngroup.com/) | 97 | 81 (–16.7%) | 80 (–17%) | 81 (–16.3%) | 82 (–15.8%) | ***80 (–17.4%)*** | 81 (–16%) |
+| [Opera](https://www.opera.com/) | 209 | 153 (–26.7%) | ***150 (–28.2%)*** | 153 (–27%) | 152 (–27.1%) | 152 (–27.5%) | 152 (–27.3%) |
+| [OSCE](https://www.osce.org/) | 171 | 144 (–16.2%) | 143 (–16.6%) | 144 (–16.1%) | 144 (–15.7%) | ***141 (–17.4%)*** | 144 (–15.8%) |
+| [Scrum Guide](https://scrumguides.org/scrum-guide.html) | 34 | 31 (–8.9%) | ***31 (–10.1%)*** | 32 (–7.3%) | 31 (–7.9%) | 31 (–10.1%) | 31 (–7.8%) |
+| [Scrum.org](https://www.scrum.org/) | 207 | 177 (–14.5%) | 175 (–15.2%) | 176 (–14.9%) | 177 (–14.5%) | ***175 (–15.2%)*** | 176 (–14.7%) |
+| [SELFHTML](https://wiki.selfhtml.org/) | 21 | 20 (–7.5%) | ***18 (–17.3%)*** | 18 (–13.5%) | 18 (–14.2%) | 18 (–16.7%) | 18 (–14.1%) |
+| [SitePoint](https://www.sitepoint.com/) | 481 | ***475 (–1.3%)*** | 476 (–0.9%) | n/a | 476 (–0.9%) | 476 (–1.1%) | 477 (–0.7%) |
+| [Smashing Magazine](https://www.smashingmagazine.com/) | 292 | 293 (+0.2%) | ***291 (–0.5%)*** | 292 (–0.1%) | 292 (–0.2%) | 291 (–0.4%) | 292 (+0%) |
+| [Startup-Verband](https://startupverband.de/) | 44 | 32 (–26.2%) | ***31 (–29.1%)*** | 32 (–26.6%) | 32 (–26.9%) | 31 (–28.1%) | 32 (–26.3%) |
+| [TAZ](https://taz.de/) | 421 | 399 (–5.3%) | ***379 (–9.9%)*** | n/a | 391 (–7.3%) | 389 (–7.6%) | 392 (–6.8%) |
+| [TetraLogical](https://tetralogical.com/) | 59 | 53 (–10%) | 54 (–9%) | 54 (–9.6%) | 54 (–9.5%) | ***53 (–10.2%)*** | 54 (–9.6%) |
+| [TPGi](https://www.tpgi.com/) | 174 | 178 (+2.1%) | ***168 (–3.6%)*** | 172 (–1.6%) | 170 (–2.2%) | 170 (–2.7%) | 171 (–1.6%) |
+| [United Nations](https://www.un.org/en/) | 151 | 130 (–13.7%) | ***125 (–16.7%)*** | 130 (–13.8%) | 129 (–14.6%) | 128 (–15.3%) | 130 (–14%) |
+| [UX Collective](https://uxdesign.cc/) | 98 | 141 (+44.5%) | ***95 (–2.6%)*** | 97 (–0.8%) | 96 (–1.2%) | 96 (–1.4%) | 97 (–0.9%) |
+| [Vivaldi](https://vivaldi.com/) | 93 | 85 (–8.8%) | ***83 (–11%)*** | 84 (–9.8%) | 83 (–10%) | 83 (–11%) | 84 (–9.7%) |
+| [W3C](https://www.w3.org/) | 51 | 41 (–18.8%) | ***40 (–20.8%)*** | 41 (–19.2%) | 41 (–19.4%) | 40 (–20.4%) | 41 (–19.1%) |
+| [WordPress Blog](https://wordpress.com/blog/) | 194 | 179 (–7.9%) | ***177 (–9%)*** | 181 (–7.1%) | 179 (–7.7%) | 178 (–8.7%) | 181 (–6.9%) |
+| **Sites processed (of sites overall)** |  | 49/49 | 49/49 | 39/49 | 49/49 | 49/49 | 49/49 |
+| **Average processing time** |  | 31 ms | 41 ms | 768 ms | 33 ms | ***8 ms*** | 185 ms |
+| **Average result (KB)** | 374 | 349 (–6.7%) | ***339 (–9.3%)*** | 363 (–3.1%) | 347 (–7.2%) | 344 (–8%) | 348 (–7.1%) |
 
 ## 2. Maximum Minification Compared
 
 | Site | Original Size (KB) | [@swc/html](https://github.com/swc-project/swc) | [HTML Minifier Next](https://github.com/j9t/html-minifier-next) | [html­com­pressor.­com](https://htmlcompressor.com/) | [htmlnano](https://github.com/posthtml/htmlnano) | [minify-html](https://github.com/wilsonzlin/minify-html) | [minimize](https://github.com/Swaagie/minimize) |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| [Minifier Test](https://hell.meiert.org/core/html/minifier-test.html) | 31 | 24 | **23** | 24 | **23** | **23** | 26 |
-| [A List Apart](https://alistapart.com/) | 63 | 57 | 53 | 56 | **39** | 55 | 58 |
-| [Apple](https://www.apple.com/) | 233 | 213 | **193** | 212 | 202 | 209 | 212 |
-| [BBC](https://www.bbc.co.uk/) | 707 | 669 | **654** | n/a | 662 | 663 | 701 |
-| [Bun](https://bun.sh/) | 461 | 435 | 420 | n/a | **374** | 436 | 455 |
-| [CERN](https://home.cern/) | 150 | 92 | **80** | 95 | 89 | 90 | 92 |
-| [CSS-Tricks](https://css-tricks.com/) | 155 | 139 | 114 | 138 | **108** | 137 | 141 |
-| [DeepSeek](https://www.deepseek.com/) | 104 | 99 | **83** | 99 | 89 | 98 | 103 |
-| [DIN](https://www.din.de/) | 250 | 175 | 163 | 175 | **136** | 174 | 182 |
-| [DLR](https://www.dlr.de/) | 576 | 541 | 531 | n/a | **526** | 533 | 573 |
-| [ECMAScript](https://tc39.es/ecma262/) | 7306 | 6714 | **6492** | n/a | 6677 | 6627 | 6680 |
-| [EDRi](https://edri.org/) | 80 | 71 | 67 | 72 | **53** | 70 | 74 |
-| [EFF](https://www.eff.org/) | 56 | 50 | **46** | 50 | 48 | 49 | 51 |
-| [European Alternatives](https://european-alternatives.eu/) | 48 | 32 | **30** | 32 | **30** | 32 | 32 |
-| [FAZ](https://www.faz.net/aktuell/) | 1587 | 1527 | 1374 | n/a | **1322** | 1517 | 1531 |
-| [French Tech](https://lafrenchtech.gouv.fr/) | 152 | 126 | 122 | 127 | **51** | 125 | 132 |
-| [Front-End Social](https://front-end.social/) | 36 | 34 | **31** | 35 | **31** | 34 | 35 |
-| [Frontend Dogma](https://frontenddogma.com/) | 225 | 233 | **217** | 224 | 231 | 225 | 244 |
-| [Google](https://www.google.com/) | 18 | 17 | **16** | 18 | **16** | 17 | 18 |
-| [Ground News](https://ground.news/) | 1489 | 1397 | **1325** | n/a | 1373 | 1395 | 1476 |
-| [HTML 3.2](https://www.w3.org/TR/2018/SPSD-html32-20180315/) | 123 | 119 | **118** | 121 | 124 | 119 | 123 |
-| [HTML Living Standard](https://html.spec.whatwg.org/multipage/) | 149 | 152 | **148** | 149 | 155 | 149 | 155 |
-| [IETF](https://www.ietf.org/) | 82 | 34 | **31** | 34 | 33 | 33 | 34 |
-| [Igalia](https://www.igalia.com/) | 48 | 36 | **33** | 36 | 35 | 35 | 36 |
-| [Ladybird](https://ladybird.org/) | 31 | 29 | **27** | 29 | 28 | 29 | 29 |
-| [Leanpub](https://leanpub.com/) | 245 | 231 | **225** | 242 | 228 | 229 | 240 |
-| [Legge Stanca](https://www.gazzettaufficiale.it/atto/serie_generale/caricaDettaglioAtto/originario?atto.dataPubblicazioneGazzetta=2004-01-17&atto.codiceRedazionale=004G0015&elenco30giorni=false) | 17 | 10 | **9** | 10 | **9** | 10 | 12 |
-| [Mastodon](https://mastodon.social/explore) | 38 | 36 | 33 | 37 | **32** | 36 | 37 |
-| [MDN](https://developer.mozilla.org/en-US/) | 109 | 66 | 62 | 68 | **50** | 65 | 68 |
-| [Middle East Eye](https://www.middleeasteye.net/) | 220 | 204 | **194** | 200 | 199 | 197 | 200 |
-| [Mistral AI](https://mistral.ai/) | 377 | 339 | **327** | n/a | 334 | 338 | 373 |
-| [Mondoweiss](https://mondoweiss.net/) | 373 | 352 | **340** | n/a | n/a | 347 | 360 |
-| [Mozilla](https://www.mozilla.org/) | 47 | 37 | **33** | 36 | **33** | 35 | 36 |
-| [Nielsen Norman Group](https://www.nngroup.com/) | 97 | 80 | **58** | 80 | 59 | 79 | 81 |
-| [Opera](https://www.opera.com/) | 209 | 147 | 134 | 152 | **100** | 146 | 152 |
-| [OSCE](https://www.osce.org/) | 171 | 144 | **135** | 144 | 136 | 141 | 144 |
-| [Scrum Guide](https://scrumguides.org/scrum-guide.html) | 34 | **31** | **31** | 32 | **31** | **31** | **31** |
-| [Scrum.org](https://www.scrum.org/) | 207 | 177 | **172** | 176 | 173 | 175 | 176 |
-| [SELFHTML](https://wiki.selfhtml.org/) | 21 | 18 | **17** | 18 | 18 | 18 | 18 |
-| [SitePoint](https://www.sitepoint.com/) | 481 | 458 | **418** | n/a | 420 | 459 | 478 |
-| [Smashing Magazine](https://www.smashingmagazine.com/) | 291 | 291 | 288 | 291 | **278** | 289 | 291 |
-| [Startup-Verband](https://startupverband.de/) | 44 | 32 | **30** | 32 | 31 | 31 | 32 |
-| [TAZ](https://taz.de/) | 421 | 375 | **350** | n/a | 366 | 377 | 392 |
-| [TetraLogical](https://tetralogical.com/) | 59 | 53 | **49** | 54 | 50 | 53 | 54 |
-| [TPGi](https://www.tpgi.com/) | 174 | 165 | 158 | 171 | **149** | 165 | 172 |
-| [United Nations](https://www.un.org/en/) | 151 | 126 | 112 | 123 | **84** | 124 | 130 |
-| [UX Collective](https://uxdesign.cc/) | 99 | 92 | **90** | 94 | 91 | 92 | 98 |
-| [Vivaldi](https://vivaldi.com/) | 93 | 81 | **74** | 82 | n/a | 81 | 84 |
-| [W3C](https://www.w3.org/) | 51 | 39 | **36** | 39 | 37 | 38 | 41 |
-| [WordPress Blog](https://wordpress.com/blog/) | 194 | 158 | 149 | 168 | **135** | 165 | 181 |
-| **Average processing time** |  | 34 ms (50/50) | 62 ms (50/50) | 1201 ms (40/50) | 153 ms (48/50) | **10 ms (50/50)** | 181 ms (50/50) |
+| [Minifier Test](https://hell.meiert.org/core/html/minifier-test.html) | 31 | 24 (–23.3%) | 23 (–25.4%) | 24 (–22.9%) | ***23 (–26.2%)*** | 23 (–25.3%) | 26 (–16.3%) |
+| [A List Apart](https://alistapart.com/) | 63 | 57 (–9.6%) | 53 (–15.2%) | 56 (–10.2%) | ***39 (–37.5%)*** | 55 (–12.1%) | 58 (–7.4%) |
+| [Apple](https://www.apple.com/) | 227 | 208 (–8.4%) | ***192 (–15.4%)*** | 207 (–8.8%) | 197 (–13.2%) | 204 (–10.1%) | 207 (–8.9%) |
+| [BBC](https://www.bbc.co.uk/) | 667 | 631 (–5.3%) | ***618 (–7.4%)*** | n/a | 625 (–6.4%) | 627 (–6.1%) | 661 (–0.8%) |
+| [Bun](https://bun.sh/) | 461 | 435 (–5.7%) | 420 (–8.8%) | n/a | ***374 (–18.9%)*** | 436 (–5.3%) | 455 (–1.3%) |
+| [CERN](https://home.cern/) | 150 | 92 (–38.6%) | ***80 (–46.8%)*** | 95 (–37%) | 89 (–40.5%) | 90 (–40.2%) | 92 (–38.7%) |
+| [CSS-Tricks](https://css-tricks.com/) | 155 | 139 (–10.3%) | 114 (–26.5%) | 138 (–11%) | ***108 (–30.2%)*** | 137 (–11.6%) | 141 (–8.7%) |
+| [DeepSeek](https://www.deepseek.com/) | 104 | 99 (–5%) | ***83 (–19.7%)*** | 99 (–4.9%) | 89 (–14.5%) | 98 (–5.4%) | 103 (–1.1%) |
+| [DIN](https://www.din.de/) | 250 | 175 (–30.1%) | 163 (–34.7%) | 175 (–29.9%) | ***136 (–45.7%)*** | 174 (–30.6%) | 182 (–27.2%) |
+| [DLR](https://www.dlr.de/) | 576 | 541 (–6.1%) | 531 (–7.8%) | n/a | ***526 (–8.7%)*** | 533 (–7.5%) | 573 (–0.5%) |
+| [ECMAScript](https://tc39.es/ecma262/) | 7306 | 6714 (–8.1%) | ***6492 (–11.2%)*** | n/a | 6677 (–8.6%) | 6627 (–9.3%) | 6680 (–8.6%) |
+| [EFF](https://www.eff.org/) | 56 | 50 (–10.5%) | ***46 (–17.4%)*** | 50 (–9.7%) | 48 (–13.7%) | 49 (–12.1%) | 51 (–9.4%) |
+| [European Alternatives](https://european-alternatives.eu/) | 48 | 32 (–32.5%) | ***30 (–37.1%)*** | 32 (–32.4%) | 30 (–36.3%) | 32 (–33.1%) | 32 (–32.4%) |
+| [FAZ](https://www.faz.net/aktuell/) | 1605 | 1544 (–3.7%) | 1390 (–13.4%) | n/a | ***1338 (–16.6%)*** | 1534 (–4.4%) | 1549 (–3.5%) |
+| [Ground News](https://ground.news/) | 1597 | 1500 (–6.1%) | ***1423 (–10.9%)*** | n/a | 1475 (–7.7%) | 1499 (–6.2%) | 1584 (–0.8%) |
+| [HTML 3.2](https://www.w3.org/TR/2018/SPSD-html32-20180315/) | 123 | 119 (–3.1%) | ***118 (–3.4%)*** | 121 (–1.3%) | 124 (+0.9%) | 119 (–3.3%) | 123 (+0.5%) |
+| [HTML Living Standard](https://html.spec.whatwg.org/multipage/) | 149 | 152 (+1.8%) | ***148 (–0.7%)*** | 149 (–0.3%) | 155 (+3.7%) | 149 (–0.3%) | 155 (+3.8%) |
+| [IETF](https://www.ietf.org/) | 82 | 34 (–59.2%) | ***31 (–61.8%)*** | 34 (–58.5%) | 33 (–59.8%) | 33 (–60.1%) | 34 (–58.8%) |
+| [Igalia](https://www.igalia.com/) | 48 | 36 (–24.9%) | ***33 (–31.2%)*** | 36 (–25.5%) | 35 (–27.1%) | 35 (–26.9%) | 36 (–25%) |
+| [Ladybird](https://ladybird.org/) | 31 | 29 (–4.6%) | ***27 (–11.9%)*** | 29 (–5.8%) | 28 (–7.8%) | 29 (–6.4%) | 29 (–5.9%) |
+| [Leanpub](https://leanpub.com/) | 238 | 226 (–5%) | ***220 (–7.5%)*** | 235 (–1.2%) | 223 (–6.2%) | 224 (–5.9%) | 233 (–2%) |
+| [Legge Stanca](https://www.gazzettaufficiale.it/atto/serie_generale/caricaDettaglioAtto/originario?atto.dataPubblicazioneGazzetta=2004-01-17&atto.codiceRedazionale=004G0015&elenco30giorni=false) | 17 | 10 (–43.8%) | ***9 (–46.5%)*** | 10 (–42.7%) | 9 (–46.3%) | 10 (–40.5%) | 12 (–27.5%) |
+| [Mastodon](https://mastodon.social/explore) | 38 | 36 (–5%) | 33 (–12.5%) | 37 (–3.5%) | ***32 (–14.7%)*** | 36 (–6.2%) | 37 (–3.3%) |
+| [MDN](https://developer.mozilla.org/en-US/) | 107 | 65 (–39.1%) | 61 (–42.7%) | 67 (–37.7%) | ***49 (–54%)*** | 64 (–40.3%) | 67 (–38%) |
+| [Middle East Eye](https://www.middleeasteye.net/) | 220 | 204 (–7.3%) | ***194 (–11.8%)*** | 200 (–8.8%) | 199 (–9.4%) | 197 (–10.3%) | 199 (–9.3%) |
+| [Mistral AI](https://mistral.ai/) | 377 | 339 (–9.9%) | ***327 (–13.2%)*** | n/a | 334 (–11.2%) | 338 (–10.3%) | 373 (–0.9%) |
+| [Mondoweiss](https://mondoweiss.net/) | 373 | 352 (–5.7%) | ***340 (–9%)*** | n/a | n/a | 347 (–6.9%) | 359 (–3.7%) |
+| [Mozilla](https://www.mozilla.org/) | 47 | 37 (–21%) | ***33 (–30.4%)*** | 36 (–22.2%) | 33 (–29.4%) | 35 (–26.1%) | 36 (–23.1%) |
+| [Nielsen Norman Group](https://www.nngroup.com/) | 97 | 80 (–17.5%) | ***58 (–40.5%)*** | 80 (–16.9%) | 59 (–39.5%) | 79 (–18%) | 81 (–16%) |
+| [Opera](https://www.opera.com/) | 209 | 147 (–29.4%) | 134 (–35.9%) | 152 (–27.2%) | ***100 (–52.3%)*** | 146 (–30%) | 152 (–27.3%) |
+| [OSCE](https://www.osce.org/) | 171 | 144 (–16.2%) | ***135 (–21.5%)*** | 144 (–16.1%) | 136 (–20.7%) | 141 (–17.6%) | 144 (–15.8%) |
+| [Scrum Guide](https://scrumguides.org/scrum-guide.html) | 34 | 31 (–9%) | ***31 (–10.3%)*** | 32 (–7.3%) | 31 (–8.2%) | 31 (–10.1%) | 31 (–7.8%) |
+| [Scrum.org](https://www.scrum.org/) | 207 | 177 (–14.5%) | ***172 (–16.9%)*** | 176 (–14.9%) | 173 (–16.3%) | 175 (–15.3%) | 176 (–14.7%) |
+| [SELFHTML](https://wiki.selfhtml.org/) | 21 | 18 (–14%) | ***17 (–18.9%)*** | 18 (–14.2%) | 18 (–15.6%) | 18 (–17.5%) | 18 (–14.1%) |
+| [SitePoint](https://www.sitepoint.com/) | 481 | 458 (–4.8%) | ***418 (–13.1%)*** | n/a | 420 (–12.6%) | 459 (–4.5%) | 477 (–0.7%) |
+| [Smashing Magazine](https://www.smashingmagazine.com/) | 292 | 291 (–0.3%) | 288 (–1.3%) | 292 (–0.1%) | ***278 (–4.7%)*** | 290 (–0.9%) | 292 (+0%) |
+| [Startup-Verband](https://startupverband.de/) | 44 | 32 (–26.3%) | ***30 (–30.6%)*** | 32 (–26.8%) | 31 (–28.4%) | 31 (–28.3%) | 32 (–26.3%) |
+| [TAZ](https://taz.de/) | 421 | 374 (–11.1%) | ***350 (–16.8%)*** | n/a | 366 (–13.1%) | 377 (–10.5%) | 392 (–6.8%) |
+| [TetraLogical](https://tetralogical.com/) | 59 | 53 (–10.1%) | ***49 (–16.9%)*** | 53 (–9.8%) | 50 (–16.1%) | 53 (–10.3%) | 54 (–9.6%) |
+| [TPGi](https://www.tpgi.com/) | 174 | 165 (–5.2%) | 158 (–9.5%) | 171 (–1.8%) | ***149 (–14.7%)*** | 165 (–5.6%) | 171 (–1.6%) |
+| [United Nations](https://www.un.org/en/) | 151 | 126 (–16.2%) | 112 (–25.6%) | 123 (–18.6%) | ***84 (–44.1%)*** | 124 (–17.8%) | 130 (–14%) |
+| [UX Collective](https://uxdesign.cc/) | 98 | 90 (–7.3%) | ***88 (–9.7%)*** | 92 (–5.2%) | 89 (–9%) | 90 (–7.9%) | 97 (–0.9%) |
+| [Vivaldi](https://vivaldi.com/) | 93 | 81 (–12.1%) | ***74 (–20.5%)*** | 82 (–11.4%) | n/a | 81 (–12.9%) | 84 (–9.7%) |
+| [W3C](https://www.w3.org/) | 51 | 39 (–22.6%) | ***36 (–28.9%)*** | 39 (–23%) | 37 (–27.4%) | 38 (–24.3%) | 41 (–19.1%) |
+| [WordPress Blog](https://wordpress.com/blog/) | 194 | 158 (–18.7%) | 149 (–23.4%) | 168 (–13.7%) | ***135 (–30.7%)*** | 165 (–14.9%) | 181 (–6.9%) |
+| **Sites processed (of sites overall)** |  | 45/45 | 45/45 | 35/45 | 43/45 | 45/45 | 45/45 |
+| **Average processing time** |  | 38 ms | 67 ms | 1238 ms | 159 ms | ***11 ms*** | 193 ms |
+| **Average result (KB)** | 399 | 363 (–8.9%) | ***345 (–13.4%)*** | 386 (–3.3%) | 348 (–12.8%) | 360 (–9.7%) | 370 (–7.2%) |
+
+Benchmarks last updated: Feb 15, 2026
 <!-- End auto-generated -->
 
 ## Notes
 
-* Minimize only minifies HTML.
-* [HTML Minifier Terser](https://github.com/terser/html-minifier-terser) is currently not included due to issues around whitespace collapsing and removal of code using modern CSS features, issues which appeared to distort the data.
+* Minifiers:
+  - Minimize only minifies HTML.
+  - [HTML Minifier Terser](https://github.com/terser/html-minifier-terser) is currently not included due to issues around whitespace collapsing and removal of code using modern CSS features, issues which appeared to distort the data.
+* Failed sites are not excluded from the calculation for the average result, but counted as unminified. This avoids test failures advantaging the respective minifier.
