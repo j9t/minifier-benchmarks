@@ -77,8 +77,21 @@ const table = new Table({
   }, 0) + 2, 25, 25, 25, 25, 25, 25, 25, 25, 20]
 });
 
+// Ordered list of minifier keys (used for iteration in ˚processFile˚ and ˚generateMarkdownTable˚)
+const minifierNames = ['swchtml', 'minifier', 'compressor', 'htmlnano', 'minifyhtml', 'minimize'];
+
 function toKb(size, precision) {
   return (size / 1024).toFixed(precision || 0);
+}
+
+function formatDelta(rawSize, originalSize) {
+  if (!rawSize || rawSize <= 0 || !originalSize || originalSize <= 0) return '';
+  const delta = ((rawSize - originalSize) / originalSize) * 100;
+  let formatted = delta.toFixed(1).replace(/\.0$/, '');
+  if (formatted === '-0') formatted = '0';
+  if (delta > 0 && !formatted.startsWith('+')) formatted = '+' + formatted;
+  formatted = formatted.replace('-', '–');
+  return ' (' + formatted + '%)';
 }
 
 function redSize(size) {
@@ -237,17 +250,8 @@ function generateMarkdownTable() {
       if (i < 2) return cell; // Site name and original size columns
       if (cell === 'n/a' || cell === '<1') return cell;
 
-      // Compute delta percentage from raw byte sizes
       const rawSize = rawSizes ? rawSizes[i - 2] : 0;
-      let deltaStr = '';
-      if (rawSize > 0 && originalSize > 0) {
-        const delta = ((rawSize - originalSize) / originalSize) * 100;
-        let formatted = delta.toFixed(1).replace(/\.0$/, '');
-        if (formatted === '-0') formatted = '0';
-        if (delta > 0 && !formatted.startsWith('+')) formatted = '+' + formatted;
-        formatted = formatted.replace('-', '–');
-        deltaStr = ' (' + formatted + '%)';
-      }
+      const deltaStr = formatDelta(rawSize, originalSize);
 
       if (boldIndices?.has(i)) {
         // Best result: Bold and italics for improved visibility
@@ -257,8 +261,6 @@ function generateMarkdownTable() {
     });
     output(formattedRow);
   });
-
-  const minifierNames = ['swchtml', 'minifier', 'compressor', 'htmlnano', 'minifyhtml', 'minimize'];
 
   // Count only sites that were actually processed (not skipped due to download failure)
   const processedSites = fileNames.filter(name => rows[name] && rows[name].report).length;
@@ -316,7 +318,7 @@ function generateMarkdownTable() {
   const avgOrigKB = origCount > 0 ? Math.round(totalOrigBytes / origCount / 1024) : '';
   const savingsRow = ['**Average result (KB)**', String(avgOrigKB)];
   const avgSizes = {};
-  let bestAvgBytes = null;
+  let bestTotalBytes = null;
 
   // Compute per-minifier averages; failed sites count as unminified (original size)
   minifierNames.forEach(function (name, idx) {
@@ -336,25 +338,20 @@ function generateMarkdownTable() {
     });
 
     if (count > 0) {
-      const avgBytes = totalMinifierBytes / count;
-      const avgKB = Math.round(avgBytes / 1024);
-      const delta = ((totalMinifierBytes - totalOriginalBytes) / totalOriginalBytes) * 100;
-      avgSizes[name] = { avgKB, avgBytes, delta };
-      if (bestAvgBytes === null || avgBytes < bestAvgBytes) {
-        bestAvgBytes = avgBytes;
+      const avgKB = Math.round(totalMinifierBytes / count / 1024);
+      avgSizes[name] = { avgKB, totalMinifierBytes, totalOriginalBytes };
+      if (bestTotalBytes === null || totalMinifierBytes < bestTotalBytes) {
+        bestTotalBytes = totalMinifierBytes;
       }
     }
   });
 
   minifierNames.forEach(function (name) {
     if (avgSizes[name]) {
-      const { avgKB, avgBytes, delta } = avgSizes[name];
-      let formatted = delta.toFixed(1).replace(/\.0$/, '');
-      if (formatted === '-0') formatted = '0';
-      if (delta > 0 && !formatted.startsWith('+')) formatted = '+' + formatted;
-      formatted = formatted.replace('-', '–');
-      const display = avgKB + ' (' + formatted + '%)';
-      if (bestAvgBytes !== null && avgBytes === bestAvgBytes) {
+      const { avgKB, totalMinifierBytes, totalOriginalBytes } = avgSizes[name];
+      const deltaStr = formatDelta(totalMinifierBytes, totalOriginalBytes);
+      const display = avgKB + deltaStr;
+      if (bestTotalBytes !== null && totalMinifierBytes === bestTotalBytes) {
         savingsRow.push('***' + display + '***');
       } else {
         savingsRow.push(display);
@@ -379,7 +376,6 @@ function displayTable() {
 
   // Add average processing time row
   const timeRow = ['Average processing time', ''];
-  const minifierNames = ['swchtml', 'minifier', 'compressor', 'htmlnano', 'minifyhtml', 'minimize'];
 
   // Count only sites that were actually processed (not skipped due to download failure)
   const processedSites = fileNames.filter(name => rows[name]).length;
@@ -804,7 +800,7 @@ async function processFile(fileName) {
       toKb(original.size)
     ];
     const rawSizes = [];
-    for (const name in infos) {
+    for (const name of minifierNames) {
       const info = infos[name];
       display.push([greenSize(info.size), greenSize(info.gzSize), greenSize(info.lzSize), greenSize(info.brSize)].join('\n'));
       rawSizes.push(info.size || 0);
@@ -1026,10 +1022,18 @@ const dateStamp = `${months[now.getMonth()]} ${now.getDate()}, ${now.getFullYear
 const readme = path.join(__dirname, 'README.md');
 let data = await readText(readme);
 
-// Update the single date at the start of the benchmarks section
+// Update date stamp (used by HTML mode via regex, by max mode via content insertion)
 const dateLinePattern = /Benchmarks last updated: .+/;
+const dateLine = `Benchmarks last updated: ${dateStamp}`;
 if (dateLinePattern.test(data)) {
-  data = data.replace(dateLinePattern, `Benchmarks last updated: ${dateStamp}`);
+  data = data.replace(dateLinePattern, dateLine);
+} else if (IS_HTML_ONLY) {
+  // Fallback: Insert before-end marker if date line is missing
+  const endMarker = '<!-- End auto-generated -->';
+  const markerPos = data.indexOf(endMarker);
+  if (markerPos !== -1) {
+    data = data.slice(0, markerPos) + dateLine + '\n' + data.slice(markerPos);
+  }
 }
 
 // Target different sections based on mode
