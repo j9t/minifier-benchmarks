@@ -196,24 +196,19 @@ function generateMarkdownTable() {
       return;
     }
 
-    const row = rows[fileName].report;
+    const rawSizes = rows[fileName].rawSizes;
 
-    // Find the best (smallest) size among all minifiers
-    // Minifier results start at index 2 (@swc/html)
+    // Find the best (smallest) size among all minifiers using raw bytes
+    // `rawSizes[0]` corresponds to report index 2 (@swc/html)
     const minifierResults = [];
-    for (let i = 2; i < row.length; i++) {
-      const raw = row[i];
-      // Skip non-numeric markers
-      if (raw === 'n/a' || raw === '<1') continue;
-
-      const numericValue = parseFloat(raw);
-      if (!Number.isNaN(numericValue)) {
-        minifierResults.push({ index: i, value: numericValue });
+    for (let i = 0; i < rawSizes.length; i++) {
+      if (rawSizes[i] > 0) {
+        minifierResults.push({ index: i + 2, value: rawSizes[i] });
       }
     }
 
     if (minifierResults.length > 0) {
-      // Find and store indices of cells with minimum value
+      // Find and store indices of cells with minimum raw byte value
       const minValue = Math.min(...minifierResults.map(r => r.value));
       rows[fileName].boldIndices = new Set(
         minifierResults.filter(r => r.value === minValue).map(r => r.index)
@@ -234,17 +229,50 @@ function generateMarkdownTable() {
     if (!rows[fileName] || !rows[fileName].report) return; // Prevent outputting rows with missing data
     const row = rows[fileName].report;
     const boldIndices = rows[fileName].boldIndices;
-    // Apply bold formatting during output without modifying the original data
-    const formattedRow = row.map((cell, i) => boldIndices?.has(i) ? `**${cell}**` : cell);
+    const originalSize = rows[fileName].originalSize;
+    const rawSizes = rows[fileName].rawSizes;
+
+    // Apply formatting: Delta percentages and highlighting for best results
+    const formattedRow = row.map((cell, i) => {
+      if (i < 2) return cell; // Site name and original size columns
+      if (cell === 'n/a' || cell === '<1') return cell;
+
+      // Compute delta percentage from raw byte sizes
+      const rawSize = rawSizes ? rawSizes[i - 2] : 0;
+      let deltaStr = '';
+      if (rawSize > 0 && originalSize > 0) {
+        const delta = ((rawSize - originalSize) / originalSize) * 100;
+        let formatted = delta.toFixed(1).replace(/\.0$/, '');
+        if (formatted === '-0') formatted = '0';
+        if (delta > 0 && !formatted.startsWith('+')) formatted = '+' + formatted;
+        formatted = formatted.replace('-', '–');
+        deltaStr = ' (' + formatted + '%)';
+      }
+
+      if (boldIndices?.has(i)) {
+        // Best result: Bold and italics for improved visibility
+        return '***' + cell + deltaStr + '***';
+      }
+      return cell + deltaStr;
+    });
     output(formattedRow);
   });
 
-  // Add average processing time row
-  const timeRow = ['**Average processing time**', ''];
   const minifierNames = ['swchtml', 'minifier', 'compressor', 'htmlnano', 'minifyhtml', 'minimize'];
 
   // Count only sites that were actually processed (not skipped due to download failure)
   const processedSites = fileNames.filter(name => rows[name] && rows[name].report).length;
+
+  // Add sites succeeded row
+  const sitesRow = ['**Sites processed (of sites overall)**', ''];
+  minifierNames.forEach(function (name) {
+    const successCount = successCounts[name];
+    sitesRow.push(successCount + '/' + processedSites);
+  });
+  output(sitesRow);
+
+  // Add average processing time row
+  const timeRow = ['**Average processing time**', ''];
 
   // Calculate averages and find fastest
   const averages = {};
@@ -264,18 +292,78 @@ function generateMarkdownTable() {
     const successCount = successCounts[name];
     if (successCount > 0) {
       const avgTime = Math.round(averages[name]);
-      const display = avgTime + ' ms (' + successCount + '/' + processedSites + ')';
-      // Bold if this is the fastest average
+      // Bold + italic if this is the fastest average
       if (fastestAvg !== null && averages[name] === fastestAvg) {
-        timeRow.push('**' + display + '**');
+        timeRow.push('***' + avgTime + ' ms***');
       } else {
-        timeRow.push(display);
+        timeRow.push(avgTime + ' ms');
       }
     } else {
       timeRow.push('n/a');
     }
   });
   output(timeRow);
+
+  // Add average result row
+  // Compute average original size across all processed sites
+  let totalOrigBytes = 0;
+  let origCount = 0;
+  fileNames.forEach(function (fileName) {
+    if (!rows[fileName] || !rows[fileName].originalSize) return;
+    totalOrigBytes += rows[fileName].originalSize;
+    origCount++;
+  });
+  const avgOrigKB = origCount > 0 ? Math.round(totalOrigBytes / origCount / 1024) : '';
+  const savingsRow = ['**Average result (KB)**', String(avgOrigKB)];
+  const avgSizes = {};
+  let bestAvgBytes = null;
+
+  // Compute per-minifier averages; failed sites count as unminified (original size)
+  minifierNames.forEach(function (name, idx) {
+    let totalMinifierBytes = 0;
+    let totalOriginalBytes = 0;
+    let count = 0;
+
+    fileNames.forEach(function (fileName) {
+      if (!rows[fileName] || !rows[fileName].rawSizes) return;
+      const rawSize = rows[fileName].rawSizes[idx];
+      const origSize = rows[fileName].originalSize;
+      if (origSize > 0) {
+        totalMinifierBytes += (rawSize > 0) ? rawSize : origSize;
+        totalOriginalBytes += origSize;
+        count++;
+      }
+    });
+
+    if (count > 0) {
+      const avgBytes = totalMinifierBytes / count;
+      const avgKB = Math.round(avgBytes / 1024);
+      const delta = ((totalMinifierBytes - totalOriginalBytes) / totalOriginalBytes) * 100;
+      avgSizes[name] = { avgKB, avgBytes, delta };
+      if (bestAvgBytes === null || avgBytes < bestAvgBytes) {
+        bestAvgBytes = avgBytes;
+      }
+    }
+  });
+
+  minifierNames.forEach(function (name) {
+    if (avgSizes[name]) {
+      const { avgKB, avgBytes, delta } = avgSizes[name];
+      let formatted = delta.toFixed(1).replace(/\.0$/, '');
+      if (formatted === '-0') formatted = '0';
+      if (delta > 0 && !formatted.startsWith('+')) formatted = '+' + formatted;
+      formatted = formatted.replace('-', '–');
+      const display = avgKB + ' (' + formatted + '%)';
+      if (bestAvgBytes !== null && avgBytes === bestAvgBytes) {
+        savingsRow.push('***' + display + '***');
+      } else {
+        savingsRow.push(display);
+      }
+    } else {
+      savingsRow.push('n/a');
+    }
+  });
+  output(savingsRow);
 
   return content;
 }
@@ -715,9 +803,11 @@ async function processFile(fileName) {
       '[' + fileName + '](' + urls[fileName] + ')',
       toKb(original.size)
     ];
+    const rawSizes = [];
     for (const name in infos) {
       const info = infos[name];
       display.push([greenSize(info.size), greenSize(info.gzSize), greenSize(info.lzSize), greenSize(info.brSize)].join('\n'));
+      rawSizes.push(info.size || 0);
       // Use raw bytes to determine display logic
       if (info.size == null || info.size === undefined) {
         report.push('n/a');
@@ -745,7 +835,9 @@ async function processFile(fileName) {
     );
     rows[fileName] = {
       display: display,
-      report: report
+      report: report,
+      originalSize: original.size,
+      rawSizes: rawSizes
     };
 
     // Accumulate total processing times and count successes
@@ -970,10 +1062,11 @@ if (end !== -1) {
 }
 
 // Replace table content, normalize newlines to avoid double blank lines
-// Add end comment after max table (marks end of auto-generated content)
-const endComment = IS_HTML_ONLY ? '' : '<!-- End auto-generated -->';
+// For max mode: Include date stamp and end comment (they fall within the replaced range)
 const trimmedContent = content.trimEnd();
-const separator = endComment ? '\n' + endComment + '\n\n' : '\n\n';
+const separator = IS_HTML_ONLY
+  ? '\n\n'
+  : '\n\nBenchmarks last updated: ' + dateStamp + '\n<!-- End auto-generated -->\n\n';
 const newData = data.slice(0, start) + trimmedContent + separator + data.slice(end);
 await writeText(readme, newData);
 
