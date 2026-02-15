@@ -205,7 +205,7 @@ function generateMarkdownTable() {
   fileNames.forEach(function (fileName) {
     // Add a check for `rows[fileName]`
     if (!rows[fileName] || !rows[fileName].report) {
-      benchmarkErrors.push(`Skipping ${fileName}: row or report is missing`);
+      benchmarkErrors.push(`Skipped ${fileName}: Row or report is missing`);
       return;
     }
 
@@ -370,7 +370,7 @@ function displayTable() {
     if (rows[fileName]) { // Ensure the `fileName` exists in rows
       table.push(rows[fileName].display);
     } else {
-      benchmarkErrors.push(`No data available for ${fileName}. Skipping.`);
+      benchmarkErrors.push(`No data available for ${fileName}`);
     }
   });
 
@@ -977,7 +977,7 @@ async function processFile(fileName) {
     if (!site) {
       // Remove any partially written file
       try { await fs.unlink(filePath); } catch { /* ignore */ }
-      benchmarkErrors.push(`Skipping ${fileName} due to download failure`);
+      benchmarkErrors.push(`Skipped ${fileName} due to download failure`);
       rows[fileName] = null; // Explicitly mark as skipped
       return;
     }
