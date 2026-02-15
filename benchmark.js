@@ -80,6 +80,10 @@ const table = new Table({
 // Ordered list of minifier keys (used for iteration in ˚processFile˚ and ˚generateMarkdownTable˚)
 const minifierNames = ['swchtml', 'minifier', 'compressor', 'htmlnano', 'minifyhtml', 'minimize'];
 
+// In the report array, columns 0 and 1 are site name and original size;
+// minifier results start at this offset (must match `minifierNames` order)
+const MINIFIER_COL_OFFSET = 2;
+
 function toKb(size, precision) {
   return (size / 1024).toFixed(precision || 0);
 }
@@ -216,7 +220,7 @@ function generateMarkdownTable() {
     const minifierResults = [];
     for (let i = 0; i < rawSizes.length; i++) {
       if (rawSizes[i] > 0) {
-        minifierResults.push({ index: i + 2, value: rawSizes[i] });
+        minifierResults.push({ index: i + MINIFIER_COL_OFFSET, value: rawSizes[i] });
       }
     }
 
@@ -250,7 +254,7 @@ function generateMarkdownTable() {
       if (i < 2) return cell; // Site name and original size columns
       if (cell === 'n/a' || cell === '<1') return cell;
 
-      const rawSize = rawSizes ? rawSizes[i - 2] : 0;
+      const rawSize = rawSizes ? rawSizes[i - MINIFIER_COL_OFFSET] : 0;
       const deltaStr = formatDelta(rawSize, originalSize);
 
       if (boldIndices?.has(i)) {
@@ -1065,8 +1069,11 @@ if (end !== -1) {
   end = data.length;
 }
 
-// Replace table content, normalize newlines to avoid double blank lines
-// For max mode: Include date stamp and end comment (they fall within the replaced range)
+// Replace table content, normalize newlines to avoid double blank lines.
+// In HTML mode, the date line is outside the replaced range and updated via the
+// `dateLinePattern` regex above. In max mode, the date falls inside the replaced
+// range (between the table and `## Notes`), so the regex is a no-op and the
+// separator below provides the authoritative date insertion.
 const trimmedContent = content.trimEnd();
 const separator = IS_HTML_ONLY
   ? '\n\n'
