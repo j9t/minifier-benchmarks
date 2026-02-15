@@ -442,7 +442,7 @@ async function processFile(fileName) {
       brFilePath: path.join(outputDir, fileName + '.html.br')
     };
     const infos = {};
-    ['swchtml', 'minifier', 'compressor', 'htmlnano', 'minifyhtml', 'minimize'].forEach(function (name) {
+    minifierNames.forEach(function (name) {
       infos[name] = {
         filePath: path.join(outputDir, fileName + '.' + name + '.html'),
         gzFilePath: path.join(outputDir, fileName + '.' + name + '.html.gz'),
