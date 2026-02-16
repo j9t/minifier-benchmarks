@@ -148,4 +148,7 @@ Benchmarks last updated: Feb 15, 2026
 * Minifiers:
   - Minimize only minifies HTML.
   - [HTML Minifier Terser](https://github.com/terser/html-minifier-terser) is currently not included due to issues around whitespace collapsing and removal of code using modern CSS features, issues which appeared to distort the data.
-* Failed sites are not excluded from the calculation for the average result, but counted as unminified. This avoids test failures advantaging the respective minifier.
+* Calculation:
+  - Calculations are done based on bytes, which are used to compare effectiveness.
+  - Failed sites are not excluded from the calculation for the average result, but counted as unminified. This avoids test failures advantaging the respective minifier.
+* Benchmarks are currently run manually (on a 2024 Apple Mac Mini) but may be automated in the future.
