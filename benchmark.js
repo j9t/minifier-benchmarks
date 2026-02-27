@@ -95,7 +95,7 @@ function formatDelta(rawSize, originalSize) {
   if (formatted === '-0') formatted = '0';
   if (delta > 0 && !formatted.startsWith('+')) formatted = '+' + formatted;
   formatted = formatted.replace('-', '–');
-  return ' (' + formatted + '%)';
+  return '<br>(' + formatted + '%)';
 }
 
 function redSize(size) {
