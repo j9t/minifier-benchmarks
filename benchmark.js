@@ -669,19 +669,6 @@ async function processFile(fileName) {
     async function testhtmlnano() {
       const info = infos.htmlnano;
 
-      // Temporary workaround for Terser crashes—remove when htmlnano/Terser stability improves
-      // URLs that cause Terser crashes in htmlnano (add more as needed)
-      const SKIP_URLS = [
-        'https://vivaldi.com/'
-      ];
-
-      if (!IS_HTML_ONLY && SKIP_URLS.includes(site)) {
-        benchmarkErrors.push(`htmlnano skipped for ${fileName} (known Terser crash)`);
-        resetSizes(info);
-        return;
-      }
-      // End workaround
-
       const data = await readText(filePath);
       info.startTime = Date.now();
 
