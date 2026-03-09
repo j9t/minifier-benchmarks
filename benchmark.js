@@ -696,8 +696,9 @@ async function processFile(fileName) {
               minifySvg: false,
               removeUnusedCss: false
             }
-          : {};
-        options.minifyUrls = site;
+          : {
+              minifyUrls: site,
+          };
         const result = await htmlnano.process(data, options, preset);
         await writeText(info.filePath, result.html);
         await readSizes(info);
