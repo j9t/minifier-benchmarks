@@ -694,6 +694,7 @@ async function processFile(fileName) {
               minifyJs: false,
               minifyJson: false,
               minifySvg: false,
+              minifyHtmlTemplate: false,
               removeUnusedCss: false
             }
           : {
