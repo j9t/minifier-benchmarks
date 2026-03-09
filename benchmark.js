@@ -677,22 +677,16 @@ async function processFile(fileName) {
         const preset = htmlnano.presets.max;
         const options = IS_HTML_ONLY
           ? {
-              collapseWhitespace: 'aggressive',
-              removeEmptyElements: true,
-              sortAttributesWithLists: false,
               minifyCss: false,
               minifyJs: false,
               minifyJson: false,
               minifySvg: false,
+              minifyHtmlTemplate: false,
               removeUnusedCss: false
             }
           : {
-              collapseWhitespace: 'aggressive',
-              removeEmptyElements: true,
-              sortAttributesWithLists: false,
-              removeUnusedCss: { tool: 'purgeCSS' },
-              minifyUrls: site
-            };
+              minifyUrls: site,
+          };
         const result = await htmlnano.process(data, options, preset);
         await writeText(info.filePath, result.html);
         await readSizes(info);
