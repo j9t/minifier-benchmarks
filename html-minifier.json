@@ -36,7 +36,6 @@
   "partialMarkup": false,
   "preserveLineBreaks": false,
   "preventAttributesEscaping": true,
-  "processConditionalComments": true,
   "processScripts": [],
   "removeAttributeQuotes": true,
   "removeComments": true,
