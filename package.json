@@ -1,10 +1,10 @@
 {
   "dependencies": {
     "@minify-html/node": "^0.18.1",
-    "@swc/html": "^1.15.30",
-    "html-minifier-next": "^6.1.2",
-    "htmlnano": "^3.2.0",
-    "minimize": "^2.2.0"
+    "@swc/html": "^1.15.32",
+    "html-minifier-next": "^6.2.0",
+    "htmlnano": "^3.2.1",
+    "minimize": "^2.0.0"
   },
   "devDependencies": {
     "cli-table3": "^0.6.5",
