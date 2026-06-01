@@ -3,7 +3,7 @@
     "@minify-html/node": "^0.18.1",
     "@swc/html": "^1.15.33",
     "html-minifier-next": "^6.2.4",
-    "htmlnano": "^3.2.1",
+    "htmlnano": "^3.3.2",
     "minimize": "^2.0.0"
   },
   "devDependencies": {
