@@ -2,7 +2,7 @@
   "dependencies": {
     "@minify-html/node": "^0.18.1",
     "@swc/html": "^1.15.40",
-    "html-minifier-next": "^6.2.8",
+    "html-minifier-next": "^6.2.10",
     "htmlnano": "^3.3.2",
     "minimize": "^2.2.0"
   },
