@@ -44,7 +44,7 @@ await fs.mkdir(path.join(__dirname, 'input'), { recursive: true });
 const user_agent = 'html-minifier-next-benchmarks/0.0';
 const urls = JSON.parse(await fs.readFile(path.join(__dirname, 'sites.json'), 'utf8'));
 const fileNames = Object.keys(urls);
-const minifierConfig = JSON.parse(await fs.readFile(path.join(__dirname, 'html-minifier.json'), 'utf8'));
+const minifierConfig = JSON.parse(await fs.readFile(path.join(__dirname, 'html-minifier-next.json'), 'utf8'));
 const minimize = new Minimize();
 const benchmarkErrors = [];
 
