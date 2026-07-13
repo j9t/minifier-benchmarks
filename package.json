@@ -22,6 +22,7 @@
     "svgo": "^4.0.0",
     "terser": "^5.21.0"
   },
+  "private": true,
   "scripts": {
     "benchmarks:html": "node benchmark.js --mode=html",
     "benchmarks:max": "node benchmark.js --mode=max",
