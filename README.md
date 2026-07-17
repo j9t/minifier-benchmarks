@@ -29,114 +29,114 @@ Two tests are run: One exclusively applying [HTML minification](#1-html-minifica
 | Site | Original Size (KB) | [@swc/html](https://github.com/swc-project/swc) | [HTML Minifier Next](https://github.com/j9t/html-minifier-next) | [html­com­pressor.­com](https://htmlcompressor.com/) | [htmlnano](https://github.com/posthtml/htmlnano) | [minify-html](https://github.com/wilsonzlin/minify-html) | [minimize](https://github.com/Swaagie/minimize) |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | [Minifier Test](https://hell.meiert.org/core/html/minifier-test.html) | 31 | 26<br>(–17.2%) | ***25<br>(–19.6%)*** | 26<br>(–17%) | 26<br>(–16.5%) | 25<br>(–19.2%) | 26<br>(–16.3%) |
-| [A List Apart](https://alistapart.com/) | 63 | 59<br>(–5.8%) | 58<br>(–8.4%) | 58<br>(–7.2%) | 58<br>(–7.7%) | ***57<br>(–8.4%)*** | 58<br>(–7.3%) |
-| [Apple](https://www.apple.com/) | 243 | 231<br>(–5.1%) | ***225<br>(–7.6%)*** | 229<br>(–5.8%) | 228<br>(–6.3%) | 226<br>(–6.9%) | 228<br>(–6.1%) |
-| [BBC](https://www.bbc.co.uk/) | 816 | 811<br>(–0.7%) | ***802<br>(–1.7%)*** | n/a | 809<br>(–0.9%) | 805<br>(–1.4%) | 809<br>(–0.8%) |
-| [Bun](https://bun.sh/) | 283 | 272<br>(–3.8%) | ***264<br>(–6.8%)*** | 278<br>(–1.7%) | 276<br>(–2.5%) | 273<br>(–3.4%) | 276<br>(–2.4%) |
+| [A List Apart](https://alistapart.com/) | 63 | 59<br>(–5.8%) | 57<br>(–8.4%) | 58<br>(–7.2%) | 58<br>(–7.7%) | ***57<br>(–8.4%)*** | 58<br>(–7.3%) |
+| [Apple](https://www.apple.com/) | 244 | 231<br>(–5.1%) | ***225<br>(–7.6%)*** | 229<br>(–5.9%) | 228<br>(–6.3%) | 227<br>(–6.9%) | 229<br>(–6%) |
+| [BBC](https://www.bbc.co.uk/) | 784 | 779<br>(–0.7%) | ***772<br>(–1.5%)*** | n/a | 776<br>(–1.1%) | 773<br>(–1.4%) | 778<br>(–0.8%) |
+| [Bun](https://bun.sh/) | 283 | 272<br>(–3.8%) | ***264<br>(–6.8%)*** | 278<br>(–1.7%) | 276<br>(–2.6%) | 273<br>(–3.4%) | 276<br>(–2.4%) |
 | [CERN](https://home.cern/) | 301 | 289<br>(–3.8%) | ***281<br>(–6.5%)*** | n/a | 288<br>(–4.2%) | 287<br>(–4.7%) | 289<br>(–4.1%) |
-| [CSS-Tricks](https://css-tricks.com/) | 147 | 136<br>(–7.8%) | ***133<br>(–9.6%)*** | 134<br>(–8.9%) | 133<br>(–9.3%) | 133<br>(–9.5%) | 134<br>(–8.8%) |
-| [DeepSeek](https://www.deepseek.com/) | 147 | 146<br>(–0.6%) | ***140<br>(–5.1%)*** | 146<br>(–0.8%) | 146<br>(–1.1%) | 146<br>(–0.9%) | 146<br>(–0.8%) |
-| [DIN](https://www.din.de/) | 254 | 183<br>(–28.3%) | ***176<br>(–30.7%)*** | 184<br>(–27.8%) | 183<br>(–28.1%) | 180<br>(–29.1%) | 183<br>(–27.9%) |
-| [DLR](https://www.dlr.de/) | 563 | 559<br>(–0.6%) | ***557<br>(–1%)*** | n/a | 558<br>(–0.8%) | 557<br>(–1%) | 560<br>(–0.5%) |
-| [ECMAScript](https://tc39.es/ecma262/) | 7417 | 7050<br>(–4.9%) | ***6809<br>(–8.2%)*** | n/a | 6925<br>(–6.6%) | 6948<br>(–6.3%) | 6979<br>(–5.9%) |
-| [EDRi](https://edri.org/) | 84 | 78<br>(–7.6%) | ***77<br>(–8.2%)*** | 79<br>(–6.6%) | 78<br>(–7.5%) | 77<br>(–8.1%) | 79<br>(–6.7%) |
+| [CSS-Tricks](https://css-tricks.com/) | 150 | 138<br>(–7.8%) | ***136<br>(–9.6%)*** | 137<br>(–8.9%) | 136<br>(–9.3%) | 136<br>(–9.5%) | 137<br>(–8.8%) |
+| [DeepSeek](https://www.deepseek.com/) | 147 | 146<br>(–0.6%) | ***139<br>(–5.2%)*** | 146<br>(–0.8%) | 145<br>(–1.1%) | 146<br>(–0.9%) | 146<br>(–0.8%) |
+| [DIN](https://www.din.de/) | 254 | 183<br>(–28.3%) | ***176<br>(–30.7%)*** | 184<br>(–27.8%) | 182<br>(–28.3%) | 180<br>(–29.1%) | 183<br>(–27.9%) |
+| [DLR](https://www.dlr.de/) | 563 | 560<br>(–0.6%) | ***557<br>(–1%)*** | n/a | 559<br>(–0.8%) | 558<br>(–1%) | 560<br>(–0.5%) |
+| [ECMAScript](https://tc39.es/ecma262/) | 7421 | 7054<br>(–4.9%) | ***6813<br>(–8.2%)*** | n/a | 6929<br>(–6.6%) | 6952<br>(–6.3%) | 6983<br>(–5.9%) |
+| [EDRi](https://edri.org/) | 84 | 78<br>(–7.7%) | ***77<br>(–8.2%)*** | 78<br>(–6.6%) | 78<br>(–7.6%) | 77<br>(–8.1%) | 78<br>(–6.7%) |
 | [EFF](https://www.eff.org/) | 53 | 49<br>(–8.1%) | ***46<br>(–12.7%)*** | 49<br>(–7.9%) | 48<br>(–10.1%) | 47<br>(–11.6%) | 48<br>(–9.8%) |
 | [European Alternatives](https://european-alternatives.eu/) | 49 | 33<br>(–33.1%) | ***33<br>(–33.9%)*** | 33<br>(–32.9%) | 33<br>(–33.1%) | 33<br>(–33.7%) | 33<br>(–33.1%) |
-| [FAZ](https://www.faz.net/aktuell/) | 1587 | 1536<br>(–3.2%) | ***1457<br>(–8.2%)*** | n/a | 1534<br>(–3.3%) | 1527<br>(–3.8%) | 1531<br>(–3.5%) |
-| [French Tech](https://lafrenchtech.gouv.fr/) | 175 | 140<br>(–20.1%) | ***138<br>(–20.8%)*** | 140<br>(–19.8%) | 140<br>(–20%) | 139<br>(–20.7%) | 140<br>(–19.9%) |
+| [FAZ](https://www.faz.net/aktuell/) | 1596 | 1546<br>(–3.2%) | ***1467<br>(–8.1%)*** | n/a | 1543<br>(–3.3%) | 1536<br>(–3.8%) | 1540<br>(–3.5%) |
+| [French Tech](https://lafrenchtech.gouv.fr/) | 175 | 140<br>(–20%) | ***139<br>(–20.7%)*** | 141<br>(–19.7%) | 140<br>(–20%) | 139<br>(–20.6%) | 141<br>(–19.8%) |
 | [Front-End Social](https://front-end.social/) | 43 | 41<br>(–4.1%) | ***40<br>(–6.4%)*** | 42<br>(–3.4%) | 40<br>(–6.3%) | 40<br>(–6.4%) | 42<br>(–3.5%) |
-| [Frontend Dogma](https://frontenddogma.com/) | 223 | 231<br>(+3.6%) | 223<br>(0%) | ***223<br>(–0.2%)*** | 237<br>(+5.9%) | 223<br>(–0.1%) | 242<br>(+8.3%) |
-| [Google](https://www.google.com/) | 80 | 123<br>(+54.7%) | 79<br>(–0.6%) | 79<br>(–0.3%) | ***79<br>(–0.8%)*** | 79<br>(–0.5%) | 79<br>(–0.3%) |
-| [Ground News](https://ground.news/) | 3139 | 3115<br>(–0.7%) | ***3075<br>(–2%)*** | n/a | 3122<br>(–0.5%) | 3114<br>(–0.8%) | 3125<br>(–0.4%) |
-| [HTML 3.2](https://www.w3.org/TR/2018/SPSD-html32-20180315/) | 123 | 119<br>(–3%) | 119<br>(–3%) | 121<br>(–1.2%) | 124<br>(+0.9%) | ***119<br>(–3.2%)*** | 123<br>(+0.5%) |
+| [Frontend Dogma](https://frontenddogma.com/) | 224 | 232<br>(+3.6%) | 224<br>(0%) | ***224<br>(–0.2%)*** | 238<br>(+5.9%) | 224<br>(–0.1%) | 243<br>(+8.3%) |
+| [Google](https://www.google.com/) | 80 | 123<br>(+54.8%) | 79<br>(–0.6%) | 79<br>(–0.3%) | ***79<br>(–0.8%)*** | 79<br>(–0.5%) | 79<br>(–0.3%) |
+| [Ground News](https://ground.news/) | 1854 | 1830<br>(–1.3%) | ***1790<br>(–3.5%)*** | n/a | 1834<br>(–1.1%) | 1828<br>(–1.4%) | 1840<br>(–0.8%) |
+| [HTML 3.2](https://www.w3.org/TR/2018/SPSD-html32-20180315/) | 123 | 119<br>(–3%) | 119<br>(–3%) | 121<br>(–1.2%) | 124<br>(+0.8%) | ***119<br>(–3.2%)*** | 123<br>(+0.5%) |
 | [HTML Living Standard](https://html.spec.whatwg.org/multipage/) | 151 | 154<br>(+1.8%) | ***150<br>(–0.6%)*** | 151<br>(–0.2%) | 155<br>(+2.6%) | 151<br>(–0.3%) | 157<br>(+3.8%) |
-| [IETF](https://www.ietf.org/) | 82 | 34<br>(–58.2%) | ***32<br>(–60.7%)*** | 35<br>(–57.7%) | 34<br>(–58.8%) | 33<br>(–59.3%) | 34<br>(–58.2%) |
-| [Igalia](https://www.igalia.com/) | 44 | 34<br>(–21.2%) | ***32<br>(–27%)*** | 34<br>(–22.3%) | 34<br>(–22.8%) | 34<br>(–23.3%) | 34<br>(–22.7%) |
+| [IETF](https://www.ietf.org/) | 82 | 34<br>(–58.4%) | ***32<br>(–61%)*** | 34<br>(–57.9%) | 33<br>(–59%) | 33<br>(–59.5%) | 34<br>(–58.4%) |
+| [Igalia](https://www.igalia.com/) | 44 | 34<br>(–21.3%) | ***32<br>(–27.1%)*** | 34<br>(–22.4%) | 34<br>(–22.8%) | 33<br>(–23.4%) | 34<br>(–22.8%) |
 | [Ladybird](https://ladybird.org/) | 30 | 28<br>(–3.9%) | ***28<br>(–6.4%)*** | 28<br>(–5%) | 28<br>(–5.4%) | 28<br>(–5.7%) | 28<br>(–5%) |
-| [Leanpub](https://leanpub.com/) | 338 | 335<br>(–1%) | ***328<br>(–2.9%)*** | n/a | 334<br>(–1.2%) | 332<br>(–1.9%) | 333<br>(–1.6%) |
-| [Legge Stanca](https://www.gazzettaufficiale.it/atto/serie_generale/caricaDettaglioAtto/originario?atto.dataPubblicazioneGazzetta=2004-01-17&atto.codiceRedazionale=004G0015&elenco30giorni=false) | 17 | 12<br>(–28.5%) | ***12<br>(–30.4%)*** | 12<br>(–27.3%) | 12<br>(–29.7%) | 12<br>(–30.2%) | 12<br>(–27.5%) |
-| [Mastodon](https://mastodon.social/explore) | 43 | 41<br>(–4.1%) | ***40<br>(–6.4%)*** | 41<br>(–3.4%) | 40<br>(–6.3%) | 40<br>(–6.4%) | 41<br>(–3.5%) |
-| [MDN](https://developer.mozilla.org/en-US/) | 118 | 70<br>(–40.2%) | ***67<br>(–42.7%)*** | 72<br>(–38.8%) | 72<br>(–39%) | 69<br>(–41.5%) | 71<br>(–39.2%) |
-| [Mistral AI](https://mistral.ai/) | 424 | 408<br>(–3.7%) | ***403<br>(–4.8%)*** | n/a | 421<br>(–0.7%) | 410<br>(–3.3%) | 421<br>(–0.6%) |
-| [Mondoweiss](https://mondoweiss.net/) | 206 | 194<br>(–6%) | ***186<br>(–9.8%)*** | 192<br>(–7.1%) | 191<br>(–7.6%) | 190<br>(–8%) | 192<br>(–7.1%) |
+| [Leanpub](https://leanpub.com/) | 348 | 345<br>(–1.1%) | ***338<br>(–3%)*** | n/a | 344<br>(–1.2%) | 342<br>(–1.9%) | 343<br>(–1.6%) |
+| [Legge Stanca](https://www.gazzettaufficiale.it/atto/serie_generale/caricaDettaglioAtto/originario?atto.dataPubblicazioneGazzetta=2004-01-17&atto.codiceRedazionale=004G0015&elenco30giorni=false) | 17 | 12<br>(–28.5%) | ***12<br>(–30.4%)*** | 12<br>(–27.3%) | 12<br>(–30%) | 12<br>(–30.2%) | 12<br>(–27.5%) |
+| [Mastodon](https://mastodon.social/explore) | 43 | 41<br>(–4.1%) | ***40<br>(–6.4%)*** | 41<br>(–3.4%) | 40<br>(–6.4%) | 40<br>(–6.4%) | 41<br>(–3.5%) |
+| [MDN](https://developer.mozilla.org/en-US/) | 119 | 71<br>(–40.2%) | ***68<br>(–42.7%)*** | 73<br>(–38.8%) | 72<br>(–39.5%) | 69<br>(–41.4%) | 72<br>(–39.2%) |
+| [Mistral AI](https://mistral.ai/) | 425 | 412<br>(–3.1%) | ***340<br>(–20%)*** | n/a | 424<br>(–0.3%) | 413<br>(–2.8%) | 425<br>(0%) |
+| [Mondoweiss](https://mondoweiss.net/) | 413 | 409<br>(–1%) | ***393<br>(–4.9%)*** | n/a | 397<br>(–3.9%) | 396<br>(–4%) | 398<br>(–3.6%) |
 | [Mozilla](https://www.mozilla.org/) | 47 | 37<br>(–21%) | 35<br>(–25.8%) | 37<br>(–22.2%) | 36<br>(–23.8%) | ***35<br>(–26%)*** | 36<br>(–23%) |
-| [Nielsen Norman Group](https://www.nngroup.com/) | 101 | 84<br>(–16.9%) | ***83<br>(–17.9%)*** | 84<br>(–16.5%) | 85<br>(–16.1%) | 83<br>(–17.6%) | 85<br>(–16.1%) |
-| [Opera](https://www.opera.com/) | 188 | 137<br>(–27.3%) | ***133<br>(–29.1%)*** | 136<br>(–27.5%) | 136<br>(–27.8%) | 135<br>(–28.1%) | 135<br>(–27.9%) |
-| [OSCE](https://www.osce.org/) | 172 | 144<br>(–16%) | 142<br>(–17.2%) | 144<br>(–15.9%) | 145<br>(–15.7%) | ***142<br>(–17.3%)*** | 145<br>(–15.7%) |
+| [Nielsen Norman Group](https://www.nngroup.com/) | 103 | 86<br>(–16.3%) | ***85<br>(–17.3%)*** | 86<br>(–15.9%) | 87<br>(–15.5%) | 85<br>(–17%) | 87<br>(–15.5%) |
+| [Opera](https://www.opera.com/) | 185 | 135<br>(–26.9%) | ***132<br>(–28.6%)*** | 135<br>(–27.1%) | 134<br>(–27.4%) | 134<br>(–27.7%) | 134<br>(–27.5%) |
+| [OSCE](https://www.osce.org/) | 171 | 144<br>(–16.1%) | 142<br>(–17.2%) | 144<br>(–16%) | 144<br>(–15.8%) | ***142<br>(–17.4%)*** | 144<br>(–15.7%) |
 | [Scrum Guide](https://scrumguides.org/scrum-guide.html) | 34 | 31<br>(–8.9%) | ***30<br>(–10.7%)*** | 32<br>(–7.3%) | 31<br>(–7.9%) | 31<br>(–10.1%) | 31<br>(–7.8%) |
-| [SELFHTML](https://wiki.selfhtml.org/) | 21 | 19<br>(–7.6%) | ***17<br>(–17.4%)*** | 18<br>(–13.6%) | 18<br>(–14.4%) | 17<br>(–16.8%) | 18<br>(–14.2%) |
-| [SitePoint](https://www.sitepoint.com/) | 237 | 234<br>(–1.3%) | ***233<br>(–1.5%)*** | 235<br>(–0.7%) | 235<br>(–0.9%) | 234<br>(–1.1%) | 235<br>(–0.7%) |
-| [Smashing Magazine](https://www.smashingmagazine.com/) | 303 | 303<br>(+0.2%) | ***301<br>(–0.5%)*** | n/a | 302<br>(–0.2%) | 301<br>(–0.4%) | 303<br>(0%) |
-| [Startup-Verband](https://startupverband.de/) | 50 | 37<br>(–26.3%) | ***35<br>(–29.4%)*** | 36<br>(–27.1%) | 36<br>(–27.6%) | 36<br>(–28.4%) | 36<br>(–27.1%) |
-| [TAZ](https://taz.de/) | 434 | 409<br>(–5.8%) | ***389<br>(–10.5%)*** | n/a | 400<br>(–7.8%) | 400<br>(–8%) | 403<br>(–7.3%) |
+| [SELFHTML](https://wiki.selfhtml.org/) | 21 | 19<br>(–7.6%) | ***17<br>(–17.4%)*** | 18<br>(–13.6%) | 18<br>(–14.6%) | 17<br>(–16.8%) | 18<br>(–14.2%) |
+| [SitePoint](https://www.sitepoint.com/) | 235 | 232<br>(–1.3%) | ***231<br>(–1.5%)*** | 233<br>(–0.7%) | 232<br>(–0.9%) | 232<br>(–1.1%) | 233<br>(–0.7%) |
+| [Smashing Magazine](https://www.smashingmagazine.com/) | 310 | 311<br>(+0.2%) | ***308<br>(–0.5%)*** | n/a | 309<br>(–0.2%) | 309<br>(–0.4%) | 310<br>(0%) |
+| [Startup-Verband](https://startupverband.de/) | 51 | 38<br>(–26.3%) | ***36<br>(–29.3%)*** | 37<br>(–27.2%) | 37<br>(–27.7%) | 36<br>(–28.4%) | 37<br>(–27.1%) |
+| [TAZ](https://taz.de/) | 420 | 397<br>(–5.5%) | ***377<br>(–10.3%)*** | n/a | 388<br>(–7.6%) | 387<br>(–7.8%) | 390<br>(–7.1%) |
 | [TetraLogical](https://tetralogical.com/) | 60 | 54<br>(–10.1%) | ***54<br>(–10.5%)*** | 54<br>(–9.8%) | 54<br>(–9.8%) | 54<br>(–10.3%) | 54<br>(–9.8%) |
 | [TPGi](https://www.tpgi.com/) | 177 | 162<br>(–8.5%) | ***160<br>(–9.9%)*** | 162<br>(–8.5%) | 161<br>(–9.3%) | 160<br>(–9.6%) | 162<br>(–8.5%) |
-| [United Nations](https://www.un.org/en/) | 155 | 134<br>(–13.4%) | ***130<br>(–16.5%)*** | 134<br>(–13.7%) | 133<br>(–14.3%) | 132<br>(–15%) | 134<br>(–13.7%) |
-| [UX Collective](https://uxdesign.cc/) | 121 | 165<br>(+36.1%) | ***118<br>(–2.6%)*** | 120<br>(–0.7%) | 119<br>(–1.4%) | 119<br>(–1.5%) | 120<br>(–1.2%) |
-| [Vivaldi](https://vivaldi.com/) | 91 | 83<br>(–8.7%) | 81<br>(–10.7%) | 83<br>(–9.4%) | 82<br>(–9.7%) | ***81<br>(–10.7%)*** | 83<br>(–9.3%) |
-| [W3C](https://www.w3.org/) | 52 | 42<br>(–18.5%) | ***41<br>(–20.5%)*** | 42<br>(–18.8%) | 42<br>(–19.1%) | 41<br>(–20.1%) | 42<br>(–18.7%) |
-| [WordPress Blog](https://wordpress.com/blog/) | 206 | 190<br>(–7.5%) | ***187<br>(–9%)*** | 192<br>(–6.8%) | 190<br>(–7.4%) | 189<br>(–8.3%) | 192<br>(–6.6%) |
-| **Sites processed (of sites overall)** |  | 48/48 | 48/48 | 38/48 | 48/48 | 48/48 | 48/48 |
-| **Average processing time** |  | 30 ms | 41 ms | 860 ms | 37 ms | ***9 ms*** | 191 ms |
-| **Average result (KB)** | 411 | 392<br>(–4.6%) | ***379<br>(–7.7%)*** | 400<br>(–2.6%) | 387<br>(–5.7%) | 386<br>(–6.1%) | 389<br>(–5.3%) |
+| [United Nations](https://www.un.org/en/) | 154 | 133<br>(–13.5%) | ***128<br>(–16.6%)*** | 133<br>(–13.6%) | 132<br>(–14.5%) | 131<br>(–15.1%) | 133<br>(–13.8%) |
+| [UX Collective](https://uxdesign.cc/) | 152 | 197<br>(+29.1%) | 149<br>(–2.3%) | 151<br>(–0.8%) | 150<br>(–1.3%) | 150<br>(–1.4%) | ***148<br>(–2.6%)*** |
+| [Vivaldi](https://vivaldi.com/) | 91 | 83<br>(–8.8%) | 82<br>(–10.7%) | 83<br>(–9.5%) | 82<br>(–9.8%) | ***82<br>(–10.8%)*** | 83<br>(–9.4%) |
+| [W3C](https://www.w3.org/) | 52 | 42<br>(–18.5%) | ***41<br>(–20.5%)*** | 42<br>(–18.8%) | 42<br>(–19.1%) | 41<br>(–20%) | 42<br>(–18.7%) |
+| [WordPress Blog](https://wordpress.com/blog/) | 224 | 206<br>(–8.3%) | ***202<br>(–10%)*** | 207<br>(–7.9%) | 205<br>(–8.5%) | 204<br>(–9.2%) | 207<br>(–7.6%) |
+| **Sites processed (of sites overall)** |  | 48/48 | 48/48 | 37/48 | 48/48 | 48/48 | 48/48 |
+| **Average processing time** |  | 30 ms | 41 ms | 993 ms | 40 ms | ***9 ms*** | 192 ms |
+| **Average result (KB)** | 389 | 370<br>(–4.9%) | ***356<br>(–8.5%)*** | 379<br>(–2.6%) | 365<br>(–6.1%) | 364<br>(–6.4%) | 367<br>(–5.6%) |
 
 ## 2. Maximum Minification Compared
 
 | Site | Original Size (KB) | [@swc/html](https://github.com/swc-project/swc) | [HTML Minifier Next](https://github.com/j9t/html-minifier-next) | [html­com­pressor.­com](https://htmlcompressor.com/) | [htmlnano](https://github.com/posthtml/htmlnano) | [minify-html](https://github.com/wilsonzlin/minify-html) | [minimize](https://github.com/Swaagie/minimize) |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | [Minifier Test](https://hell.meiert.org/core/html/minifier-test.html) | 31 | 24<br>(–23.3%) | 23<br>(–25.5%) | 24<br>(–22.9%) | ***23<br>(–26.5%)*** | 23<br>(–25.3%) | 26<br>(–16.3%) |
-| [A List Apart](https://alistapart.com/) | 63 | 57<br>(–9.2%) | 53<br>(–14.8%) | 56<br>(–10%) | ***39<br>(–37.5%)*** | 55<br>(–11.8%) | 58<br>(–7.3%) |
-| [Apple](https://www.apple.com/) | 243 | 231<br>(–5.2%) | ***215<br>(–11.6%)*** | 229<br>(–5.8%) | 219<br>(–10%) | 226<br>(–6.9%) | 228<br>(–6.1%) |
-| [BBC](https://www.bbc.co.uk/) | 816 | 767<br>(–6%) | ***749<br>(–8.2%)*** | n/a | 762<br>(–6.7%) | 761<br>(–6.8%) | 809<br>(–0.8%) |
+| [A List Apart](https://alistapart.com/) | 63 | 57<br>(–9.1%) | 53<br>(–14.8%) | 56<br>(–10%) | ***39<br>(–37.4%)*** | 55<br>(–11.7%) | 58<br>(–7.3%) |
+| [Apple](https://www.apple.com/) | 244 | 231<br>(–5.2%) | ***216<br>(–11.5%)*** | 229<br>(–5.9%) | 219<br>(–10.1%) | 227<br>(–7%) | 229<br>(–6%) |
+| [BBC](https://www.bbc.co.uk/) | 784 | 739<br>(–5.8%) | ***723<br>(–7.9%)*** | n/a | 732<br>(–6.7%) | 733<br>(–6.6%) | 778<br>(–0.8%) |
 | [Bun](https://bun.sh/) | 283 | 272<br>(–3.9%) | ***259<br>(–8.3%)*** | 278<br>(–1.7%) | 272<br>(–4%) | 273<br>(–3.4%) | 276<br>(–2.4%) |
 | [CERN](https://home.cern/) | 301 | 273<br>(–9.1%) | 259<br>(–14%) | n/a | ***217<br>(–28%)*** | 272<br>(–9.7%) | 289<br>(–4.1%) |
-| [CSS-Tricks](https://css-tricks.com/) | 147 | 130<br>(–11.9%) | 118<br>(–19.6%) | 129<br>(–12.2%) | ***102<br>(–31%)*** | 128<br>(–13.1%) | 134<br>(–8.8%) |
-| [DeepSeek](https://www.deepseek.com/) | 147 | 141<br>(–4.1%) | ***118<br>(–20.2%)*** | 141<br>(–4%) | 123<br>(–16.3%) | 141<br>(–4.2%) | 146<br>(–0.8%) |
-| [DIN](https://www.din.de/) | 254 | 176<br>(–30.8%) | 164<br>(–35.4%) | 177<br>(–30.6%) | ***136<br>(–46.4%)*** | 175<br>(–31.2%) | 183<br>(–27.9%) |
-| [DLR](https://www.dlr.de/) | 563 | 528<br>(–6.1%) | 518<br>(–7.9%) | n/a | ***514<br>(–8.7%)*** | 521<br>(–7.5%) | 560<br>(–0.5%) |
-| [ECMAScript](https://tc39.es/ecma262/) | 7417 | 7050<br>(–4.9%) | ***6808<br>(–8.2%)*** | n/a | 6924<br>(–6.6%) | 6948<br>(–6.3%) | 6979<br>(–5.9%) |
-| [EDRi](https://edri.org/) | 84 | 75<br>(–11.2%) | 71<br>(–15.9%) | 76<br>(–9.5%) | ***55<br>(–34.6%)*** | 75<br>(–11.3%) | 79<br>(–6.7%) |
-| [EFF](https://www.eff.org/) | 53 | 47<br>(–10.9%) | ***43<br>(–18.8%)*** | 48<br>(–10.2%) | 46<br>(–14.2%) | 47<br>(–12.5%) | 48<br>(–9.8%) |
+| [CSS-Tricks](https://css-tricks.com/) | 150 | 132<br>(–11.7%) | 121<br>(–19.6%) | 132<br>(–12.1%) | ***104<br>(–30.7%)*** | 130<br>(–13%) | 137<br>(–8.8%) |
+| [DeepSeek](https://www.deepseek.com/) | 147 | 141<br>(–4.1%) | ***117<br>(–20.2%)*** | 141<br>(–4%) | 123<br>(–16.3%) | 141<br>(–4.2%) | 146<br>(–0.8%) |
+| [DIN](https://www.din.de/) | 254 | 176<br>(–30.8%) | 164<br>(–35.4%) | 177<br>(–30.6%) | ***136<br>(–46.5%)*** | 175<br>(–31.2%) | 183<br>(–27.9%) |
+| [DLR](https://www.dlr.de/) | 563 | 529<br>(–6.1%) | 519<br>(–7.9%) | n/a | ***514<br>(–8.7%)*** | 521<br>(–7.5%) | 560<br>(–0.5%) |
+| [ECMAScript](https://tc39.es/ecma262/) | 7421 | 7054<br>(–4.9%) | ***6812<br>(–8.2%)*** | n/a | 6928<br>(–6.6%) | 6952<br>(–6.3%) | 6983<br>(–5.9%) |
+| [EDRi](https://edri.org/) | 84 | 75<br>(–11.2%) | 71<br>(–16%) | 76<br>(–9.6%) | ***55<br>(–34.7%)*** | 74<br>(–11.3%) | 78<br>(–6.7%) |
+| [EFF](https://www.eff.org/) | 53 | 47<br>(–10.9%) | ***43<br>(–18.8%)*** | 48<br>(–10.2%) | 46<br>(–14.3%) | 47<br>(–12.5%) | 48<br>(–9.8%) |
 | [European Alternatives](https://european-alternatives.eu/) | 49 | 33<br>(–33.2%) | ***31<br>(–37.7%)*** | 33<br>(–33%) | 31<br>(–37%) | 33<br>(–33.8%) | 33<br>(–33.1%) |
-| [FAZ](https://www.faz.net/aktuell/) | 1587 | 1465<br>(–7.7%) | 1402<br>(–11.6%) | n/a | ***1333<br>(–16%)*** | 1519<br>(–4.2%) | 1531<br>(–3.5%) |
-| [French Tech](https://lafrenchtech.gouv.fr/) | 175 | 133<br>(–23.8%) | 128<br>(–26.6%) | 134<br>(–23.2%) | ***58<br>(–66.8%)*** | 132<br>(–24.3%) | 140<br>(–19.9%) |
+| [FAZ](https://www.faz.net/aktuell/) | 1596 | 1475<br>(–7.6%) | 1411<br>(–11.6%) | n/a | ***1343<br>(–15.9%)*** | 1529<br>(–4.2%) | 1540<br>(–3.5%) |
+| [French Tech](https://lafrenchtech.gouv.fr/) | 175 | 134<br>(–23.6%) | 129<br>(–26.6%) | 135<br>(–23.1%) | ***59<br>(–66.6%)*** | 133<br>(–24.2%) | 141<br>(–19.8%) |
 | [Front-End Social](https://front-end.social/) | 43 | 41<br>(–5.2%) | ***37<br>(–14.4%)*** | 41<br>(–3.7%) | 37<br>(–14.2%) | 40<br>(–6.7%) | 42<br>(–3.5%) |
-| [Frontend Dogma](https://frontenddogma.com/) | 223 | 231<br>(+3.6%) | ***216<br>(–3.3%)*** | 223<br>(–0.2%) | 228<br>(+2.2%) | 223<br>(–0.1%) | 242<br>(+8.3%) |
+| [Frontend Dogma](https://frontenddogma.com/) | 224 | 232<br>(+3.6%) | ***217<br>(–3.3%)*** | 224<br>(–0.2%) | 229<br>(+2.1%) | 224<br>(–0.1%) | 243<br>(+8.3%) |
 | [Google](https://www.google.com/) | 80 | 76<br>(–4.6%) | 75<br>(–5.3%) | 79<br>(–0.8%) | ***64<br>(–19.7%)*** | 77<br>(–3.6%) | 79<br>(–0.3%) |
-| [Ground News](https://ground.news/) | 3139 | 2923<br>(–6.9%) | ***2848<br>(–9.3%)*** | n/a | 2893<br>(–7.8%) | 2915<br>(–7.1%) | 3125<br>(–0.4%) |
-| [HTML 3.2](https://www.w3.org/TR/2018/SPSD-html32-20180315/) | 123 | 119<br>(–3.1%) | ***118<br>(–3.4%)*** | 121<br>(–1.3%) | 123<br>(+0.7%) | 119<br>(–3.3%) | 123<br>(+0.5%) |
+| [Ground News](https://ground.news/) | 1854 | 1738<br>(–6.2%) | ***1660<br>(–10.5%)*** | n/a | 1706<br>(–8%) | 1735<br>(–6.4%) | 1840<br>(–0.8%) |
+| [HTML 3.2](https://www.w3.org/TR/2018/SPSD-html32-20180315/) | 123 | 119<br>(–3.1%) | ***118<br>(–3.4%)*** | 121<br>(–1.3%) | 123<br>(+0.6%) | 119<br>(–3.3%) | 123<br>(+0.5%) |
 | [HTML Living Standard](https://html.spec.whatwg.org/multipage/) | 151 | 154<br>(+1.8%) | ***150<br>(–0.7%)*** | 151<br>(–0.3%) | 155<br>(+2.5%) | 151<br>(–0.3%) | 157<br>(+3.8%) |
-| [IETF](https://www.ietf.org/) | 82 | 34<br>(–58.5%) | ***32<br>(–61.5%)*** | 35<br>(–57.8%) | 33<br>(–59.5%) | 33<br>(–59.4%) | 34<br>(–58.2%) |
-| [Igalia](https://www.igalia.com/) | 44 | 34<br>(–22.7%) | ***31<br>(–29.4%)*** | 34<br>(–23.3%) | 33<br>(–25.4%) | 33<br>(–24.8%) | 34<br>(–22.7%) |
+| [IETF](https://www.ietf.org/) | 82 | 34<br>(–58.7%) | ***31<br>(–61.8%)*** | 34<br>(–58.1%) | 33<br>(–59.8%) | 33<br>(–59.7%) | 34<br>(–58.4%) |
+| [Igalia](https://www.igalia.com/) | 44 | 34<br>(–22.8%) | ***31<br>(–29.5%)*** | 33<br>(–23.4%) | 32<br>(–25.5%) | 33<br>(–24.9%) | 34<br>(–22.8%) |
 | [Ladybird](https://ladybird.org/) | 30 | 28<br>(–3.9%) | 27<br>(–7.7%) | 28<br>(–5%) | ***25<br>(–14.1%)*** | 28<br>(–5.7%) | 28<br>(–5%) |
-| [Leanpub](https://leanpub.com/) | 338 | 322<br>(–4.8%) | ***306<br>(–9.4%)*** | n/a | 313<br>(–7.5%) | 319<br>(–5.7%) | 333<br>(–1.6%) |
-| [Legge Stanca](https://www.gazzettaufficiale.it/atto/serie_generale/caricaDettaglioAtto/originario?atto.dataPubblicazioneGazzetta=2004-01-17&atto.codiceRedazionale=004G0015&elenco30giorni=false) | 17 | 10<br>(–43.8%) | ***9<br>(–46.5%)*** | 10<br>(–42.7%) | 9<br>(–46.5%) | 10<br>(–40.5%) | 12<br>(–27.5%) |
+| [Leanpub](https://leanpub.com/) | 348 | 334<br>(–4.1%) | ***318<br>(–8.8%)*** | n/a | 325<br>(–6.8%) | 331<br>(–5%) | 343<br>(–1.6%) |
+| [Legge Stanca](https://www.gazzettaufficiale.it/atto/serie_generale/caricaDettaglioAtto/originario?atto.dataPubblicazioneGazzetta=2004-01-17&atto.codiceRedazionale=004G0015&elenco30giorni=false) | 17 | 10<br>(–43.8%) | 9<br>(–46.5%) | 10<br>(–42.7%) | ***9<br>(–46.7%)*** | 10<br>(–40.5%) | 12<br>(–27.5%) |
 | [Mastodon](https://mastodon.social/explore) | 43 | 41<br>(–5.2%) | ***37<br>(–14.4%)*** | 41<br>(–3.7%) | 37<br>(–14.3%) | 40<br>(–6.7%) | 41<br>(–3.5%) |
-| [MDN](https://developer.mozilla.org/en-US/) | 118 | 70<br>(–40.3%) | 66<br>(–43.8%) | 72<br>(–38.9%) | ***54<br>(–53.8%)*** | 69<br>(–41.5%) | 71<br>(–39.2%) |
-| [Mistral AI](https://mistral.ai/) | 424 | 408<br>(–3.7%) | ***322<br>(–23.9%)*** | n/a | 331<br>(–22%) | 410<br>(–3.3%) | 421<br>(–0.6%) |
-| [Mondoweiss](https://mondoweiss.net/) | 206 | 187<br>(–9.3%) | 173<br>(–16.3%) | 189<br>(–8.3%) | ***166<br>(–19.7%)*** | 186<br>(–9.8%) | 192<br>(–7.1%) |
+| [MDN](https://developer.mozilla.org/en-US/) | 119 | 71<br>(–40.3%) | 67<br>(–43.8%) | 73<br>(–38.8%) | ***55<br>(–53.7%)*** | 69<br>(–41.5%) | 72<br>(–39.2%) |
+| [Mistral AI](https://mistral.ai/) | 425 | 412<br>(–3.1%) | ***259<br>(–39%)*** | n/a | 333<br>(–21.6%) | 413<br>(–2.9%) | 425<br>(0%) |
+| [Mondoweiss](https://mondoweiss.net/) | 413 | 390<br>(–5.6%) | 376<br>(–9%) | n/a | ***370<br>(–10.6%)*** | 385<br>(–6.8%) | 398<br>(–3.6%) |
 | [Mozilla](https://www.mozilla.org/) | 47 | 37<br>(–21%) | ***32<br>(–31.6%)*** | 37<br>(–22.2%) | 33<br>(–29.4%) | 35<br>(–26%) | 36<br>(–23%) |
-| [Nielsen Norman Group](https://www.nngroup.com/) | 101 | 83<br>(–17.7%) | ***58<br>(–42.7%)*** | 84<br>(–17.2%) | 59<br>(–41.9%) | 83<br>(–18.2%) | 85<br>(–16.1%) |
-| [Opera](https://www.opera.com/) | 188 | 132<br>(–29.9%) | 124<br>(–34.1%) | 136<br>(–27.7%) | ***86<br>(–54%)*** | 131<br>(–30.5%) | 135<br>(–27.9%) |
-| [OSCE](https://www.osce.org/) | 172 | 144<br>(–16.1%) | ***135<br>(–21.4%)*** | 144<br>(–15.9%) | 136<br>(–20.7%) | 142<br>(–17.4%) | 145<br>(–15.7%) |
+| [Nielsen Norman Group](https://www.nngroup.com/) | 103 | 85<br>(–17%) | ***60<br>(–41.7%)*** | 86<br>(–16.5%) | 61<br>(–40.9%) | 85<br>(–17.6%) | 87<br>(–15.5%) |
+| [Opera](https://www.opera.com/) | 185 | 131<br>(–29.5%) | 123<br>(–33.7%) | 135<br>(–27.3%) | ***85<br>(–54%)*** | 130<br>(–30.1%) | 134<br>(–27.5%) |
+| [OSCE](https://www.osce.org/) | 171 | 144<br>(–16.1%) | ***135<br>(–21.4%)*** | 144<br>(–16%) | 136<br>(–20.8%) | 141<br>(–17.5%) | 144<br>(–15.7%) |
 | [Scrum Guide](https://scrumguides.org/scrum-guide.html) | 34 | 31<br>(–9%) | ***30<br>(–10.9%)*** | 32<br>(–7.3%) | 31<br>(–8.3%) | 31<br>(–10.1%) | 31<br>(–7.8%) |
-| [SELFHTML](https://wiki.selfhtml.org/) | 21 | 18<br>(–14.2%) | ***17<br>(–19.1%)*** | 18<br>(–14.4%) | 18<br>(–15.8%) | 17<br>(–17.6%) | 18<br>(–14.2%) |
-| [SitePoint](https://www.sitepoint.com/) | 237 | 225<br>(–4.9%) | ***212<br>(–10.4%)*** | 227<br>(–4.1%) | 213<br>(–9.8%) | 226<br>(–4.7%) | 235<br>(–0.7%) |
-| [Smashing Magazine](https://www.smashingmagazine.com/) | 303 | 302<br>(–0.3%) | 299<br>(–1.3%) | n/a | ***288<br>(–4.7%)*** | 300<br>(–0.9%) | 303<br>(0%) |
-| [Startup-Verband](https://startupverband.de/) | 50 | 37<br>(–26.4%) | ***34<br>(–31.1%)*** | 36<br>(–27.3%) | 35<br>(–29.4%) | 35<br>(–28.6%) | 36<br>(–27.1%) |
-| [TAZ](https://taz.de/) | 434 | 389<br>(–10.3%) | ***363<br>(–16.4%)*** | n/a | 380<br>(–12.4%) | 390<br>(–10.3%) | 403<br>(–7.3%) |
-| [TetraLogical](https://tetralogical.com/) | 60 | 54<br>(–10.2%) | ***50<br>(–17%)*** | 54<br>(–9.9%) | 50<br>(–16.3%) | 54<br>(–10.5%) | 54<br>(–9.8%) |
+| [SELFHTML](https://wiki.selfhtml.org/) | 21 | 18<br>(–14.2%) | ***17<br>(–19.1%)*** | 18<br>(–14.4%) | 18<br>(–16%) | 17<br>(–17.6%) | 18<br>(–14.2%) |
+| [SitePoint](https://www.sitepoint.com/) | 235 | 223<br>(–4.9%) | ***210<br>(–10.4%)*** | 225<br>(–4.1%) | 211<br>(–9.9%) | 223<br>(–4.7%) | 233<br>(–0.7%) |
+| [Smashing Magazine](https://www.smashingmagazine.com/) | 310 | 309<br>(–0.3%) | 306<br>(–1.2%) | n/a | ***293<br>(–5.4%)*** | 307<br>(–0.8%) | 310<br>(0%) |
+| [Startup-Verband](https://startupverband.de/) | 51 | 37<br>(–26.4%) | ***35<br>(–31.1%)*** | 37<br>(–27.3%) | 36<br>(–29.6%) | 36<br>(–28.6%) | 37<br>(–27.1%) |
+| [TAZ](https://taz.de/) | 420 | 377<br>(–10.3%) | ***352<br>(–16.2%)*** | n/a | 368<br>(–12.4%) | 377<br>(–10.2%) | 390<br>(–7.1%) |
+| [TetraLogical](https://tetralogical.com/) | 60 | 54<br>(–10.2%) | ***50<br>(–17%)*** | 54<br>(–9.9%) | 50<br>(–16.4%) | 54<br>(–10.5%) | 54<br>(–9.8%) |
 | [TPGi](https://www.tpgi.com/) | 177 | 136<br>(–23.4%) | 133<br>(–25.1%) | 142<br>(–20%) | ***117<br>(–34.2%)*** | 138<br>(–22.3%) | 162<br>(–8.5%) |
-| [United Nations](https://www.un.org/en/) | 155 | 131<br>(–15.9%) | 116<br>(–25.4%) | 127<br>(–18.4%) | ***88<br>(–43.6%)*** | 128<br>(–17.6%) | 134<br>(–13.7%) |
-| [UX Collective](https://uxdesign.cc/) | 121 | 114<br>(–5.9%) | ***102<br>(–16.2%)*** | 119<br>(–1.5%) | 102<br>(–15.8%) | 113<br>(–6.8%) | 120<br>(–1.2%) |
-| [Vivaldi](https://vivaldi.com/) | 91 | 80<br>(–11.9%) | 73<br>(–20%) | 81<br>(–11.4%) | ***64<br>(–29.7%)*** | 79<br>(–13%) | 83<br>(–9.3%) |
-| [W3C](https://www.w3.org/) | 52 | 40<br>(–22.1%) | ***37<br>(–28.5%)*** | 40<br>(–22.5%) | 38<br>(–27.1%) | 39<br>(–23.8%) | 42<br>(–18.7%) |
-| [WordPress Blog](https://wordpress.com/blog/) | 206 | 169<br>(–17.9%) | 159<br>(–22.5%) | 179<br>(–13.1%) | ***142<br>(–31.1%)*** | 176<br>(–14.4%) | 192<br>(–6.6%) |
-| **Sites processed (of sites overall)** |  | 48/48 | 48/48 | 38/48 | 48/48 | 48/48 | 48/48 |
-| **Average processing time** |  | 35 ms | 66 ms | 1627 ms | 147 ms | ***11 ms*** | 190 ms |
-| **Average result (KB)** | 411 | 379<br>(–7.7%) | 362<br>(–11.9%) | 398<br>(–3%) | ***359<br>(–12.6%)*** | 377<br>(–8.2%) | 389<br>(–5.3%) |
+| [United Nations](https://www.un.org/en/) | 154 | 129<br>(–16%) | 115<br>(–25.3%) | 126<br>(–18.3%) | ***87<br>(–43.7%)*** | 127<br>(–17.5%) | 133<br>(–13.8%) |
+| [UX Collective](https://uxdesign.cc/) | 152 | 142<br>(–6.5%) | ***129<br>(–15.2%)*** | 150<br>(–1.4%) | 130<br>(–14.9%) | 141<br>(–7.7%) | 148<br>(–2.6%) |
+| [Vivaldi](https://vivaldi.com/) | 91 | 80<br>(–12%) | 73<br>(–20%) | 81<br>(–11.5%) | ***64<br>(–29.8%)*** | 79<br>(–13.1%) | 83<br>(–9.4%) |
+| [W3C](https://www.w3.org/) | 52 | 40<br>(–22.1%) | ***37<br>(–28.4%)*** | 40<br>(–22.5%) | 38<br>(–27.1%) | 39<br>(–23.8%) | 42<br>(–18.7%) |
+| [WordPress Blog](https://wordpress.com/blog/) | 224 | 184<br>(–18.1%) | 172<br>(–23.1%) | 193<br>(–13.9%) | ***155<br>(–31%)*** | 191<br>(–15%) | 207<br>(–7.6%) |
+| **Sites processed (of sites overall)** |  | 48/48 | 48/48 | 37/48 | 48/48 | 48/48 | 48/48 |
+| **Average processing time** |  | 34 ms | 64 ms | 1455 ms | 147 ms | ***11 ms*** | 195 ms |
+| **Average result (KB)** | 389 | 360<br>(–7.6%) | 341<br>(–12.4%) | 377<br>(–3.1%) | ***339<br>(–12.8%)*** | 357<br>(–8.2%) | 367<br>(–5.6%) |
 
-Benchmarks last updated: Jul 9, 2026
+Benchmarks last updated: Jul 17, 2026
 <!-- End auto-generated -->
 
 ## Notes
