@@ -715,11 +715,13 @@ async function processFile(fileName) {
           preserve_chevron_percent_template_syntax: false,
           remove_bangs: true,
           remove_processing_instructions: true,
-          // Possibly non-compliant options (output still works in all browsers):
+          // minify-html calls the following four options “possibly” non-compliant
+          // but `allow_noncompliant_unquoted_attribute_values` doesn’t seem to,
+          // which is why it stays on
           allow_noncompliant_unquoted_attribute_values: true,
-          allow_optimal_entities: true,
-          allow_removing_spaces_between_attributes: true,
-          minify_doctype: true
+          allow_optimal_entities: false,
+          allow_removing_spaces_between_attributes: false,
+          minify_doctype: false
         });
         await writeBuffer(info.filePath, result);
         await readSizes(info);
