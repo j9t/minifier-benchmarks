@@ -536,6 +536,7 @@ async function processFile(fileName) {
           config.minifyJS = false;
           config.minifySVG = false;
           config.minifyURLs = false;
+          config.removeUnusedCSS = false;
         }
 
         const result = await minifyHMN(data, config);
