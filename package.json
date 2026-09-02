@@ -2,8 +2,8 @@
   "dependencies": {
     "@minify-html/node": "^0.18.1",
     "@swc/html": "^1.16.1",
-    "html-minifier-next": "^8.2.2",
-    "htmlnano": "^3.4.0",
+    "html-minifier-next": "^8.3.1",
+    "htmlnano": "^3.4.1",
     "minimize": "^2.2.0"
   },
   "devDependencies": {
