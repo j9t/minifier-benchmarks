@@ -908,7 +908,7 @@ async function processFile(fileName) {
           });
 
           writeStream.on('close', function () {
-            // Ensure clean-up if stream closes without finishing
+            // Ensure cleanup if stream closes without finishing
             if (!resolved) {
               safeResolve(null);
             }
