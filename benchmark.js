@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { createReadStream, createWriteStream } from 'fs';
+import { createReadStream, createWriteStream, rmSync } from 'fs';
 import fs from 'fs/promises';
 import https from 'https';
 import path from 'path';
@@ -460,6 +460,10 @@ async function processFile(fileName) {
       info.gzSize = 0;
       info.lzSize = 0;
       info.brSize = 0;
+      // Remove a previous run’s output, which would otherwise pass for this run’s
+      for (const filePath of [info.filePath, info.gzFilePath, info.lzFilePath, info.brFilePath]) {
+        rmSync(filePath, { force: true });
+      }
     }
 
     async function readSizes(info) {
