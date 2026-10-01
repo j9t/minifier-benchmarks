@@ -201,7 +201,7 @@ function generateMarkdownTable() {
     '[@swc/html](https://github.com/swc-project/swc)',
     '[HTML Minifier Next](https://github.com/j9t/html-minifier-next)',
     '[html­com­pressor.­com](https://htmlcompressor.com/)',
-    '[htmlnano](https://github.com/posthtml/htmlnano)',
+    '[htmlnano](https://github.com/maltsev/htmlnano)',
     '[minify-html](https://github.com/wilsonzlin/minify-html)',
     '[minimize](https://github.com/Swaagie/minimize)'
   ];
