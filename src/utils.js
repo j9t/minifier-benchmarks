@@ -24,20 +24,23 @@ export function median(values) {
   return sorted.length % 2 ? sorted[middle] : (sorted[middle - 1] + sorted[middle]) / 2;
 }
 
-// Returns a function that runs `run` once untimed (JIT warm-up, lazy-loaded dependencies,
-// leftover garbage), then `runs` times timed, and resolves to the last result with the
-// median time (forcing garbage collection would slow down JavaScript-based minifiers)
-export function createMeasure(runs, now = () => performance.now()) {
-  return async function measure(run) {
-    let result = await run();
-    const times = [];
-    for (let i = 0; i < runs; i++) {
-      const startTime = now();
-      result = await run();
-      times.push(now() - startTime);
-    }
-    return { result, time: median(times) };
-  };
+// Rotates `names` by `offset`, so that minifiers take turns being first (and last)
+export function getRunOrder(names, offset) {
+  const shift = ((offset % names.length) + names.length) % names.length;
+  return [...names.slice(shift), ...names.slice(0, shift)];
+}
+
+// Whether the median of `times` exceeds the fastest run by more than `ratio` and `minMs`,
+// which suggests that interference (like system load) affected at least half of the runs
+export function isUnsteady(times, { ratio = 0.5, minMs = 2 } = {}) {
+  const fastest = Math.min(...times);
+  return median(times) - fastest > Math.max(fastest * ratio, minMs);
+}
+
+function getStandardError(values, mean) {
+  if (values.length < 2) return Infinity;
+  const variance = values.reduce((sum, value) => sum + (value - mean) ** 2, 0) / (values.length - 1);
+  return Math.sqrt(variance / values.length);
 }
 
 // Mean and median of per-site times; local minifiers are compared on the sites all of them
@@ -55,9 +58,12 @@ export function getTimeStats({ rows, fileNames, minifierNames, remoteMinifierNam
     const sites = remoteMinifierNames.has(name) ? sitesProcessed : sitesCommon;
     const times = sites.map(site => rows[site].times[name]).filter(time => time != null);
     if (times.length === 0) return;
+    const mean = times.reduce((sum, time) => sum + time, 0) / times.length;
     stats[name] = {
-      mean: times.reduce((sum, time) => sum + time, 0) / times.length,
-      median: median(times)
+      mean,
+      median: median(times),
+      // Estimates count as reliable if their mean exceeds twice its standard error
+      isReliable: !remoteMinifierNames.has(name) || mean > 2 * getStandardError(times, mean)
     };
     if (!remoteMinifierNames.has(name)) {
       fastestMean = Math.min(fastestMean ?? Infinity, stats[name].mean);

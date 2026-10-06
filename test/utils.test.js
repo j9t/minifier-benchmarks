@@ -1,15 +1,9 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { createMeasure, formatDelta, formatTime, getSizeStats, getTimeStats, median, toKb } from '../utils.js';
+import { formatDelta, formatTime, getRunOrder, getSizeStats, getTimeStats, isUnsteady, median, toKb } from '../src/utils.js';
 
 const minifierNames = ['local1', 'remote', 'local2'];
 const remoteMinifierNames = new Set(['remote']);
-
-// Fake clock returning start/end pairs that yield the given durations
-function createClock(durations) {
-  const timestamps = durations.flatMap((duration, i) => [i * 100, i * 100 + duration]);
-  return () => timestamps.shift();
-}
 
 describe('median', () => {
   it('Returns the middle value for an odd count', () => {
@@ -27,18 +21,38 @@ describe('median', () => {
   });
 });
 
-describe('createMeasure', () => {
-  it('Runs once untimed, then the given number of times timed', async () => {
-    let calls = 0;
-    const measure = createMeasure(3, createClock([1, 1, 1]));
-    await measure(() => ++calls);
-    assert.equal(calls, 4);
+describe('getRunOrder', () => {
+  it('Rotates the names by the offset', () => {
+    assert.deepEqual(getRunOrder(['a', 'b', 'c'], 1), ['b', 'c', 'a']);
   });
 
-  it('Returns the last result and the median time', async () => {
-    let calls = 0;
-    const measure = createMeasure(3, createClock([5, 1, 3]));
-    assert.deepEqual(await measure(async () => ++calls), { result: 4, time: 3 });
+  it('Wraps offsets beyond the number of names', () => {
+    assert.deepEqual(getRunOrder(['a', 'b', 'c'], 5), ['c', 'a', 'b']);
+  });
+
+  it('Puts each name first equally often over consecutive offsets', () => {
+    const firsts = [0, 1, 2, 3, 4, 5].map(offset => getRunOrder(['a', 'b', 'c'], offset)[0]);
+    assert.deepEqual(firsts, ['a', 'b', 'c', 'a', 'b', 'c']);
+  });
+
+  it('Leaves the input unchanged', () => {
+    const names = ['a', 'b'];
+    getRunOrder(names, 1);
+    assert.deepEqual(names, ['a', 'b']);
+  });
+});
+
+describe('isUnsteady', () => {
+  it('Accepts a single slow run, which the median absorbs', () => {
+    assert.equal(isUnsteady([10, 10, 11, 10, 40]), false);
+  });
+
+  it('Flags runs whose median is far above the fastest run', () => {
+    assert.equal(isUnsteady([10, 25, 30, 11, 40]), true);
+  });
+
+  it('Ignores differences below the minimum in milliseconds', () => {
+    assert.equal(isUnsteady([1, 2.5, 2.5, 1, 2.5]), false);
   });
 });
 
@@ -93,6 +107,25 @@ describe('getTimeStats', () => {
     const stats = getTimeStats({ rows, fileNames: ['a'], minifierNames, remoteMinifierNames });
     assert.equal(stats.remote.isFastestMean, false);
     assert.equal(stats.local1.isFastestMean, true);
+  });
+
+  it('Marks remote estimates as reliable if clearly above noise', () => {
+    const rows = Object.fromEntries([700, 800, 750, 650, 720].map((time, i) => [i, { times: { local1: 1, remote: time, local2: 1 } }]));
+    const stats = getTimeStats({ rows, fileNames: Object.keys(rows), minifierNames, remoteMinifierNames });
+    assert.equal(stats.remote.isReliable, true);
+  });
+
+  it('Marks remote estimates as unreliable if within noise', () => {
+    const rows = Object.fromEntries([400, -500, 300, -350, 200].map((time, i) => [i, { times: { local1: 1, remote: time, local2: 1 } }]));
+    const stats = getTimeStats({ rows, fileNames: Object.keys(rows), minifierNames, remoteMinifierNames });
+    assert.equal(stats.remote.isReliable, false);
+    assert.equal(stats.local1.isReliable, true);
+  });
+
+  it('Marks a single remote estimate as unreliable', () => {
+    const rows = { a: { times: { local1: 1, remote: 700, local2: 1 } } };
+    const stats = getTimeStats({ rows, fileNames: ['a'], minifierNames, remoteMinifierNames });
+    assert.equal(stats.remote.isReliable, false);
   });
 
   it('Ignores skipped sites and omits minifiers without times', () => {
