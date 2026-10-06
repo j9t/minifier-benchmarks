@@ -56,9 +56,11 @@ function getStandardError(values, mean) {
   return Math.sqrt(variance / values.length);
 }
 
-// Mean and median of per-site times; local minifiers are compared on the sites all of them
-// processed, so that a failure on a large site doesn’t lower a minifier’s times
-export function getTimeStats({ rows, fileNames, minifierNames, remoteMinifierNames }) {
+// Mean and median of per-site times; local minifiers are compared on the sites
+// all of them processed, so that a failure on a large site doesn’t lower a
+// minifier’s times; times within `tieRatio` of the fastest count as fastest,
+// too, as smaller differences are within noise
+export function getTimeStats({ rows, fileNames, minifierNames, remoteMinifierNames, tieRatio = 0.05 }) {
   const sitesProcessed = fileNames.filter(name => rows[name]);
   const sitesCommon = sitesProcessed.filter(name => minifierNames.every(minifierName =>
     remoteMinifierNames.has(minifierName) || rows[name].times[minifierName] != null
@@ -86,8 +88,9 @@ export function getTimeStats({ rows, fileNames, minifierNames, remoteMinifierNam
 
   minifierNames.forEach(function (name) {
     if (!stats[name]) return;
-    stats[name].isFastestMean = stats[name].mean === fastestMean;
-    stats[name].isFastestMedian = stats[name].median === fastestMedian;
+    const isLocal = !remoteMinifierNames.has(name);
+    stats[name].isFastestMean = isLocal && stats[name].mean <= fastestMean * (1 + tieRatio);
+    stats[name].isFastestMedian = isLocal && stats[name].median <= fastestMedian * (1 + tieRatio);
   });
 
   return stats;

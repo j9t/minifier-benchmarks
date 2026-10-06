@@ -139,6 +139,25 @@ describe('getTimeStats', () => {
     assert.equal(stats.local2.isFastestMedian, false);
   });
 
+  it('Counts times within 5% of the fastest as fastest, too', () => {
+    const rows = { a: { times: { local1: 100, remote: 1, local2: 104 } } };
+    const stats = getTimeStats({ rows, fileNames: ['a'], minifierNames, remoteMinifierNames });
+    assert.equal(stats.local1.isFastestMean, true);
+    assert.equal(stats.local2.isFastestMean, true);
+  });
+
+  it('Doesn’t count times beyond 5% of the fastest as fastest', () => {
+    const rows = { a: { times: { local1: 100, remote: 1, local2: 106 } } };
+    const stats = getTimeStats({ rows, fileNames: ['a'], minifierNames, remoteMinifierNames });
+    assert.equal(stats.local2.isFastestMean, false);
+  });
+
+  it('Applies a custom tie ratio', () => {
+    const rows = { a: { times: { local1: 100, remote: 1, local2: 104 } } };
+    const stats = getTimeStats({ rows, fileNames: ['a'], minifierNames, remoteMinifierNames, tieRatio: 0 });
+    assert.equal(stats.local2.isFastestMean, false);
+  });
+
   it('Never marks a remote minifier as fastest', () => {
     const rows = { a: { times: { local1: 10, remote: 1, local2: 20 } } };
     const stats = getTimeStats({ rows, fileNames: ['a'], minifierNames, remoteMinifierNames });

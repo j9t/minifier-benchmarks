@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { fork } from 'child_process';
+import { execFileSync, fork } from 'child_process';
 import { createReadStream, createWriteStream, rmSync } from 'fs';
 import fs from 'fs/promises';
 import https from 'https';
@@ -74,8 +74,8 @@ const localMinifierNames = minifierNames.filter(name => !remoteMinifierNames.has
 // Per site: site URL as well as paths, sizes, and times of the input and outputs
 const sites = {};
 
-// One step per site for preparation, each minifier, and completion
-const stepsPerSite = minifierNames.length + 2;
+// One step per site for preparation, warm-up, each minifier, and completion
+const stepsPerSite = minifierNames.length + 3;
 const progress = new Progress(`:current/:total (${fileNames.length}×${stepsPerSite}) [:bar] :percent :etas :fileName`, {
   width: 40,
   total: fileNames.length * stepsPerSite,
@@ -693,7 +693,19 @@ async function ensureLowLoad() {
   }
 }
 
-// Step 2: Time a site once system load is low, re-measuring unsteady timings (and aborting if
+// Step 2: Run each local minifier once on all sites (untimed), so that the first sites aren’t
+// timed while JavaScript-based minifiers are still warming up
+async function warmUpFile(fileName, siteIndex, workers) {
+  const { site } = sites[fileName];
+  for (const name of getRunOrder(Object.keys(workers), siteIndex)) {
+    // Errors recur and get reported when timing
+    const response = await workers[name].request('load', { fileName, site });
+    if (!response.error) await workers[name].request('warmup');
+  }
+  progress.tick({ fileName: `Warmed up ${fileName}` });
+}
+
+// Step 3: Time a site once system load is low, re-measuring unsteady timings (and aborting if
 // they stay unsteady), then write the outputs
 async function measureFile(fileName, siteIndex, workers) {
   const { infos } = sites[fileName];
@@ -811,7 +823,7 @@ function requestHTMLCompressor(code, params) {
   });
 }
 
-// Step 3: htmlcompressor.com, https://htmlcompressor.com/api/#:~:text=HTMLCompressor%20API%20reference
+// Step 4: htmlcompressor.com, https://htmlcompressor.com/api/#:~:text=HTMLCompressor%20API%20reference
 // Processing time is estimated as the difference to a baseline request with the same content and
 // minification off (which still removes comments); network jitter only allows averages over many sites
 async function testHTMLCompressor(fileName, siteIndex) {
@@ -866,7 +878,7 @@ async function testHTMLCompressor(fileName, siteIndex) {
   progress.tick({ fileName: `${minifierLabels.compressor}: ${fileName}` });
 }
 
-// Step 4: Compress outputs and collect results
+// Step 5: Compress outputs and collect results
 async function finishFile(fileName) {
   const { original, infos } = sites[fileName];
 
@@ -959,6 +971,9 @@ for (const name of localMinifierNames) {
     workers[name] = worker;
   }
 }
+for (const [siteIndex, fileName] of fileNamesReady.entries()) {
+  await warmUpFile(fileName, siteIndex, workers);
+}
 try {
   for (const [siteIndex, fileName] of fileNamesReady.entries()) {
     await measureFile(fileName, siteIndex, workers);
@@ -1004,7 +1019,17 @@ let data = await readText(readme);
 
 // Update date stamp (used by HTML mode via regex, by max mode via content insertion)
 const dateLinePattern = /Benchmarks last updated: .+/;
-const dateLine = `Benchmarks last updated: ${dateStamp}`;
+// Environment, as JavaScript-based minifiers’ times depend on the Node.js version
+function getSystemName() {
+  if (process.platform !== 'darwin') return `${os.type()} ${os.release()}`;
+  try {
+    return 'macOS ' + execFileSync('sw_vers', ['-productVersion'], { encoding: 'utf8' }).trim();
+  } catch {
+    return `macOS (Darwin ${os.release()})`;
+  }
+}
+const environment = `Node.js ${process.versions.node}, ${getSystemName()}, ${os.cpus()[0]?.model ?? 'unknown CPU'}`;
+const dateLine = `Benchmarks last updated: ${dateStamp} (${environment})`;
 if (dateLinePattern.test(data)) {
   data = data.replace(dateLinePattern, dateLine);
 } else if (IS_HTML_ONLY) {
@@ -1053,7 +1078,7 @@ if (end !== -1) {
 const trimmedContent = content.trimEnd();
 const separator = IS_HTML_ONLY
   ? '\n\n'
-  : '\n\nBenchmarks last updated: ' + dateStamp + '\n<!-- End auto-generated -->\n\n';
+  : '\n\n' + dateLine + '\n<!-- End auto-generated -->\n\n';
 const newData = data.slice(0, start) + trimmedContent + separator + data.slice(end);
 await writeText(readme, newData);
 
