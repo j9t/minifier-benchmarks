@@ -13,7 +13,7 @@ import zlib from 'zlib';
 import lzma from 'lzma';
 import Progress from 'progress';
 import Table from 'cli-table3';
-import { formatDelta, formatTime, getRunOrder, getSizeStats, getTimeStats, isUnsteady, median, toKb } from './utils.js';
+import { formatDelta, formatTime, getRunOrder, getSizeStats, getTimeStats, isUnsteady, median, toKb, waitForLoad } from './utils.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -74,14 +74,11 @@ const localMinifierNames = minifierNames.filter(name => !remoteMinifierNames.has
 // Per site: site URL as well as paths, sizes, and times of the input and outputs
 const sites = {};
 
-// Signs of interference: timings whose median is well above their fastest run, and system load per site
-const unsteadyTimings = [];
-const loadAverages = [];
-
 // One step per site for preparation, each minifier, and completion
-const progress = new Progress(':current/:total [:bar] :percent :etas :fileName', {
+const stepsPerSite = minifierNames.length + 2;
+const progress = new Progress(`:current/:total (${fileNames.length}×${stepsPerSite}) [:bar] :percent :etas :fileName`, {
   width: 40,
-  total: fileNames.length * (minifierNames.length + 2),
+  total: fileNames.length * stepsPerSite,
   complete: '=',
   incomplete: '-',
   clear: !VERBOSE,
@@ -89,10 +86,23 @@ const progress = new Progress(':current/:total [:bar] :percent :etas :fileName',
 });
 
 // Concurrency for downloading inputs and compressing outputs (doesn’t affect minifier timings)
-const BENCH_CONCURRENCY = Math.max(1, parseInt(process.env.BENCH_CONCURRENCY || '1', 10) || 1);
+const CONCURRENCY = 4;
 
-// Timed runs per site and local minifier (after one untimed warm-up run); the median counts
-const BENCH_RUNS = Math.max(1, parseInt(process.env.BENCH_RUNS || '5', 10) || 1);
+// Untimed warm-up runs (as JavaScript-based minifiers need a few to reach steady speed)
+// and timed runs per site and local minifier; the median of the timed runs counts
+const WARMUP_RUNS = 3;
+const RUNS_PER_SITE = 5;
+
+// Conditions for fair timings: The 1-minute load average must be at most half the CPU cores
+// (waiting up to 3 minutes for it to drop), and sites with unsteady timings get re-measured
+// up to twice; otherwise, the benchmark aborts
+const LOAD_MAX = os.availableParallelism() / 2;
+const LOAD_WAIT_MAX_MS = 3 * 60 * 1000;
+const LOAD_POLL_MS = 5 * 1000;
+const RETRIES_MAX = 2;
+
+// Thrown when conditions don’t allow fair timings
+class AbortError extends Error {}
 
 const table = new Table({
   head: ['File', 'Before', ...minifierNames.map(name => minifierLabels[name]), 'Savings', 'Time'],
@@ -363,7 +373,7 @@ function displayTable() {
   console.log(table.toString());
 }
 
-// Runs `task` for each item, up to `BENCH_CONCURRENCY` at a time
+// Runs `task` for each item, up to `CONCURRENCY` at a time
 async function runConcurrently(items, task) {
   const queue = [...items];
   async function next() {
@@ -376,7 +386,7 @@ async function runConcurrently(items, task) {
       }
     }
   }
-  await Promise.all(Array.from({ length: Math.min(BENCH_CONCURRENCY, queue.length) }, next));
+  await Promise.all(Array.from({ length: Math.min(CONCURRENCY, queue.length) }, next));
 }
 
 function getInputPath(fileName) {
@@ -627,27 +637,30 @@ function startWorker(name) {
   };
 }
 
-// Step 2: Time all local minifiers on a site, one request at a time; runs are interleaved
+// Times all local minifiers on a site, one request at a time; runs are interleaved
 // (in rotating order), so that system load affects all minifiers alike
-async function measureFile(fileName, siteIndex, workers) {
-  const { site, infos } = sites[fileName];
+async function timeFile(fileName, siteIndex, workers) {
+  const { site } = sites[fileName];
   const times = {};
+  const errors = {};
 
   for (const name of getRunOrder(Object.keys(workers), siteIndex)) {
     let response = await workers[name].request('load', { fileName, site });
-    if (!response.error) response = await workers[name].request('warmup');
+    for (let run = 0; run < WARMUP_RUNS && !response.error; run++) {
+      response = await workers[name].request('warmup');
+    }
     if (response.error) {
-      failMinifier(name, fileName, response.error);
+      errors[name] = response.error;
     } else {
       times[name] = [];
     }
   }
 
-  for (let run = 0; run < BENCH_RUNS; run++) {
+  for (let run = 0; run < RUNS_PER_SITE; run++) {
     for (const name of getRunOrder(Object.keys(times), siteIndex + run)) {
       const response = await workers[name].request('run');
       if (response.error) {
-        failMinifier(name, fileName, response.error);
+        errors[name] = response.error;
         delete times[name];
       } else {
         times[name].push(response.time);
@@ -655,20 +668,62 @@ async function measureFile(fileName, siteIndex, workers) {
     }
   }
 
-  for (const name of Object.keys(times)) {
+  return { times, errors };
+}
+
+// Prints a message above the progress bar (or plainly, if output isn’t a terminal)
+function notify(message) {
+  if (process.stderr.isTTY) {
+    progress.interrupt(message);
+  } else {
+    console.error(message);
+  }
+}
+
+async function ensureLowLoad() {
+  const isLow = await waitForLoad({
+    getLoad: () => os.loadavg()[0],
+    loadMax: LOAD_MAX,
+    waitMaxMs: LOAD_WAIT_MAX_MS,
+    pollMs: LOAD_POLL_MS,
+    onWait: load => notify(`System load ${load.toFixed(1)} above ${LOAD_MAX}; waiting up to ${LOAD_WAIT_MAX_MS / 60000} minutes for it to drop`)
+  });
+  if (!isLow) {
+    throw new AbortError(`System load stayed above ${LOAD_MAX} (1-minute average: ${os.loadavg()[0].toFixed(1)}) for ${LOAD_WAIT_MAX_MS / 60000} minutes`);
+  }
+}
+
+// Step 2: Time a site once system load is low, re-measuring unsteady timings (and aborting if
+// they stay unsteady), then write the outputs
+async function measureFile(fileName, siteIndex, workers) {
+  const { infos } = sites[fileName];
+  let result;
+
+  for (let attempt = 0; ; attempt++) {
+    await ensureLowLoad();
+    result = await timeFile(fileName, siteIndex, workers);
+    const namesUnsteady = Object.keys(result.times).filter(name => isUnsteady(result.times[name]));
+    if (namesUnsteady.length === 0) break;
+    const details = namesUnsteady.map(name => `${minifierLabels[name]}: ${result.times[name].map(time => time.toFixed(1)).join(', ')} ms`).join('; ');
+    if (attempt >= RETRIES_MAX) {
+      throw new AbortError(`Timings for ${fileName} stayed unsteady after ${RETRIES_MAX} re-measurements (${details})`);
+    }
+    notify(`Unsteady timings for ${fileName} (${details}); re-measuring (${attempt + 1}/${RETRIES_MAX})`);
+  }
+
+  for (const [name, error] of Object.entries(result.errors)) {
+    failMinifier(name, fileName, error);
+  }
+  for (const [name, times] of Object.entries(result.times)) {
     const response = await workers[name].request('write');
     if (response.error) {
       failMinifier(name, fileName, response.error);
       continue;
     }
     infos[name].hasOutput = true;
-    infos[name].time = median(times[name]);
-    if (isUnsteady(times[name])) {
-      unsteadyTimings.push(`${minifierLabels[name]} for ${fileName}: ${times[name].map(time => time.toFixed(1)).join(', ')} ms`);
-    }
+    infos[name].time = median(times);
   }
 
-  loadAverages.push(os.loadavg()[0]);
   progress.tick(localMinifierNames.length, { fileName: `Timed ${fileName}` });
 }
 
@@ -887,9 +942,7 @@ async function finishFile(fileName) {
 // Log mode and concurrency settings
 const modeLabel = IS_HTML_ONLY ? 'HTML' : 'max';
 console.error(`\nRunning benchmarks in ${modeLabel} mode (${IS_HTML_ONLY ? 'HTML-only' : 'HTML, CSS, JS, and other available options'})`);
-if (VERBOSE || BENCH_CONCURRENCY > 1) {
-  console.error(`Concurrency for downloads and compression: ${BENCH_CONCURRENCY}`);
-}
+log(`Concurrency for downloads and compression: ${CONCURRENCY}`);
 
 await runConcurrently(fileNames, prepareFile);
 
@@ -906,8 +959,17 @@ for (const name of localMinifierNames) {
     workers[name] = worker;
   }
 }
-for (const [siteIndex, fileName] of fileNamesReady.entries()) {
-  await measureFile(fileName, siteIndex, workers);
+try {
+  for (const [siteIndex, fileName] of fileNamesReady.entries()) {
+    await measureFile(fileName, siteIndex, workers);
+  }
+} catch (err) {
+  if (!(err instanceof AbortError)) throw err;
+  Object.values(workers).forEach(worker => worker.close());
+  progress.terminate();
+  console.error(styleText(['red'], `\nBenchmark aborted: ${err.message}`));
+  console.error('README.md was not updated; re-run once the system is idle');
+  process.exit(1);
 }
 Object.values(workers).forEach(worker => worker.close());
 
@@ -919,21 +981,6 @@ for (const [siteIndex, fileName] of fileNamesReady.entries()) {
 await runConcurrently(fileNamesReady, finishFile);
 
 displayTable();
-
-// Report signs of interference with timings
-const loadMax = Math.max(0, ...loadAverages);
-const cpuCount = os.availableParallelism();
-if (loadMax > cpuCount / 2) {
-  benchmarkErrors.push(`High system load during timing (1-minute load average up to ${loadMax.toFixed(1)} on ${cpuCount} cores); consider re-running on an idler system`);
-}
-if (unsteadyTimings.length > 0) {
-  const shown = 10;
-  benchmarkErrors.push(`Unsteady timings (median of runs over 50% above the fastest run) for ${unsteadyTimings.length} site and minifier combinations; consider re-running if these are many:`);
-  unsteadyTimings.slice(0, shown).forEach(entry => benchmarkErrors.push(`  ${entry}`));
-  if (unsteadyTimings.length > shown) {
-    benchmarkErrors.push(`  …and ${unsteadyTimings.length - shown} more`);
-  }
-}
 
 // Display issues that occurred during benchmarking
 if (benchmarkErrors.length > 0) {

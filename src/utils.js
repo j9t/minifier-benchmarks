@@ -37,6 +37,19 @@ export function isUnsteady(times, { ratio = 0.5, minMs = 2 } = {}) {
   return median(times) - fastest > Math.max(fastest * ratio, minMs);
 }
 
+// Resolves to whether `getLoad()` is at or below `loadMax`, or drops there within `waitMaxMs`
+// (checked every `pollMs`); calls `onWait` with the load once if it has to wait
+export async function waitForLoad({ getLoad, loadMax, waitMaxMs, pollMs, onWait = () => {}, sleep = ms => new Promise(resolve => setTimeout(resolve, ms)) }) {
+  let waited = 0;
+  while (getLoad() > loadMax) {
+    if (waited >= waitMaxMs) return false;
+    if (waited === 0) onWait(getLoad());
+    await sleep(pollMs);
+    waited += pollMs;
+  }
+  return true;
+}
+
 function getStandardError(values, mean) {
   if (values.length < 2) return Infinity;
   const variance = values.reduce((sum, value) => sum + (value - mean) ** 2, 0) / (values.length - 1);

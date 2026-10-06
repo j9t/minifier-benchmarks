@@ -1,6 +1,6 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { formatDelta, formatTime, getRunOrder, getSizeStats, getTimeStats, isUnsteady, median, toKb } from '../src/utils.js';
+import { formatDelta, formatTime, getRunOrder, getSizeStats, getTimeStats, isUnsteady, median, toKb, waitForLoad } from '../src/utils.js';
 
 const minifierNames = ['local1', 'remote', 'local2'];
 const remoteMinifierNames = new Set(['remote']);
@@ -53,6 +53,43 @@ describe('isUnsteady', () => {
 
   it('Ignores differences below the minimum in milliseconds', () => {
     assert.equal(isUnsteady([1, 2.5, 2.5, 1, 2.5]), false);
+  });
+});
+
+describe('waitForLoad', () => {
+  // Returns the given loads in turn (repeating the last one) and records the sleeps
+  function createLoad(loads) {
+    const sleeps = [];
+    return {
+      sleeps,
+      options: {
+        getLoad: () => loads.length > 1 ? loads.shift() : loads[0],
+        loadMax: 5,
+        waitMaxMs: 30,
+        pollMs: 10,
+        sleep: async ms => { sleeps.push(ms); }
+      }
+    };
+  }
+
+  it('Resolves to true without waiting if the load is low', async () => {
+    const { sleeps, options } = createLoad([2]);
+    assert.equal(await waitForLoad(options), true);
+    assert.deepEqual(sleeps, []);
+  });
+
+  it('Waits until the load drops', async () => {
+    const { sleeps, options } = createLoad([8, 8, 7, 4]);
+    let waitCalls = 0;
+    assert.equal(await waitForLoad({ ...options, onWait: () => waitCalls++ }), true);
+    assert.equal(sleeps.length, 2);
+    assert.equal(waitCalls, 1);
+  });
+
+  it('Resolves to false if the load stays high for the maximum wait', async () => {
+    const { sleeps, options } = createLoad([9]);
+    assert.equal(await waitForLoad(options), false);
+    assert.deepEqual(sleeps, [10, 10, 10]);
   });
 });
 
