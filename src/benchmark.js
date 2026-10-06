@@ -357,12 +357,17 @@ function displayTable() {
   [['mean', 'Average processing time'], ['median', 'Median processing time']].forEach(function ([key, label]) {
     const timeRow = [label, ''];
     minifierNames.forEach(function (name) {
-      if (timeStats[name]) {
-        const display = blueTime(Math.round(timeStats[name][key])) +
-                        styleText(['white'], ' (' + successCounts[name] + '/' + processedSites + ')');
-        timeRow.push(display);
-      } else {
+      const stats = timeStats[name];
+      const counts = styleText(['white'], ' (' + successCounts[name] + '/' + processedSites + ')');
+      // Same rules as in the Markdown table (see `generateMarkdownTable`)
+      if (!stats) {
         timeRow.push(styleText(['white'], 'n/a'));
+      } else if (!stats.isReliable) {
+        timeRow.push(styleText(['white'], 'n/a (noise)') + counts);
+      } else if (remoteMinifierNames.has(name)) {
+        timeRow.push(blueTime(Math.round(stats[key])) + styleText(['white'], ' est.') + counts);
+      } else {
+        timeRow.push(blueTime(Math.round(stats[key])) + counts);
       }
     });
     timeRow.push('', '');
@@ -577,7 +582,7 @@ async function prepareFile(fileName) {
       try { await fs.unlink(filePath); } catch { /* ignore */ }
       benchmarkErrors.push(`Skipped ${fileName} due to download failure`);
       rows[fileName] = null; // Explicitly mark as skipped
-      progress.tick(minifierNames.length + 2, { fileName: `Skipped ${fileName}` });
+      progress.tick(stepsPerSite, { fileName: `Skipped ${fileName}` });
       return;
     }
   }
@@ -783,6 +788,9 @@ function requestHTMLCompressor(code, params) {
       } else if (res.headers['content-encoding'] === 'deflate') {
         stream = stream.pipe(zlib.createInflate());
       }
+      // Response and decompression errors (which `pipe` doesn’t forward) fail the request
+      res.on('error', err => settle({ error: err.message }));
+      stream.on('error', err => settle({ error: err.message }));
       stream.setEncoding('utf8');
       let response = '';
       stream.on('data', function (chunk) {
