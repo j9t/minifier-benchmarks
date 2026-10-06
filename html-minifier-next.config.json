@@ -1,7 +1,7 @@
 {
-  "cacheCSS": 2000,
-  "cacheJS": 1000,
-  "cacheSVG": 1000,
+  "cacheCSS": 0,
+  "cacheJS": 0,
+  "cacheSVG": 0,
   "caseSensitive": false,
   "collapseAttributeWhitespace": true,
   "collapseBooleanAttributes": true,

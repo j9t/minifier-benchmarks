@@ -2,7 +2,7 @@
   "dependencies": {
     "@minify-html/node": "^0.18.1",
     "@swc/html": "^1.16.13",
-    "html-minifier-next": "^8.10.1",
+    "html-minifier-next": "^8.10.6",
     "htmlnano": "^3.5.1",
     "minimize": "^2.2.0"
   },
@@ -24,9 +24,10 @@
   },
   "private": true,
   "scripts": {
-    "benchmarks:html": "node benchmark.js --mode=html",
-    "benchmarks:max": "node benchmark.js --mode=max",
-    "benchmarks": "npm run benchmarks:html && npm run benchmarks:max"
+    "benchmarks:html": "node src/benchmark.js --mode=html",
+    "benchmarks:max": "node src/benchmark.js --mode=max",
+    "benchmarks": "npm run benchmarks:html && npm run benchmarks:max",
+    "test": "node --test"
   },
   "type": "module"
 }
