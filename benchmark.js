@@ -16,6 +16,7 @@ import htmlnano from 'htmlnano';
 import { minify as minifySWC } from '@swc/html';
 import minifyHTMLPkg from '@minify-html/node';
 import Minimize from 'minimize';
+import { createMeasure, formatDelta, formatTime, getSizeStats, getTimeStats, toKb } from './utils.js';
 
 const { minify: minifyHTML } = minifyHTMLPkg;
 
@@ -70,6 +71,20 @@ const progress = new Progress(':current/:total [:bar] :percent :etas :fileName',
 // Set `BENCH_CONCURRENCY=6` for faster parallel execution (may show CPU contention)
 const BENCH_CONCURRENCY = Math.max(1, parseInt(process.env.BENCH_CONCURRENCY || '1', 10) || 1);
 
+// Timed runs per site and local minifier (after one untimed warm-up run); the median counts
+const BENCH_RUNS = Math.max(1, parseInt(process.env.BENCH_RUNS || '5', 10) || 1);
+
+// Forcing garbage collection before each timed run keeps one tool’s garbage (or the
+// compression of its output) from being collected on another tool’s time
+const hasGC = typeof globalThis.gc === 'function';
+if (!hasGC) {
+  console.error('Warning: Run with `node --expose-gc` (as the npm scripts do) for comparable timings');
+}
+const measure = createMeasure(BENCH_RUNS, hasGC ? globalThis.gc : undefined);
+
+// Remote minifiers’ times include the network round trip, so they don’t compete for the fastest time
+const remoteMinifierNames = new Set(['compressor']);
+
 const table = new Table({
   head: ['File', 'Before', '@swc/html', 'HTML Minifier Next', 'htmlcompressor.com', 'htmlnano', 'minify-html', 'Minimize', 'Savings', 'Time'],
   colWidths: [fileNames.reduce(function (length, fileName) {
@@ -83,20 +98,6 @@ const minifierNames = ['swchtml', 'minifier', 'compressor', 'htmlnano', 'minifyh
 // In the report array, columns 0 and 1 are site name and original size;
 // minifier results start at this offset (must match `minifierNames` order)
 const MINIFIER_COL_OFFSET = 2;
-
-function toKb(size, precision) {
-  return (size / 1024).toFixed(precision || 0);
-}
-
-function formatDelta(rawSize, originalSize) {
-  if (!rawSize || rawSize <= 0 || !originalSize || originalSize <= 0) return '';
-  const delta = ((rawSize - originalSize) / originalSize) * 100;
-  let formatted = delta.toFixed(1).replace(/\.0$/, '');
-  if (formatted === '-0') formatted = '0';
-  if (delta > 0 && !formatted.startsWith('+')) formatted = '+' + formatted;
-  formatted = formatted.replace('-', '–');
-  return '<br>(' + formatted + '%)';
-}
 
 function redSize(size) {
   return styleText(['red', 'bold'], String(size)) + styleText(['white'], ' (' + toKb(size, 2) + ' KB)');
@@ -177,14 +178,6 @@ function promiseLzma(data) {
 }
 
 const rows = {};
-const totalTimes = {
-  swchtml: 0,
-  minifier: 0,
-  compressor: 0,
-  htmlnano: 0,
-  minifyhtml: 0,
-  minimize: 0
-};
 const successCounts = {
   swchtml: 0,
   minifier: 0,
@@ -277,38 +270,24 @@ function generateMarkdownTable() {
   });
   output(sitesRow);
 
-  // Add average processing time row
-  const timeRow = ['**Average processing time**', ''];
-
-  // Calculate averages and find fastest
-  const averages = {};
-  let fastestAvg = null;
-  minifierNames.forEach(function (name) {
-    const successCount = successCounts[name];
-    if (successCount > 0) {
-      averages[name] = totalTimes[name] / successCount;
-      // Find the fastest average across all tools that succeeded on at least one site
-      if (fastestAvg === null || averages[name] < fastestAvg) {
-        fastestAvg = averages[name];
-      }
-    }
-  });
-
-  minifierNames.forEach(function (name) {
-    const successCount = successCounts[name];
-    if (successCount > 0) {
-      const avgTime = Math.round(averages[name]);
-      // Bold + italic if this is the fastest average
-      if (fastestAvg !== null && averages[name] === fastestAvg) {
-        timeRow.push('***' + avgTime + ' ms***');
+  // Add average and median processing time rows (fastest in bold and italics)
+  const timeStats = getTimeStats({ rows, fileNames, minifierNames, remoteMinifierNames });
+  [['mean', 'isFastestMean', '**Average processing time**'], ['median', 'isFastestMedian', '**Median processing time**']].forEach(function ([key, fastestKey, label]) {
+    const timeRow = [label, ''];
+    minifierNames.forEach(function (name) {
+      const stats = timeStats[name];
+      if (!stats) {
+        timeRow.push('n/a');
+      } else if (remoteMinifierNames.has(name)) {
+        timeRow.push(formatTime(stats[key]) + '<br>(network)');
+      } else if (stats[fastestKey]) {
+        timeRow.push('***' + formatTime(stats[key]) + '***');
       } else {
-        timeRow.push(avgTime + ' ms');
+        timeRow.push(formatTime(stats[key]));
       }
-    } else {
-      timeRow.push('n/a');
-    }
+    });
+    output(timeRow);
   });
-  output(timeRow);
 
   // Add average result row
   // Compute average original size across all processed sites
@@ -321,34 +300,7 @@ function generateMarkdownTable() {
   });
   const avgOrigKB = origCount > 0 ? Math.round(totalOrigBytes / origCount / 1024) : '';
   const savingsRow = ['**Average result (KB)**', String(avgOrigKB)];
-  const avgSizes = {};
-  let bestTotalBytes = null;
-
-  // Compute per-minifier averages; failed sites count as unminified (original size)
-  minifierNames.forEach(function (name, idx) {
-    let totalMinifierBytes = 0;
-    let totalOriginalBytes = 0;
-    let count = 0;
-
-    fileNames.forEach(function (fileName) {
-      if (!rows[fileName] || !rows[fileName].rawSizes) return;
-      const rawSize = rows[fileName].rawSizes[idx];
-      const origSize = rows[fileName].originalSize;
-      if (origSize > 0) {
-        totalMinifierBytes += (rawSize > 0) ? rawSize : origSize;
-        totalOriginalBytes += origSize;
-        count++;
-      }
-    });
-
-    if (count > 0) {
-      const avgKB = Math.round(totalMinifierBytes / count / 1024);
-      avgSizes[name] = { avgKB, totalMinifierBytes, totalOriginalBytes };
-      if (bestTotalBytes === null || totalMinifierBytes < bestTotalBytes) {
-        bestTotalBytes = totalMinifierBytes;
-      }
-    }
-  });
+  const { avgSizes, bestTotalBytes } = getSizeStats({ rows, fileNames, minifierNames });
 
   minifierNames.forEach(function (name) {
     if (avgSizes[name]) {
@@ -378,25 +330,26 @@ function displayTable() {
     }
   });
 
-  // Add average processing time row
-  const timeRow = ['Average processing time', ''];
+  // Add average and median processing time rows
+  const timeStats = getTimeStats({ rows, fileNames, minifierNames, remoteMinifierNames });
 
   // Count only sites that were actually processed (not skipped due to download failure)
   const processedSites = fileNames.filter(name => rows[name]).length;
 
-  minifierNames.forEach(function (name) {
-    const successCount = successCounts[name];
-    if (successCount > 0) {
-      const avgTime = Math.round(totalTimes[name] / successCount);
-      const display = styleText(['cyan', 'bold'], String(avgTime)) +
-                      styleText(['white'], ' ms (' + successCount + '/' + processedSites + ')');
-      timeRow.push(display);
-    } else {
-      timeRow.push(styleText(['white'], 'n/a'));
-    }
+  [['mean', 'Average processing time'], ['median', 'Median processing time']].forEach(function ([key, label]) {
+    const timeRow = [label, ''];
+    minifierNames.forEach(function (name) {
+      if (timeStats[name]) {
+        const display = blueTime(Math.round(timeStats[name][key])) +
+                        styleText(['white'], ' (' + successCounts[name] + '/' + processedSites + ')');
+        timeRow.push(display);
+      } else {
+        timeRow.push(styleText(['white'], 'n/a'));
+      }
+    });
+    timeRow.push('', '');
+    table.push(timeRow);
   });
-  timeRow.push('', '');
-  table.push(timeRow);
 
   console.log();
   console.log(table.toString());
@@ -460,6 +413,8 @@ async function processFile(fileName) {
       info.gzSize = 0;
       info.lzSize = 0;
       info.brSize = 0;
+      info.output = null;
+      info.time = null;
       // Remove a previous run’s output, which would otherwise pass for this run’s
       for (const filePath of [info.filePath, info.gzFilePath, info.lzFilePath, info.brFilePath]) {
         rmSync(filePath, { force: true });
@@ -467,7 +422,7 @@ async function processFile(fileName) {
     }
 
     async function readSizes(info) {
-      info.endTime = Date.now();
+      info.compressStartTime = Date.now();
 
       // Apply Gzip on minified output
       await gzipFile(info.filePath, info.gzFilePath);
@@ -494,10 +449,9 @@ async function processFile(fileName) {
     async function testSWCHTML() {
       const data = await readText(filePath);
       const info = infos.swchtml;
-      info.startTime = Date.now();
 
       try {
-        const result = await minifySWC(data, {
+        const { result, time } = await measure(() => minifySWC(data, {
           // Use most aggressive settings
           forceSetHtml5Doctype: true,
           minifyJs: !IS_HTML_ONLY,
@@ -515,9 +469,9 @@ async function processFile(fileName) {
           minifyConditionalComments: true,
           tagOmission: true,
           quotes: true
-        });
-        await writeText(info.filePath, result.code);
-        await readSizes(info);
+        }));
+        info.output = result.code;
+        info.time = time;
       } catch (err) {
         benchmarkErrors.push(`@swc/html failed for ${fileName}: ${err.message}`);
         resetSizes(info);
@@ -528,10 +482,10 @@ async function processFile(fileName) {
     async function testHTMLMinifier() {
       const data = await readText(filePath);
       const info = infos.minifier;
-      info.startTime = Date.now();
 
       try {
-        // Load config and add site-specific minifyURLs
+        // Load config (with caches disabled, as they persist across calls) and add site-specific minifyURLs
+        // @@ Disable or clear the URL cache, too, once HTML Minifier Next allows it
         const config = { ...minifierConfig, minifyURLs: site };
 
         // HTML-only mode: Disable CSS, JS, SVG, and other minification
@@ -543,9 +497,10 @@ async function processFile(fileName) {
           config.removeUnusedCSS = false;
         }
 
-        const result = await minifyHMN(data, config);
-        await writeText(info.filePath, result);
-        await readSizes(info);
+        // A fresh options object per run, as HTML Minifier Next memoizes options processing per object
+        const { result, time } = await measure(() => minifyHMN(data, { ...config }));
+        info.output = result;
+        info.time = time;
       } catch (err) {
         benchmarkErrors.push(`HTML Minifier Next failed for ${fileName}: ${err.message}`);
         resetSizes(info);
@@ -553,6 +508,7 @@ async function processFile(fileName) {
     }
 
     // htmlcompressor.com, https://htmlcompressor.com/api/#:~:text=HTMLCompressor%20API%20reference
+    // Requested only once (no warm-up or repeated runs) to spare the service
     async function testHTMLCompressor() {
       const data = await readText(filePath);
       const url = new URL('https://htmlcompressor.com/compress');
@@ -566,7 +522,7 @@ async function processFile(fileName) {
       };
 
       let info = infos.compressor;
-      info.startTime = Date.now();
+      const startTime = performance.now();
 
       function failed() {
         // Site refused to process content
@@ -577,10 +533,17 @@ async function processFile(fileName) {
       }
 
       return new Promise((resolve) => {
+        // Guards against reporting a request twice (e.g., a rejection followed by a timeout)
+        let isSettled = false;
+
         const request = https.request(url, options, function (res) {
           // Check HTTP status code
           if (res.statusCode < 200 || res.statusCode >= 300) {
+            if (isSettled) return;
+            isSettled = true;
             benchmarkErrors.push(`htmlcompressor.com failed for ${fileName}: HTTP ${res.statusCode}`);
+            res.resume();
+            request.destroy();
             failed();
             resolve();
             return;
@@ -602,7 +565,10 @@ async function processFile(fileName) {
           let response = '';
           stream.on('data', function (chunk) {
             response += chunk;
-          }).on('end', async function () {
+          }).on('end', function () {
+            if (isSettled) return;
+            isSettled = true;
+            const time = performance.now() - startTime;
             let compressedContent = '';
             let isSuccess = false;
 
@@ -631,8 +597,8 @@ async function processFile(fileName) {
             }
 
             if (info && isSuccess && compressedContent) {
-              await writeText(info.filePath, compressedContent);
-              await readSizes(info);
+              info.output = compressedContent;
+              info.time = time;
             } else { // Site refused to process content or returned error
               failed();
             }
@@ -642,6 +608,8 @@ async function processFile(fileName) {
 
         // Set request timeout (15 seconds)
         request.setTimeout(15000, function() {
+          if (isSettled) return;
+          isSettled = true;
           benchmarkErrors.push(`htmlcompressor.com timed out for ${fileName}`);
           request.destroy();
           failed();
@@ -649,6 +617,8 @@ async function processFile(fileName) {
         });
 
         request.on('error', (err) => {
+          if (isSettled) return;
+          isSettled = true;
           benchmarkErrors.push(`htmlcompressor.com error for ${fileName}: ${err.message}`);
           failed();
           resolve();
@@ -673,9 +643,7 @@ async function processFile(fileName) {
     // htmlnano, https://htmlnano.netlify.app/presets
     async function testhtmlnano() {
       const info = infos.htmlnano;
-
       const data = await readText(filePath);
-      info.startTime = Date.now();
 
       try {
         // Always use “max” preset for most aggressive HTML minification
@@ -692,9 +660,9 @@ async function processFile(fileName) {
           : {
               minifyUrls: site,
           };
-        const result = await htmlnano.process(data, options, preset);
-        await writeText(info.filePath, result.html);
-        await readSizes(info);
+        const { result, time } = await measure(() => htmlnano.process(data, options, preset));
+        info.output = result.html;
+        info.time = time;
       } catch (err) {
         benchmarkErrors.push(`htmlnano failed for ${fileName}: ${err.message}`);
         resetSizes(info);
@@ -705,10 +673,9 @@ async function processFile(fileName) {
     async function testMinifyHTML() {
       const data = await readBuffer(filePath);
       const info = infos.minifyhtml;
-      info.startTime = Date.now();
 
       try {
-        const result = minifyHTML(data, {
+        const { result, time } = await measure(() => minifyHTML(data, {
           keep_closing_tags: false,
           keep_comments: false,
           keep_html_and_head_opening_tags: false,
@@ -727,9 +694,9 @@ async function processFile(fileName) {
           allow_optimal_entities: false,
           allow_removing_spaces_between_attributes: false,
           minify_doctype: false
-        });
-        await writeBuffer(info.filePath, result);
-        await readSizes(info);
+        }));
+        info.output = result;
+        info.time = time;
       } catch (err) {
         benchmarkErrors.push(`minify-html failed for ${fileName}: ${err.message}`);
         resetSizes(info);
@@ -740,27 +707,17 @@ async function processFile(fileName) {
     async function testMinimize() {
       const data = await readText(filePath);
       const info = infos.minimize;
-      info.startTime = Date.now();
 
-      return new Promise((resolve) => {
-        minimize.parse(data, function (err, minified) {
-          if (err) {
-            benchmarkErrors.push(`Minimize failed for ${fileName}: ${err.message}`);
-            resetSizes(info);
-            return resolve();
-          }
-
-          Promise.resolve()
-            .then(() => writeText(info.filePath, minified))
-            .then(() => readSizes(info))
-            .then(() => resolve())
-            .catch(err => {
-              benchmarkErrors.push(`Failed after minimize processing ${fileName}: ${err.message}`);
-              resetSizes(info);
-              resolve();
-            });
-        });
-      });
+      try {
+        const { result, time } = await measure(() => new Promise((resolve, reject) => {
+          minimize.parse(data, (err, minified) => err ? reject(err) : resolve(minified));
+        }));
+        info.output = result;
+        info.time = time;
+      } catch (err) {
+        benchmarkErrors.push(`Minimize failed for ${fileName}: ${err.message}`);
+        resetSizes(info);
+      }
     }
 
     await readSizes(original);
@@ -782,6 +739,23 @@ async function processFile(fileName) {
 
     log(`${fileName}: Running Minimize`);
     await testMinimize();
+
+    // Write and compress outputs only once all minifiers ran, so that this work doesn’t affect timings
+    for (const name of minifierNames) {
+      const info = infos[name];
+      if (info.output == null) continue;
+      try {
+        if (typeof info.output === 'string') {
+          await writeText(info.filePath, info.output);
+        } else {
+          await writeBuffer(info.filePath, info.output);
+        }
+        await readSizes(info);
+      } catch (err) {
+        benchmarkErrors.push(`Failed to write or compress ${name} output for ${fileName}: ${err.message}`);
+        resetSizes(info);
+      }
+    }
 
     const display = [
       [fileName, '+ gzip', '+ lzma', '+ brotli'].join('\n'),
@@ -815,27 +789,29 @@ async function processFile(fileName) {
         blueSavings(original.brSize, infos.minifier.brSize)
       ].join('\n'),
       [
-        blueTime(infos.minifier.endTime - infos.minifier.startTime),
-        blueTime(infos.minifier.gzTime - infos.minifier.endTime),
+        blueTime(infos.minifier.time != null ? Math.round(infos.minifier.time) : null),
+        blueTime(infos.minifier.gzTime - infos.minifier.compressStartTime),
         blueTime(infos.minifier.lzTime - infos.minifier.gzTime),
         blueTime(infos.minifier.brTime - infos.minifier.lzTime)
       ].join('\n')
     );
+
+    // Record per-site times and count successes
+    const times = {};
+    for (const name of minifierNames) {
+      const info = infos[name];
+      const isSuccess = info.size > 0 && info.time != null;
+      times[name] = isSuccess ? info.time : null;
+      if (isSuccess) successCounts[name]++;
+    }
+
     rows[fileName] = {
       display: display,
       report: report,
       originalSize: original.size,
-      rawSizes: rawSizes
+      rawSizes: rawSizes,
+      times: times
     };
-
-    // Accumulate total processing times and count successes
-    for (const name in infos) {
-      const info = infos[name];
-      if (info.startTime && info.endTime && info.size > 0) {
-        totalTimes[name] += (info.endTime - info.startTime);
-        successCounts[name]++;
-      }
-    }
 
     progress.tick({ fileName: `Completed ${fileName}` });
   }

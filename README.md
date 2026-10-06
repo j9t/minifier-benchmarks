@@ -180,4 +180,6 @@ Benchmarks last updated: Oct 2, 2026
 * Calculation:
   - Calculations are done based on bytes, which are used to compare effectiveness.
   - Failed sites are not excluded from the calculation for the average result, but counted as unminified. This avoids test failures advantaging the respective minifier.
+  - Processing times cover the minification call only (not reading, writing, or compressing files). Each local minifier gets an untimed warm-up run per site, followed by five timed runs (configurable via `BENCH_RUNS`), each preceded by garbage collection; the median of these runs is the site’s time. Minification caches that persist across calls are disabled where possible.
+  - Average and median processing times of local minifiers are based on the sites all of them processed. htmlcompressor.com’s times are based on the sites it processed, include the network round trip (one request per site), and are therefore not comparable.
 * Benchmarks are currently run manually (on a 2024 Apple Mac Mini) but may be automated in the future.
