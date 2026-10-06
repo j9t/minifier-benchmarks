@@ -30,21 +30,14 @@ describe('median', () => {
 describe('createMeasure', () => {
   it('Runs once untimed, then the given number of times timed', async () => {
     let calls = 0;
-    const measure = createMeasure(3, undefined, createClock([1, 1, 1]));
+    const measure = createMeasure(3, createClock([1, 1, 1]));
     await measure(() => ++calls);
     assert.equal(calls, 4);
   });
 
-  it('Collects garbage before each timed run only', async () => {
-    const events = [];
-    const measure = createMeasure(2, () => events.push('gc'), createClock([1, 1]));
-    await measure(() => events.push('run'));
-    assert.deepEqual(events, ['run', 'gc', 'run', 'gc', 'run']);
-  });
-
   it('Returns the last result and the median time', async () => {
     let calls = 0;
-    const measure = createMeasure(3, undefined, createClock([5, 1, 3]));
+    const measure = createMeasure(3, createClock([5, 1, 3]));
     assert.deepEqual(await measure(async () => ++calls), { result: 4, time: 3 });
   });
 });

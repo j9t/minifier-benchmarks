@@ -24,8 +24,8 @@
   },
   "private": true,
   "scripts": {
-    "benchmarks:html": "node --expose-gc benchmark.js --mode=html",
-    "benchmarks:max": "node --expose-gc benchmark.js --mode=max",
+    "benchmarks:html": "node benchmark.js --mode=html",
+    "benchmarks:max": "node benchmark.js --mode=max",
     "benchmarks": "npm run benchmarks:html && npm run benchmarks:max",
     "test": "node --test"
   },

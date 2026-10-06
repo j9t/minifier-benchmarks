@@ -73,14 +73,7 @@ const BENCH_CONCURRENCY = Math.max(1, parseInt(process.env.BENCH_CONCURRENCY || 
 
 // Timed runs per site and local minifier (after one untimed warm-up run); the median counts
 const BENCH_RUNS = Math.max(1, parseInt(process.env.BENCH_RUNS || '5', 10) || 1);
-
-// Forcing garbage collection before each timed run keeps one tool’s garbage (or the
-// compression of its output) from being collected on another tool’s time
-const hasGC = typeof globalThis.gc === 'function';
-if (!hasGC) {
-  console.error('Warning: Run with `node --expose-gc` (as the npm scripts do) for comparable timings');
-}
-const measure = createMeasure(BENCH_RUNS, hasGC ? globalThis.gc : undefined);
+const measure = createMeasure(BENCH_RUNS);
 
 // Remote minifiers’ times include the network round trip, so they don’t compete for the fastest time
 const remoteMinifierNames = new Set(['compressor']);

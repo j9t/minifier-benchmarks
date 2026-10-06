@@ -24,15 +24,14 @@ export function median(values) {
   return sorted.length % 2 ? sorted[middle] : (sorted[middle - 1] + sorted[middle]) / 2;
 }
 
-// Returns a function that runs `run` once untimed (JIT warm-up, lazy-loaded dependencies),
-// then `runs` times timed (each after `gc`, if given), and resolves to the last result with
-// the median time
-export function createMeasure(runs, gc, now = () => performance.now()) {
+// Returns a function that runs `run` once untimed (JIT warm-up, lazy-loaded dependencies,
+// leftover garbage), then `runs` times timed, and resolves to the last result with the
+// median time (forcing garbage collection would slow down JavaScript-based minifiers)
+export function createMeasure(runs, now = () => performance.now()) {
   return async function measure(run) {
     let result = await run();
     const times = [];
     for (let i = 0; i < runs; i++) {
-      if (gc) gc();
       const startTime = now();
       result = await run();
       times.push(now() - startTime);
