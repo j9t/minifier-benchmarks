@@ -28,147 +28,166 @@ Two tests are run: One exclusively applying [HTML minification](#1-html-minifica
 
 | Site | Original Size (KB) | [@swc/html](https://github.com/swc-project/swc) | [HTML Minifier Next](https://github.com/j9t/html-minifier-next) | [html­com­pressor.­com](https://htmlcompressor.com/) | [htmlnano](https://github.com/maltsev/htmlnano) | [minify-html](https://github.com/wilsonzlin/minify-html) | [minimize](https://github.com/Swaagie/minimize) |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| [Minifier Test](https://hell.meiert.org/core/html/minifier-test.html) | 105 | 87<br>(–17.1%) | ***85<br>(–19.3%)*** | 89<br>(–15.1%) | 86<br>(–18.2%) | 86<br>(–18.5%) | 90<br>(–14.6%) |
-| [A List Apart](https://alistapart.com/) | 64 | 60<br>(–5.7%) | ***58<br>(–8.2%)*** | 59<br>(–7.1%) | 59<br>(–8.2%) | 59<br>(–8%) | 59<br>(–7.1%) |
-| [BBC](https://www.bbc.co.uk/) | 737 | 733<br>(–0.6%) | 727<br>(–1.4%) | n/a | ***727<br>(–1.5%)*** | 729<br>(–1.2%) | 732<br>(–0.8%) |
-| [BITV 2.0](https://www.gesetze-im-internet.de/bitv_2_0/BJNR184300011.html) | 36 | 34<br>(–6.7%) | 33<br>(–8.7%) | 35<br>(–2.3%) | ***33<br>(–9%)*** | 33<br>(–8.5%) | 35<br>(–2.4%) |
-| [CERN](https://home.cern/) | 291 | 279<br>(–4%) | 275<br>(–5.6%) | 279<br>(–4.1%) | ***272<br>(–6.6%)*** | 277<br>(–4.7%) | 279<br>(–4.3%) |
-| [DeepSeek](https://www.deepseek.com/) | 113 | 112<br>(–0.7%) | ***112<br>(–1.2%)*** | 112<br>(–0.6%) | 112<br>(–1.1%) | 112<br>(–0.8%) | 112<br>(–0.7%) |
-| [DIN](https://www.din.de/) | 256 | 184<br>(–28.3%) | ***178<br>(–30.6%)*** | 185<br>(–27.7%) | 179<br>(–30.3%) | 182<br>(–29%) | 184<br>(–28%) |
-| [DLR](https://www.dlr.de/) | 544 | 540<br>(–0.6%) | ***537<br>(–1.1%)*** | n/a | 538<br>(–1%) | 539<br>(–0.9%) | 541<br>(–0.5%) |
-| [ECMAScript](https://tc39.es/ecma262/) | 7451 | 7086<br>(–4.9%) | 6841<br>(–8.2%) | n/a | ***6834<br>(–8.3%)*** | 6988<br>(–6.2%) | 7013<br>(–5.9%) |
+| [Minifier Test](https://hell.meiert.org/core/html/minifier-test.html) | 105 | 87<br>(–17.1%) | ***85<br>(–19.3%)*** | 89<br>(–15.1%) | 86<br>(–18%) | 86<br>(–18.5%) | 90<br>(–14.6%) |
+| [A List Apart](https://alistapart.com/) | 64 | 60<br>(–5.7%) | ***58<br>(–8.3%)*** | 59<br>(–7.1%) | 59<br>(–8.2%) | 59<br>(–8%) | 59<br>(–7.1%) |
+| [AfricTivistes](https://www.africtivistes.org/) | 461 | 416<br>(–9.6%) | 402<br>(–12.8%) | n/a | ***399<br>(–13.5%)*** | 413<br>(–10.4%) | 453<br>(–1.6%) |
+| [BBC](https://www.bbc.co.uk/) | 706 | 702<br>(–0.7%) | 696<br>(–1.5%) | n/a | ***696<br>(–1.5%)*** | 698<br>(–1.2%) | 701<br>(–0.8%) |
+| [BITV 2.0](https://www.gesetze-im-internet.de/bitv_2_0/BJNR184300011.html) | 36 | 34<br>(–6.7%) | ***33<br>(–8.7%)*** | 35<br>(–2.3%) | 33<br>(–8.6%) | 33<br>(–8.5%) | 35<br>(–2.4%) |
+| [CERN](https://home.cern/) | 291 | 280<br>(–4%) | 275<br>(–5.5%) | 279<br>(–4.1%) | ***272<br>(–6.5%)*** | 278<br>(–4.7%) | 279<br>(–4.3%) |
+| [DeepSeek](https://www.deepseek.com/) | 113 | 112<br>(–0.7%) | ***112<br>(–1.2%)*** | 112<br>(–0.6%) | 112<br>(–1%) | 112<br>(–0.8%) | 112<br>(–0.7%) |
+| [Derechos Digitales](https://www.derechosdigitales.org/) | 110 | 97<br>(–11.8%) | ***96<br>(–13.5%)*** | 100<br>(–9.9%) | 97<br>(–12.1%) | 97<br>(–12.2%) | 100<br>(–9.5%) |
+| [DIN](https://www.din.de/) | 256 | 184<br>(–28.3%) | ***178<br>(–30.6%)*** | 185<br>(–27.7%) | 179<br>(–30.2%) | 182<br>(–29%) | 184<br>(–28%) |
+| [DLR](https://www.dlr.de/) | 544 | 541<br>(–0.6%) | ***538<br>(–1.1%)*** | n/a | 539<br>(–1%) | 539<br>(–0.9%) | 541<br>(–0.5%) |
+| [ECMAScript](https://tc39.es/ecma262/) | 7450 | 7085<br>(–4.9%) | ***6840<br>(–8.2%)*** | n/a | 6895<br>(–7.5%) | 6988<br>(–6.2%) | 7013<br>(–5.9%) |
 | [EDRi](https://edri.org/) | 84 | 77<br>(–7.7%) | ***77<br>(–8.3%)*** | 78<br>(–6.6%) | 77<br>(–8.2%) | 77<br>(–7.9%) | 78<br>(–6.7%) |
-| [EFF](https://www.eff.org/) | 54 | 50<br>(–7.9%) | ***47<br>(–12.9%)*** | 50<br>(–7.7%) | 47<br>(–12.8%) | 48<br>(–11.1%) | 49<br>(–9.5%) |
-| [ELLE](https://www.elle.com/) | 721 | 716<br>(–0.7%) | ***711<br>(–1.4%)*** | n/a | 713<br>(–1.2%) | 713<br>(–1.1%) | 716<br>(–0.7%) |
-| [European Alternatives](https://european-alternatives.eu/) | 49 | 33<br>(–33.1%) | 33<br>(–33.9%) | 33<br>(–33%) | ***33<br>(–33.9%)*** | 33<br>(–33.5%) | 33<br>(–33.1%) |
+| [EFF](https://www.eff.org/) | 54 | 50<br>(–8.2%) | ***47<br>(–13.1%)*** | 50<br>(–7.9%) | 47<br>(–12.3%) | 48<br>(–11.3%) | 49<br>(–9.7%) |
+| [ELLE](https://www.elle.com/) | 737 | 732<br>(–0.7%) | ***727<br>(–1.4%)*** | n/a | 729<br>(–1.1%) | 729<br>(–1.1%) | 732<br>(–0.7%) |
+| [eMAG](https://emag.governoeletronico.gov.br/) | 240 | 194<br>(–18.9%) | ***188<br>(–21.8%)*** | 205<br>(–14.5%) | 200<br>(–16.6%) | 189<br>(–21.4%) | 205<br>(–14.5%) |
+| [European Alternatives](https://european-alternatives.eu/) | 50 | 33<br>(–33%) | 33<br>(–33.8%) | 33<br>(–32.9%) | ***33<br>(–33.9%)*** | 33<br>(–33.4%) | 33<br>(–33%) |
 | [European Green Party](https://europeangreens.eu/) | 439 | 434<br>(–1.1%) | ***431<br>(–1.8%)*** | n/a | 431<br>(–1.7%) | 431<br>(–1.7%) | 436<br>(–0.5%) |
 | [European Left Alliance](https://leftalliance.eu/) | 298 | 289<br>(–3.1%) | 286<br>(–4.1%) | n/a | ***285<br>(–4.2%)*** | 286<br>(–3.9%) | 289<br>(–3%) |
-| [European Network Against Racism](https://www.enar-eu.org/) | 210 | 205<br>(–2.7%) | ***192<br>(–8.8%)*** | 205<br>(–2.7%) | 195<br>(–7.2%) | 203<br>(–3.4%) | 205<br>(–2.8%) |
-| [FAZ](https://www.faz.net/aktuell/) | 1618 | 1563<br>(–3.4%) | ***1479<br>(–8.6%)*** | n/a | 1554<br>(–4%) | 1558<br>(–3.7%) | 1557<br>(–3.7%) |
-| [French Tech](https://lafrenchtech.gouv.fr/) | 182 | 135<br>(–26.3%) | 133<br>(–27%) | 135<br>(–26.1%) | ***133<br>(–27%)*** | 133<br>(–26.9%) | 135<br>(–26.2%) |
+| [European Network Against Racism](https://www.enar-eu.org/) | 211 | 205<br>(–2.7%) | ***192<br>(–8.8%)*** | 205<br>(–2.6%) | 196<br>(–7.1%) | 204<br>(–3.4%) | 205<br>(–2.8%) |
+| [FAZ](https://www.faz.net/aktuell/) | 1404 | 1357<br>(–3.4%) | ***1263<br>(–10.1%)*** | n/a | 1340<br>(–4.6%) | 1344<br>(–4.3%) | 1344<br>(–4.3%) |
+| [Folha de S.Paulo](https://www.folha.uol.com.br/) | 955 | 828<br>(–13.3%) | ***781<br>(–18.2%)*** | n/a | 828<br>(–13.3%) | 832<br>(–12.9%) | 829<br>(–13.2%) |
+| [French Tech](https://lafrenchtech.gouv.fr/) | 185 | 137<br>(–26.2%) | 135<br>(–26.9%) | 137<br>(–26.1%) | ***135<br>(–27%)*** | 135<br>(–26.8%) | 137<br>(–26.2%) |
 | [Front-End Social](https://front-end.social/) | 54 | 52<br>(–4.6%) | ***50<br>(–7.2%)*** | 52<br>(–3.7%) | 50<br>(–7.2%) | 50<br>(–7.2%) | 52<br>(–3.8%) |
-| [Frontend Dogma](https://frontenddogma.com/) | 228 | 238<br>(+4.2%) | 228<br>(0%) | ***228<br>(–0.2%)*** | 228<br>(0%) | 228<br>(0%) | 246<br>(+8%) |
+| [Frontend Dogma](https://frontenddogma.com/) | 228 | 238<br>(+4.2%) | 228<br>(0%) | ***228<br>(–0.2%)*** | 228<br>(0%) | 228<br>(0%) | 247<br>(+8%) |
 | [Gaza Maps](https://gazamaps.com/) | 15 | 12<br>(–18.2%) | ***11<br>(–26.4%)*** | 12<br>(–17%) | 11<br>(–26.3%) | 12<br>(–19.1%) | 12<br>(–18.4%) |
-| [Genocide Watch](https://www.genocidewatch.com/) | 1857 | 1834<br>(–1.2%) | ***1811<br>(–2.5%)*** | n/a | 1822<br>(–1.8%) | 1825<br>(–1.7%) | 1843<br>(–0.8%) |
-| [Ground News](https://ground.news/) | 2189 | 2166<br>(–1%) | ***2120<br>(–3.2%)*** | n/a | 2140<br>(–2.2%) | 2166<br>(–1.1%) | 2175<br>(–0.6%) |
+| [Genocide Watch](https://www.genocidewatch.com/) | 1837 | 1814<br>(–1.2%) | ***1791<br>(–2.5%)*** | n/a | 1803<br>(–1.9%) | 1805<br>(–1.7%) | 1823<br>(–0.8%) |
+| [Ground News](https://ground.news/) | 3429 | 3407<br>(–0.6%) | ***3356<br>(–2.1%)*** | n/a | 3382<br>(–1.4%) | 3406<br>(–0.7%) | 3415<br>(–0.4%) |
+| [Hong Kong Free Press](https://hongkongfp.com/) | 392 | 370<br>(–5.6%) | ***364<br>(–7%)*** | n/a | 365<br>(–6.7%) | 367<br>(–6.4%) | 371<br>(–5.3%) |
 | [HTML 3.2](https://www.w3.org/TR/2018/SPSD-html32-20180315/) | 123 | ***119<br>(–3%)*** | 119<br>(–3%) | 121<br>(–1.2%) | 120<br>(–2.2%) | 119<br>(–2.7%) | 123<br>(+0.5%) |
 | [HTML Living Standard](https://html.spec.whatwg.org/multipage/) | 151 | 154<br>(+1.8%) | 151<br>(–0.2%) | ***151<br>(–0.2%)*** | 151<br>(–0.2%) | 151<br>(–0.2%) | 157<br>(+3.8%) |
-| [Human Rights Watch](https://www.hrw.org/) | 299 | 258<br>(–13.4%) | ***250<br>(–16.4%)*** | n/a | 251<br>(–16%) | 254<br>(–14.8%) | 257<br>(–14%) |
-| [IETF](https://www.ietf.org/) | 83 | 34<br>(–58.7%) | ***31<br>(–61.9%)*** | 35<br>(–57.4%) | 32<br>(–61.2%) | 33<br>(–59.6%) | 34<br>(–58.6%) |
-| [Igalia](https://www.igalia.com/) | 44 | 35<br>(–21.7%) | 34<br>(–24.1%) | 34<br>(–22.6%) | ***33<br>(–24.6%)*** | 34<br>(–23.6%) | 34<br>(–23.2%) |
-| [KoRo](https://www.koro.com/) | 946 | 892<br>(–5.7%) | 883<br>(–6.6%) | n/a | ***881<br>(–6.8%)*** | 896<br>(–5.3%) | 916<br>(–3.1%) |
+| [Human Rights Watch](https://www.hrw.org/) | 271 | 234<br>(–13.5%) | ***226<br>(–16.7%)*** | 233<br>(–14%) | 227<br>(–16.3%) | 230<br>(–15%) | 232<br>(–14.3%) |
+| [IETF](https://www.ietf.org/) | 83 | 34<br>(–58.4%) | ***32<br>(–61.9%)*** | 35<br>(–57.5%) | 32<br>(–61.2%) | 33<br>(–59.6%) | 34<br>(–58.6%) |
+| [Igalia](https://www.igalia.com/) | 44 | 35<br>(–21.5%) | 33<br>(–23.9%) | 34<br>(–22.4%) | ***33<br>(–24.4%)*** | 34<br>(–23.4%) | 34<br>(–23%) |
+| [Jinbonet](https://act.jinbo.net/) | 414 | 363<br>(–12.2%) | ***356<br>(–13.9%)*** | n/a | 357<br>(–13.7%) | 361<br>(–12.9%) | 402<br>(–2.9%) |
+| [KoRo](https://www.koro.com/) | 1002 | 946<br>(–5.6%) | 937<br>(–6.4%) | n/a | ***937<br>(–6.5%)*** | 950<br>(–5.2%) | 973<br>(–2.9%) |
 | [Ladybird](https://ladybird.org/) | 29 | 28<br>(–3.9%) | ***27<br>(–6.5%)*** | 28<br>(–5%) | 27<br>(–6.1%) | 27<br>(–5.7%) | 28<br>(–5%) |
-| [Leanpub](https://leanpub.com/) | 512 | 506<br>(–1.1%) | 492<br>(–4%) | n/a | ***489<br>(–4.5%)*** | 503<br>(–1.7%) | 504<br>(–1.6%) |
-| [Legge Stanca](https://www.gazzettaufficiale.it/atto/serie_generale/caricaDettaglioAtto/originario?atto.dataPubblicazioneGazzetta=2004-01-17&atto.codiceRedazionale=004G0015&elenco30giorni=false) | 17 | 12<br>(–28.5%) | 12<br>(–30.4%) | 12<br>(–27%) | ***12<br>(–30.6%)*** | 12<br>(–30.1%) | 12<br>(–27.5%) |
+| [Leanpub](https://leanpub.com/) | 541 | 535<br>(–1%) | 519<br>(–3.9%) | n/a | ***517<br>(–4.4%)*** | 531<br>(–1.8%) | 532<br>(–1.6%) |
+| [Legge Stanca](https://www.gazzettaufficiale.it/atto/serie_generale/caricaDettaglioAtto/originario?atto.dataPubblicazioneGazzetta=2004-01-17&atto.codiceRedazionale=004G0015&elenco30giorni=false) | 17 | 12<br>(–28.5%) | ***12<br>(–30.4%)*** | 12<br>(–27%) | 12<br>(–30.2%) | 12<br>(–30.1%) | 12<br>(–27.5%) |
 | [Mastodon](https://mastodon.social/explore) | 50 | 48<br>(–4.5%) | ***47<br>(–7.1%)*** | 48<br>(–3.7%) | 47<br>(–7.1%) | 47<br>(–7%) | 48<br>(–3.8%) |
 | [MDN](https://developer.mozilla.org/en-US/) | 119 | 71<br>(–40.1%) | ***69<br>(–41.8%)*** | 73<br>(–38.7%) | 71<br>(–40.3%) | 70<br>(–41.1%) | 72<br>(–39.1%) |
-| [Médecins Sans Frontières](https://www.msf.org/) | 346 | 306<br>(–11.5%) | ***297<br>(–14.2%)*** | n/a | 299<br>(–13.6%) | 304<br>(–12.1%) | 304<br>(–12.1%) |
-| [Mistral AI](https://mistral.ai/) | 308 | 297<br>(–3.4%) | ***253<br>(–17.7%)*** | n/a | 264<br>(–14.3%) | 298<br>(–3.3%) | 306<br>(–0.7%) |
-| [Mondoweiss](https://mondoweiss.net/) | 348 | 335<br>(–3.7%) | ***328<br>(–5.5%)*** | n/a | 329<br>(–5.5%) | 333<br>(–4.3%) | 334<br>(–4%) |
-| [Mozilla](https://www.mozilla.org/) | 47 | 37<br>(–20.9%) | ***34<br>(–25.9%)*** | 36<br>(–22.2%) | 34<br>(–25.9%) | 35<br>(–25.6%) | 36<br>(–23%) |
-| [Omas gegen Rechts](https://www.omas-gegen-rechts.org/) | 123 | 120<br>(–2.9%) | 118<br>(–4.3%) | 120<br>(–2.8%) | ***117<br>(–5.4%)*** | 119<br>(–3.7%) | 120<br>(–2.9%) |
-| [Opera](https://www.opera.com/) | 186 | 137<br>(–26%) | ***133<br>(–28.1%)*** | 137<br>(–26.2%) | 135<br>(–27.1%) | 136<br>(–26.7%) | 136<br>(–26.7%) |
-| [OSCE](https://www.osce.org/) | 181 | 152<br>(–15.8%) | ***150<br>(–17.1%)*** | 153<br>(–15.7%) | 151<br>(–16.4%) | 151<br>(–16.6%) | 153<br>(–15.6%) |
-| [OZeWAI](https://ozewai.org/) | 147 | 144<br>(–2%) | ***141<br>(–3.6%)*** | 143<br>(–2.2%) | 141<br>(–3.5%) | 142<br>(–3.1%) | 143<br>(–2.2%) |
-| [Piccalilli](https://piccalil.li/) | 78 | 76<br>(–2.8%) | 75<br>(–4.2%) | 76<br>(–2.3%) | ***75<br>(–4.3%)*** | 75<br>(–4%) | 76<br>(–2.4%) |
+| [Médecins Sans Frontières](https://www.msf.org/) | 346 | 306<br>(–11.5%) | ***297<br>(–14.2%)*** | n/a | 299<br>(–13.6%) | 304<br>(–12.2%) | 304<br>(–12.1%) |
+| [Mistral AI](https://mistral.ai/) | 333 | 323<br>(–3.2%) | ***270<br>(–18.9%)*** | n/a | 281<br>(–15.6%) | 322<br>(–3.5%) | 331<br>(–0.8%) |
+| [Mondoweiss](https://mondoweiss.net/) | 350 | 337<br>(–3.7%) | ***331<br>(–5.5%)*** | n/a | 331<br>(–5.4%) | 335<br>(–4.3%) | 336<br>(–4%) |
+| [Mozilla](https://www.mozilla.org/) | 47 | 37<br>(–20.9%) | ***35<br>(–25.9%)*** | 36<br>(–22.1%) | 35<br>(–25.8%) | 35<br>(–25.6%) | 36<br>(–22.9%) |
+| [Nikkei](https://www.nikkei.com/) | 708 | 669<br>(–5.5%) | ***640<br>(–9.6%)*** | n/a | 657<br>(–7.3%) | 660<br>(–6.8%) | 698<br>(–1.4%) |
+| [Omas gegen Rechts](https://www.omas-gegen-rechts.org/) | 123 | 120<br>(–2.9%) | 118<br>(–4.3%) | 120<br>(–2.8%) | ***117<br>(–5.3%)*** | 119<br>(–3.7%) | 120<br>(–2.9%) |
+| [Opera](https://www.opera.com/) | 186 | 137<br>(–26%) | ***134<br>(–28.1%)*** | 137<br>(–26.2%) | 135<br>(–27.1%) | 136<br>(–26.7%) | 136<br>(–26.7%) |
+| [OSCE](https://www.osce.org/) | 177 | 149<br>(–15.9%) | ***146<br>(–17.2%)*** | 149<br>(–15.8%) | 148<br>(–16.5%) | 147<br>(–16.8%) | 149<br>(–15.7%) |
+| [OZeWAI](https://ozewai.org/) | 146 | 143<br>(–2%) | ***141<br>(–3.6%)*** | 143<br>(–2.2%) | 141<br>(–3.5%) | 142<br>(–3%) | 143<br>(–2.2%) |
+| [Piccalilli](https://piccalil.li/) | 78 | 76<br>(–2.8%) | ***75<br>(–4.2%)*** | 76<br>(–2.3%) | 75<br>(–4.2%) | 75<br>(–4%) | 76<br>(–2.4%) |
 | [Qooxdoo](https://qooxdoo.org/) | 37 | 29<br>(–21.8%) | ***29<br>(–22.9%)*** | 32<br>(–13.5%) | 31<br>(–16.3%) | 29<br>(–21.5%) | 30<br>(–19.5%) |
-| [Qwant](https://www.qwant.com/) | 139 | 137<br>(–1%) | 137<br>(–1.4%) | 137<br>(–1.2%) | ***136<br>(–2.4%)*** | 137<br>(–1.4%) | 137<br>(–1.3%) |
+| [Qwant](https://www.qwant.com/) | 139 | 137<br>(–1%) | ***137<br>(–1.4%)*** | 137<br>(–1.2%) | 137<br>(–1.4%) | 137<br>(–1.4%) | 137<br>(–1.3%) |
 | [REJECT AIPAC](https://rejectaipac.org/) | 71 | 70<br>(–1.7%) | ***67<br>(–6%)*** | 69<br>(–2%) | 67<br>(–5.3%) | 69<br>(–2.2%) | 69<br>(–2%) |
-| [Scrum Guide](https://scrumguides.org/scrum-guide.html) | 34 | 31<br>(–8.9%) | 30<br>(–10.7%) | 32<br>(–7.3%) | ***30<br>(–10.7%)*** | 31<br>(–10%) | 31<br>(–7.8%) |
-| [SELFHTML](https://wiki.selfhtml.org/) | 21 | 18<br>(–13.1%) | ***17<br>(–17.6%)*** | 18<br>(–13.4%) | 17<br>(–17.5%) | 18<br>(–16.3%) | 18<br>(–14%) |
-| [SitePoint](https://www.sitepoint.com/) | 224 | 221<br>(–1.3%) | ***220<br>(–1.7%)*** | 223<br>(–0.7%) | 220<br>(–1.6%) | 222<br>(–1%) | 223<br>(–0.7%) |
-| [Smashing Magazine](https://www.smashingmagazine.com/) | 289 | 290<br>(+0.2%) | ***287<br>(–0.6%)*** | 289<br>(–0.1%) | 288<br>(–0.4%) | 288<br>(–0.4%) | 289<br>(+0%) |
+| [Research ICT Africa](https://researchictafrica.net/) | 184 | 173<br>(–5.8%) | ***169<br>(–7.8%)*** | 175<br>(–4.9%) | 170<br>(–7.3%) | 171<br>(–6.7%) | 175<br>(–4.9%) |
+| [Scrum Guide](https://scrumguides.org/scrum-guide.html) | 34 | 31<br>(–8.9%) | ***30<br>(–10.7%)*** | 32<br>(–7.3%) | 30<br>(–10.7%) | 31<br>(–10%) | 31<br>(–7.8%) |
+| [SELFHTML](https://wiki.selfhtml.org/) | 21 | 18<br>(–13.1%) | ***17<br>(–17.6%)*** | 18<br>(–13.4%) | 17<br>(–17.4%) | 18<br>(–16.3%) | 18<br>(–14%) |
+| [SFLC.in](https://sflc.in/) | 171 | 168<br>(–1.7%) | ***164<br>(–3.6%)*** | 168<br>(–1.4%) | 165<br>(–3.4%) | 167<br>(–2.2%) | 168<br>(–1.3%) |
+| [SitePoint](https://www.sitepoint.com/) | 225 | 222<br>(–1.3%) | ***221<br>(–1.7%)*** | 223<br>(–0.7%) | 221<br>(–1.6%) | 223<br>(–1%) | 223<br>(–0.7%) |
+| [Smashing Magazine](https://www.smashingmagazine.com/) | 287 | 288<br>(+0.2%) | ***286<br>(–0.6%)*** | 287<br>(–0.1%) | 286<br>(–0.4%) | 286<br>(–0.4%) | 287<br>(0%) |
 | [Startpage](https://www.startpage.com/) | 22 | 21<br>(–2.4%) | ***21<br>(–2.6%)*** | 21<br>(–2.1%) | 21<br>(–2.5%) | 21<br>(–2.3%) | 21<br>(–2.1%) |
-| [Startup-Verband](https://startupverband.de/) | 56 | 41<br>(–26.1%) | ***39<br>(–30.1%)*** | 41<br>(–27%) | 40<br>(–29.3%) | 40<br>(–28%) | 41<br>(–27.1%) |
-| [TAZ](https://taz.de/) | 465 | 434<br>(–6.7%) | ***406<br>(–12.6%)*** | n/a | 418<br>(–10.1%) | 430<br>(–7.5%) | 431<br>(–7.2%) |
-| [TetraLogical](https://tetralogical.com/) | 94 | 88<br>(–6.4%) | ***88<br>(–6.5%)*** | 89<br>(–6%) | 88<br>(–6.5%) | 88<br>(–6.2%) | 89<br>(–6%) |
-| [The Left](https://left.eu/) | 125 | 112<br>(–10.6%) | ***108<br>(–13.7%)*** | 115<br>(–8.2%) | 109<br>(–13.1%) | 111<br>(–11.5%) | 115<br>(–8.3%) |
-| [TPGi](https://www.tpgi.com/) | 195 | 175<br>(–10%) | ***175<br>(–10.3%)*** | 179<br>(–8.2%) | 175<br>(–10.1%) | 176<br>(–9.7%) | 179<br>(–8.2%) |
-| [Track AIPAC](https://www.trackaipac.com/) | 358 | 320<br>(–10.5%) | ***214<br>(–40.2%)*** | n/a | 318<br>(–11.2%) | 319<br>(–11%) | 227<br>(–36.7%) |
-| [United Nations](https://www.un.org/en/) | 161 | 140<br>(–13%) | 133<br>(–17.1%) | 140<br>(–12.9%) | ***133<br>(–17.1%)*** | 138<br>(–14.4%) | 140<br>(–13.2%) |
-| [Vivaldi](https://vivaldi.com/) | 93 | 84<br>(–8.9%) | ***83<br>(–10.8%)*** | 84<br>(–9.4%) | 83<br>(–10.7%) | 83<br>(–10.4%) | 84<br>(–9.3%) |
-| [W3C](https://www.w3.org/) | 47 | 39<br>(–18.5%) | ***38<br>(–20.2%)*** | 39<br>(–18.5%) | 38<br>(–19.9%) | 38<br>(–19.8%) | 39<br>(–18.5%) |
-| [WordPress Blog](https://wordpress.com/blog/) | 221 | 204<br>(–7.7%) | ***201<br>(–9.3%)*** | 205<br>(–7.3%) | 201<br>(–9.1%) | 202<br>(–8.4%) | 205<br>(–7.2%) |
-| [博客园](https://www.cnblogs.com/) | 79 | 56<br>(–29.3%) | ***55<br>(–29.7%)*** | 57<br>(–28.2%) | 55<br>(–29.6%) | 56<br>(–28.9%) | 57<br>(–28.2%) |
+| [Startup-Verband](https://startupverband.de/) | 57 | 42<br>(–26.2%) | ***39<br>(–30.2%)*** | 41<br>(–27%) | 40<br>(–29.4%) | 41<br>(–28.1%) | 41<br>(–27.1%) |
+| [TAZ](https://taz.de/) | 394 | 369<br>(–6.2%) | ***344<br>(–12.7%)*** | n/a | 360<br>(–8.6%) | 366<br>(–7%) | 367<br>(–6.7%) |
+| [TetraLogical](https://tetralogical.com/) | 94 | 88<br>(–6.4%) | ***88<br>(–6.5%)*** | 89<br>(–6%) | 88<br>(–6.5%) | 89<br>(–6.2%) | 89<br>(–6%) |
+| [The Left](https://left.eu/) | 124 | 111<br>(–10.5%) | ***108<br>(–13.6%)*** | 114<br>(–8.2%) | 108<br>(–13%) | 110<br>(–11.4%) | 114<br>(–8.2%) |
+| [TPGi](https://www.tpgi.com/) | 195 | 175<br>(–10%) | ***175<br>(–10.3%)*** | 179<br>(–8.2%) | 176<br>(–9.9%) | 176<br>(–9.7%) | 179<br>(–8.2%) |
+| [Track AIPAC](https://www.trackaipac.com/) | 570 | 532<br>(–6.6%) | ***215<br>(–62.3%)*** | n/a | 531<br>(–6.9%) | 530<br>(–6.9%) | 228<br>(–60%) |
+| [United Nations](https://www.un.org/en/) | 161 | 141<br>(–12.9%) | ***134<br>(–16.9%)*** | 141<br>(–12.9%) | 134<br>(–16.8%) | 138<br>(–14.3%) | 140<br>(–13.2%) |
+| [Vivaldi](https://vivaldi.com/) | 93 | 84<br>(–8.9%) | ***83<br>(–10.8%)*** | 84<br>(–9.4%) | 83<br>(–10.5%) | 83<br>(–10.4%) | 84<br>(–9.3%) |
+| [W3C](https://www.w3.org/) | 49 | 40<br>(–17.9%) | ***40<br>(–19.6%)*** | 40<br>(–17.9%) | 40<br>(–19.2%) | 40<br>(–19.1%) | 41<br>(–17.9%) |
+| [Wikipedia](https://en.wikipedia.org/wiki/Main_Page) | 253 | 246<br>(–3.1%) | ***235<br>(–7.4%)*** | 242<br>(–4.5%) | 235<br>(–7.3%) | 238<br>(–6%) | 242<br>(–4.6%) |
+| [WordPress Blog](https://wordpress.com/blog/) | 221 | 204<br>(–7.7%) | ***201<br>(–9.2%)*** | 205<br>(–7.3%) | 201<br>(–8.9%) | 202<br>(–8.4%) | 205<br>(–7.2%) |
+| [博客园](https://www.cnblogs.com/) | 80 | 56<br>(–29.2%) | ***56<br>(–29.6%)*** | 57<br>(–28.2%) | 56<br>(–29.4%) | 57<br>(–28.8%) | 57<br>(–28.2%) |
 | [稀土掘金](https://juejin.cn/) | 77 | 75<br>(–3.3%) | ***73<br>(–6.1%)*** | 75<br>(–3.3%) | 74<br>(–4%) | 74<br>(–3.9%) | 75<br>(–3.5%) |
-| **Sites processed (of sites overall)** |  | 63/63 | 63/63 | 46/63 | 63/63 | 63/63 | 63/63 |
-| **Average processing time** |  | 23 ms | 18 ms | n/a<br>(network noise) | 25 ms | ***7 ms*** | 152 ms |
-| **Median processing time** |  | 8 ms | 5 ms | n/a<br>(network noise) | 8 ms | ***2 ms*** | 31 ms |
-| **Average result (KB)** | 389 | 369<br>(–5.2%) | ***357<br>(–8.2%)*** | 381<br>(–2.2%) | 361<br>(–7.2%) | 366<br>(–6%) | 368<br>(–5.6%) |
+| **Sites processed (of sites overall)** |  | 73/73 | 73/73 | 52/73 | 73/73 | 73/73 | 73/73 |
+| **Average processing time** |  | 26 ms | 19 ms | n/a<br>(network noise) | 39 ms | ***7 ms*** | 160 ms |
+| **Median processing time** |  | 9 ms | 6 ms | n/a<br>(network noise) | 14 ms | ***2 ms*** | 35 ms |
+| **Average result (KB)** | 406 | 384<br>(–5.5%) | ***369<br>(–9.2%)*** | 397<br>(–2.2%) | 377<br>(–7.1%) | 381<br>(–6.2%) | 381<br>(–6.1%) |
 
 ## 2. Maximum Minification Compared
 
 | Site | Original Size (KB) | [@swc/html](https://github.com/swc-project/swc) | [HTML Minifier Next](https://github.com/j9t/html-minifier-next) | [html­com­pressor.­com](https://htmlcompressor.com/) | [htmlnano](https://github.com/maltsev/htmlnano) | [minify-html](https://github.com/wilsonzlin/minify-html) | [minimize](https://github.com/Swaagie/minimize) |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| [Minifier Test](https://hell.meiert.org/core/html/minifier-test.html) | 105 | 82<br>(–21.9%) | 78<br>(–25.3%) | 84<br>(–19.6%) | ***78<br>(–25.8%)*** | 81<br>(–23.2%) | 90<br>(–14.6%) |
-| [A List Apart](https://alistapart.com/) | 64 | 58<br>(–9.2%) | 45<br>(–30%) | 57<br>(–9.9%) | ***39<br>(–38.8%)*** | 56<br>(–11.4%) | 59<br>(–7.1%) |
-| [BBC](https://www.bbc.co.uk/) | 737 | 696<br>(–5.6%) | ***679<br>(–7.9%)*** | n/a | 683<br>(–7.4%) | 692<br>(–6.2%) | 732<br>(–0.8%) |
-| [BITV 2.0](https://www.gesetze-im-internet.de/bitv_2_0/BJNR184300011.html) | 36 | 33<br>(–6.8%) | ***32<br>(–10.1%)*** | 35<br>(–2.6%) | 32<br>(–9.9%) | 33<br>(–9.4%) | 35<br>(–2.4%) |
-| [CERN](https://home.cern/) | 291 | 264<br>(–9.5%) | 224<br>(–23.2%) | 269<br>(–7.7%) | ***209<br>(–28.1%)*** | 262<br>(–9.8%) | 279<br>(–4.3%) |
-| [DeepSeek](https://www.deepseek.com/) | 113 | 108<br>(–4.5%) | 85<br>(–24.8%) | 112<br>(–1.1%) | ***85<br>(–25%)*** | 108<br>(–4.4%) | 112<br>(–0.7%) |
-| [DIN](https://www.din.de/) | 256 | 177<br>(–30.9%) | 134<br>(–47.6%) | 178<br>(–30.6%) | ***132<br>(–48.4%)*** | 176<br>(–31.1%) | 184<br>(–28%) |
-| [DLR](https://www.dlr.de/) | 544 | 510<br>(–6.1%) | 502<br>(–7.7%) | n/a | ***496<br>(–8.8%)*** | 503<br>(–7.5%) | 541<br>(–0.5%) |
-| [ECMAScript](https://tc39.es/ecma262/) | 7451 | 7086<br>(–4.9%) | 6840<br>(–8.2%) | n/a | ***6833<br>(–8.3%)*** | 6988<br>(–6.2%) | 7013<br>(–5.9%) |
-| [EDRi](https://edri.org/) | 84 | 74<br>(–11.1%) | 55<br>(–34.5%) | 76<br>(–9.5%) | ***54<br>(–35.4%)*** | 74<br>(–11.1%) | 78<br>(–6.7%) |
-| [EFF](https://www.eff.org/) | 54 | 49<br>(–10.7%) | ***44<br>(–19%)*** | 49<br>(–9.9%) | 44<br>(–18.8%) | 48<br>(–12%) | 49<br>(–9.5%) |
-| [ELLE](https://www.elle.com/) | 721 | 706<br>(–2.2%) | ***691<br>(–4.2%)*** | n/a | 699<br>(–3.1%) | 703<br>(–2.5%) | 716<br>(–0.7%) |
-| [European Alternatives](https://european-alternatives.eu/) | 49 | 33<br>(–33.2%) | 31<br>(–37.7%) | 33<br>(–33%) | ***31<br>(–37.7%)*** | 33<br>(–33.5%) | 33<br>(–33.1%) |
-| [European Green Party](https://europeangreens.eu/) | 439 | 429<br>(–2.3%) | 107<br>(–75.5%) | n/a | ***105<br>(–76%)*** | 426<br>(–2.8%) | 436<br>(–0.5%) |
-| [European Left Alliance](https://leftalliance.eu/) | 298 | 284<br>(–4.5%) | 245<br>(–17.8%) | n/a | ***240<br>(–19.4%)*** | 282<br>(–5.2%) | 289<br>(–3%) |
-| [European Network Against Racism](https://www.enar-eu.org/) | 210 | 196<br>(–6.8%) | 142<br>(–32.6%) | 199<br>(–5.3%) | ***140<br>(–33.4%)*** | 195<br>(–7.3%) | 205<br>(–2.8%) |
-| [FAZ](https://www.faz.net/aktuell/) | 1618 | 1494<br>(–7.6%) | 1364<br>(–15.7%) | n/a | ***1350<br>(–16.5%)*** | 1552<br>(–4.1%) | 1557<br>(–3.7%) |
-| [French Tech](https://lafrenchtech.gouv.fr/) | 182 | 128<br>(–30%) | 54<br>(–70.4%) | 129<br>(–29.4%) | ***53<br>(–70.7%)*** | 127<br>(–30.4%) | 135<br>(–26.2%) |
-| [Front-End Social](https://front-end.social/) | 54 | 51<br>(–5.6%) | 47<br>(–13.7%) | 52<br>(–4%) | ***47<br>(–13.8%)*** | 50<br>(–7.6%) | 52<br>(–3.8%) |
-| [Frontend Dogma](https://frontenddogma.com/) | 228 | 238<br>(+4.2%) | 221<br>(–3.1%) | 228<br>(–0.2%) | ***220<br>(–3.5%)*** | 228<br>(0%) | 246<br>(+8%) |
-| [Gaza Maps](https://gazamaps.com/) | 15 | 12<br>(–18.2%) | 10<br>(–30.4%) | 12<br>(–18.2%) | ***10<br>(–30.4%)*** | 12<br>(–19.1%) | 12<br>(–18.4%) |
-| [Genocide Watch](https://www.genocidewatch.com/) | 1857 | 1803<br>(–2.9%) | ***1375<br>(–25.9%)*** | n/a | n/a | 1804<br>(–2.9%) | 1843<br>(–0.8%) |
-| [Ground News](https://ground.news/) | 2189 | 2053<br>(–6.2%) | ***1970<br>(–10%)*** | n/a | 1999<br>(–8.7%) | 2048<br>(–6.4%) | 2175<br>(–0.6%) |
-| [HTML 3.2](https://www.w3.org/TR/2018/SPSD-html32-20180315/) | 123 | 119<br>(–3.1%) | ***119<br>(–3.4%)*** | 121<br>(–1.3%) | 120<br>(–2.4%) | 119<br>(–2.8%) | 123<br>(+0.5%) |
+| [Minifier Test](https://hell.meiert.org/core/html/minifier-test.html) | 105 | 82<br>(–21.9%) | ***78<br>(–25.3%)*** | 84<br>(–19.6%) | 79<br>(–24.9%) | 81<br>(–23.2%) | 90<br>(–14.6%) |
+| [A List Apart](https://alistapart.com/) | 64 | 58<br>(–9.2%) | 45<br>(–30%) | 57<br>(–9.9%) | ***39<br>(–38.6%)*** | 56<br>(–11.4%) | 59<br>(–7.1%) |
+| [AfricTivistes](https://www.africtivistes.org/) | 461 | 414<br>(–10.2%) | 399<br>(–13.5%) | n/a | ***391<br>(–15.1%)*** | 410<br>(–10.9%) | 453<br>(–1.6%) |
+| [BBC](https://www.bbc.co.uk/) | 706 | 667<br>(–5.6%) | ***650<br>(–7.9%)*** | n/a | 652<br>(–7.6%) | 663<br>(–6.2%) | 701<br>(–0.8%) |
+| [BITV 2.0](https://www.gesetze-im-internet.de/bitv_2_0/BJNR184300011.html) | 36 | 33<br>(–6.8%) | ***32<br>(–10.1%)*** | 35<br>(–2.6%) | 32<br>(–9.6%) | 33<br>(–9.4%) | 35<br>(–2.4%) |
+| [CERN](https://home.cern/) | 291 | 264<br>(–9.4%) | 224<br>(–23.1%) | 269<br>(–7.7%) | ***213<br>(–26.9%)*** | 263<br>(–9.8%) | 279<br>(–4.3%) |
+| [DeepSeek](https://www.deepseek.com/) | 113 | 108<br>(–4.5%) | 85<br>(–24.8%) | 112<br>(–1.1%) | ***85<br>(–24.9%)*** | 108<br>(–4.4%) | 112<br>(–0.7%) |
+| [Derechos Digitales](https://www.derechosdigitales.org/) | 110 | 95<br>(–14.4%) | 66<br>(–40%) | 98<br>(–11.6%) | ***65<br>(–40.9%)*** | 95<br>(–14.3%) | 100<br>(–9.5%) |
+| [DIN](https://www.din.de/) | 256 | 177<br>(–30.9%) | ***134<br>(–47.6%)*** | 178<br>(–30.6%) | 135<br>(–47.4%) | 176<br>(–31.1%) | 184<br>(–28%) |
+| [DLR](https://www.dlr.de/) | 544 | 511<br>(–6.2%) | 502<br>(–7.7%) | n/a | ***496<br>(–8.8%)*** | 503<br>(–7.6%) | 541<br>(–0.5%) |
+| [ECMAScript](https://tc39.es/ecma262/) | 7450 | 7085<br>(–4.9%) | ***6839<br>(–8.2%)*** | n/a | 6894<br>(–7.5%) | 6987<br>(–6.2%) | 7013<br>(–5.9%) |
+| [EDRi](https://edri.org/) | 84 | 74<br>(–11.1%) | ***55<br>(–34.5%)*** | 76<br>(–9.5%) | 55<br>(–34.4%) | 74<br>(–11.1%) | 78<br>(–6.7%) |
+| [EFF](https://www.eff.org/) | 54 | 48<br>(–11%) | ***44<br>(–19.1%)*** | 49<br>(–10.2%) | 44<br>(–18.2%) | 47<br>(–12.3%) | 49<br>(–9.7%) |
+| [ELLE](https://www.elle.com/) | 737 | 721<br>(–2.2%) | ***707<br>(–4.1%)*** | n/a | 711<br>(–3.5%) | 719<br>(–2.5%) | 732<br>(–0.7%) |
+| [European Alternatives](https://european-alternatives.eu/) | 50 | 33<br>(–33.1%) | 31<br>(–37.6%) | 33<br>(–32.9%) | ***31<br>(–37.7%)*** | 33<br>(–33.5%) | 33<br>(–33%) |
+| [European Green Party](https://europeangreens.eu/) | 439 | 429<br>(–2.3%) | 107<br>(–75.5%) | n/a | ***106<br>(–75.9%)*** | 426<br>(–2.8%) | 436<br>(–0.5%) |
+| [European Left Alliance](https://leftalliance.eu/) | 298 | 284<br>(–4.5%) | 245<br>(–17.8%) | n/a | ***241<br>(–19.1%)*** | 282<br>(–5.2%) | 289<br>(–3%) |
+| [European Network Against Racism](https://www.enar-eu.org/) | 211 | 197<br>(–6.7%) | ***142<br>(–32.5%)*** | 200<br>(–5.3%) | 143<br>(–32.1%) | 195<br>(–7.3%) | 205<br>(–2.8%) |
+| [FAZ](https://www.faz.net/aktuell/) | 1404 | 1287<br>(–8.4%) | 1174<br>(–16.4%) | n/a | ***1159<br>(–17.5%)*** | 1339<br>(–4.7%) | 1344<br>(–4.3%) |
+| [Folha de S.Paulo](https://www.folha.uol.com.br/) | 955 | 820<br>(–14.1%) | ***704<br>(–26.3%)*** | n/a | 732<br>(–23.4%) | 829<br>(–13.2%) | 829<br>(–13.2%) |
+| [French Tech](https://lafrenchtech.gouv.fr/) | 185 | 130<br>(–29.9%) | 56<br>(–69.8%) | 131<br>(–29.3%) | ***55<br>(–70%)*** | 129<br>(–30.3%) | 137<br>(–26.2%) |
+| [Front-End Social](https://front-end.social/) | 54 | 51<br>(–5.6%) | ***47<br>(–13.7%)*** | 52<br>(–4%) | 47<br>(–13.6%) | 50<br>(–7.6%) | 52<br>(–3.8%) |
+| [Frontend Dogma](https://frontenddogma.com/) | 228 | 238<br>(+4.2%) | ***221<br>(–3.1%)*** | 228<br>(–0.2%) | 221<br>(–3.1%) | 228<br>(0%) | 247<br>(+8%) |
+| [Gaza Maps](https://gazamaps.com/) | 15 | 12<br>(–18.2%) | ***10<br>(–30.4%)*** | 12<br>(–18.2%) | ***10<br>(–30.4%)*** | 12<br>(–19.1%) | 12<br>(–18.4%) |
+| [Genocide Watch](https://www.genocidewatch.com/) | 1837 | 1783<br>(–2.9%) | ***1358<br>(–26.1%)*** | n/a | 1429<br>(–22.2%) | 1784<br>(–2.9%) | 1823<br>(–0.8%) |
+| [GIGW](https://guidelines.india.gov.in/) | 109 | 79<br>(–27.7%) | 58<br>(–46.6%) | 80<br>(–26.3%) | ***58<br>(–47.2%)*** | 80<br>(–27%) | 88<br>(–19.5%) |
+| [Ground News](https://ground.news/) | 3429 | 3203<br>(–6.6%) | ***3117<br>(–9.1%)*** | n/a | 3132<br>(–8.6%) | 3191<br>(–6.9%) | 3415<br>(–0.4%) |
+| [Hong Kong Free Press](https://hongkongfp.com/) | 392 | 364<br>(–7.1%) | 310<br>(–21%) | n/a | ***309<br>(–21.1%)*** | 363<br>(–7.4%) | 371<br>(–5.3%) |
+| [HTML 3.2](https://www.w3.org/TR/2018/SPSD-html32-20180315/) | 123 | 119<br>(–3.1%) | ***119<br>(–3.4%)*** | 121<br>(–1.3%) | 120<br>(–2.5%) | 119<br>(–2.8%) | 123<br>(+0.5%) |
 | [HTML Living Standard](https://html.spec.whatwg.org/multipage/) | 151 | 154<br>(+1.8%) | ***151<br>(–0.4%)*** | 151<br>(–0.3%) | 151<br>(–0.4%) | 151<br>(–0.2%) | 157<br>(+3.8%) |
-| [Human Rights Watch](https://www.hrw.org/) | 299 | 255<br>(–14.4%) | 239<br>(–19.8%) | n/a | ***239<br>(–20%)*** | 253<br>(–15.1%) | 257<br>(–14%) |
-| [IETF](https://www.ietf.org/) | 83 | 34<br>(–58.9%) | ***31<br>(–62.7%)*** | 34<br>(–58.3%) | 31<br>(–62%) | 33<br>(–59.7%) | 34<br>(–58.6%) |
-| [Igalia](https://www.igalia.com/) | 44 | 34<br>(–23.3%) | 32<br>(–26.5%) | 34<br>(–23.9%) | ***32<br>(–27.3%)*** | 33<br>(–25%) | 34<br>(–23.2%) |
-| [KoRo](https://www.koro.com/) | 946 | 887<br>(–6.2%) | ***871<br>(–7.9%)*** | n/a | 894<br>(–5.5%) | 891<br>(–5.7%) | 916<br>(–3.1%) |
-| [Ladybird](https://ladybird.org/) | 29 | 28<br>(–4%) | 26<br>(–9.1%) | 28<br>(–5%) | ***25<br>(–14.9%)*** | 27<br>(–5.7%) | 28<br>(–5%) |
-| [Leanpub](https://leanpub.com/) | 512 | 487<br>(–4.8%) | 464<br>(–9.3%) | n/a | ***460<br>(–10.1%)*** | 484<br>(–5.4%) | 504<br>(–1.6%) |
-| [Legge Stanca](https://www.gazzettaufficiale.it/atto/serie_generale/caricaDettaglioAtto/originario?atto.dataPubblicazioneGazzetta=2004-01-17&atto.codiceRedazionale=004G0015&elenco30giorni=false) | 17 | 10<br>(–43.8%) | 9<br>(–47%) | 10<br>(–42.7%) | ***9<br>(–47.3%)*** | 10<br>(–40.3%) | 12<br>(–27.5%) |
-| [Mastodon](https://mastodon.social/explore) | 50 | 47<br>(–5.4%) | 43<br>(–13.8%) | 48<br>(–3.9%) | ***43<br>(–14%)*** | 46<br>(–7.3%) | 48<br>(–3.8%) |
-| [MDN](https://developer.mozilla.org/en-US/) | 119 | 71<br>(–40.2%) | 68<br>(–42.8%) | 73<br>(–38.8%) | ***59<br>(–50.7%)*** | 70<br>(–41.1%) | 72<br>(–39.1%) |
+| [Human Rights Watch](https://www.hrw.org/) | 271 | 231<br>(–14.7%) | 216<br>(–20.4%) | 232<br>(–14.4%) | ***215<br>(–20.6%)*** | 229<br>(–15.4%) | 232<br>(–14.3%) |
+| [IETF](https://www.ietf.org/) | 83 | 34<br>(–58.6%) | ***31<br>(–62.7%)*** | 34<br>(–58.3%) | 31<br>(–62%) | 33<br>(–59.8%) | 34<br>(–58.6%) |
+| [Igalia](https://www.igalia.com/) | 44 | 34<br>(–23%) | 32<br>(–26.3%) | 34<br>(–23.7%) | ***32<br>(–27%)*** | 33<br>(–24.7%) | 34<br>(–23%) |
+| [Jinbonet](https://act.jinbo.net/) | 414 | 345<br>(–16.6%) | 180<br>(–56.5%) | n/a | ***169<br>(–59.1%)*** | 342<br>(–17.3%) | 402<br>(–2.9%) |
+| [KoRo](https://www.koro.com/) | 1002 | 941<br>(–6%) | ***925<br>(–7.6%)*** | n/a | 929<br>(–7.3%) | 946<br>(–5.6%) | 973<br>(–2.9%) |
+| [Ladybird](https://ladybird.org/) | 29 | 28<br>(–4%) | ***26<br>(–9.1%)*** | 28<br>(–5%) | 26<br>(–8.9%) | 27<br>(–5.7%) | 28<br>(–5%) |
+| [Leanpub](https://leanpub.com/) | 541 | 515<br>(–4.7%) | 490<br>(–9.3%) | n/a | ***489<br>(–9.5%)*** | 511<br>(–5.5%) | 532<br>(–1.6%) |
+| [Legge Stanca](https://www.gazzettaufficiale.it/atto/serie_generale/caricaDettaglioAtto/originario?atto.dataPubblicazioneGazzetta=2004-01-17&atto.codiceRedazionale=004G0015&elenco30giorni=false) | 17 | 10<br>(–43.8%) | 9<br>(–47%) | 10<br>(–42.7%) | ***9<br>(–47.1%)*** | 10<br>(–40.3%) | 12<br>(–27.5%) |
+| [Mastodon](https://mastodon.social/explore) | 50 | 47<br>(–5.4%) | ***43<br>(–13.8%)*** | 48<br>(–3.9%) | 43<br>(–13.7%) | 46<br>(–7.3%) | 48<br>(–3.8%) |
+| [MDN](https://developer.mozilla.org/en-US/) | 119 | 71<br>(–40.2%) | 68<br>(–42.9%) | 73<br>(–38.8%) | ***62<br>(–48%)*** | 70<br>(–41.2%) | 72<br>(–39.1%) |
 | [Médecins Sans Frontières](https://www.msf.org/) | 346 | 305<br>(–11.8%) | 219<br>(–36.7%) | n/a | ***218<br>(–37%)*** | 304<br>(–12.2%) | 304<br>(–12.1%) |
-| [Mistral AI](https://mistral.ai/) | 308 | 294<br>(–4.6%) | ***185<br>(–40%)*** | n/a | 186<br>(–39.5%) | 296<br>(–4%) | 306<br>(–0.7%) |
-| [Mondoweiss](https://mondoweiss.net/) | 348 | 328<br>(–5.6%) | 307<br>(–11.7%) | n/a | ***305<br>(–12.4%)*** | 323<br>(–7.2%) | 334<br>(–4%) |
-| [Mozilla](https://www.mozilla.org/) | 47 | 37<br>(–20.9%) | ***32<br>(–31.8%)*** | 36<br>(–22.2%) | 32<br>(–31.1%) | 35<br>(–25.6%) | 36<br>(–23%) |
-| [Omas gegen Rechts](https://www.omas-gegen-rechts.org/) | 123 | 114<br>(–7.4%) | 68<br>(–44.8%) | 116<br>(–5.8%) | ***61<br>(–50.2%)*** | 114<br>(–7.7%) | 120<br>(–2.9%) |
-| [Opera](https://www.opera.com/) | 186 | 132<br>(–28.7%) | ***84<br>(–55%)*** | 136<br>(–26.6%) | 85<br>(–54%) | 132<br>(–29.1%) | 136<br>(–26.7%) |
-| [OSCE](https://www.osce.org/) | 181 | 152<br>(–15.8%) | 149<br>(–17.8%) | 152<br>(–15.8%) | ***143<br>(–21.1%)*** | 151<br>(–16.8%) | 153<br>(–15.6%) |
-| [OZeWAI](https://ozewai.org/) | 147 | 136<br>(–6.9%) | 86<br>(–41.1%) | 140<br>(–4.7%) | ***73<br>(–50.1%)*** | 135<br>(–7.7%) | 143<br>(–2.2%) |
-| [Piccalilli](https://piccalil.li/) | 78 | 75<br>(–4%) | 64<br>(–18.1%) | 76<br>(–3%) | ***49<br>(–36.9%)*** | 74<br>(–4.9%) | 76<br>(–2.4%) |
-| [Qooxdoo](https://qooxdoo.org/) | 37 | 29<br>(–21.8%) | 22<br>(–41.6%) | 32<br>(–13.5%) | ***22<br>(–41.8%)*** | 29<br>(–21.5%) | 30<br>(–19.5%) |
-| [Qwant](https://www.qwant.com/) | 139 | 123<br>(–11.4%) | 116<br>(–16.3%) | 137<br>(–1.4%) | ***114<br>(–17.5%)*** | 122<br>(–11.9%) | 137<br>(–1.3%) |
-| [REJECT AIPAC](https://rejectaipac.org/) | 71 | 65<br>(–8.5%) | 45<br>(–36%) | 66<br>(–6.6%) | ***42<br>(–40.3%)*** | 65<br>(–8.1%) | 69<br>(–2%) |
-| [Scrum Guide](https://scrumguides.org/scrum-guide.html) | 34 | 31<br>(–9%) | 30<br>(–10.9%) | 32<br>(–7.3%) | ***30<br>(–11.1%)*** | 31<br>(–10%) | 31<br>(–7.8%) |
-| [SELFHTML](https://wiki.selfhtml.org/) | 21 | 18<br>(–14%) | ***17<br>(–19.2%)*** | 18<br>(–14.2%) | 17<br>(–18.4%) | 17<br>(–17.2%) | 18<br>(–14%) |
-| [SitePoint](https://www.sitepoint.com/) | 224 | 213<br>(–4.8%) | ***202<br>(–9.9%)*** | 215<br>(–4.2%) | 202<br>(–9.8%) | 214<br>(–4.7%) | 223<br>(–0.7%) |
-| [Smashing Magazine](https://www.smashingmagazine.com/) | 289 | 288<br>(–0.3%) | 276<br>(–4.7%) | 289<br>(–0.1%) | ***274<br>(–5.1%)*** | 287<br>(–0.9%) | 289<br>(+0%) |
-| [Startpage](https://www.startpage.com/) | 22 | 19<br>(–13.7%) | 16<br>(–25.6%) | 19<br>(–13%) | ***16<br>(–27.2%)*** | 20<br>(–6%) | 21<br>(–2.1%) |
-| [Startup-Verband](https://startupverband.de/) | 56 | 41<br>(–26.2%) | ***38<br>(–32.1%)*** | 41<br>(–27.1%) | 38<br>(–31.4%) | 40<br>(–28.2%) | 41<br>(–27.1%) |
-| [TAZ](https://taz.de/) | 465 | 420<br>(–9.7%) | ***380<br>(–18.1%)*** | n/a | 399<br>(–14.2%) | 421<br>(–9.4%) | 431<br>(–7.2%) |
-| [TetraLogical](https://tetralogical.com/) | 94 | 88<br>(–6.5%) | 84<br>(–10.4%) | 89<br>(–6.1%) | ***84<br>(–11%)*** | 88<br>(–6.3%) | 89<br>(–6%) |
-| [The Left](https://left.eu/) | 125 | 106<br>(–15.3%) | 91<br>(–27.4%) | 111<br>(–10.9%) | ***90<br>(–28.2%)*** | 106<br>(–15%) | 115<br>(–8.3%) |
-| [TPGi](https://www.tpgi.com/) | 195 | 151<br>(–22.6%) | 133<br>(–32%) | 159<br>(–18.7%) | ***130<br>(–33.1%)*** | 153<br>(–21.3%) | 179<br>(–8.2%) |
-| [Track AIPAC](https://www.trackaipac.com/) | 358 | 302<br>(–15.5%) | ***195<br>(–45.6%)*** | n/a | 282<br>(–21.3%) | 301<br>(–16%) | 227<br>(–36.7%) |
-| [United Nations](https://www.un.org/en/) | 161 | 136<br>(–15.6%) | 89<br>(–44.6%) | 129<br>(–19.6%) | ***88<br>(–45.1%)*** | 134<br>(–16.9%) | 140<br>(–13.2%) |
-| [Vivaldi](https://vivaldi.com/) | 93 | 81<br>(–12.2%) | 64<br>(–30.6%) | 82<br>(–11.6%) | ***64<br>(–31%)*** | 81<br>(–13%) | 84<br>(–9.3%) |
-| [W3C](https://www.w3.org/) | 47 | 37<br>(–22.3%) | ***34<br>(–28.7%)*** | 37<br>(–22.4%) | 34<br>(–28.4%) | 36<br>(–23.7%) | 39<br>(–18.5%) |
-| [WordPress Blog](https://wordpress.com/blog/) | 221 | 182<br>(–17.6%) | 153<br>(–30.9%) | 191<br>(–13.6%) | ***150<br>(–32%)*** | 189<br>(–14.4%) | 205<br>(–7.2%) |
-| [博客园](https://www.cnblogs.com/) | 79 | 55<br>(–29.9%) | 52<br>(–33.8%) | 56<br>(–28.7%) | ***48<br>(–38.7%)*** | 56<br>(–29.1%) | 57<br>(–28.2%) |
-| [稀土掘金](https://juejin.cn/) | 77 | 66<br>(–14%) | ***59<br>(–23.8%)*** | 73<br>(–5.9%) | 59<br>(–23.5%) | 66<br>(–14.7%) | 75<br>(–3.5%) |
-| **Sites processed (of sites overall)** |  | 63/63 | 63/63 | 46/63 | 62/63 | 63/63 | 63/63 |
-| **Average processing time** |  | 26 ms | 41 ms | 656 ms<br>(estimate) | 113 ms | ***8 ms*** | 149 ms |
-| **Median processing time** |  | 11 ms | 16 ms | 707 ms<br>(estimate) | 63 ms | ***3 ms*** | 30 ms |
-| **Average result (KB)** | 389 | 361<br>(–7.4%) | ***322<br>(–17.2%)*** | 379<br>(–2.7%) | 331<br>(–15.1%) | 359<br>(–7.8%) | 368<br>(–5.6%) |
+| [Mistral AI](https://mistral.ai/) | 333 | 319<br>(–4.3%) | ***198<br>(–40.7%)*** | n/a | 199<br>(–40.2%) | 320<br>(–4.1%) | 331<br>(–0.8%) |
+| [Mondoweiss](https://mondoweiss.net/) | 350 | 330<br>(–5.7%) | 310<br>(–11.6%) | n/a | ***309<br>(–11.8%)*** | 325<br>(–7.3%) | 336<br>(–4%) |
+| [Mozilla](https://www.mozilla.org/) | 47 | 37<br>(–20.9%) | 32<br>(–31.8%) | 36<br>(–22.1%) | ***32<br>(–31.8%)*** | 35<br>(–25.6%) | 36<br>(–22.9%) |
+| [Nikkei](https://www.nikkei.com/) | 708 | 667<br>(–5.8%) | ***623<br>(–12%)*** | n/a | 638<br>(–9.8%) | 660<br>(–6.8%) | 698<br>(–1.4%) |
+| [Omas gegen Rechts](https://www.omas-gegen-rechts.org/) | 123 | 114<br>(–7.4%) | 68<br>(–44.8%) | 116<br>(–5.8%) | ***64<br>(–47.9%)*** | 114<br>(–7.7%) | 120<br>(–2.9%) |
+| [Opera](https://www.opera.com/) | 186 | 132<br>(–28.7%) | ***84<br>(–55%)*** | 136<br>(–26.6%) | 85<br>(–54.3%) | 132<br>(–29.1%) | 136<br>(–26.7%) |
+| [OSCE](https://www.osce.org/) | 177 | 149<br>(–15.9%) | 145<br>(–18%) | 149<br>(–15.9%) | ***145<br>(–18.1%)*** | 147<br>(–16.9%) | 149<br>(–15.7%) |
+| [OZeWAI](https://ozewai.org/) | 146 | 136<br>(–6.9%) | 86<br>(–41.1%) | 139<br>(–4.7%) | ***81<br>(–44.8%)*** | 135<br>(–7.8%) | 143<br>(–2.2%) |
+| [Piccalilli](https://piccalil.li/) | 78 | 75<br>(–4%) | 64<br>(–18.1%) | 76<br>(–3%) | ***61<br>(–21.4%)*** | 74<br>(–4.9%) | 76<br>(–2.4%) |
+| [Qooxdoo](https://qooxdoo.org/) | 37 | 29<br>(–21.8%) | 22<br>(–41.6%) | 32<br>(–13.5%) | ***22<br>(–41.7%)*** | 29<br>(–21.5%) | 30<br>(–19.5%) |
+| [Qwant](https://www.qwant.com/) | 139 | 123<br>(–11.4%) | ***116<br>(–16.3%)*** | 137<br>(–1.4%) | 117<br>(–16.1%) | 122<br>(–11.9%) | 137<br>(–1.3%) |
+| [REJECT AIPAC](https://rejectaipac.org/) | 71 | 65<br>(–8.5%) | 45<br>(–36%) | 66<br>(–6.6%) | ***43<br>(–39.2%)*** | 65<br>(–8.1%) | 69<br>(–2%) |
+| [Research ICT Africa](https://researchictafrica.net/) | 184 | 168<br>(–8.7%) | 143<br>(–22.3%) | 172<br>(–6.6%) | ***140<br>(–23.5%)*** | 167<br>(–9.3%) | 175<br>(–4.9%) |
+| [Scrum Guide](https://scrumguides.org/scrum-guide.html) | 34 | 31<br>(–9%) | 30<br>(–10.9%) | 32<br>(–7.3%) | ***30<br>(–11%)*** | 31<br>(–10%) | 31<br>(–7.8%) |
+| [SELFHTML](https://wiki.selfhtml.org/) | 21 | 18<br>(–14%) | ***17<br>(–19.2%)*** | 18<br>(–14.2%) | 17<br>(–19%) | 17<br>(–17.2%) | 18<br>(–14%) |
+| [SitePoint](https://www.sitepoint.com/) | 225 | 214<br>(–4.8%) | ***202<br>(–9.9%)*** | 215<br>(–4.2%) | 203<br>(–9.9%) | 214<br>(–4.6%) | 223<br>(–0.7%) |
+| [Smashing Magazine](https://www.smashingmagazine.com/) | 287 | 287<br>(–0.3%) | 274<br>(–4.7%) | 287<br>(–0.1%) | ***273<br>(–5%)*** | 285<br>(–0.9%) | 287<br>(0%) |
+| [Startpage](https://www.startpage.com/) | 22 | 19<br>(–13.7%) | 16<br>(–25.6%) | 19<br>(–13%) | ***16<br>(–26.9%)*** | 20<br>(–6%) | 21<br>(–2.1%) |
+| [Startup-Verband](https://startupverband.de/) | 57 | 42<br>(–26.2%) | ***38<br>(–32.2%)*** | 41<br>(–27.2%) | 39<br>(–31.5%) | 41<br>(–28.2%) | 41<br>(–27.1%) |
+| [TAZ](https://taz.de/) | 394 | 335<br>(–14.9%) | ***301<br>(–23.6%)*** | n/a | 326<br>(–17.3%) | 345<br>(–12.3%) | 367<br>(–6.7%) |
+| [TetraLogical](https://tetralogical.com/) | 94 | 88<br>(–6.5%) | ***85<br>(–10.4%)*** | 89<br>(–6.1%) | 85<br>(–10.4%) | 88<br>(–6.3%) | 89<br>(–6%) |
+| [The Left](https://left.eu/) | 124 | 106<br>(–15.2%) | ***90<br>(–27.4%)*** | 111<br>(–10.8%) | 91<br>(–27%) | 106<br>(–14.9%) | 114<br>(–8.2%) |
+| [TPGi](https://www.tpgi.com/) | 195 | 151<br>(–22.6%) | 133<br>(–32%) | 159<br>(–18.7%) | ***131<br>(–32.5%)*** | 153<br>(–21.3%) | 179<br>(–8.2%) |
+| [Track AIPAC](https://www.trackaipac.com/) | 570 | 514<br>(–9.7%) | ***196<br>(–65.6%)*** | n/a | 506<br>(–11.3%) | 513<br>(–10%) | 228<br>(–60%) |
+| [United Nations](https://www.un.org/en/) | 161 | 136<br>(–15.5%) | 90<br>(–44.3%) | 130<br>(–19.5%) | ***89<br>(–44.7%)*** | 134<br>(–16.7%) | 140<br>(–13.2%) |
+| [Vivaldi](https://vivaldi.com/) | 93 | 81<br>(–12.2%) | ***64<br>(–30.6%)*** | 82<br>(–11.6%) | 64<br>(–30.6%) | 81<br>(–13%) | 84<br>(–9.3%) |
+| [W3C](https://www.w3.org/) | 49 | 39<br>(–21.6%) | ***35<br>(–28.1%)*** | 39<br>(–21.7%) | 36<br>(–27.8%) | 38<br>(–22.9%) | 41<br>(–17.9%) |
+| [Wikipedia](https://en.wikipedia.org/wiki/Main_Page) | 253 | 245<br>(–3.3%) | ***222<br>(–12.5%)*** | 241<br>(–4.8%) | 222<br>(–12.4%) | 238<br>(–6.2%) | 242<br>(–4.6%) |
+| [WordPress Blog](https://wordpress.com/blog/) | 221 | 182<br>(–17.6%) | 153<br>(–30.8%) | 191<br>(–13.5%) | ***152<br>(–31.1%)*** | 189<br>(–14.4%) | 205<br>(–7.2%) |
+| [博客园](https://www.cnblogs.com/) | 80 | 56<br>(–29.7%) | 53<br>(–33.7%) | 57<br>(–28.7%) | ***52<br>(–34.4%)*** | 57<br>(–29%) | 57<br>(–28.2%) |
+| [稀土掘金](https://juejin.cn/) | 77 | 66<br>(–14%) | ***59<br>(–23.8%)*** | 73<br>(–5.9%) | 59<br>(–23.3%) | 66<br>(–14.7%) | 75<br>(–3.5%) |
+| **Sites processed (of sites overall)** |  | 72/72 | 72/72 | 51/72 | 72/72 | 72/72 | 72/72 |
+| **Average processing time** |  | 29 ms | 43 ms | 769 ms<br>(estimate) | 153 ms | ***9 ms*** | 151 ms |
+| **Median processing time** |  | 12 ms | 20 ms | 691 ms<br>(estimate) | 76 ms | ***4 ms*** | 34 ms |
+| **Average result (KB)** | 407 | 375<br>(–7.9%) | ***333<br>(–18.4%)*** | 397<br>(–2.6%) | 339<br>(–16.9%) | 374<br>(–8.3%) | 382<br>(–6.1%) |
 
-Benchmarks last updated: Oct 6, 2026 (Node.js 24.21.0, macOS 15.7.9, Apple M4)
+Benchmarks last updated: Oct 14, 2026 (Node.js 24.21.0, macOS 15.7.9, Apple M4)
 <!-- End auto-generated -->
 
 ## Notes
