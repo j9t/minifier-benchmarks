@@ -124,6 +124,7 @@ Two tests are run: One exclusively applying [HTML minification](#1-html-minifica
 | [EDRi](https://edri.org/) | 84 | 74<br>(–11.1%) | ***55<br>(–34.5%)*** | 76<br>(–9.5%) | 55<br>(–34.4%) | 74<br>(–11.1%) | 78<br>(–6.7%) |
 | [EFF](https://www.eff.org/) | 54 | 48<br>(–11%) | ***44<br>(–19.1%)*** | 49<br>(–10.2%) | 44<br>(–18.2%) | 47<br>(–12.3%) | 49<br>(–9.7%) |
 | [ELLE](https://www.elle.com/) | 737 | 721<br>(–2.2%) | ***707<br>(–4.1%)*** | n/a | 711<br>(–3.5%) | 719<br>(–2.5%) | 732<br>(–0.7%) |
+| [eMAG](https://emag.governoeletronico.gov.br/) | 240 | 194<br>(–18.9%) | ***188<br>(–21.8%)*** | 205<br>(–14.5%) | 200<br>(–16.6%) | 189<br>(–21.4%) | 205<br>(–14.5%) |
 | [European Alternatives](https://european-alternatives.eu/) | 50 | 33<br>(–33.1%) | 31<br>(–37.6%) | 33<br>(–32.9%) | ***31<br>(–37.7%)*** | 33<br>(–33.5%) | 33<br>(–33%) |
 | [European Green Party](https://europeangreens.eu/) | 439 | 429<br>(–2.3%) | 107<br>(–75.5%) | n/a | ***106<br>(–75.9%)*** | 426<br>(–2.8%) | 436<br>(–0.5%) |
 | [European Left Alliance](https://leftalliance.eu/) | 298 | 284<br>(–4.5%) | 245<br>(–17.8%) | n/a | ***241<br>(–19.1%)*** | 282<br>(–5.2%) | 289<br>(–3%) |
@@ -135,7 +136,6 @@ Two tests are run: One exclusively applying [HTML minification](#1-html-minifica
 | [Frontend Dogma](https://frontenddogma.com/) | 228 | 238<br>(+4.2%) | ***221<br>(–3.1%)*** | 228<br>(–0.2%) | 221<br>(–3.1%) | 228<br>(0%) | 247<br>(+8%) |
 | [Gaza Maps](https://gazamaps.com/) | 15 | 12<br>(–18.2%) | ***10<br>(–30.4%)*** | 12<br>(–18.2%) | ***10<br>(–30.4%)*** | 12<br>(–19.1%) | 12<br>(–18.4%) |
 | [Genocide Watch](https://www.genocidewatch.com/) | 1837 | 1783<br>(–2.9%) | ***1358<br>(–26.1%)*** | n/a | 1429<br>(–22.2%) | 1784<br>(–2.9%) | 1823<br>(–0.8%) |
-| [GIGW](https://guidelines.india.gov.in/) | 109 | 79<br>(–27.7%) | 58<br>(–46.6%) | 80<br>(–26.3%) | ***58<br>(–47.2%)*** | 80<br>(–27%) | 88<br>(–19.5%) |
 | [Ground News](https://ground.news/) | 3429 | 3203<br>(–6.6%) | ***3117<br>(–9.1%)*** | n/a | 3132<br>(–8.6%) | 3191<br>(–6.9%) | 3415<br>(–0.4%) |
 | [Hong Kong Free Press](https://hongkongfp.com/) | 392 | 364<br>(–7.1%) | 310<br>(–21%) | n/a | ***309<br>(–21.1%)*** | 363<br>(–7.4%) | 371<br>(–5.3%) |
 | [HTML 3.2](https://www.w3.org/TR/2018/SPSD-html32-20180315/) | 123 | 119<br>(–3.1%) | ***119<br>(–3.4%)*** | 121<br>(–1.3%) | 120<br>(–2.5%) | 119<br>(–2.8%) | 123<br>(+0.5%) |
@@ -166,6 +166,7 @@ Two tests are run: One exclusively applying [HTML minification](#1-html-minifica
 | [Research ICT Africa](https://researchictafrica.net/) | 184 | 168<br>(–8.7%) | 143<br>(–22.3%) | 172<br>(–6.6%) | ***140<br>(–23.5%)*** | 167<br>(–9.3%) | 175<br>(–4.9%) |
 | [Scrum Guide](https://scrumguides.org/scrum-guide.html) | 34 | 31<br>(–9%) | 30<br>(–10.9%) | 32<br>(–7.3%) | ***30<br>(–11%)*** | 31<br>(–10%) | 31<br>(–7.8%) |
 | [SELFHTML](https://wiki.selfhtml.org/) | 21 | 18<br>(–14%) | ***17<br>(–19.2%)*** | 18<br>(–14.2%) | 17<br>(–19%) | 17<br>(–17.2%) | 18<br>(–14%) |
+| [SFLC.in](https://sflc.in/) | 171 | 164<br>(–3.7%) | 135<br>(–20.9%) | 168<br>(–1.7%) | ***133<br>(–21.9%)*** | 164<br>(–4.1%) | 168<br>(–1.3%) |
 | [SitePoint](https://www.sitepoint.com/) | 225 | 214<br>(–4.8%) | ***202<br>(–9.9%)*** | 215<br>(–4.2%) | 203<br>(–9.9%) | 214<br>(–4.6%) | 223<br>(–0.7%) |
 | [Smashing Magazine](https://www.smashingmagazine.com/) | 287 | 287<br>(–0.3%) | 274<br>(–4.7%) | 287<br>(–0.1%) | ***273<br>(–5%)*** | 285<br>(–0.9%) | 287<br>(0%) |
 | [Startpage](https://www.startpage.com/) | 22 | 19<br>(–13.7%) | 16<br>(–25.6%) | 19<br>(–13%) | ***16<br>(–26.9%)*** | 20<br>(–6%) | 21<br>(–2.1%) |
@@ -182,10 +183,10 @@ Two tests are run: One exclusively applying [HTML minification](#1-html-minifica
 | [WordPress Blog](https://wordpress.com/blog/) | 221 | 182<br>(–17.6%) | 153<br>(–30.8%) | 191<br>(–13.5%) | ***152<br>(–31.1%)*** | 189<br>(–14.4%) | 205<br>(–7.2%) |
 | [博客园](https://www.cnblogs.com/) | 80 | 56<br>(–29.7%) | 53<br>(–33.7%) | 57<br>(–28.7%) | ***52<br>(–34.4%)*** | 57<br>(–29%) | 57<br>(–28.2%) |
 | [稀土掘金](https://juejin.cn/) | 77 | 66<br>(–14%) | ***59<br>(–23.8%)*** | 73<br>(–5.9%) | 59<br>(–23.3%) | 66<br>(–14.7%) | 75<br>(–3.5%) |
-| **Sites processed (of sites overall)** |  | 72/72 | 72/72 | 51/72 | 72/72 | 72/72 | 72/72 |
-| **Average processing time** |  | 29 ms | 43 ms | 769 ms<br>(estimate) | 153 ms | ***9 ms*** | 151 ms |
-| **Median processing time** |  | 12 ms | 20 ms | 691 ms<br>(estimate) | 76 ms | ***4 ms*** | 34 ms |
-| **Average result (KB)** | 407 | 375<br>(–7.9%) | ***333<br>(–18.4%)*** | 397<br>(–2.6%) | 339<br>(–16.9%) | 374<br>(–8.3%) | 382<br>(–6.1%) |
+| **Sites processed (of sites overall)** |  | 73/73 | 73/73 | 52/73 | 73/73 | 73/73 | 73/73 |
+| **Average processing time** |  | 28 ms | 43 ms | 757 ms<br>(estimate) | 151 ms | ***9 ms*** | 145 ms |
+| **Median processing time** |  | 12 ms | 18 ms | 691 ms<br>(estimate) | 79 ms | ***4 ms*** | 34 ms |
+| **Average result (KB)** | 406 | 374<br>(–7.8%) | ***332<br>(–18.3%)*** | 395<br>(–2.6%) | 338<br>(–16.8%) | 372<br>(–8.3%) | 381<br>(–6.1%) |
 
 Benchmarks last updated: Oct 14, 2026 (Node.js 24.21.0, macOS 15.7.9, Apple M4)
 <!-- End auto-generated -->
