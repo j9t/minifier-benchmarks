@@ -428,7 +428,8 @@ function resetSizes(info) {
 }
 
 function failMinifier(name, fileName, message) {
-  benchmarkErrors.push(`${minifierLabels[name]} failed for ${fileName}: ${message}`);
+  // First line only (as some minifiers append code excerpts)
+  benchmarkErrors.push(`${minifierLabels[name]} failed for ${fileName}: ${message.split('\n')[0]}`);
   resetSizes(sites[fileName].infos[name]);
 }
 
