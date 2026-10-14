@@ -54,13 +54,14 @@ function log(message) {
 }
 
 // Ordered list of minifier keys (also the order of table columns)
-const minifierNames = ['swchtml', 'minifier', 'compressor', 'htmlnano', 'minifyhtml', 'minimize'];
+const minifierNames = ['swchtml', 'minifier', 'compressor', 'htmlnano', 'minify', 'minifyhtml', 'minimize'];
 
 const minifierLabels = {
   swchtml: '@swc/html',
   minifier: 'HTML Minifier Next',
   compressor: 'htmlcompressor.com',
   htmlnano: 'htmlnano',
+  minify: 'minify',
   minifyhtml: 'minify-html',
   minimize: 'Minimize'
 };
@@ -68,14 +69,18 @@ const minifierLabels = {
 // Remote minifiers’ times are estimates (see `testHTMLCompressor`), so they don’t compete for the fastest time
 const remoteMinifierNames = new Set(['compressor']);
 
+// Minifiers that can’t limit minification to HTML only run in max mode (their HTML mode results show as “n/a”)
+const maxOnlyMinifierNames = new Set(['minify']);
+const excludedMinifierNames = IS_HTML_ONLY ? maxOnlyMinifierNames : new Set();
+
 // Local minifiers run in their own processes (see `worker.js`)
-const localMinifierNames = minifierNames.filter(name => !remoteMinifierNames.has(name));
+const localMinifierNames = minifierNames.filter(name => !remoteMinifierNames.has(name) && !excludedMinifierNames.has(name));
 
 // Per site: site URL as well as paths, sizes, and times of the input and outputs
 const sites = {};
 
-// One step per site for preparation, warm-up, each minifier, and completion
-const stepsPerSite = minifierNames.length + 3;
+// One step per site for preparation, warm-up, each minifier that runs in this mode, and completion
+const stepsPerSite = minifierNames.length - excludedMinifierNames.size + 3;
 const progress = new Progress(`:current/:total (${fileNames.length}×${stepsPerSite}) [:bar] :percent :etas :fileName`, {
   width: 40,
   total: fileNames.length * stepsPerSite,
@@ -108,7 +113,7 @@ const table = new Table({
   head: ['File', 'Before', ...minifierNames.map(name => minifierLabels[name]), 'Savings', 'Time'],
   colWidths: [fileNames.reduce(function (length, fileName) {
     return Math.max(length, fileName.length);
-  }, 0) + 2, 25, 25, 25, 25, 25, 25, 25, 25, 20]
+  }, 0) + 2, 25, 25, 25, 25, 25, 25, 25, 25, 25, 20]
 });
 
 // In the report array, columns 0 and 1 are site name and original size;
@@ -199,6 +204,7 @@ const successCounts = {
   minifier: 0,
   compressor: 0,
   htmlnano: 0,
+  minify: 0,
   minifyhtml: 0,
   minimize: 0
 };
@@ -211,6 +217,7 @@ function generateMarkdownTable() {
     '[HTML Minifier Next](https://github.com/j9t/html-minifier-next)',
     '[html­com­pressor.­com](https://htmlcompressor.com/)',
     '[htmlnano](https://github.com/maltsev/htmlnano)',
+    '[minify](https://github.com/tdewolff/minify)',
     '[minify-html](https://github.com/wilsonzlin/minify-html)',
     '[minimize](https://github.com/Swaagie/minimize)'
   ];
@@ -281,13 +288,12 @@ function generateMarkdownTable() {
   // Add sites succeeded row
   const sitesRow = ['**Sites processed (of sites overall)**', ''];
   minifierNames.forEach(function (name) {
-    const successCount = successCounts[name];
-    sitesRow.push(successCount + '/' + processedSites);
+    sitesRow.push(excludedMinifierNames.has(name) ? 'n/a' : successCounts[name] + '/' + processedSites);
   });
   output(sitesRow);
 
   // Add average and median processing time rows (fastest in bold and italics)
-  const timeStats = getTimeStats({ rows, fileNames, minifierNames, remoteMinifierNames });
+  const timeStats = getTimeStats({ rows, fileNames, minifierNames, remoteMinifierNames, excludedMinifierNames });
   [['mean', 'isFastestMean', '**Average processing time**'], ['median', 'isFastestMedian', '**Median processing time**']].forEach(function ([key, fastestKey, label]) {
     const timeRow = [label, ''];
     minifierNames.forEach(function (name) {
@@ -318,7 +324,7 @@ function generateMarkdownTable() {
   });
   const avgOrigKB = origCount > 0 ? Math.round(totalOrigBytes / origCount / 1024) : '';
   const savingsRow = ['**Average result (KB)**', String(avgOrigKB)];
-  const { avgSizes, bestTotalBytes } = getSizeStats({ rows, fileNames, minifierNames });
+  const { avgSizes, bestTotalBytes } = getSizeStats({ rows, fileNames, minifierNames, excludedMinifierNames });
 
   minifierNames.forEach(function (name) {
     if (avgSizes[name]) {
@@ -349,7 +355,7 @@ function displayTable() {
   });
 
   // Add average and median processing time rows
-  const timeStats = getTimeStats({ rows, fileNames, minifierNames, remoteMinifierNames });
+  const timeStats = getTimeStats({ rows, fileNames, minifierNames, remoteMinifierNames, excludedMinifierNames });
 
   // Count only sites that were actually processed (not skipped due to download failure)
   const processedSites = fileNames.filter(name => rows[name]).length;

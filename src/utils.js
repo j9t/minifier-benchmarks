@@ -59,17 +59,19 @@ function getStandardError(values, mean) {
 // Mean and median of per-site times; local minifiers are compared on the sites
 // all of them processed, so that a failure on a large site doesn’t lower a
 // minifier’s times; times within `tieRatio` of the fastest count as fastest,
-// too, as smaller differences are within noise
-export function getTimeStats({ rows, fileNames, minifierNames, remoteMinifierNames, tieRatio = 0.05 }) {
+// too, as smaller differences are within noise; minifiers that didn’t run in
+// this mode (`excludedMinifierNames`) are left out
+export function getTimeStats({ rows, fileNames, minifierNames, remoteMinifierNames, excludedMinifierNames = new Set(), tieRatio = 0.05 }) {
+  const minifierNamesIncluded = minifierNames.filter(name => !excludedMinifierNames.has(name));
   const sitesProcessed = fileNames.filter(name => rows[name]);
-  const sitesCommon = sitesProcessed.filter(name => minifierNames.every(minifierName =>
+  const sitesCommon = sitesProcessed.filter(name => minifierNamesIncluded.every(minifierName =>
     remoteMinifierNames.has(minifierName) || rows[name].times[minifierName] != null
   ));
   const stats = {};
   let fastestMean = null;
   let fastestMedian = null;
 
-  minifierNames.forEach(function (name) {
+  minifierNamesIncluded.forEach(function (name) {
     const sites = remoteMinifierNames.has(name) ? sitesProcessed : sitesCommon;
     const times = sites.map(site => rows[site].times[name]).filter(time => time != null);
     if (times.length === 0) return;
@@ -86,7 +88,7 @@ export function getTimeStats({ rows, fileNames, minifierNames, remoteMinifierNam
     }
   });
 
-  minifierNames.forEach(function (name) {
+  minifierNamesIncluded.forEach(function (name) {
     if (!stats[name]) return;
     const isLocal = !remoteMinifierNames.has(name);
     stats[name].isFastestMean = isLocal && stats[name].mean <= fastestMean * (1 + tieRatio);
@@ -97,12 +99,14 @@ export function getTimeStats({ rows, fileNames, minifierNames, remoteMinifierNam
 }
 
 // Per-minifier average output sizes; failed sites count as unminified (original size),
-// so that failures don’t advantage a minifier
-export function getSizeStats({ rows, fileNames, minifierNames }) {
+// so that failures don’t advantage a minifier; minifiers that didn’t run in this mode
+// (`excludedMinifierNames`) are left out
+export function getSizeStats({ rows, fileNames, minifierNames, excludedMinifierNames = new Set() }) {
   const avgSizes = {};
   let bestTotalBytes = null;
 
   minifierNames.forEach(function (name, idx) {
+    if (excludedMinifierNames.has(name)) return;
     let totalMinifierBytes = 0;
     let totalOriginalBytes = 0;
     let count = 0;

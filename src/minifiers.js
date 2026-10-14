@@ -4,6 +4,7 @@
 import { minify as minifyHMN } from 'html-minifier-next';
 import htmlnano from 'htmlnano';
 import { minify as minifySWC } from '@swc/html';
+import { minify as minifyTdewolff } from '@tdewolff/minify';
 import minifyHTMLPkg from '@minify-html/node';
 import Minimize from 'minimize';
 
@@ -79,6 +80,26 @@ export function createMinifiers({ isHtmlOnly, minifierConfig }) {
           };
         const result = await htmlnano.process(data, options, preset);
         return result.html;
+      }
+    },
+
+    // minify, https://github.com/tdewolff/minify; always minifies CSS and JavaScript, so
+    // `benchmark.js` only runs it in max mode
+    minify: {
+      minify(data) {
+        return minifyTdewolff({
+          data,
+          type: 'text/html',
+          // Keep nothing optional, for most aggressive settings
+          htmlKeepComments: false,
+          htmlKeepConditionalComments: false,
+          htmlKeepDefaultAttrvals: false,
+          htmlKeepDocumentTags: false,
+          htmlKeepEndTags: false,
+          htmlKeepQuotes: false,
+          htmlKeepSpecialComments: false,
+          htmlKeepWhitespace: false
+        });
       }
     },
 
