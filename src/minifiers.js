@@ -9,6 +9,10 @@ import Minimize from 'minimize';
 
 const { minify: minifyHTML } = minifyHTMLPkg;
 
+// Set by minify’s `init`, as its package loads a native library on import, which only exists
+// for some platforms (and would otherwise keep all minifiers from loading)
+let minifyTdewolff;
+
 export function createMinifiers({ isHtmlOnly, minifierConfig }) {
   const minimize = new Minimize();
 
@@ -79,6 +83,29 @@ export function createMinifiers({ isHtmlOnly, minifierConfig }) {
           };
         const result = await htmlnano.process(data, options, preset);
         return result.html;
+      }
+    },
+
+    // minify, https://github.com/tdewolff/minify; always minifies CSS and JavaScript, so
+    // `benchmark.js` only runs it in max mode
+    minify: {
+      async init() {
+        ({ minify: minifyTdewolff } = await import('@tdewolff/minify'));
+      },
+      minify(data) {
+        return minifyTdewolff({
+          data,
+          type: 'text/html',
+          // Keep nothing optional, for most aggressive settings
+          htmlKeepComments: false,
+          htmlKeepConditionalComments: false,
+          htmlKeepDefaultAttrvals: false,
+          htmlKeepDocumentTags: false,
+          htmlKeepEndTags: false,
+          htmlKeepQuotes: false,
+          htmlKeepSpecialComments: false,
+          htmlKeepWhitespace: false
+        });
       }
     },
 

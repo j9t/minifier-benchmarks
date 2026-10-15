@@ -193,6 +193,17 @@ describe('getTimeStats', () => {
     assert.equal(stats.local1.mean, 10);
     assert.equal(stats.remote, undefined);
   });
+
+  it('Omits excluded minifiers and doesn’t let their missing times reduce the common sites', () => {
+    const rows = {
+      a: { times: { local1: 10, remote: 100, local2: null } },
+      b: { times: { local1: 30, remote: 300, local2: null } }
+    };
+    const stats = getTimeStats({ rows, fileNames: ['a', 'b'], minifierNames, remoteMinifierNames, excludedMinifierNames: new Set(['local2']) });
+    assert.equal(stats.local1.mean, 20);
+    assert.equal(stats.local1.isFastestMean, true);
+    assert.equal(stats.local2, undefined);
+  });
 });
 
 describe('getSizeStats', () => {
@@ -218,6 +229,14 @@ describe('getSizeStats', () => {
     const rows = { a: null, b: { originalSize: 2048, rawSizes: [1024, 1024, 1024] } };
     const { avgSizes } = getSizeStats({ rows, fileNames: ['a', 'b'], minifierNames });
     assert.equal(avgSizes.local1.totalOriginalBytes, 2048);
+  });
+
+  it('Omits excluded minifiers instead of counting them as unminified', () => {
+    const rows = { a: { originalSize: 4096, rawSizes: [3072, 0, 2048] } };
+    const { avgSizes, bestTotalBytes } = getSizeStats({ rows, fileNames: ['a'], minifierNames, excludedMinifierNames: new Set(['remote']) });
+    assert.equal(avgSizes.remote, undefined);
+    assert.equal(avgSizes.local2.totalMinifierBytes, 2048);
+    assert.equal(bestTotalBytes, 2048);
   });
 });
 

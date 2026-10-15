@@ -16,10 +16,11 @@ let data;
 let result;
 
 const handlers = {
-  init(message) {
+  async init(message) {
     ({ name, dirInput, dirOutput } = message);
     minifier = createMinifiers(message)[name];
     if (!minifier) throw new Error(`Unknown minifier: ${name}`);
+    await minifier.init?.();
   },
 
   // Read a site’s input once, so that reading doesn’t affect timed runs

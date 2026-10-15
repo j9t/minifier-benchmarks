@@ -9,14 +9,21 @@ import { fileURLToPath } from 'url';
 const dirRoot = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 const minifierConfig = JSON.parse(await fs.readFile(path.join(dirRoot, 'html-minifier-next.config.json'), 'utf8'));
 
-// Starts the worker like `benchmark.js` does; requests resolve to the worker’s responses
-function startWorker() {
-  const child = fork(path.join(dirRoot, 'src', 'worker.js'), { stdio: ['ignore', 'ignore', 'ignore', 'ipc'] });
+// Starts the worker like `benchmark.js` does (plus `execArgv`);
+// requests resolve to the worker’s responses
+function startWorker(execArgv = []) {
+  const child = fork(path.join(dirRoot, 'src', 'worker.js'), { execArgv: [...process.execArgv, ...execArgv], stdio: ['ignore', 'ignore', 'ignore', 'ipc'] });
   const pending = new Map();
   let nextId = 0;
   child.on('message', ({ id, ...response }) => {
     pending.get(id)(response);
     pending.delete(id);
+  });
+  // Fails pending requests if the worker exits (e.g., on a failed import),
+  // rather than leaving them hanging
+  child.on('exit', code => {
+    for (const resolve of pending.values()) resolve({ error: `Worker exited with code ${code}` });
+    pending.clear();
   });
   return {
     request(type, message = {}) {
@@ -41,6 +48,14 @@ describe('worker', () => {
   before(async () => {
     dirTemp = await fs.mkdtemp(path.join(os.tmpdir(), 'minifier-benchmarks-'));
     await fs.writeFile(path.join(dirTemp, 'a.html'), '<!DOCTYPE html><title>A</title><p>  A  </p>');
+    // Simulates a platform without a prebuilt library for minify
+    await fs.writeFile(path.join(dirTemp, 'no-minify.mjs'), `import { registerHooks } from 'module';
+registerHooks({
+  resolve(specifier, context, nextResolve) {
+    if (specifier === '@tdewolff/minify') throw new Error('Native library not found');
+    return nextResolve(specifier, context);
+  }
+});`);
   });
 
   after(async () => {
@@ -76,6 +91,23 @@ describe('worker', () => {
       assert.equal(typeof (await worker.request('run')).time, 'number');
     } finally {
       await worker.close();
+    }
+  });
+
+  it('Starts minify, which loads its package on init', async () => {
+    const worker = await startMinifier('minify');
+    await worker.close();
+  });
+
+  it('Reports a minifier whose package fails to load as failing to start, without affecting other minifiers', async () => {
+    const execArgv = ['--import', path.join(dirTemp, 'no-minify.mjs')];
+    const workerMinify = startWorker(execArgv);
+    const workerHMN = startWorker(execArgv);
+    try {
+      assert.match((await workerMinify.request('init', { name: 'minify', isHtmlOnly: false, minifierConfig })).error, /Native library not found/);
+      assert.deepEqual(await workerHMN.request('init', { name: 'minifier', isHtmlOnly: false, minifierConfig }), {});
+    } finally {
+      await Promise.all([workerMinify.close(), workerHMN.close()]);
     }
   });
 
