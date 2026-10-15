@@ -253,7 +253,7 @@ function renderFootnote() {
     notes.push(`Average original size: ${formatNumber(modeData.averageOriginalKb)} KB. Size reduction compares total output with total original size; failed sites count as unminified. Times of local minifiers are based on the sites all of them processed; times within 5% of the fastest count as fastest, too.`);
     const minifiersRemote = modeData.minifiers.filter(minifier => minifier.isRemote && !minifier.isExcluded);
     const namesEstimated = minifiersRemote.filter(minifier => minifier.isTimeReliable).map(minifier => minifier.name);
-    const namesNoisy = minifiersRemote.filter(minifier => !minifier.isTimeReliable).map(minifier => minifier.name);
+    const namesNoisy = minifiersRemote.filter(minifier => minifier.isTimeReliable === false).map(minifier => minifier.name);
     if (namesEstimated.length) {
       notes.push(`* ${listNames(namesEstimated)}: Estimated times (remote service).`);
     }

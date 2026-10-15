@@ -320,6 +320,13 @@ describe('getResultsData', () => {
     assert.equal(local1.averageMs, 1.2);
   });
 
+  it('Returns null reliability for minifiers without times', () => {
+    const rowsUntimed = { a: { ...rows.a, times: { local1: 10, remote: null, local2: 12 } } };
+    const remote = getData({ rows: rowsUntimed, fileNames: ['a'] }).minifiers.find(minifier => minifier.id === 'remote');
+    assert.equal(remote.isTimeReliable, null);
+    assert.equal(remote.averageMs, null);
+  });
+
   it('Marks excluded minifiers and leaves their results empty', () => {
     const data = getData({ excludedMinifierNames: new Set(['local2']) });
     const local2 = data.minifiers.find(minifier => minifier.id === 'local2');

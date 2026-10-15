@@ -184,7 +184,7 @@ export function getResultsData({ rows, fileNames, urls, minifierNames, minifierI
       isSmallest: Boolean(sizes) && sizes.totalMinifierBytes === bestTotalBytes,
       averageMs: hasTimes ? roundTime(times.mean) : null,
       medianMs: hasTimes ? roundTime(times.median) : null,
-      isTimeReliable: isExcluded ? null : Boolean(times?.isReliable),
+      isTimeReliable: isExcluded || !times ? null : times.isReliable,
       isFastestAverage: Boolean(times?.isFastestMean),
       isFastestMedian: Boolean(times?.isFastestMedian)
     };
