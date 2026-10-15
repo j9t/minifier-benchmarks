@@ -4,13 +4,17 @@ export function toKb(size, precision) {
   return (size / 1024).toFixed(precision || 0);
 }
 
+// Change from `originalSize` to `rawSize` in percent, rounded to one decimal
+export function getDelta(rawSize, originalSize) {
+  if (!rawSize || rawSize <= 0 || !originalSize || originalSize <= 0) return null;
+  const delta = Number((((rawSize - originalSize) / originalSize) * 100).toFixed(1));
+  return delta === 0 ? 0 : delta;
+}
+
 export function formatDelta(rawSize, originalSize) {
-  if (!rawSize || rawSize <= 0 || !originalSize || originalSize <= 0) return '';
-  const delta = ((rawSize - originalSize) / originalSize) * 100;
-  let formatted = delta.toFixed(1).replace(/\.0$/, '');
-  if (formatted === '-0') formatted = '0';
-  if (delta > 0 && !formatted.startsWith('+')) formatted = '+' + formatted;
-  formatted = formatted.replace('-', '–');
+  const delta = getDelta(rawSize, originalSize);
+  if (delta === null) return '';
+  const formatted = (delta > 0 ? '+' : '') + String(delta).replace('-', '–');
   return '<br>(' + formatted + '%)';
 }
 
@@ -132,4 +136,67 @@ export function getSizeStats({ rows, fileNames, minifierNames, excludedMinifierN
   });
 
   return { avgSizes, bestTotalBytes };
+}
+
+function roundTime(time) {
+  return Math.round(time * 10) / 10;
+}
+
+function formatDate(date) {
+  return [date.getFullYear(), date.getMonth() + 1, date.getDate()].map(part => String(part).padStart(2, '0')).join('-');
+}
+
+// Results for the website (`site/data/`), with the same values as the README tables
+export function getResultsData({ rows, fileNames, urls, minifierNames, minifierInfo, remoteMinifierNames, excludedMinifierNames = new Set(), mode, date, environment }) {
+  const fileNamesProcessed = fileNames.filter(fileName => rows[fileName]);
+  const timeStats = getTimeStats({ rows, fileNames, minifierNames, remoteMinifierNames, excludedMinifierNames });
+  const { avgSizes, bestTotalBytes } = getSizeStats({ rows, fileNames, minifierNames, excludedMinifierNames });
+  const totalOriginalBytes = fileNamesProcessed.reduce((total, fileName) => total + rows[fileName].originalSize, 0);
+
+  const sites = fileNamesProcessed.map(function (fileName) {
+    const { originalSize, rawSizes } = rows[fileName];
+    const sizesIncluded = rawSizes.filter((size, idx) => size > 0 && !excludedMinifierNames.has(minifierNames[idx]));
+    const bestSize = Math.min(...sizesIncluded);
+    const results = {};
+    minifierNames.forEach(function (name, idx) {
+      const size = rawSizes[idx];
+      results[name] = size > 0 && !excludedMinifierNames.has(name)
+        ? { kb: Number(toKb(size)), delta: getDelta(size, originalSize), isBest: size === bestSize }
+        : null;
+    });
+    return { name: fileName, url: urls[fileName], kb: Number(toKb(originalSize)), results };
+  });
+
+  const minifiers = minifierNames.map(function (name, idx) {
+    const isExcluded = excludedMinifierNames.has(name);
+    const sizes = avgSizes[name];
+    const times = timeStats[name];
+    const hasTimes = Boolean(times?.isReliable);
+    return {
+      id: name,
+      name: minifierInfo[name].name,
+      url: minifierInfo[name].url,
+      isRemote: remoteMinifierNames.has(name),
+      isExcluded,
+      processed: isExcluded ? null : fileNamesProcessed.filter(fileName => rows[fileName].rawSizes[idx] > 0).length,
+      kb: sizes ? sizes.avgKB : null,
+      delta: sizes ? getDelta(sizes.totalMinifierBytes, sizes.totalOriginalBytes) : null,
+      isSmallest: Boolean(sizes) && sizes.totalMinifierBytes === bestTotalBytes,
+      averageMs: hasTimes ? roundTime(times.mean) : null,
+      medianMs: hasTimes ? roundTime(times.median) : null,
+      isTimeReliable: isExcluded || !times ? null : times.isReliable,
+      isFastestAverage: Boolean(times?.isFastestMean),
+      isFastestMedian: Boolean(times?.isFastestMedian)
+    };
+  });
+
+  return {
+    mode,
+    date: formatDate(date),
+    environment,
+    siteCount: fileNamesProcessed.length,
+    averageOriginalKb: fileNamesProcessed.length > 0 ? Math.round(totalOriginalBytes / fileNamesProcessed.length / 1024) : null,
+    minifiers,
+    sites
+  };
 }
