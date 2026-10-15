@@ -463,5 +463,5 @@ try {
   if (isViewLinked) document.getElementById('benchmarks').scrollIntoView({ behavior: 'instant' });
 } catch (err) {
   console.error(err);
-  elements.results.innerHTML = `<p class="table-message">The results couldn’t be loaded. Please see the <a href="${urlRepo}#${modes.html.anchor}">results on GitHub</a>.</p>`;
+  elements.results.innerHTML = `<p class="table-message">The results couldn’t be loaded. Please see the <a href="${urlRepo}#${modes[state.mode].anchor}">results on GitHub</a>.</p>`;
 }
