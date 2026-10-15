@@ -867,6 +867,11 @@ th.numeric {
 		width: 9em;
 	}
 
+	.badge {
+		display: table;
+		margin: 6px 0 0;
+	}
+
 	.data-tabs {
 		gap: 24px;
 	}
