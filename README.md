@@ -5,7 +5,7 @@ Benchmarks Project** website](https://j9t.github.io/minifier-benchmarks/) for in
 
 <!-- What’s this, GitHub -->
 <div align="center">
-	<a href="https://j9t.github.io/minifier-benchmarks/"><img src="https://j9t.github.io/minifier-benchmarks/logo.png" alt="The Minifier Benchmarks Project.”" width="150" height="150"></a>
+	<a href="https://j9t.github.io/minifier-benchmarks/"><img src="https://j9t.github.io/minifier-benchmarks/logo.svg" alt="The Minifier Benchmarks Project.”" width="150" height="150"></a>
 </div>
 
 Two tests are run: One exclusively applying [HTML minification](#1-html-minification-compared) (with the most aggressive settings that do not impact conformance), the other [enabling all minification features](#2-maximum-minification-compared) the respective minifier offers that keep output conformant (this is play—it’s not a fair comparison and may exceed project needs).
