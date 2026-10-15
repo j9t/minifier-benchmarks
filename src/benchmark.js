@@ -13,7 +13,7 @@ import zlib from 'zlib';
 import lzma from 'lzma';
 import Progress from 'progress';
 import Table from 'cli-table3';
-import { formatDelta, formatTime, getRunOrder, getSizeStats, getTimeStats, isUnsteady, median, toKb, waitForLoad } from './utils.js';
+import { formatDelta, formatTime, getResultsData, getRunOrder, getSizeStats, getTimeStats, isUnsteady, median, toKb, waitForLoad } from './utils.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -63,8 +63,20 @@ const minifierLabels = {
   htmlnano: 'htmlnano',
   minify: 'minify',
   minifyhtml: 'minify-html',
-  minimize: 'Minimize'
+  minimize: 'minimize'
 };
+
+const minifierUrls = {
+  swchtml: 'https://github.com/swc-project/swc',
+  minifier: 'https://github.com/j9t/html-minifier-next',
+  compressor: 'https://htmlcompressor.com/',
+  htmlnano: 'https://github.com/maltsev/htmlnano',
+  minify: 'https://github.com/tdewolff/minify',
+  minifyhtml: 'https://github.com/wilsonzlin/minify-html',
+  minimize: 'https://github.com/Swaagie/minimize'
+};
+
+const minifierInfo = Object.fromEntries(minifierNames.map(name => [name, { name: minifierLabels[name], url: minifierUrls[name] }]));
 
 // Remote minifiers’ times are estimates (see `testHTMLCompressor`), so they don’t compete for the fastest time
 const remoteMinifierNames = new Set(['compressor']);
@@ -215,13 +227,8 @@ function generateMarkdownTable() {
   const headers = [
     'Site',
     'Original Size (KB)',
-    '[@swc/html](https://github.com/swc-project/swc)',
-    '[HTML Minifier Next](https://github.com/j9t/html-minifier-next)',
-    '[html­com­pressor.­com](https://htmlcompressor.com/)',
-    '[htmlnano](https://github.com/maltsev/htmlnano)',
-    '[minify](https://github.com/tdewolff/minify)',
-    '[minify-html](https://github.com/wilsonzlin/minify-html)',
-    '[minimize](https://github.com/Swaagie/minimize)'
+    // Soft hyphens keep the htmlcompressor.com column narrow
+    ...minifierNames.map(name => '[' + (name === 'compressor' ? 'html\u00ADcom\u00ADpressor.\u00ADcom' : minifierLabels[name]) + '](' + minifierUrls[name] + ')')
   ];
 
   fileNames.forEach(function (fileName) {
@@ -1101,3 +1108,8 @@ const newData = data.slice(0, start) + trimmedContent + separator + data.slice(e
 await writeText(readme, newData);
 
 console.log(`\nUpdated ${modeLabel} README.md section`);
+
+const resultsData = getResultsData({ rows, fileNames, urls, minifierNames, minifierInfo, remoteMinifierNames, excludedMinifierNames, mode: MODE, date: now, environment });
+await writeText(path.join(dirRoot, 'site', 'data', MODE + '.json'), JSON.stringify(resultsData, null, 2));
+
+console.log(`Updated site/data/${MODE}.json`);

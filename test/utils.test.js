@@ -1,6 +1,6 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { formatDelta, formatTime, getRunOrder, getSizeStats, getTimeStats, isUnsteady, median, toKb, waitForLoad } from '../src/utils.js';
+import { formatDelta, formatTime, getDelta, getResultsData, getRunOrder, getSizeStats, getTimeStats, isUnsteady, median, toKb, waitForLoad } from '../src/utils.js';
 
 const minifierNames = ['local1', 'remote', 'local2'];
 const remoteMinifierNames = new Set(['remote']);
@@ -237,6 +237,97 @@ describe('getSizeStats', () => {
     assert.equal(avgSizes.remote, undefined);
     assert.equal(avgSizes.local2.totalMinifierBytes, 2048);
     assert.equal(bestTotalBytes, 2048);
+  });
+});
+
+describe('getDelta', () => {
+  it('Returns the change in percent, rounded to one decimal', () => {
+    assert.equal(getDelta(900, 1000), -10);
+    assert.equal(getDelta(1015, 1000), 1.5);
+    assert.equal(getDelta(8764, 10000), -12.4);
+  });
+
+  it('Returns zero (not negative zero) for rounded-away changes', () => {
+    assert.ok(Object.is(getDelta(9999, 10000), 0));
+  });
+
+  it('Returns null for missing sizes', () => {
+    assert.equal(getDelta(0, 1000), null);
+    assert.equal(getDelta(1000, 0), null);
+  });
+});
+
+describe('getResultsData', () => {
+  const minifierInfo = {
+    local1: { name: 'Local 1', url: 'https://example.org/local1' },
+    remote: { name: 'Remote', url: 'https://example.org/remote' },
+    local2: { name: 'Local 2', url: 'https://example.org/local2' }
+  };
+  const urls = { a: 'https://example.org/a', b: 'https://example.org/b', c: 'https://example.org/c' };
+  const rows = {
+    a: { originalSize: 10240, rawSizes: [8192, 9216, 8192], times: { local1: 10, remote: 100, local2: 20 } },
+    b: { originalSize: 20480, rawSizes: [10240, 0, 15360], times: { local1: 30, remote: null, local2: 40 } },
+    c: null
+  };
+
+  function getData(options = {}) {
+    return getResultsData({ rows, fileNames: ['a', 'b', 'c'], urls, minifierNames, minifierInfo, remoteMinifierNames, mode: 'html', date: new Date(2026, 9, 14), environment: 'Node.js 24.0.0', ...options });
+  }
+
+  it('Returns mode, date, environment, and the number of processed sites', () => {
+    const data = getData();
+    assert.equal(data.mode, 'html');
+    assert.equal(data.date, '2026-10-14');
+    assert.equal(data.environment, 'Node.js 24.0.0');
+    assert.equal(data.siteCount, 2);
+  });
+
+  it('Returns the average original size in kilobytes', () => {
+    assert.equal(getData().averageOriginalKb, 15);
+  });
+
+  it('Leaves out skipped sites', () => {
+    assert.deepEqual(getData().sites.map(site => site.name), ['a', 'b']);
+  });
+
+  it('Returns per-site sizes, deltas, and the best results', () => {
+    const [siteA, siteB] = getData().sites;
+    assert.equal(siteA.url, 'https://example.org/a');
+    assert.equal(siteA.kb, 10);
+    assert.deepEqual(siteA.results.local1, { kb: 8, delta: -20, isBest: true });
+    assert.deepEqual(siteA.results.local2, { kb: 8, delta: -20, isBest: true });
+    assert.deepEqual(siteA.results.remote, { kb: 9, delta: -10, isBest: false });
+    assert.equal(siteB.results.remote, null);
+  });
+
+  it('Returns per-minifier summaries', () => {
+    const [local1, remote] = getData().minifiers;
+    assert.deepEqual(local1, {
+      id: 'local1', name: 'Local 1', url: 'https://example.org/local1', isRemote: false, isExcluded: false,
+      processed: 2, kb: 9, delta: -40, isSmallest: true,
+      averageMs: 20, medianMs: 20, isTimeReliable: true, isFastestAverage: true, isFastestMedian: true
+    });
+    assert.equal(remote.isRemote, true);
+    assert.equal(remote.processed, 1);
+    assert.equal(remote.delta, -3.3);
+    assert.equal(remote.isSmallest, false);
+    assert.equal(remote.isTimeReliable, false);
+  });
+
+  it('Rounds times to one decimal', () => {
+    const rowsFractional = { a: { ...rows.a, times: { local1: 1.234, remote: null, local2: 5.678 } } };
+    const [local1] = getData({ rows: rowsFractional, fileNames: ['a'] }).minifiers;
+    assert.equal(local1.averageMs, 1.2);
+  });
+
+  it('Marks excluded minifiers and leaves their results empty', () => {
+    const data = getData({ excludedMinifierNames: new Set(['local2']) });
+    const local2 = data.minifiers.find(minifier => minifier.id === 'local2');
+    assert.equal(local2.isExcluded, true);
+    assert.equal(local2.processed, null);
+    assert.equal(local2.kb, null);
+    assert.equal(local2.averageMs, null);
+    assert.equal(data.sites[0].results.local2, null);
   });
 });
 
