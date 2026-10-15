@@ -3,6 +3,11 @@
 A collection of regularly updated benchmarks for web page minifiers ([context](https://dev.to/j9t/on-the-need-for-neutral-maintained-minifier-metrics-5715)). Visit [the **Minifier
 Benchmarks Project** website](https://j9t.github.io/minifier-benchmarks/) for interactive results.
 
+<!-- What’s this, GitHub -->
+<div align="center">
+	<a href="https://j9t.github.io/minifier-benchmarks/"><img src="https://j9t.github.io/minifier-benchmarks/logo.png" alt="The Minifier Benchmarks Project.”" width="300" height="300"></a>
+</div>
+
 Two tests are run: One exclusively applying [HTML minification](#1-html-minification-compared) (with the most aggressive settings that do not impact conformance), the other [enabling all minification features](#2-maximum-minification-compared) the respective minifier offers that keep output conformant (this is play—it’s not a fair comparison and may exceed project needs).
 
 * **👩‍💻 Minifier user?** Compare HTML minifiers [by HTML minification effectiveness](#1-html-minification-compared), [by maximum effectiveness](#2-maximum-minification-compared) (all conformant minification and tree-shaking options enabled), and by the respective processing times
