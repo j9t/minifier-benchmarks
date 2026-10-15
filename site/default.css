@@ -621,19 +621,23 @@ th.numeric {
 	min-width: 230px;
 }
 
+.benchmark-table .saving-cell {
+	padding-left: 0;
+}
+
 .saving-content {
 	align-items: center;
 	display: flex;
 	gap: 20px;
-	justify-content: flex-end;
 }
 
 .saving-bar {
 	background: var(--secondary);
 	border-radius: 2px;
+	flex: 1;
 	height: 5px;
+	min-width: 115px;
 	overflow: hidden;
-	width: 115px;
 }
 
 .saving-bar span {
@@ -641,6 +645,12 @@ th.numeric {
 	border-radius: 2px;
 	display: block;
 	height: 100%;
+}
+
+/* Width of the longest value, set by app.js, to keep bars aligned */
+.saving-value {
+	min-width: var(--saving-value-width);
+	text-align: left;
 }
 
 .badge {
@@ -985,6 +995,10 @@ th.numeric {
 	.benchmark-table th,
 	.benchmark-table td {
 		padding-inline: 14px;
+	}
+
+	.saving-content {
+		gap: 14px;
 	}
 
 	.table-footnote {

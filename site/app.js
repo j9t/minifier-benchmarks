@@ -157,6 +157,7 @@ function renderSummary() {
   const modeData = getModeData();
   const minifiers = getMinifiersSorted().filter(minifier => matchesQuery(minifier.name));
   const deltaBest = Math.min(...getMinifiersIncluded().map(minifier => minifier.delta ?? 0));
+  const deltaWidth = Math.max(...getMinifiersIncluded().map(minifier => formatDelta(minifier.delta).length));
 
   const rows = minifiers.map(function (minifier, idx) {
     const share = deltaBest < 0 && minifier.delta < 0 ? Math.min(minifier.delta / deltaBest, 1) * 100 : 0;
@@ -171,7 +172,7 @@ function renderSummary() {
       <td class="numeric saving-cell">
         <div class="saving-content">
           <div class="saving-bar" aria-hidden="true"><span style="width: ${share.toFixed(1)}%"></span></div>
-          <span${minifier.isSmallest ? ' class="best-result"' : ''}>${formatDelta(minifier.delta)}</span>
+          <span class="saving-value${minifier.isSmallest ? ' best-result' : ''}">${formatDelta(minifier.delta)}</span>
         </div>
       </td>
       <td class="numeric">${renderTime(minifier, minifier.averageMs, minifier.isFastestAverage)}</td>
@@ -191,7 +192,7 @@ function renderSummary() {
     rows.push(`<tr><td colspan="7" class="table-message">No minifiers match “${escapeHtml(state.query)}.”</td></tr>`);
   }
 
-  elements.results.innerHTML = `<table class="benchmark-table">
+  elements.results.innerHTML = `<table class="benchmark-table" style="--saving-value-width: ${deltaWidth}ch">
     <caption class="visually-hidden">${modes[state.mode].label}: Results per minifier</caption>
     <thead>
       <tr>
