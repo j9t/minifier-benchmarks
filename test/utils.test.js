@@ -362,6 +362,15 @@ describe('formatTime', () => {
     assert.equal(formatTime(24.6), '25 ms');
   });
 
+  it('Keeps one decimal below 10 milliseconds', () => {
+    assert.equal(formatTime(3.94), '3.9 ms');
+    assert.equal(formatTime(4), '4.0 ms');
+  });
+
+  it('Rounds to whole milliseconds when one decimal reaches 10', () => {
+    assert.equal(formatTime(9.96), '10 ms');
+  });
+
   it('Formats sub-millisecond times as “<1”', () => {
     assert.equal(formatTime(0.4), '<1 ms');
   });

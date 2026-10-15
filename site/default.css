@@ -8,7 +8,8 @@
 	--foreground: oklch(23.5% 0.012 160);
 	--ink-soft: oklch(60% 0.012 160);
 	--muted-foreground: oklch(51% 0.013 160);
-	--positive: oklch(44% 0.1 155);
+	--negative: oklch(55% 0.22 27);
+	--positive: oklch(53% 0.13 155);
 	--positive-soft: oklch(95.3% 0.036 155);
 	--primary: oklch(82% 0.155 155);
 	--primary-foreground: oklch(23.5% 0.025 155);
@@ -26,7 +27,8 @@
 		--foreground: oklch(94% 0.006 150);
 		--ink-soft: oklch(62% 0.012 160);
 		--muted-foreground: oklch(72% 0.012 160);
-		--positive: oklch(80% 0.13 155);
+		--negative: oklch(72% 0.17 25);
+		--positive: oklch(82% 0.17 155);
 		--positive-soft: oklch(27% 0.04 155);
 		--primary: oklch(78% 0.15 155);
 		--primary-foreground: oklch(20% 0.025 155);
@@ -244,8 +246,14 @@ input {
 /* Hero */
 
 .hero {
+	column-gap: 20px;
+	display: flex;
+	flex-wrap: wrap;
 	padding-block: 59px 47px;
-	position: relative;
+}
+
+.hero > :not(.eyebrow, .hero-index) {
+	flex-basis: 100%;
 }
 
 .eyebrow {
@@ -272,10 +280,8 @@ input {
 .hero-index {
 	color: var(--ink-soft);
 	font: 11px var(--font-mono);
-	position: absolute;
-	right: 0;
+	margin-left: auto;
 	text-transform: uppercase;
-	top: 69px;
 }
 
 .hero h1 {
@@ -617,6 +623,11 @@ th.numeric {
 	color: inherit;
 }
 
+.increase {
+	color: var(--negative);
+	font-weight: 500;
+}
+
 .saving-cell {
 	min-width: 230px;
 }
@@ -657,10 +668,12 @@ th.numeric {
 	background: var(--background);
 	border: 1px solid var(--border);
 	border-radius: 3px;
+	bottom: 1px;
 	color: var(--positive);
 	font: 9px var(--font-mono);
 	margin-left: 9px;
 	padding: 3px 5px;
+	position: relative;
 	text-transform: uppercase;
 }
 
@@ -850,10 +863,6 @@ th.numeric {
 		font-size: 48px;
 	}
 
-	.hero-index {
-		display: none;
-	}
-
 	.stat {
 		padding-inline: 17px;
 	}
@@ -919,6 +928,10 @@ th.numeric {
 
 	.hero {
 		padding-block: 38px 35px;
+	}
+
+	.hero-index {
+		display: none;
 	}
 
 	.hero h1 {

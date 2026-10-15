@@ -18,8 +18,11 @@ export function formatDelta(rawSize, originalSize) {
   return '<br>(' + formatted + '%)';
 }
 
+// Keeps one decimal below 10 ms, where rounding would hide differences
 export function formatTime(time) {
-  return (time < 1 ? '<1' : String(Math.round(time))) + ' ms';
+  if (time < 1) return '<1 ms';
+  const timeRounded = Math.round(time * 10) / 10;
+  return (timeRounded < 10 ? timeRounded.toFixed(1) : String(Math.round(time))) + ' ms';
 }
 
 export function median(values) {

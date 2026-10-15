@@ -32,7 +32,7 @@ const minifiersNotIncluded = [
   {
     name: 'HTML Minifier Terser',
     url: 'https://github.com/terser/html-minifier-terser',
-    badge: 'Known issues',
+    badge: 'Minification issues',
     note: 'HTML Minifier Terser isn’t included as it breaks markup.'
   }
 ];
@@ -80,8 +80,11 @@ function formatDelta(delta) {
   return (delta < 0 ? '−' : '+') + Math.abs(delta) + '%';
 }
 
+// Keeps one decimal below 10 ms, where rounding would hide differences
 function formatMs(ms) {
-  return ms < 1 ? '<1' : formatNumber(Math.round(ms));
+  if (ms < 1) return '<1';
+  const msRounded = Math.round(ms * 10) / 10;
+  return msRounded < 10 ? msRounded.toFixed(1) : formatNumber(Math.round(ms));
 }
 
 // Parses “YYYY-MM-DD” into its parts, avoiding time zone shifts
@@ -162,7 +165,7 @@ function renderSummary() {
   const rows = minifiers.map(function (minifier, idx) {
     const share = deltaBest < 0 && minifier.delta < 0 ? Math.min(minifier.delta / deltaBest, 1) * 100 : 0;
     const badges = [
-      minifier.isSmallest ? '<span class="badge">Smallest</span>' : '',
+      minifier.isSmallest ? '<span class="badge">Most effective</span>' : '',
       minifier.isFastestAverage ? '<span class="badge">Fastest</span>' : ''
     ].join('');
     return `<tr${minifier.isSmallest ? ' class="leading-row"' : ''}>
@@ -172,7 +175,7 @@ function renderSummary() {
       <td class="numeric saving-cell">
         <div class="saving-content">
           <div class="saving-bar" aria-hidden="true"><span style="width: ${share.toFixed(1)}%"></span></div>
-          <span class="saving-value${minifier.isSmallest ? ' best-result' : ''}">${formatDelta(minifier.delta)}</span>
+          <span class="saving-value${minifier.isSmallest ? ' best-result' : ''}${minifier.delta > 0 ? ' increase' : ''}">${formatDelta(minifier.delta)}</span>
         </div>
       </td>
       <td class="numeric">${renderTime(minifier, minifier.averageMs, minifier.isFastestAverage)}</td>
@@ -218,7 +221,7 @@ function renderSites() {
     const cells = minifiers.map(function (minifier) {
       const result = site.results[minifier.id];
       if (!result) return '<td class="numeric muted">n/a</td>';
-      return `<td class="numeric${result.isBest ? ' best-result' : ''}">${formatKb(result.kb)}<span class="delta">${formatDelta(result.delta)}</span></td>`;
+      return `<td class="numeric${result.isBest ? ' best-result' : ''}">${formatKb(result.kb)}<span class="delta${result.delta > 0 ? ' increase' : ''}">${formatDelta(result.delta)}</span></td>`;
     });
     return `<tr>
       <th class="tool-cell" scope="row"><a href="${escapeHtml(site.url)}" target="_blank">${escapeHtml(site.name)} ${icon('arrow-up-right', 11)}</a></th>
@@ -319,7 +322,7 @@ function renderOverview() {
   // Both modes usually run together, in the same environment
   const environments = [html, max].map(modeData => `${modeData.environment} · ${formatDate(modeData.date)}`);
   elements.environment.innerHTML = environments[0] === environments[1]
-    ? `Environment · ${escapeHtml(environments[0])}`
+    ? `Environment: ${escapeHtml(environments[0])}`
     : Object.keys(modes).map((mode, idx) => `${modes[mode].label} · ${escapeHtml(environments[idx])}`).join('<br>');
 }
 
