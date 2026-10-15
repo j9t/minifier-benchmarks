@@ -30,6 +30,7 @@ const html = `<!DOCTYPE html>
 async function minifyAll(isHtmlOnly) {
   const outputs = {};
   for (const [name, minifier] of Object.entries(createMinifiers({ isHtmlOnly, minifierConfig }))) {
+    await minifier.init?.();
     outputs[name] = String(await minifier.minify(minifier.isBufferInput ? Buffer.from(html) : html, site));
   }
   return outputs;

@@ -69,9 +69,11 @@ const minifierLabels = {
 // Remote minifiers’ times are estimates (see `testHTMLCompressor`), so they don’t compete for the fastest time
 const remoteMinifierNames = new Set(['compressor']);
 
-// Minifiers that can’t limit minification to HTML only run in max mode (their HTML mode results show as “n/a”)
+// Minifiers that can’t limit minification to HTML only run in max mode
 const maxOnlyMinifierNames = new Set(['minify']);
-const excludedMinifierNames = IS_HTML_ONLY ? maxOnlyMinifierNames : new Set();
+
+// Minifiers whose results show as “n/a” (max-only ones in HTML mode, and ones that fail to start)
+const excludedMinifierNames = new Set(IS_HTML_ONLY ? maxOnlyMinifierNames : []);
 
 // Local minifiers run in their own processes (see `worker.js`)
 const localMinifierNames = minifierNames.filter(name => !remoteMinifierNames.has(name) && !excludedMinifierNames.has(name));
@@ -981,6 +983,7 @@ for (const name of localMinifierNames) {
   const response = await worker.request('init', { name, isHtmlOnly: IS_HTML_ONLY, minifierConfig, dirInput, dirOutput });
   if (response.error) {
     benchmarkErrors.push(`${minifierLabels[name]} failed to start: ${response.error}`);
+    excludedMinifierNames.add(name);
     worker.close();
   } else {
     workers[name] = worker;
