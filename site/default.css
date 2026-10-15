@@ -44,8 +44,11 @@
 }
 
 html {
+	-webkit-font-smoothing: antialiased;
 	scroll-behavior: smooth;
 	scroll-padding-top: 30px;
+	scrollbar-gutter: stable;
+	text-wrap: pretty;
 }
 
 body {
@@ -857,6 +860,11 @@ th.numeric {
 		justify-content: space-between;
 		margin-top: 8px;
 		width: 100%;
+	}
+
+	.sites-table tbody th {
+		white-space: normal;
+		width: 9em;
 	}
 
 	.data-tabs {
