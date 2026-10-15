@@ -48,6 +48,7 @@ export function createMinifiers({ isHtmlOnly, minifierConfig }) {
       minify(data, site) {
         // Load config (with caches disabled, as they persist across calls) and add site-specific minifyURLs;
         // a fresh object per call, as HTML Minifier Next memoizes options processing per object
+        //
         // @@ Disable or clear the URL cache, too, once HTML Minifier Next allows it
         const config = { ...minifierConfig, minifyURLs: site };
 
