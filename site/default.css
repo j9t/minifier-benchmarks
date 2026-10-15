@@ -541,10 +541,10 @@ input {
 	background: var(--surface);
 }
 
-.benchmark-table .leading-row,
+/* .benchmark-table .leading-row,
 .benchmark-table .leading-row:hover {
 	background: var(--positive-soft);
-}
+} */
 
 .benchmark-table .considered-row {
 	opacity: 0.65;
