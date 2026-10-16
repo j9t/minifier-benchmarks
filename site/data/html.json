@@ -1,9 +1,9 @@
 {
   "mode": "html",
-  "date": "2026-10-15",
+  "date": "2026-10-16",
   "environment": "Node.js 24.22.0, macOS 15.7.9, Apple M4",
-  "siteCount": 72,
-  "averageOriginalKb": 386,
+  "siteCount": 93,
+  "averageOriginalKb": 355,
   "minifiers": [
     {
       "id": "swchtml",
@@ -11,12 +11,12 @@
       "url": "https://github.com/swc-project/swc",
       "isRemote": false,
       "isExcluded": false,
-      "processed": 72,
-      "kb": 363,
-      "delta": -5.8,
+      "processed": 93,
+      "kb": 334,
+      "delta": -5.9,
       "isSmallest": false,
-      "averageMs": 22,
-      "medianMs": 10,
+      "averageMs": 19.6,
+      "medianMs": 8.9,
       "isTimeReliable": true,
       "isFastestAverage": false,
       "isFastestMedian": false
@@ -27,12 +27,12 @@
       "url": "https://github.com/j9t/html-minifier-next",
       "isRemote": false,
       "isExcluded": false,
-      "processed": 72,
-      "kb": 350,
-      "delta": -9.4,
+      "processed": 93,
+      "kb": 320,
+      "delta": -9.6,
       "isSmallest": true,
-      "averageMs": 18.6,
-      "medianMs": 6.9,
+      "averageMs": 15.7,
+      "medianMs": 5.9,
       "isTimeReliable": true,
       "isFastestAverage": false,
       "isFastestMedian": false
@@ -43,12 +43,12 @@
       "url": "https://htmlcompressor.com/",
       "isRemote": true,
       "isExcluded": false,
-      "processed": 51,
-      "kb": 377,
-      "delta": -2.3,
+      "processed": 68,
+      "kb": 346,
+      "delta": -2.5,
       "isSmallest": false,
-      "averageMs": 239,
-      "medianMs": 218.8,
+      "averageMs": 159.2,
+      "medianMs": 101.8,
       "isTimeReliable": true,
       "isFastestAverage": false,
       "isFastestMedian": false
@@ -59,12 +59,12 @@
       "url": "https://github.com/maltsev/htmlnano",
       "isRemote": false,
       "isExcluded": false,
-      "processed": 72,
-      "kb": 356,
-      "delta": -7.6,
+      "processed": 93,
+      "kb": 327,
+      "delta": -7.7,
       "isSmallest": false,
-      "averageMs": 36.3,
-      "medianMs": 16,
+      "averageMs": 32.1,
+      "medianMs": 13.8,
       "isTimeReliable": true,
       "isFastestAverage": false,
       "isFastestMedian": false
@@ -91,12 +91,12 @@
       "url": "https://github.com/wilsonzlin/minify-html",
       "isRemote": false,
       "isExcluded": false,
-      "processed": 72,
-      "kb": 360,
+      "processed": 93,
+      "kb": 331,
       "delta": -6.6,
       "isSmallest": false,
-      "averageMs": 6.3,
-      "medianMs": 2.1,
+      "averageMs": 5.4,
+      "medianMs": 1.8,
       "isTimeReliable": true,
       "isFastestAverage": true,
       "isFastestMedian": true
@@ -107,12 +107,12 @@
       "url": "https://github.com/Swaagie/minimize",
       "isRemote": false,
       "isExcluded": false,
-      "processed": 72,
-      "kb": 362,
-      "delta": -6.1,
+      "processed": 93,
+      "kb": 332,
+      "delta": -6.3,
       "isSmallest": false,
-      "averageMs": 143.7,
-      "medianMs": 34.3,
+      "averageMs": 120.9,
+      "medianMs": 32.4,
       "isTimeReliable": true,
       "isFastestAverage": false,
       "isFastestMedian": false
@@ -196,35 +196,111 @@
       }
     },
     {
-      "name": "AfricTivistes",
-      "url": "https://www.africtivistes.org/",
-      "kb": 497,
+      "name": "African Declaration on Internet Rights",
+      "url": "https://africaninternetrights.net/",
+      "kb": 62,
       "results": {
         "swchtml": {
-          "kb": 446,
-          "delta": -10.3,
+          "kb": 51,
+          "delta": -17.6,
           "isBest": false
         },
         "minifier": {
-          "kb": 431,
-          "delta": -13.4,
+          "kb": 49,
+          "delta": -20.8,
+          "isBest": true
+        },
+        "compressor": {
+          "kb": 50,
+          "delta": -19,
+          "isBest": false
+        },
+        "htmlnano": {
+          "kb": 49,
+          "delta": -20.7,
+          "isBest": false
+        },
+        "minify": null,
+        "minifyhtml": {
+          "kb": 50,
+          "delta": -19.9,
+          "isBest": false
+        },
+        "minimize": {
+          "kb": 50,
+          "delta": -19.6,
+          "isBest": false
+        }
+      }
+    },
+    {
+      "name": "AfricTivistes",
+      "url": "https://www.africtivistes.org/",
+      "kb": 493,
+      "results": {
+        "swchtml": {
+          "kb": 444,
+          "delta": -10.1,
+          "isBest": false
+        },
+        "minifier": {
+          "kb": 428,
+          "delta": -13.2,
           "isBest": false
         },
         "compressor": null,
         "htmlnano": {
-          "kb": 428,
-          "delta": -14,
+          "kb": 425,
+          "delta": -13.8,
           "isBest": true
         },
         "minify": null,
         "minifyhtml": {
-          "kb": 442,
-          "delta": -11,
+          "kb": 440,
+          "delta": -10.8,
           "isBest": false
         },
         "minimize": {
-          "kb": 489,
-          "delta": -1.5,
+          "kb": 486,
+          "delta": -1.6,
+          "isBest": false
+        }
+      }
+    },
+    {
+      "name": "Amnesty International Australia",
+      "url": "https://www.amnesty.org.au/",
+      "kb": 197,
+      "results": {
+        "swchtml": {
+          "kb": 173,
+          "delta": -12.4,
+          "isBest": false
+        },
+        "minifier": {
+          "kb": 168,
+          "delta": -14.7,
+          "isBest": false
+        },
+        "compressor": {
+          "kb": 176,
+          "delta": -10.8,
+          "isBest": false
+        },
+        "htmlnano": {
+          "kb": 167,
+          "delta": -15.2,
+          "isBest": true
+        },
+        "minify": null,
+        "minifyhtml": {
+          "kb": 171,
+          "delta": -13.1,
+          "isBest": false
+        },
+        "minimize": {
+          "kb": 175,
+          "delta": -11.2,
           "isBest": false
         }
       }
@@ -232,32 +308,32 @@
     {
       "name": "BBC",
       "url": "https://www.bbc.co.uk/",
-      "kb": 707,
+      "kb": 799,
       "results": {
         "swchtml": {
-          "kb": 703,
+          "kb": 794,
           "delta": -0.6,
           "isBest": false
         },
         "minifier": {
-          "kb": 697,
-          "delta": -1.4,
+          "kb": 788,
+          "delta": -1.5,
           "isBest": false
         },
         "compressor": null,
         "htmlnano": {
-          "kb": 697,
+          "kb": 787,
           "delta": -1.5,
           "isBest": true
         },
         "minify": null,
         "minifyhtml": {
-          "kb": 699,
-          "delta": -1.1,
+          "kb": 790,
+          "delta": -1.2,
           "isBest": false
         },
         "minimize": {
-          "kb": 702,
+          "kb": 793,
           "delta": -0.8,
           "isBest": false
         }
@@ -302,9 +378,47 @@
       }
     },
     {
+      "name": "Canaltech",
+      "url": "https://canaltech.com.br/",
+      "kb": 272,
+      "results": {
+        "swchtml": {
+          "kb": 258,
+          "delta": -5.2,
+          "isBest": false
+        },
+        "minifier": {
+          "kb": 210,
+          "delta": -23,
+          "isBest": true
+        },
+        "compressor": {
+          "kb": 269,
+          "delta": -1.2,
+          "isBest": false
+        },
+        "htmlnano": {
+          "kb": 210,
+          "delta": -22.7,
+          "isBest": false
+        },
+        "minify": null,
+        "minifyhtml": {
+          "kb": 258,
+          "delta": -5.2,
+          "isBest": false
+        },
+        "minimize": {
+          "kb": 269,
+          "delta": -1.2,
+          "isBest": false
+        }
+      }
+    },
+    {
       "name": "CERN",
       "url": "https://home.cern/",
-      "kb": 291,
+      "kb": 292,
       "results": {
         "swchtml": {
           "kb": 280,
@@ -312,17 +426,17 @@
           "isBest": false
         },
         "minifier": {
-          "kb": 275,
+          "kb": 276,
           "delta": -5.5,
           "isBest": false
         },
         "compressor": {
-          "kb": 279,
+          "kb": 280,
           "delta": -4.1,
           "isBest": false
         },
         "htmlnano": {
-          "kb": 272,
+          "kb": 273,
           "delta": -6.5,
           "isBest": true
         },
@@ -335,6 +449,44 @@
         "minimize": {
           "kb": 279,
           "delta": -4.3,
+          "isBest": false
+        }
+      }
+    },
+    {
+      "name": "Coding Rights",
+      "url": "https://codingrights.org/",
+      "kb": 120,
+      "results": {
+        "swchtml": {
+          "kb": 112,
+          "delta": -6.2,
+          "isBest": false
+        },
+        "minifier": {
+          "kb": 106,
+          "delta": -11,
+          "isBest": true
+        },
+        "compressor": {
+          "kb": 112,
+          "delta": -6.1,
+          "isBest": false
+        },
+        "htmlnano": {
+          "kb": 109,
+          "delta": -8.7,
+          "isBest": false
+        },
+        "minify": null,
+        "minifyhtml": {
+          "kb": 110,
+          "delta": -7.9,
+          "isBest": false
+        },
+        "minimize": {
+          "kb": 112,
+          "delta": -6.2,
           "isBest": false
         }
       }
@@ -416,39 +568,115 @@
       }
     },
     {
-      "name": "DIN",
-      "url": "https://www.din.de/",
-      "kb": 256,
+      "name": "Digital Rights Foundation",
+      "url": "https://digitalrightsfoundation.pk/",
+      "kb": 278,
       "results": {
         "swchtml": {
-          "kb": 184,
-          "delta": -28.3,
+          "kb": 224,
+          "delta": -19.5,
           "isBest": false
         },
         "minifier": {
-          "kb": 178,
-          "delta": -30.6,
+          "kb": 219,
+          "delta": -21.2,
           "isBest": true
         },
         "compressor": {
-          "kb": 185,
-          "delta": -27.7,
+          "kb": 270,
+          "delta": -3,
           "isBest": false
         },
         "htmlnano": {
-          "kb": 179,
-          "delta": -30.2,
+          "kb": 220,
+          "delta": -20.9,
           "isBest": false
         },
         "minify": null,
         "minifyhtml": {
-          "kb": 182,
+          "kb": 223,
+          "delta": -20,
+          "isBest": false
+        },
+        "minimize": {
+          "kb": 270,
+          "delta": -3.1,
+          "isBest": false
+        }
+      }
+    },
+    {
+      "name": "Digital Rights Watch",
+      "url": "https://digitalrightswatch.org.au/",
+      "kb": 23,
+      "results": {
+        "swchtml": {
+          "kb": 17,
+          "delta": -27.6,
+          "isBest": false
+        },
+        "minifier": {
+          "kb": 16,
+          "delta": -30.7,
+          "isBest": false
+        },
+        "compressor": {
+          "kb": 17,
+          "delta": -27.5,
+          "isBest": false
+        },
+        "htmlnano": {
+          "kb": 16,
+          "delta": -30.7,
+          "isBest": true
+        },
+        "minify": null,
+        "minifyhtml": {
+          "kb": 16,
+          "delta": -29.3,
+          "isBest": false
+        },
+        "minimize": {
+          "kb": 17,
+          "delta": -28.2,
+          "isBest": false
+        }
+      }
+    },
+    {
+      "name": "DIN",
+      "url": "https://www.din.de/",
+      "kb": 255,
+      "results": {
+        "swchtml": {
+          "kb": 183,
+          "delta": -28.3,
+          "isBest": false
+        },
+        "minifier": {
+          "kb": 177,
+          "delta": -30.6,
+          "isBest": true
+        },
+        "compressor": {
+          "kb": 184,
+          "delta": -27.7,
+          "isBest": false
+        },
+        "htmlnano": {
+          "kb": 178,
+          "delta": -30.1,
+          "isBest": false
+        },
+        "minify": null,
+        "minifyhtml": {
+          "kb": 181,
           "delta": -29,
           "isBest": false
         },
         "minimize": {
-          "kb": 184,
-          "delta": -28,
+          "kb": 183,
+          "delta": -27.9,
           "isBest": false
         }
       }
@@ -456,32 +684,32 @@
     {
       "name": "DLR",
       "url": "https://www.dlr.de/",
-      "kb": 544,
+      "kb": 546,
       "results": {
         "swchtml": {
-          "kb": 541,
+          "kb": 542,
           "delta": -0.6,
           "isBest": false
         },
         "minifier": {
-          "kb": 538,
+          "kb": 539,
           "delta": -1.1,
           "isBest": true
         },
         "compressor": null,
         "htmlnano": {
-          "kb": 538,
+          "kb": 540,
           "delta": -1,
           "isBest": false
         },
         "minify": null,
         "minifyhtml": {
-          "kb": 539,
+          "kb": 540,
           "delta": -0.9,
           "isBest": false
         },
         "minimize": {
-          "kb": 541,
+          "kb": 543,
           "delta": -0.5,
           "isBest": false
         }
@@ -510,13 +738,51 @@
         },
         "minify": null,
         "minifyhtml": {
-          "kb": 6988,
+          "kb": 6987,
           "delta": -6.2,
           "isBest": false
         },
         "minimize": {
-          "kb": 7013,
+          "kb": 7012,
           "delta": -5.9,
+          "isBest": false
+        }
+      }
+    },
+    {
+      "name": "EDRi",
+      "url": "https://edri.org/",
+      "kb": 84,
+      "results": {
+        "swchtml": {
+          "kb": 77,
+          "delta": -7.7,
+          "isBest": false
+        },
+        "minifier": {
+          "kb": 77,
+          "delta": -8.3,
+          "isBest": true
+        },
+        "compressor": {
+          "kb": 78,
+          "delta": -6.6,
+          "isBest": false
+        },
+        "htmlnano": {
+          "kb": 77,
+          "delta": -8.2,
+          "isBest": false
+        },
+        "minify": null,
+        "minifyhtml": {
+          "kb": 77,
+          "delta": -7.9,
+          "isBest": false
+        },
+        "minimize": {
+          "kb": 78,
+          "delta": -6.7,
           "isBest": false
         }
       }
@@ -527,13 +793,13 @@
       "kb": 54,
       "results": {
         "swchtml": {
-          "kb": 49,
+          "kb": 50,
           "delta": -8.2,
           "isBest": false
         },
         "minifier": {
           "kb": 47,
-          "delta": -13.2,
+          "delta": -13.1,
           "isBest": true
         },
         "compressor": {
@@ -543,13 +809,13 @@
         },
         "htmlnano": {
           "kb": 47,
-          "delta": -12.4,
+          "delta": -12.3,
           "isBest": false
         },
         "minify": null,
         "minifyhtml": {
           "kb": 48,
-          "delta": -11.4,
+          "delta": -11.3,
           "isBest": false
         },
         "minimize": {
@@ -562,32 +828,32 @@
     {
       "name": "ELLE",
       "url": "https://www.elle.com/",
-      "kb": 737,
+      "kb": 734,
       "results": {
         "swchtml": {
-          "kb": 732,
+          "kb": 729,
           "delta": -0.7,
           "isBest": false
         },
         "minifier": {
-          "kb": 727,
+          "kb": 723,
           "delta": -1.4,
           "isBest": true
         },
         "compressor": null,
         "htmlnano": {
-          "kb": 729,
+          "kb": 725,
           "delta": -1.1,
           "isBest": false
         },
         "minify": null,
         "minifyhtml": {
-          "kb": 729,
+          "kb": 725,
           "delta": -1.1,
           "isBest": false
         },
         "minimize": {
-          "kb": 732,
+          "kb": 728,
           "delta": -0.7,
           "isBest": false
         }
@@ -638,7 +904,7 @@
       "results": {
         "swchtml": {
           "kb": 33,
-          "delta": -33.1,
+          "delta": -33,
           "isBest": false
         },
         "minifier": {
@@ -659,7 +925,7 @@
         "minify": null,
         "minifyhtml": {
           "kb": 33,
-          "delta": -33.5,
+          "delta": -33.4,
           "isBest": false
         },
         "minimize": {
@@ -697,7 +963,7 @@
           "isBest": false
         },
         "minimize": {
-          "kb": 436,
+          "kb": 437,
           "delta": -0.5,
           "isBest": false
         }
@@ -778,32 +1044,32 @@
     {
       "name": "FAZ",
       "url": "https://www.faz.net/aktuell/",
-      "kb": 1366,
+      "kb": 1380,
       "results": {
         "swchtml": {
-          "kb": 1320,
-          "delta": -3.4,
+          "kb": 1333,
+          "delta": -3.3,
           "isBest": false
         },
         "minifier": {
-          "kb": 1228,
-          "delta": -10.1,
+          "kb": 1242,
+          "delta": -10,
           "isBest": true
         },
         "compressor": null,
         "htmlnano": {
-          "kb": 1304,
+          "kb": 1317,
           "delta": -4.6,
           "isBest": false
         },
         "minify": null,
         "minifyhtml": {
-          "kb": 1308,
-          "delta": -4.3,
+          "kb": 1321,
+          "delta": -4.2,
           "isBest": false
         },
         "minimize": {
-          "kb": 1307,
+          "kb": 1321,
           "delta": -4.3,
           "isBest": false
         }
@@ -812,33 +1078,71 @@
     {
       "name": "Folha de S.Paulo",
       "url": "https://www.folha.uol.com.br/",
-      "kb": 949,
+      "kb": 941,
       "results": {
         "swchtml": {
-          "kb": 824,
+          "kb": 816,
           "delta": -13.2,
           "isBest": false
         },
         "minifier": {
-          "kb": 778,
-          "delta": -18,
+          "kb": 771,
+          "delta": -18.1,
           "isBest": true
         },
         "compressor": null,
         "htmlnano": {
-          "kb": 824,
+          "kb": 816,
           "delta": -13.2,
           "isBest": false
         },
         "minify": null,
         "minifyhtml": {
-          "kb": 827,
-          "delta": -12.8,
+          "kb": 820,
+          "delta": -12.9,
           "isBest": false
         },
         "minimize": {
-          "kb": 825,
+          "kb": 817,
           "delta": -13.1,
+          "isBest": false
+        }
+      }
+    },
+    {
+      "name": "Foundation for Media Alternatives",
+      "url": "https://fma.ph/",
+      "kb": 120,
+      "results": {
+        "swchtml": {
+          "kb": 116,
+          "delta": -3.5,
+          "isBest": false
+        },
+        "minifier": {
+          "kb": 114,
+          "delta": -5.1,
+          "isBest": true
+        },
+        "compressor": {
+          "kb": 116,
+          "delta": -3.4,
+          "isBest": false
+        },
+        "htmlnano": {
+          "kb": 114,
+          "delta": -5,
+          "isBest": false
+        },
+        "minify": null,
+        "minifyhtml": {
+          "kb": 115,
+          "delta": -4.2,
+          "isBest": false
+        },
+        "minimize": {
+          "kb": 115,
+          "delta": -3.7,
           "isBest": false
         }
       }
@@ -846,37 +1150,37 @@
     {
       "name": "French Tech",
       "url": "https://lafrenchtech.gouv.fr/",
-      "kb": 185,
+      "kb": 187,
       "results": {
         "swchtml": {
-          "kb": 137,
-          "delta": -26.2,
+          "kb": 138,
+          "delta": -26.3,
           "isBest": false
         },
         "minifier": {
-          "kb": 135,
-          "delta": -26.9,
+          "kb": 136,
+          "delta": -27,
           "isBest": false
         },
         "compressor": {
-          "kb": 137,
-          "delta": -26.1,
+          "kb": 138,
+          "delta": -26.2,
           "isBest": false
         },
         "htmlnano": {
-          "kb": 135,
-          "delta": -27,
+          "kb": 136,
+          "delta": -27.1,
           "isBest": true
         },
         "minify": null,
         "minifyhtml": {
-          "kb": 135,
-          "delta": -26.8,
+          "kb": 136,
+          "delta": -26.9,
           "isBest": false
         },
         "minimize": {
-          "kb": 137,
-          "delta": -26.2,
+          "kb": 138,
+          "delta": -26.3,
           "isBest": false
         }
       }
@@ -925,7 +1229,7 @@
       "kb": 228,
       "results": {
         "swchtml": {
-          "kb": 237,
+          "kb": 238,
           "delta": 4.2,
           "isBest": false
         },
@@ -935,7 +1239,7 @@
           "isBest": false
         },
         "compressor": {
-          "kb": 227,
+          "kb": 228,
           "delta": -0.2,
           "isBest": true
         },
@@ -951,8 +1255,8 @@
           "isBest": false
         },
         "minimize": {
-          "kb": 246,
-          "delta": 8.1,
+          "kb": 247,
+          "delta": 8,
           "isBest": false
         }
       }
@@ -998,32 +1302,32 @@
     {
       "name": "Genocide Watch",
       "url": "https://www.genocidewatch.com/",
-      "kb": 1838,
+      "kb": 1840,
       "results": {
         "swchtml": {
-          "kb": 1815,
+          "kb": 1818,
           "delta": -1.2,
           "isBest": false
         },
         "minifier": {
-          "kb": 1792,
+          "kb": 1794,
           "delta": -2.5,
           "isBest": true
         },
         "compressor": null,
         "htmlnano": {
-          "kb": 1804,
+          "kb": 1806,
           "delta": -1.8,
           "isBest": false
         },
         "minify": null,
         "minifyhtml": {
-          "kb": 1807,
+          "kb": 1809,
           "delta": -1.7,
           "isBest": false
         },
         "minimize": {
-          "kb": 1824,
+          "kb": 1826,
           "delta": -0.8,
           "isBest": false
         }
@@ -1032,33 +1336,71 @@
     {
       "name": "Ground News",
       "url": "https://ground.news/",
-      "kb": 1820,
+      "kb": 2184,
       "results": {
         "swchtml": {
-          "kb": 1798,
-          "delta": -1.2,
+          "kb": 2160,
+          "delta": -1.1,
           "isBest": false
         },
         "minifier": {
-          "kb": 1748,
-          "delta": -4,
+          "kb": 2111,
+          "delta": -3.3,
           "isBest": true
         },
         "compressor": null,
         "htmlnano": {
-          "kb": 1773,
-          "delta": -2.6,
+          "kb": 2136,
+          "delta": -2.2,
           "isBest": false
         },
         "minify": null,
         "minifyhtml": {
-          "kb": 1797,
-          "delta": -1.2,
+          "kb": 2160,
+          "delta": -1.1,
           "isBest": false
         },
         "minimize": {
-          "kb": 1806,
+          "kb": 2170,
           "delta": -0.7,
+          "isBest": false
+        }
+      }
+    },
+    {
+      "name": "Hiperderecho",
+      "url": "https://hiperderecho.org/",
+      "kb": 62,
+      "results": {
+        "swchtml": {
+          "kb": 60,
+          "delta": -2.7,
+          "isBest": false
+        },
+        "minifier": {
+          "kb": 59,
+          "delta": -4.4,
+          "isBest": true
+        },
+        "compressor": {
+          "kb": 60,
+          "delta": -2.9,
+          "isBest": false
+        },
+        "htmlnano": {
+          "kb": 59,
+          "delta": -4.1,
+          "isBest": false
+        },
+        "minify": null,
+        "minifyhtml": {
+          "kb": 60,
+          "delta": -3.7,
+          "isBest": false
+        },
+        "minimize": {
+          "kb": 60,
+          "delta": -3.2,
           "isBest": false
         }
       }
@@ -1066,33 +1408,33 @@
     {
       "name": "Hong Kong Free Press",
       "url": "https://hongkongfp.com/",
-      "kb": 360,
+      "kb": 393,
       "results": {
         "swchtml": {
-          "kb": 337,
-          "delta": -6.3,
+          "kb": 371,
+          "delta": -5.6,
           "isBest": false
         },
         "minifier": {
-          "kb": 332,
-          "delta": -7.6,
+          "kb": 365,
+          "delta": -7,
           "isBest": true
         },
         "compressor": null,
         "htmlnano": {
-          "kb": 333,
-          "delta": -7.4,
+          "kb": 366,
+          "delta": -6.8,
           "isBest": false
         },
         "minify": null,
         "minifyhtml": {
-          "kb": 335,
-          "delta": -7,
+          "kb": 368,
+          "delta": -6.4,
           "isBest": false
         },
         "minimize": {
-          "kb": 340,
-          "delta": -5.7,
+          "kb": 372,
+          "delta": -5.3,
           "isBest": false
         }
       }
@@ -1176,36 +1518,36 @@
     {
       "name": "Human Rights Watch",
       "url": "https://www.hrw.org/",
-      "kb": 271,
+      "kb": 272,
       "results": {
         "swchtml": {
-          "kb": 234,
+          "kb": 235,
           "delta": -13.5,
           "isBest": false
         },
         "minifier": {
-          "kb": 226,
-          "delta": -16.7,
+          "kb": 227,
+          "delta": -16.6,
           "isBest": true
         },
         "compressor": {
-          "kb": 233,
+          "kb": 234,
           "delta": -14,
           "isBest": false
         },
         "htmlnano": {
-          "kb": 227,
-          "delta": -16.3,
+          "kb": 228,
+          "delta": -16.2,
           "isBest": false
         },
         "minify": null,
         "minifyhtml": {
-          "kb": 230,
+          "kb": 231,
           "delta": -15,
           "isBest": false
         },
         "minimize": {
-          "kb": 232,
+          "kb": 233,
           "delta": -14.2,
           "isBest": false
         }
@@ -1255,34 +1597,178 @@
       "kb": 44,
       "results": {
         "swchtml": {
-          "kb": 35,
-          "delta": -21.5,
+          "kb": 34,
+          "delta": -21.6,
           "isBest": false
         },
         "minifier": {
           "kb": 33,
-          "delta": -23.9,
+          "delta": -24,
           "isBest": false
         },
         "compressor": {
           "kb": 34,
-          "delta": -22.4,
+          "delta": -22.5,
           "isBest": false
         },
         "htmlnano": {
           "kb": 33,
-          "delta": -24.4,
+          "delta": -24.5,
           "isBest": true
         },
         "minify": null,
         "minifyhtml": {
-          "kb": 34,
-          "delta": -23.4,
+          "kb": 33,
+          "delta": -23.5,
           "isBest": false
         },
         "minimize": {
           "kb": 34,
-          "delta": -23,
+          "delta": -23.1,
+          "isBest": false
+        }
+      }
+    },
+    {
+      "name": "InfoQ China",
+      "url": "https://www.infoq.cn/",
+      "kb": 667,
+      "results": {
+        "swchtml": {
+          "kb": 644,
+          "delta": -3.5,
+          "isBest": false
+        },
+        "minifier": {
+          "kb": 637,
+          "delta": -4.5,
+          "isBest": true
+        },
+        "compressor": null,
+        "htmlnano": {
+          "kb": 638,
+          "delta": -4.3,
+          "isBest": false
+        },
+        "minify": null,
+        "minifyhtml": {
+          "kb": 641,
+          "delta": -3.9,
+          "isBest": false
+        },
+        "minimize": {
+          "kb": 645,
+          "delta": -3.4,
+          "isBest": false
+        }
+      }
+    },
+    {
+      "name": "Intervozes",
+      "url": "https://intervozes.org.br/",
+      "kb": 152,
+      "results": {
+        "swchtml": {
+          "kb": 141,
+          "delta": -6.9,
+          "isBest": false
+        },
+        "minifier": {
+          "kb": 140,
+          "delta": -7.8,
+          "isBest": true
+        },
+        "compressor": {
+          "kb": 144,
+          "delta": -5,
+          "isBest": false
+        },
+        "htmlnano": {
+          "kb": 140,
+          "delta": -7.4,
+          "isBest": false
+        },
+        "minify": null,
+        "minifyhtml": {
+          "kb": 141,
+          "delta": -7.1,
+          "isBest": false
+        },
+        "minimize": {
+          "kb": 144,
+          "delta": -4.9,
+          "isBest": false
+        }
+      }
+    },
+    {
+      "name": "iTnews",
+      "url": "https://www.itnews.com.au/",
+      "kb": 139,
+      "results": {
+        "swchtml": {
+          "kb": 82,
+          "delta": -40.6,
+          "isBest": false
+        },
+        "minifier": {
+          "kb": 79,
+          "delta": -42.8,
+          "isBest": true
+        },
+        "compressor": {
+          "kb": 83,
+          "delta": -39.9,
+          "isBest": false
+        },
+        "htmlnano": {
+          "kb": 80,
+          "delta": -41.9,
+          "isBest": false
+        },
+        "minify": null,
+        "minifyhtml": {
+          "kb": 80,
+          "delta": -42.2,
+          "isBest": false
+        },
+        "minimize": {
+          "kb": 82,
+          "delta": -40.6,
+          "isBest": false
+        }
+      }
+    },
+    {
+      "name": "ITWeb",
+      "url": "https://www.itweb.co.za/",
+      "kb": 312,
+      "results": {
+        "swchtml": {
+          "kb": 295,
+          "delta": -5.5,
+          "isBest": false
+        },
+        "minifier": {
+          "kb": 276,
+          "delta": -11.5,
+          "isBest": true
+        },
+        "compressor": null,
+        "htmlnano": {
+          "kb": 279,
+          "delta": -10.6,
+          "isBest": false
+        },
+        "minify": null,
+        "minifyhtml": {
+          "kb": 292,
+          "delta": -6.3,
+          "isBest": false
+        },
+        "minimize": {
+          "kb": 292,
+          "delta": -6.3,
           "isBest": false
         }
       }
@@ -1322,35 +1808,73 @@
       }
     },
     {
-      "name": "KoRo",
-      "url": "https://www.koro.com/",
-      "kb": 1006,
+      "name": "Kenya Human Rights Commission",
+      "url": "https://www.khrc.or.ke/",
+      "kb": 242,
       "results": {
         "swchtml": {
-          "kb": 949,
-          "delta": -5.6,
+          "kb": 238,
+          "delta": -1.6,
           "isBest": false
         },
         "minifier": {
-          "kb": 941,
-          "delta": -6.4,
+          "kb": 235,
+          "delta": -3,
+          "isBest": false
+        },
+        "compressor": {
+          "kb": 237,
+          "delta": -2.1,
+          "isBest": false
+        },
+        "htmlnano": {
+          "kb": 236,
+          "delta": -2.8,
+          "isBest": false
+        },
+        "minify": null,
+        "minifyhtml": {
+          "kb": 236,
+          "delta": -2.5,
+          "isBest": false
+        },
+        "minimize": {
+          "kb": 227,
+          "delta": -6.5,
+          "isBest": true
+        }
+      }
+    },
+    {
+      "name": "KoRo",
+      "url": "https://www.koro.com/",
+      "kb": 959,
+      "results": {
+        "swchtml": {
+          "kb": 904,
+          "delta": -5.7,
+          "isBest": false
+        },
+        "minifier": {
+          "kb": 896,
+          "delta": -6.6,
           "isBest": false
         },
         "compressor": null,
         "htmlnano": {
-          "kb": 940,
-          "delta": -6.5,
+          "kb": 894,
+          "delta": -6.7,
           "isBest": true
         },
         "minify": null,
         "minifyhtml": {
-          "kb": 954,
-          "delta": -5.2,
+          "kb": 908,
+          "delta": -5.3,
           "isBest": false
         },
         "minimize": {
-          "kb": 977,
-          "delta": -2.9,
+          "kb": 929,
+          "delta": -3.1,
           "isBest": false
         }
       }
@@ -1396,33 +1920,71 @@
     {
       "name": "Leanpub",
       "url": "https://leanpub.com/",
-      "kb": 527,
+      "kb": 521,
       "results": {
         "swchtml": {
-          "kb": 522,
+          "kb": 516,
           "delta": -1,
           "isBest": false
         },
         "minifier": {
-          "kb": 506,
+          "kb": 501,
           "delta": -4,
           "isBest": false
         },
         "compressor": null,
         "htmlnano": {
-          "kb": 503,
+          "kb": 498,
           "delta": -4.5,
           "isBest": true
         },
         "minify": null,
         "minifyhtml": {
-          "kb": 518,
+          "kb": 512,
           "delta": -1.8,
           "isBest": false
         },
         "minimize": {
-          "kb": 518,
+          "kb": 513,
           "delta": -1.6,
+          "isBest": false
+        }
+      }
+    },
+    {
+      "name": "Legal Resources Centre",
+      "url": "https://lrc.org.za/",
+      "kb": 170,
+      "results": {
+        "swchtml": {
+          "kb": 169,
+          "delta": -0.6,
+          "isBest": false
+        },
+        "minifier": {
+          "kb": 157,
+          "delta": -7.6,
+          "isBest": true
+        },
+        "compressor": {
+          "kb": 168,
+          "delta": -1.2,
+          "isBest": false
+        },
+        "htmlnano": {
+          "kb": 158,
+          "delta": -7,
+          "isBest": false
+        },
+        "minify": null,
+        "minifyhtml": {
+          "kb": 167,
+          "delta": -1.7,
+          "isBest": false
+        },
+        "minimize": {
+          "kb": 168,
+          "delta": -1.3,
           "isBest": false
         }
       }
@@ -1578,33 +2140,33 @@
     {
       "name": "Mistral AI",
       "url": "https://mistral.ai/",
-      "kb": 333,
+      "kb": 318,
       "results": {
         "swchtml": {
-          "kb": 323,
-          "delta": -3.2,
+          "kb": 309,
+          "delta": -2.8,
           "isBest": false
         },
         "minifier": {
-          "kb": 270,
-          "delta": -18.9,
+          "kb": 257,
+          "delta": -19.4,
           "isBest": true
         },
         "compressor": null,
         "htmlnano": {
-          "kb": 281,
-          "delta": -15.6,
+          "kb": 267,
+          "delta": -16,
           "isBest": false
         },
         "minify": null,
         "minifyhtml": {
-          "kb": 322,
-          "delta": -3.5,
+          "kb": 308,
+          "delta": -3.2,
           "isBest": false
         },
         "minimize": {
-          "kb": 331,
-          "delta": -0.8,
+          "kb": 316,
+          "delta": -0.6,
           "isBest": false
         }
       }
@@ -1612,33 +2174,33 @@
     {
       "name": "Mondoweiss",
       "url": "https://mondoweiss.net/",
-      "kb": 343,
+      "kb": 348,
       "results": {
         "swchtml": {
-          "kb": 331,
+          "kb": 335,
           "delta": -3.7,
           "isBest": false
         },
         "minifier": {
-          "kb": 324,
-          "delta": -5.6,
+          "kb": 328,
+          "delta": -5.5,
           "isBest": true
         },
         "compressor": null,
         "htmlnano": {
-          "kb": 325,
-          "delta": -5.5,
+          "kb": 329,
+          "delta": -5.4,
           "isBest": false
         },
         "minify": null,
         "minifyhtml": {
-          "kb": 328,
-          "delta": -4.4,
+          "kb": 332,
+          "delta": -4.3,
           "isBest": false
         },
         "minimize": {
-          "kb": 330,
-          "delta": -4.1,
+          "kb": 334,
+          "delta": -4,
           "isBest": false
         }
       }
@@ -1684,33 +2246,33 @@
     {
       "name": "Nikkei",
       "url": "https://www.nikkei.com/",
-      "kb": 709,
+      "kb": 712,
       "results": {
         "swchtml": {
-          "kb": 671,
+          "kb": 674,
           "delta": -5.4,
           "isBest": false
         },
         "minifier": {
-          "kb": 642,
+          "kb": 645,
           "delta": -9.5,
           "isBest": true
         },
         "compressor": null,
         "htmlnano": {
-          "kb": 658,
+          "kb": 661,
           "delta": -7.2,
           "isBest": false
         },
         "minify": null,
         "minifyhtml": {
-          "kb": 661,
+          "kb": 664,
           "delta": -6.7,
           "isBest": false
         },
         "minimize": {
-          "kb": 700,
-          "delta": -1.3,
+          "kb": 703,
+          "delta": -1.4,
           "isBest": false
         }
       }
@@ -1749,6 +2311,40 @@
         "minimize": {
           "kb": 120,
           "delta": -2.9,
+          "isBest": false
+        }
+      }
+    },
+    {
+      "name": "Open Net Korea",
+      "url": "https://www.opennetkorea.org/",
+      "kb": 325,
+      "results": {
+        "swchtml": {
+          "kb": 319,
+          "delta": -1.6,
+          "isBest": false
+        },
+        "minifier": {
+          "kb": 316,
+          "delta": -2.6,
+          "isBest": true
+        },
+        "compressor": null,
+        "htmlnano": {
+          "kb": 316,
+          "delta": -2.5,
+          "isBest": false
+        },
+        "minify": null,
+        "minifyhtml": {
+          "kb": 318,
+          "delta": -1.9,
+          "isBest": false
+        },
+        "minimize": {
+          "kb": 319,
+          "delta": -1.7,
           "isBest": false
         }
       }
@@ -1803,7 +2399,7 @@
         },
         "minifier": {
           "kb": 146,
-          "delta": -17.2,
+          "delta": -17.3,
           "isBest": true
         },
         "compressor": {
@@ -1846,7 +2442,7 @@
         },
         "compressor": {
           "kb": 143,
-          "delta": -2.2,
+          "delta": -2.1,
           "isBest": false
         },
         "htmlnano": {
@@ -1863,6 +2459,44 @@
         "minimize": {
           "kb": 143,
           "delta": -2.2,
+          "isBest": false
+        }
+      }
+    },
+    {
+      "name": "PC Watch",
+      "url": "https://pc.watch.impress.co.jp/",
+      "kb": 184,
+      "results": {
+        "swchtml": {
+          "kb": 179,
+          "delta": -2.9,
+          "isBest": false
+        },
+        "minifier": {
+          "kb": 171,
+          "delta": -7.2,
+          "isBest": true
+        },
+        "compressor": {
+          "kb": 179,
+          "delta": -2.7,
+          "isBest": false
+        },
+        "htmlnano": {
+          "kb": 171,
+          "delta": -7,
+          "isBest": false
+        },
+        "minify": null,
+        "minifyhtml": {
+          "kb": 174,
+          "delta": -5.3,
+          "isBest": false
+        },
+        "minimize": {
+          "kb": 179,
+          "delta": -2.5,
           "isBest": false
         }
       }
@@ -1901,6 +2535,44 @@
         "minimize": {
           "kb": 76,
           "delta": -2.4,
+          "isBest": false
+        }
+      }
+    },
+    {
+      "name": "Pollicy",
+      "url": "https://pollicy.org/",
+      "kb": 83,
+      "results": {
+        "swchtml": {
+          "kb": 61,
+          "delta": -26.3,
+          "isBest": false
+        },
+        "minifier": {
+          "kb": 61,
+          "delta": -27.2,
+          "isBest": true
+        },
+        "compressor": {
+          "kb": 63,
+          "delta": -24.7,
+          "isBest": false
+        },
+        "htmlnano": {
+          "kb": 61,
+          "delta": -26.5,
+          "isBest": false
+        },
+        "minify": null,
+        "minifyhtml": {
+          "kb": 62,
+          "delta": -25.3,
+          "isBest": false
+        },
+        "minimize": {
+          "kb": 63,
+          "delta": -24.6,
           "isBest": false
         }
       }
@@ -1977,6 +2649,40 @@
         "minimize": {
           "kb": 136,
           "delta": -1.3,
+          "isBest": false
+        }
+      }
+    },
+    {
+      "name": "Rappler",
+      "url": "https://www.rappler.com/",
+      "kb": 786,
+      "results": {
+        "swchtml": {
+          "kb": 750,
+          "delta": -4.6,
+          "isBest": false
+        },
+        "minifier": {
+          "kb": 745,
+          "delta": -5.3,
+          "isBest": true
+        },
+        "compressor": null,
+        "htmlnano": {
+          "kb": 749,
+          "delta": -4.7,
+          "isBest": false
+        },
+        "minify": null,
+        "minifyhtml": {
+          "kb": 750,
+          "delta": -4.6,
+          "isBest": false
+        },
+        "minimize": {
+          "kb": 758,
+          "delta": -3.6,
           "isBest": false
         }
       }
@@ -2136,37 +2842,37 @@
     {
       "name": "SFLC.in",
       "url": "https://sflc.in/",
-      "kb": 171,
+      "kb": 169,
       "results": {
         "swchtml": {
-          "kb": 168,
+          "kb": 166,
           "delta": -1.7,
           "isBest": false
         },
         "minifier": {
-          "kb": 164,
+          "kb": 163,
           "delta": -3.6,
           "isBest": true
         },
         "compressor": {
-          "kb": 168,
-          "delta": -1.4,
+          "kb": 166,
+          "delta": -1.5,
           "isBest": false
         },
         "htmlnano": {
-          "kb": 165,
+          "kb": 163,
           "delta": -3.4,
           "isBest": false
         },
         "minify": null,
         "minifyhtml": {
-          "kb": 167,
+          "kb": 165,
           "delta": -2.2,
           "isBest": false
         },
         "minimize": {
-          "kb": 168,
-          "delta": -1.3,
+          "kb": 166,
+          "delta": -1.4,
           "isBest": false
         }
       }
@@ -2174,36 +2880,36 @@
     {
       "name": "SitePoint",
       "url": "https://www.sitepoint.com/",
-      "kb": 224,
+      "kb": 225,
       "results": {
         "swchtml": {
-          "kb": 221,
+          "kb": 222,
           "delta": -1.3,
           "isBest": false
         },
         "minifier": {
-          "kb": 220,
-          "delta": -1.7,
+          "kb": 222,
+          "delta": -1.6,
           "isBest": true
         },
         "compressor": {
-          "kb": 222,
+          "kb": 224,
           "delta": -0.7,
           "isBest": false
         },
         "htmlnano": {
-          "kb": 220,
+          "kb": 222,
           "delta": -1.6,
           "isBest": false
         },
         "minify": null,
         "minifyhtml": {
-          "kb": 221,
+          "kb": 223,
           "delta": -1,
           "isBest": false
         },
         "minimize": {
-          "kb": 222,
+          "kb": 224,
           "delta": -0.7,
           "isBest": false
         }
@@ -2212,36 +2918,36 @@
     {
       "name": "Smashing Magazine",
       "url": "https://www.smashingmagazine.com/",
-      "kb": 287,
+      "kb": 282,
       "results": {
         "swchtml": {
-          "kb": 288,
+          "kb": 283,
           "delta": 0.2,
           "isBest": false
         },
         "minifier": {
-          "kb": 286,
+          "kb": 280,
           "delta": -0.6,
           "isBest": true
         },
         "compressor": {
-          "kb": 287,
+          "kb": 282,
           "delta": -0.1,
           "isBest": false
         },
         "htmlnano": {
-          "kb": 286,
+          "kb": 281,
           "delta": -0.4,
           "isBest": false
         },
         "minify": null,
         "minifyhtml": {
-          "kb": 286,
+          "kb": 281,
           "delta": -0.4,
           "isBest": false
         },
         "minimize": {
-          "kb": 287,
+          "kb": 282,
           "delta": 0,
           "isBest": false
         }
@@ -2326,33 +3032,71 @@
     {
       "name": "TAZ",
       "url": "https://taz.de/",
-      "kb": 405,
+      "kb": 381,
       "results": {
         "swchtml": {
-          "kb": 381,
-          "delta": -6,
+          "kb": 358,
+          "delta": -6.1,
           "isBest": false
         },
         "minifier": {
-          "kb": 355,
-          "delta": -12.3,
+          "kb": 333,
+          "delta": -12.6,
           "isBest": true
         },
         "compressor": null,
         "htmlnano": {
-          "kb": 372,
+          "kb": 350,
           "delta": -8.3,
           "isBest": false
         },
         "minify": null,
         "minifyhtml": {
-          "kb": 378,
-          "delta": -6.7,
+          "kb": 356,
+          "delta": -6.8,
           "isBest": false
         },
         "minimize": {
-          "kb": 379,
-          "delta": -6.4,
+          "kb": 357,
+          "delta": -6.5,
+          "isBest": false
+        }
+      }
+    },
+    {
+      "name": "TEDIC",
+      "url": "https://www.tedic.org/",
+      "kb": 95,
+      "results": {
+        "swchtml": {
+          "kb": 85,
+          "delta": -9.7,
+          "isBest": false
+        },
+        "minifier": {
+          "kb": 83,
+          "delta": -12.3,
+          "isBest": true
+        },
+        "compressor": {
+          "kb": 85,
+          "delta": -9.7,
+          "isBest": false
+        },
+        "htmlnano": {
+          "kb": 84,
+          "delta": -10.8,
+          "isBest": false
+        },
+        "minify": null,
+        "minifyhtml": {
+          "kb": 85,
+          "delta": -10.5,
+          "isBest": false
+        },
+        "minimize": {
+          "kb": 85,
+          "delta": -10.3,
           "isBest": false
         }
       }
@@ -2389,7 +3133,7 @@
           "isBest": false
         },
         "minimize": {
-          "kb": 89,
+          "kb": 88,
           "delta": -6,
           "isBest": false
         }
@@ -2398,7 +3142,7 @@
     {
       "name": "The Left",
       "url": "https://left.eu/",
-      "kb": 125,
+      "kb": 124,
       "results": {
         "swchtml": {
           "kb": 111,
@@ -2406,7 +3150,7 @@
           "isBest": false
         },
         "minifier": {
-          "kb": 108,
+          "kb": 107,
           "delta": -13.6,
           "isBest": true
         },
@@ -2423,12 +3167,50 @@
         "minify": null,
         "minifyhtml": {
           "kb": 110,
-          "delta": -11.4,
+          "delta": -11.5,
           "isBest": false
         },
         "minimize": {
           "kb": 114,
-          "delta": -8.2,
+          "delta": -8.3,
+          "isBest": false
+        }
+      }
+    },
+    {
+      "name": "Toss Tech",
+      "url": "https://toss.tech/",
+      "kb": 283,
+      "results": {
+        "swchtml": {
+          "kb": 283,
+          "delta": -0.2,
+          "isBest": false
+        },
+        "minifier": {
+          "kb": 281,
+          "delta": -0.9,
+          "isBest": true
+        },
+        "compressor": {
+          "kb": 282,
+          "delta": -0.5,
+          "isBest": false
+        },
+        "htmlnano": {
+          "kb": 281,
+          "delta": -0.9,
+          "isBest": false
+        },
+        "minify": null,
+        "minifyhtml": {
+          "kb": 281,
+          "delta": -0.7,
+          "isBest": false
+        },
+        "minimize": {
+          "kb": 282,
+          "delta": -0.6,
           "isBest": false
         }
       }
@@ -2474,33 +3256,33 @@
     {
       "name": "Track AIPAC",
       "url": "https://www.trackaipac.com/",
-      "kb": 449,
+      "kb": 575,
       "results": {
         "swchtml": {
-          "kb": 412,
-          "delta": -8.3,
+          "kb": 538,
+          "delta": -6.5,
           "isBest": false
         },
         "minifier": {
-          "kb": 215,
-          "delta": -52.2,
+          "kb": 214,
+          "delta": -62.7,
           "isBest": true
         },
         "compressor": null,
         "htmlnano": {
-          "kb": 410,
-          "delta": -8.7,
+          "kb": 536,
+          "delta": -6.8,
           "isBest": false
         },
         "minify": null,
         "minifyhtml": {
-          "kb": 410,
-          "delta": -8.7,
+          "kb": 536,
+          "delta": -6.8,
           "isBest": false
         },
         "minimize": {
-          "kb": 228,
-          "delta": -49.3,
+          "kb": 227,
+          "delta": -60.5,
           "isBest": false
         }
       }
@@ -2508,32 +3290,32 @@
     {
       "name": "United Nations",
       "url": "https://www.un.org/en/",
-      "kb": 162,
+      "kb": 161,
       "results": {
         "swchtml": {
-          "kb": 141,
+          "kb": 140,
           "delta": -12.9,
           "isBest": false
         },
         "minifier": {
           "kb": 134,
-          "delta": -16.9,
+          "delta": -17,
           "isBest": true
         },
         "compressor": {
-          "kb": 141,
+          "kb": 140,
           "delta": -12.9,
           "isBest": false
         },
         "htmlnano": {
           "kb": 134,
-          "delta": -16.8,
+          "delta": -16.9,
           "isBest": false
         },
         "minify": null,
         "minifyhtml": {
           "kb": 138,
-          "delta": -14.3,
+          "delta": -14.4,
           "isBest": false
         },
         "minimize": {
@@ -2609,11 +3391,11 @@
         "minify": null,
         "minifyhtml": {
           "kb": 40,
-          "delta": -19.1,
+          "delta": -19.2,
           "isBest": false
         },
         "minimize": {
-          "kb": 41,
+          "kb": 40,
           "delta": -17.9,
           "isBest": false
         }
@@ -2622,36 +3404,36 @@
     {
       "name": "Wikipedia",
       "url": "https://en.wikipedia.org/wiki/Main_Page",
-      "kb": 247,
+      "kb": 253,
       "results": {
         "swchtml": {
-          "kb": 239,
+          "kb": 245,
           "delta": -3.1,
           "isBest": false
         },
         "minifier": {
-          "kb": 229,
-          "delta": -7.5,
+          "kb": 234,
+          "delta": -7.4,
           "isBest": true
         },
         "compressor": {
-          "kb": 236,
+          "kb": 241,
           "delta": -4.6,
           "isBest": false
         },
         "htmlnano": {
-          "kb": 229,
-          "delta": -7.4,
+          "kb": 234,
+          "delta": -7.3,
           "isBest": false
         },
         "minify": null,
         "minifyhtml": {
-          "kb": 232,
+          "kb": 237,
           "delta": -6,
           "isBest": false
         },
         "minimize": {
-          "kb": 236,
+          "kb": 241,
           "delta": -4.6,
           "isBest": false
         }
@@ -2660,37 +3442,37 @@
     {
       "name": "WordPress Blog",
       "url": "https://wordpress.com/blog/",
-      "kb": 221,
+      "kb": 223,
       "results": {
         "swchtml": {
-          "kb": 204,
-          "delta": -7.7,
+          "kb": 206,
+          "delta": -7.6,
           "isBest": false
         },
         "minifier": {
-          "kb": 201,
+          "kb": 202,
           "delta": -9.2,
           "isBest": true
         },
         "compressor": {
-          "kb": 205,
+          "kb": 207,
           "delta": -7.3,
           "isBest": false
         },
         "htmlnano": {
-          "kb": 201,
+          "kb": 203,
           "delta": -8.9,
           "isBest": false
         },
         "minify": null,
         "minifyhtml": {
-          "kb": 202,
-          "delta": -8.4,
+          "kb": 204,
+          "delta": -8.3,
           "isBest": false
         },
         "minimize": {
-          "kb": 205,
-          "delta": -7.2,
+          "kb": 207,
+          "delta": -7.1,
           "isBest": false
         }
       }
@@ -2701,34 +3483,34 @@
       "kb": 80,
       "results": {
         "swchtml": {
-          "kb": 57,
-          "delta": -29.1,
+          "kb": 56,
+          "delta": -29.3,
           "isBest": false
         },
         "minifier": {
           "kb": 56,
-          "delta": -29.5,
+          "delta": -29.7,
           "isBest": true
         },
         "compressor": {
           "kb": 57,
-          "delta": -28.1,
+          "delta": -28.2,
           "isBest": false
         },
         "htmlnano": {
           "kb": 56,
-          "delta": -29.3,
+          "delta": -29.5,
           "isBest": false
         },
         "minify": null,
         "minifyhtml": {
           "kb": 57,
-          "delta": -28.7,
+          "delta": -28.8,
           "isBest": false
         },
         "minimize": {
           "kb": 57,
-          "delta": -28.1,
+          "delta": -28.2,
           "isBest": false
         }
       }
