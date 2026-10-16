@@ -12,6 +12,7 @@ const html = `<!DOCTYPE html>
 <html>
 <head>
 <title>Test</title>
+<meta charset="utf-8" />
 <style>
   p { color: #ff0000; }
 </style>
@@ -50,6 +51,18 @@ describe('createMinifiers', () => {
       }
     });
   }
+
+  it('Removes optional attribute value quotes with every minifier', async () => {
+    for (const [name, output] of Object.entries(await minifyAll(true))) {
+      assert.ok(output.includes('class=a'), name);
+    }
+  });
+
+  it('Removes void element slashes with every minifier', async () => {
+    for (const [name, output] of Object.entries(await minifyAll(true))) {
+      assert.ok(!output.includes('/>'), name);
+    }
+  });
 
   it('Leaves CSS and JavaScript unminified in HTML mode (except for minify, which can’t and only runs in max mode)', async () => {
     const { minify, ...outputs } = await minifyAll(true);

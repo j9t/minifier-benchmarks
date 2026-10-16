@@ -36,8 +36,8 @@ export function createMinifiers({ isHtmlOnly, minifierConfig }) {
           normalizeAttributes: true,
           removeEmptyMetadataElements: true,
           minifyConditionalComments: true,
-          tagOmission: true,
-          quotes: true
+          quotes: false // `true` keeps (and adds) attribute value quotes
+          // tagOmission: true: @swc/html omits optional tags by default; an explicit `tagOmission: true` keeps void element slashes
         });
         return result.code;
       }
