@@ -2,8 +2,8 @@
   "mode": "max",
   "date": "2026-10-16",
   "environment": "Node.js 24.22.0, macOS 15.7.9, Apple M4",
-  "siteCount": 103,
-  "averageOriginalKb": 350,
+  "siteCount": 105,
+  "averageOriginalKb": 349,
   "minifiers": [
     {
       "id": "swchtml",
@@ -11,12 +11,12 @@
       "url": "https://github.com/swc-project/swc",
       "isRemote": false,
       "isExcluded": false,
-      "processed": 103,
-      "kb": 320,
-      "delta": -8.5,
+      "processed": 105,
+      "kb": 314,
+      "delta": -10,
       "isSmallest": false,
-      "averageMs": 25.4,
-      "medianMs": 12.2,
+      "averageMs": 23.5,
+      "medianMs": 11.3,
       "isTimeReliable": true,
       "isFastestAverage": false,
       "isFastestMedian": false
@@ -27,12 +27,12 @@
       "url": "https://github.com/j9t/html-minifier-next",
       "isRemote": false,
       "isExcluded": false,
-      "processed": 103,
-      "kb": 278,
-      "delta": -20.6,
+      "processed": 105,
+      "kb": 277,
+      "delta": -20.5,
       "isSmallest": true,
-      "averageMs": 41.3,
-      "medianMs": 18.3,
+      "averageMs": 38.4,
+      "medianMs": 18.4,
       "isTimeReliable": true,
       "isFastestAverage": false,
       "isFastestMedian": false
@@ -43,12 +43,12 @@
       "url": "https://htmlcompressor.com/",
       "isRemote": true,
       "isExcluded": false,
-      "processed": 74,
-      "kb": 339,
+      "processed": 75,
+      "kb": 338,
       "delta": -3,
       "isSmallest": false,
-      "averageMs": 826.6,
-      "medianMs": 778.3,
+      "averageMs": 947.4,
+      "medianMs": 783.4,
       "isTimeReliable": true,
       "isFastestAverage": false,
       "isFastestMedian": false
@@ -59,12 +59,12 @@
       "url": "https://github.com/maltsev/htmlnano",
       "isRemote": false,
       "isExcluded": false,
-      "processed": 103,
-      "kb": 281,
-      "delta": -19.7,
+      "processed": 105,
+      "kb": 280,
+      "delta": -19.6,
       "isSmallest": false,
-      "averageMs": 157,
-      "medianMs": 85.2,
+      "averageMs": 146.5,
+      "medianMs": 75.5,
       "isTimeReliable": true,
       "isFastestAverage": false,
       "isFastestMedian": false
@@ -75,12 +75,12 @@
       "url": "https://github.com/tdewolff/minify",
       "isRemote": false,
       "isExcluded": false,
-      "processed": 101,
-      "kb": 318,
-      "delta": -9,
+      "processed": 103,
+      "kb": 317,
+      "delta": -9.1,
       "isSmallest": false,
-      "averageMs": 7,
-      "medianMs": 4,
+      "averageMs": 6.7,
+      "medianMs": 3.7,
       "isTimeReliable": true,
       "isFastestAverage": true,
       "isFastestMedian": true
@@ -91,15 +91,15 @@
       "url": "https://github.com/wilsonzlin/minify-html",
       "isRemote": false,
       "isExcluded": false,
-      "processed": 103,
-      "kb": 319,
+      "processed": 105,
+      "kb": 318,
       "delta": -8.9,
       "isSmallest": false,
-      "averageMs": 8.2,
-      "medianMs": 4.1,
+      "averageMs": 7.8,
+      "medianMs": 3.9,
       "isTimeReliable": true,
       "isFastestAverage": false,
-      "isFastestMedian": true
+      "isFastestMedian": false
     },
     {
       "id": "minimize",
@@ -107,12 +107,12 @@
       "url": "https://github.com/Swaagie/minimize",
       "isRemote": false,
       "isExcluded": false,
-      "processed": 103,
-      "kb": 326,
+      "processed": 105,
+      "kb": 325,
       "delta": -6.7,
       "isSmallest": false,
-      "averageMs": 119.4,
-      "medianMs": 33.9,
+      "averageMs": 115.8,
+      "medianMs": 34.1,
       "isTimeReliable": true,
       "isFastestAverage": false,
       "isFastestMedian": false
@@ -125,8 +125,8 @@
       "kb": 105,
       "results": {
         "swchtml": {
-          "kb": 82,
-          "delta": -21.9,
+          "kb": 79,
+          "delta": -24.6,
           "isBest": false
         },
         "minifier": {
@@ -167,8 +167,8 @@
       "kb": 64,
       "results": {
         "swchtml": {
-          "kb": 58,
-          "delta": -9.2,
+          "kb": 57,
+          "delta": -11,
           "isBest": false
         },
         "minifier": {
@@ -204,13 +204,55 @@
       }
     },
     {
+      "name": "accessibility.nl",
+      "url": "https://www.accessibility.nl/",
+      "kb": 136,
+      "results": {
+        "swchtml": {
+          "kb": 111,
+          "delta": -18.1,
+          "isBest": false
+        },
+        "minifier": {
+          "kb": 108,
+          "delta": -20.7,
+          "isBest": false
+        },
+        "compressor": {
+          "kb": 113,
+          "delta": -16.9,
+          "isBest": false
+        },
+        "htmlnano": {
+          "kb": 107,
+          "delta": -21.1,
+          "isBest": true
+        },
+        "minify": {
+          "kb": 112,
+          "delta": -17.6,
+          "isBest": false
+        },
+        "minifyhtml": {
+          "kb": 112,
+          "delta": -17.6,
+          "isBest": false
+        },
+        "minimize": {
+          "kb": 113,
+          "delta": -16.8,
+          "isBest": false
+        }
+      }
+    },
+    {
       "name": "African Declaration on Internet Rights",
       "url": "https://africaninternetrights.net/",
       "kb": 62,
       "results": {
         "swchtml": {
-          "kb": 51,
-          "delta": -17.7,
+          "kb": 50,
+          "delta": -20.4,
           "isBest": false
         },
         "minifier": {
@@ -251,8 +293,8 @@
       "kb": 497,
       "results": {
         "swchtml": {
-          "kb": 443,
-          "delta": -10.7,
+          "kb": 436,
+          "delta": -12.2,
           "isBest": false
         },
         "minifier": {
@@ -289,8 +331,8 @@
       "kb": 197,
       "results": {
         "swchtml": {
-          "kb": 161,
-          "delta": -18.4,
+          "kb": 159,
+          "delta": -19.5,
           "isBest": false
         },
         "minifier": {
@@ -324,36 +366,36 @@
     {
       "name": "BBC",
       "url": "https://www.bbc.co.uk/",
-      "kb": 798,
+      "kb": 791,
       "results": {
         "swchtml": {
-          "kb": 752,
-          "delta": -5.8,
+          "kb": 739,
+          "delta": -6.5,
           "isBest": false
         },
         "minifier": {
-          "kb": 734,
+          "kb": 727,
           "delta": -8.1,
           "isBest": true
         },
         "compressor": null,
         "htmlnano": {
-          "kb": 736,
+          "kb": 729,
           "delta": -7.8,
           "isBest": false
         },
         "minify": {
-          "kb": 759,
+          "kb": 753,
           "delta": -4.8,
           "isBest": false
         },
         "minifyhtml": {
-          "kb": 747,
+          "kb": 740,
           "delta": -6.3,
           "isBest": false
         },
         "minimize": {
-          "kb": 792,
+          "kb": 784,
           "delta": -0.8,
           "isBest": false
         }
@@ -365,8 +407,8 @@
       "kb": 100,
       "results": {
         "swchtml": {
-          "kb": 84,
-          "delta": -15.4,
+          "kb": 83,
+          "delta": -17.3,
           "isBest": false
         },
         "minifier": {
@@ -408,7 +450,7 @@
       "results": {
         "swchtml": {
           "kb": 33,
-          "delta": -6.8,
+          "delta": -8.7,
           "isBest": false
         },
         "minifier": {
@@ -446,40 +488,40 @@
     {
       "name": "Canaltech",
       "url": "https://canaltech.com.br/",
-      "kb": 271,
+      "kb": 273,
       "results": {
         "swchtml": {
-          "kb": 257,
-          "delta": -5.3,
+          "kb": 256,
+          "delta": -6.2,
           "isBest": false
         },
         "minifier": {
-          "kb": 204,
+          "kb": 206,
           "delta": -24.8,
           "isBest": true
         },
         "compressor": {
-          "kb": 268,
+          "kb": 270,
           "delta": -1.3,
           "isBest": false
         },
         "htmlnano": {
-          "kb": 204,
-          "delta": -24.6,
+          "kb": 206,
+          "delta": -24.7,
           "isBest": false
         },
         "minify": {
-          "kb": 254,
+          "kb": 257,
           "delta": -6.2,
           "isBest": false
         },
         "minifyhtml": {
-          "kb": 257,
+          "kb": 259,
           "delta": -5.3,
           "isBest": false
         },
         "minimize": {
-          "kb": 268,
+          "kb": 270,
           "delta": -1.2,
           "isBest": false
         }
@@ -491,8 +533,8 @@
       "kb": 292,
       "results": {
         "swchtml": {
-          "kb": 264,
-          "delta": -9.4,
+          "kb": 262,
+          "delta": -10.3,
           "isBest": false
         },
         "minifier": {
@@ -533,8 +575,8 @@
       "kb": 34,
       "results": {
         "swchtml": {
-          "kb": 31,
-          "delta": -7.8,
+          "kb": 30,
+          "delta": -10,
           "isBest": false
         },
         "minifier": {
@@ -575,8 +617,8 @@
       "kb": 120,
       "results": {
         "swchtml": {
-          "kb": 102,
-          "delta": -14.6,
+          "kb": 100,
+          "delta": -16.6,
           "isBest": false
         },
         "minifier": {
@@ -617,8 +659,8 @@
       "kb": 113,
       "results": {
         "swchtml": {
-          "kb": 108,
-          "delta": -4.5,
+          "kb": 107,
+          "delta": -5.2,
           "isBest": false
         },
         "minifier": {
@@ -659,8 +701,8 @@
       "kb": 111,
       "results": {
         "swchtml": {
-          "kb": 95,
-          "delta": -14.4,
+          "kb": 93,
+          "delta": -16,
           "isBest": false
         },
         "minifier": {
@@ -701,8 +743,8 @@
       "kb": 278,
       "results": {
         "swchtml": {
-          "kb": 219,
-          "delta": -21.4,
+          "kb": 216,
+          "delta": -22.4,
           "isBest": false
         },
         "minifier": {
@@ -743,8 +785,8 @@
       "kb": 23,
       "results": {
         "swchtml": {
-          "kb": 17,
-          "delta": -28.7,
+          "kb": 16,
+          "delta": -30.5,
           "isBest": false
         },
         "minifier": {
@@ -785,8 +827,8 @@
       "kb": 255,
       "results": {
         "swchtml": {
-          "kb": 176,
-          "delta": -30.9,
+          "kb": 173,
+          "delta": -32.1,
           "isBest": false
         },
         "minifier": {
@@ -824,15 +866,15 @@
     {
       "name": "DLR",
       "url": "https://www.dlr.de/",
-      "kb": 545,
+      "kb": 546,
       "results": {
         "swchtml": {
-          "kb": 512,
-          "delta": -6.1,
+          "kb": 510,
+          "delta": -6.5,
           "isBest": false
         },
         "minifier": {
-          "kb": 503,
+          "kb": 504,
           "delta": -7.7,
           "isBest": false
         },
@@ -848,7 +890,7 @@
           "isBest": false
         },
         "minifyhtml": {
-          "kb": 504,
+          "kb": 505,
           "delta": -7.5,
           "isBest": false
         },
@@ -865,8 +907,8 @@
       "kb": 7450,
       "results": {
         "swchtml": {
-          "kb": 7085,
-          "delta": -4.9,
+          "kb": 6859,
+          "delta": -7.9,
           "isBest": false
         },
         "minifier": {
@@ -903,8 +945,8 @@
       "kb": 84,
       "results": {
         "swchtml": {
-          "kb": 74,
-          "delta": -11.1,
+          "kb": 73,
+          "delta": -12.6,
           "isBest": false
         },
         "minifier": {
@@ -945,8 +987,8 @@
       "kb": 54,
       "results": {
         "swchtml": {
-          "kb": 48,
-          "delta": -11,
+          "kb": 47,
+          "delta": -13.4,
           "isBest": false
         },
         "minifier": {
@@ -955,13 +997,13 @@
           "isBest": true
         },
         "compressor": {
-          "kb": 49,
+          "kb": 48,
           "delta": -10.2,
           "isBest": false
         },
         "htmlnano": {
           "kb": 44,
-          "delta": -18.2,
+          "delta": -18.3,
           "isBest": false
         },
         "minify": {
@@ -971,12 +1013,12 @@
         },
         "minifyhtml": {
           "kb": 47,
-          "delta": -12.2,
+          "delta": -12.3,
           "isBest": false
         },
         "minimize": {
           "kb": 49,
-          "delta": -9.7,
+          "delta": -9.8,
           "isBest": false
         }
       }
@@ -984,26 +1026,26 @@
     {
       "name": "ELLE",
       "url": "https://www.elle.com/",
-      "kb": 726,
+      "kb": 725,
       "results": {
         "swchtml": {
-          "kb": 710,
-          "delta": -2.2,
+          "kb": 705,
+          "delta": -2.7,
           "isBest": false
         },
         "minifier": {
-          "kb": 696,
-          "delta": -4.1,
+          "kb": 695,
+          "delta": -4.2,
           "isBest": true
         },
         "compressor": null,
         "htmlnano": {
-          "kb": 700,
+          "kb": 699,
           "delta": -3.5,
           "isBest": false
         },
         "minify": {
-          "kb": 718,
+          "kb": 717,
           "delta": -1.1,
           "isBest": false
         },
@@ -1013,7 +1055,7 @@
           "isBest": false
         },
         "minimize": {
-          "kb": 721,
+          "kb": 720,
           "delta": -0.7,
           "isBest": false
         }
@@ -1025,8 +1067,8 @@
       "kb": 240,
       "results": {
         "swchtml": {
-          "kb": 194,
-          "delta": -18.9,
+          "kb": 191,
+          "delta": -20.1,
           "isBest": false
         },
         "minifier": {
@@ -1068,7 +1110,7 @@
       "results": {
         "swchtml": {
           "kb": 33,
-          "delta": -33.1,
+          "delta": -34.2,
           "isBest": false
         },
         "minifier": {
@@ -1078,17 +1120,17 @@
         },
         "compressor": {
           "kb": 33,
-          "delta": -32.9,
+          "delta": -33,
           "isBest": false
         },
         "htmlnano": {
           "kb": 31,
-          "delta": -37.7,
+          "delta": -37.8,
           "isBest": true
         },
         "minify": {
           "kb": 33,
-          "delta": -33.8,
+          "delta": -33.9,
           "isBest": false
         },
         "minifyhtml": {
@@ -1109,8 +1151,8 @@
       "kb": 439,
       "results": {
         "swchtml": {
-          "kb": 429,
-          "delta": -2.3,
+          "kb": 427,
+          "delta": -2.7,
           "isBest": false
         },
         "minifier": {
@@ -1147,8 +1189,8 @@
       "kb": 298,
       "results": {
         "swchtml": {
-          "kb": 284,
-          "delta": -4.5,
+          "kb": 281,
+          "delta": -5.5,
           "isBest": false
         },
         "minifier": {
@@ -1185,8 +1227,8 @@
       "kb": 211,
       "results": {
         "swchtml": {
-          "kb": 197,
-          "delta": -6.7,
+          "kb": 194,
+          "delta": -7.8,
           "isBest": false
         },
         "minifier": {
@@ -1224,36 +1266,36 @@
     {
       "name": "FAZ",
       "url": "https://www.faz.net/aktuell/",
-      "kb": 1396,
+      "kb": 1386,
       "results": {
         "swchtml": {
-          "kb": 1279,
-          "delta": -8.3,
+          "kb": 1255,
+          "delta": -9.5,
           "isBest": false
         },
         "minifier": {
-          "kb": 1168,
-          "delta": -16.3,
+          "kb": 1158,
+          "delta": -16.4,
           "isBest": false
         },
         "compressor": null,
         "htmlnano": {
-          "kb": 1152,
+          "kb": 1143,
           "delta": -17.5,
           "isBest": true
         },
         "minify": {
-          "kb": 1336,
+          "kb": 1326,
           "delta": -4.3,
           "isBest": false
         },
         "minifyhtml": {
-          "kb": 1331,
-          "delta": -4.6,
+          "kb": 1321,
+          "delta": -4.7,
           "isBest": false
         },
         "minimize": {
-          "kb": 1336,
+          "kb": 1326,
           "delta": -4.3,
           "isBest": false
         }
@@ -1262,36 +1304,36 @@
     {
       "name": "Folha de S.Paulo",
       "url": "https://www.folha.uol.com.br/",
-      "kb": 957,
+      "kb": 972,
       "results": {
         "swchtml": {
           "kb": 821,
-          "delta": -14.2,
+          "delta": -15.5,
           "isBest": false
         },
         "minifier": {
-          "kb": 706,
-          "delta": -26.2,
+          "kb": 718,
+          "delta": -26.1,
           "isBest": true
         },
         "compressor": null,
         "htmlnano": {
-          "kb": 734,
-          "delta": -23.3,
+          "kb": 747,
+          "delta": -23.2,
           "isBest": false
         },
         "minify": {
-          "kb": 795,
-          "delta": -16.9,
+          "kb": 809,
+          "delta": -16.8,
           "isBest": false
         },
         "minifyhtml": {
-          "kb": 830,
-          "delta": -13.3,
+          "kb": 843,
+          "delta": -13.2,
           "isBest": false
         },
         "minimize": {
-          "kb": 830,
+          "kb": 844,
           "delta": -13.2,
           "isBest": false
         }
@@ -1303,8 +1345,8 @@
       "kb": 120,
       "results": {
         "swchtml": {
-          "kb": 111,
-          "delta": -7.3,
+          "kb": 110,
+          "delta": -8.4,
           "isBest": false
         },
         "minifier": {
@@ -1345,8 +1387,8 @@
       "kb": 187,
       "results": {
         "swchtml": {
-          "kb": 131,
-          "delta": -29.9,
+          "kb": 129,
+          "delta": -30.7,
           "isBest": false
         },
         "minifier": {
@@ -1387,8 +1429,8 @@
       "kb": 54,
       "results": {
         "swchtml": {
-          "kb": 51,
-          "delta": -5.6,
+          "kb": 49,
+          "delta": -8.6,
           "isBest": false
         },
         "minifier": {
@@ -1426,15 +1468,15 @@
     {
       "name": "Frontend Dogma",
       "url": "https://frontenddogma.com/",
-      "kb": 228,
+      "kb": 229,
       "results": {
         "swchtml": {
-          "kb": 238,
-          "delta": 4.2,
+          "kb": 227,
+          "delta": -0.7,
           "isBest": false
         },
         "minifier": {
-          "kb": 221,
+          "kb": 222,
           "delta": -3.1,
           "isBest": true
         },
@@ -1444,17 +1486,17 @@
           "isBest": false
         },
         "htmlnano": {
-          "kb": 221,
+          "kb": 222,
           "delta": -3.1,
           "isBest": false
         },
         "minify": {
-          "kb": 228,
+          "kb": 229,
           "delta": 0,
           "isBest": false
         },
         "minifyhtml": {
-          "kb": 228,
+          "kb": 229,
           "delta": 0,
           "isBest": false
         },
@@ -1472,7 +1514,7 @@
       "results": {
         "swchtml": {
           "kb": 12,
-          "delta": -18.2,
+          "delta": -19.5,
           "isBest": false
         },
         "minifier": {
@@ -1513,8 +1555,8 @@
       "kb": 1839,
       "results": {
         "swchtml": {
-          "kb": 1786,
-          "delta": -2.9,
+          "kb": 1775,
+          "delta": -3.4,
           "isBest": false
         },
         "minifier": {
@@ -1524,8 +1566,8 @@
         },
         "compressor": null,
         "htmlnano": {
-          "kb": 1432,
-          "delta": -22.1,
+          "kb": 1431,
+          "delta": -22.2,
           "isBest": false
         },
         "minify": {
@@ -1548,36 +1590,36 @@
     {
       "name": "Ground News",
       "url": "https://ground.news/",
-      "kb": 2132,
+      "kb": 2156,
       "results": {
         "swchtml": {
-          "kb": 2000,
-          "delta": -6.2,
+          "kb": 2015,
+          "delta": -6.6,
           "isBest": false
         },
         "minifier": {
-          "kb": 1913,
+          "kb": 1935,
           "delta": -10.3,
           "isBest": true
         },
         "compressor": null,
         "htmlnano": {
-          "kb": 1936,
+          "kb": 1958,
           "delta": -9.2,
           "isBest": false
         },
         "minify": {
-          "kb": 1997,
+          "kb": 2019,
           "delta": -6.3,
           "isBest": false
         },
         "minifyhtml": {
-          "kb": 1995,
+          "kb": 2018,
           "delta": -6.4,
           "isBest": false
         },
         "minimize": {
-          "kb": 2118,
+          "kb": 2142,
           "delta": -0.7,
           "isBest": false
         }
@@ -1586,36 +1628,36 @@
     {
       "name": "heise online",
       "url": "https://www.heise.de/",
-      "kb": 905,
+      "kb": 930,
       "results": {
         "swchtml": {
-          "kb": 896,
-          "delta": -1,
+          "kb": 908,
+          "delta": -2.3,
           "isBest": false
         },
         "minifier": {
-          "kb": 862,
-          "delta": -4.8,
+          "kb": 887,
+          "delta": -4.7,
           "isBest": true
         },
         "compressor": null,
         "htmlnano": {
-          "kb": 865,
-          "delta": -4.5,
+          "kb": 889,
+          "delta": -4.4,
           "isBest": false
         },
         "minify": {
-          "kb": 868,
-          "delta": -4.1,
+          "kb": 893,
+          "delta": -4,
           "isBest": false
         },
         "minifyhtml": {
-          "kb": 886,
+          "kb": 911,
           "delta": -2.1,
           "isBest": false
         },
         "minimize": {
-          "kb": 890,
+          "kb": 914,
           "delta": -1.7,
           "isBest": false
         }
@@ -1628,7 +1670,7 @@
       "results": {
         "swchtml": {
           "kb": 55,
-          "delta": -10.7,
+          "delta": -11.9,
           "isBest": false
         },
         "minifier": {
@@ -1669,8 +1711,8 @@
       "kb": 393,
       "results": {
         "swchtml": {
-          "kb": 365,
-          "delta": -7.1,
+          "kb": 359,
+          "delta": -8.6,
           "isBest": false
         },
         "minifier": {
@@ -1707,14 +1749,14 @@
       "kb": 123,
       "results": {
         "swchtml": {
-          "kb": 119,
-          "delta": -3.1,
-          "isBest": false
+          "kb": 118,
+          "delta": -3.6,
+          "isBest": true
         },
         "minifier": {
           "kb": 119,
           "delta": -3.4,
-          "isBest": true
+          "isBest": false
         },
         "compressor": {
           "kb": 121,
@@ -1749,14 +1791,14 @@
       "kb": 151,
       "results": {
         "swchtml": {
-          "kb": 154,
-          "delta": 1.8,
-          "isBest": false
+          "kb": 149,
+          "delta": -1.5,
+          "isBest": true
         },
         "minifier": {
           "kb": 151,
           "delta": -0.4,
-          "isBest": true
+          "isBest": false
         },
         "compressor": {
           "kb": 151,
@@ -1791,8 +1833,8 @@
       "kb": 272,
       "results": {
         "swchtml": {
-          "kb": 232,
-          "delta": -14.6,
+          "kb": 226,
+          "delta": -16.8,
           "isBest": false
         },
         "minifier": {
@@ -1817,7 +1859,7 @@
         },
         "minifyhtml": {
           "kb": 230,
-          "delta": -15.3,
+          "delta": -15.4,
           "isBest": false
         },
         "minimize": {
@@ -1833,8 +1875,8 @@
       "kb": 83,
       "results": {
         "swchtml": {
-          "kb": 34,
-          "delta": -58.6,
+          "kb": 33,
+          "delta": -59.9,
           "isBest": false
         },
         "minifier": {
@@ -1875,8 +1917,8 @@
       "kb": 44,
       "results": {
         "swchtml": {
-          "kb": 34,
-          "delta": -23.1,
+          "kb": 32,
+          "delta": -25.5,
           "isBest": false
         },
         "minifier": {
@@ -1917,8 +1959,8 @@
       "kb": 668,
       "results": {
         "swchtml": {
-          "kb": 643,
-          "delta": -3.7,
+          "kb": 640,
+          "delta": -4.2,
           "isBest": false
         },
         "minifier": {
@@ -1955,8 +1997,8 @@
       "kb": 152,
       "results": {
         "swchtml": {
-          "kb": 138,
-          "delta": -8.8,
+          "kb": 136,
+          "delta": -10.4,
           "isBest": false
         },
         "minifier": {
@@ -1997,13 +2039,13 @@
       "kb": 139,
       "results": {
         "swchtml": {
-          "kb": 82,
-          "delta": -40.8,
+          "kb": 80,
+          "delta": -42.5,
           "isBest": false
         },
         "minifier": {
           "kb": 77,
-          "delta": -44.3,
+          "delta": -44.2,
           "isBest": true
         },
         "compressor": {
@@ -2013,11 +2055,11 @@
         },
         "htmlnano": {
           "kb": 79,
-          "delta": -43.4,
+          "delta": -43.3,
           "isBest": false
         },
         "minify": {
-          "kb": 81,
+          "kb": 82,
           "delta": -41.3,
           "isBest": false
         },
@@ -2039,8 +2081,8 @@
       "kb": 313,
       "results": {
         "swchtml": {
-          "kb": 291,
-          "delta": -7,
+          "kb": 284,
+          "delta": -9.3,
           "isBest": false
         },
         "minifier": {
@@ -2077,8 +2119,8 @@
       "kb": 414,
       "results": {
         "swchtml": {
-          "kb": 345,
-          "delta": -16.6,
+          "kb": 342,
+          "delta": -17.4,
           "isBest": false
         },
         "minifier": {
@@ -2115,8 +2157,8 @@
       "kb": 54,
       "results": {
         "swchtml": {
-          "kb": 55,
-          "delta": 1.9,
+          "kb": 53,
+          "delta": -1.7,
           "isBest": false
         },
         "minifier": {
@@ -2157,8 +2199,8 @@
       "kb": 242,
       "results": {
         "swchtml": {
-          "kb": 216,
-          "delta": -10.9,
+          "kb": 214,
+          "delta": -11.8,
           "isBest": false
         },
         "minifier": {
@@ -2199,8 +2241,8 @@
       "kb": 946,
       "results": {
         "swchtml": {
-          "kb": 888,
-          "delta": -6.2,
+          "kb": 879,
+          "delta": -7.1,
           "isBest": false
         },
         "minifier": {
@@ -2237,8 +2279,8 @@
       "kb": 54,
       "results": {
         "swchtml": {
-          "kb": 43,
-          "delta": -19.9,
+          "kb": 42,
+          "delta": -21.2,
           "isBest": false
         },
         "minifier": {
@@ -2279,8 +2321,8 @@
       "kb": 29,
       "results": {
         "swchtml": {
-          "kb": 28,
-          "delta": -4,
+          "kb": 27,
+          "delta": -6.3,
           "isBest": false
         },
         "minifier": {
@@ -2318,36 +2360,36 @@
     {
       "name": "Leanpub",
       "url": "https://leanpub.com/",
-      "kb": 519,
+      "kb": 526,
       "results": {
         "swchtml": {
-          "kb": 495,
-          "delta": -4.6,
+          "kb": 496,
+          "delta": -5.7,
           "isBest": false
         },
         "minifier": {
-          "kb": 471,
+          "kb": 477,
           "delta": -9.3,
           "isBest": false
         },
         "compressor": null,
         "htmlnano": {
-          "kb": 469,
+          "kb": 476,
           "delta": -9.5,
           "isBest": true
         },
         "minify": {
-          "kb": 493,
+          "kb": 499,
           "delta": -5.1,
           "isBest": false
         },
         "minifyhtml": {
-          "kb": 490,
+          "kb": 497,
           "delta": -5.5,
           "isBest": false
         },
         "minimize": {
-          "kb": 510,
+          "kb": 518,
           "delta": -1.6,
           "isBest": false
         }
@@ -2359,8 +2401,8 @@
       "kb": 170,
       "results": {
         "swchtml": {
-          "kb": 166,
-          "delta": -2.5,
+          "kb": 164,
+          "delta": -3.6,
           "isBest": false
         },
         "minifier": {
@@ -2401,8 +2443,8 @@
       "kb": 17,
       "results": {
         "swchtml": {
-          "kb": 10,
-          "delta": -43.8,
+          "kb": 9,
+          "delta": -45.9,
           "isBest": false
         },
         "minifier": {
@@ -2443,8 +2485,8 @@
       "kb": 50,
       "results": {
         "swchtml": {
-          "kb": 47,
-          "delta": -5.4,
+          "kb": 46,
+          "delta": -8.3,
           "isBest": false
         },
         "minifier": {
@@ -2485,8 +2527,8 @@
       "kb": 119,
       "results": {
         "swchtml": {
-          "kb": 71,
-          "delta": -40.2,
+          "kb": 69,
+          "delta": -41.6,
           "isBest": false
         },
         "minifier": {
@@ -2527,8 +2569,8 @@
       "kb": 346,
       "results": {
         "swchtml": {
-          "kb": 305,
-          "delta": -11.8,
+          "kb": 298,
+          "delta": -13.8,
           "isBest": false
         },
         "minifier": {
@@ -2565,8 +2607,8 @@
       "kb": 318,
       "results": {
         "swchtml": {
-          "kb": 306,
-          "delta": -3.9,
+          "kb": 300,
+          "delta": -5.8,
           "isBest": false
         },
         "minifier": {
@@ -2603,8 +2645,8 @@
       "kb": 344,
       "results": {
         "swchtml": {
-          "kb": 325,
-          "delta": -5.6,
+          "kb": 322,
+          "delta": -6.3,
           "isBest": false
         },
         "minifier": {
@@ -2641,8 +2683,8 @@
       "kb": 47,
       "results": {
         "swchtml": {
-          "kb": 37,
-          "delta": -20.9,
+          "kb": 35,
+          "delta": -24.4,
           "isBest": false
         },
         "minifier": {
@@ -2683,8 +2725,8 @@
       "kb": 344,
       "results": {
         "swchtml": {
-          "kb": 311,
-          "delta": -9.5,
+          "kb": 307,
+          "delta": -10.6,
           "isBest": false
         },
         "minifier": {
@@ -2718,36 +2760,36 @@
     {
       "name": "Nikkei",
       "url": "https://www.nikkei.com/",
-      "kb": 710,
+      "kb": 708,
       "results": {
         "swchtml": {
-          "kb": 669,
-          "delta": -5.8,
+          "kb": 657,
+          "delta": -7.2,
           "isBest": false
         },
         "minifier": {
-          "kb": 626,
+          "kb": 624,
           "delta": -11.9,
           "isBest": true
         },
         "compressor": null,
         "htmlnano": {
-          "kb": 641,
+          "kb": 639,
           "delta": -9.8,
           "isBest": false
         },
         "minify": {
-          "kb": 685,
+          "kb": 683,
           "delta": -3.5,
           "isBest": false
         },
         "minifyhtml": {
-          "kb": 662,
+          "kb": 660,
           "delta": -6.8,
           "isBest": false
         },
         "minimize": {
-          "kb": 700,
+          "kb": 698,
           "delta": -1.4,
           "isBest": false
         }
@@ -2759,8 +2801,8 @@
       "kb": 46,
       "results": {
         "swchtml": {
-          "kb": 36,
-          "delta": -22.1,
+          "kb": 35,
+          "delta": -25.2,
           "isBest": false
         },
         "minifier": {
@@ -2801,8 +2843,8 @@
       "kb": 123,
       "results": {
         "swchtml": {
-          "kb": 114,
-          "delta": -7.4,
+          "kb": 113,
+          "delta": -8.3,
           "isBest": false
         },
         "minifier": {
@@ -2843,8 +2885,8 @@
       "kb": 325,
       "results": {
         "swchtml": {
-          "kb": 312,
-          "delta": -3.7,
+          "kb": 311,
+          "delta": -4.1,
           "isBest": false
         },
         "minifier": {
@@ -2881,8 +2923,8 @@
       "kb": 110,
       "results": {
         "swchtml": {
-          "kb": 99,
-          "delta": -10.6,
+          "kb": 98,
+          "delta": -11.4,
           "isBest": false
         },
         "minifier": {
@@ -2923,8 +2965,8 @@
       "kb": 186,
       "results": {
         "swchtml": {
-          "kb": 132,
-          "delta": -28.7,
+          "kb": 130,
+          "delta": -29.7,
           "isBest": false
         },
         "minifier": {
@@ -2965,8 +3007,8 @@
       "kb": 177,
       "results": {
         "swchtml": {
-          "kb": 148,
-          "delta": -16,
+          "kb": 145,
+          "delta": -18,
           "isBest": false
         },
         "minifier": {
@@ -3007,8 +3049,8 @@
       "kb": 146,
       "results": {
         "swchtml": {
-          "kb": 136,
-          "delta": -6.9,
+          "kb": 135,
+          "delta": -7.9,
           "isBest": false
         },
         "minifier": {
@@ -3049,8 +3091,8 @@
       "kb": 184,
       "results": {
         "swchtml": {
-          "kb": 161,
-          "delta": -12.7,
+          "kb": 156,
+          "delta": -15.1,
           "isBest": false
         },
         "minifier": {
@@ -3091,8 +3133,8 @@
       "kb": 78,
       "results": {
         "swchtml": {
-          "kb": 75,
-          "delta": -4,
+          "kb": 74,
+          "delta": -5.8,
           "isBest": false
         },
         "minifier": {
@@ -3133,8 +3175,8 @@
       "kb": 83,
       "results": {
         "swchtml": {
-          "kb": 61,
-          "delta": -26.6,
+          "kb": 60,
+          "delta": -28.3,
           "isBest": false
         },
         "minifier": {
@@ -3170,13 +3212,51 @@
       }
     },
     {
+      "name": "Proton",
+      "url": "https://proton.me/",
+      "kb": 417,
+      "results": {
+        "swchtml": {
+          "kb": 372,
+          "delta": -10.6,
+          "isBest": false
+        },
+        "minifier": {
+          "kb": 368,
+          "delta": -11.7,
+          "isBest": false
+        },
+        "compressor": null,
+        "htmlnano": {
+          "kb": 362,
+          "delta": -13.1,
+          "isBest": true
+        },
+        "minify": {
+          "kb": 376,
+          "delta": -9.7,
+          "isBest": false
+        },
+        "minifyhtml": {
+          "kb": 380,
+          "delta": -8.8,
+          "isBest": false
+        },
+        "minimize": {
+          "kb": 408,
+          "delta": -2,
+          "isBest": false
+        }
+      }
+    },
+    {
       "name": "Qiita",
       "url": "https://qiita.com/",
       "kb": 317,
       "results": {
         "swchtml": {
-          "kb": 305,
-          "delta": -3.8,
+          "kb": 299,
+          "delta": -5.7,
           "isBest": false
         },
         "minifier": {
@@ -3213,8 +3293,8 @@
       "kb": 37,
       "results": {
         "swchtml": {
-          "kb": 29,
-          "delta": -21.8,
+          "kb": 28,
+          "delta": -23.6,
           "isBest": false
         },
         "minifier": {
@@ -3255,8 +3335,8 @@
       "kb": 138,
       "results": {
         "swchtml": {
-          "kb": 122,
-          "delta": -11.4,
+          "kb": 121,
+          "delta": -12.2,
           "isBest": false
         },
         "minifier": {
@@ -3297,8 +3377,8 @@
       "kb": 785,
       "results": {
         "swchtml": {
-          "kb": 732,
-          "delta": -6.8,
+          "kb": 723,
+          "delta": -7.9,
           "isBest": false
         },
         "minifier": {
@@ -3335,8 +3415,8 @@
       "kb": 71,
       "results": {
         "swchtml": {
-          "kb": 65,
-          "delta": -8.5,
+          "kb": 64,
+          "delta": -9.2,
           "isBest": false
         },
         "minifier": {
@@ -3377,8 +3457,8 @@
       "kb": 184,
       "results": {
         "swchtml": {
-          "kb": 168,
-          "delta": -8.7,
+          "kb": 165,
+          "delta": -10.4,
           "isBest": false
         },
         "minifier": {
@@ -3420,7 +3500,7 @@
       "results": {
         "swchtml": {
           "kb": 31,
-          "delta": -9,
+          "delta": -9.9,
           "isBest": false
         },
         "minifier": {
@@ -3461,8 +3541,8 @@
       "kb": 21,
       "results": {
         "swchtml": {
-          "kb": 18,
-          "delta": -14,
+          "kb": 17,
+          "delta": -17.2,
           "isBest": false
         },
         "minifier": {
@@ -3503,8 +3583,8 @@
       "kb": 169,
       "results": {
         "swchtml": {
-          "kb": 162,
-          "delta": -3.7,
+          "kb": 160,
+          "delta": -5.1,
           "isBest": false
         },
         "minifier": {
@@ -3545,8 +3625,8 @@
       "kb": 223,
       "results": {
         "swchtml": {
-          "kb": 212,
-          "delta": -4.8,
+          "kb": 211,
+          "delta": -5.4,
           "isBest": false
         },
         "minifier": {
@@ -3587,8 +3667,8 @@
       "kb": 282,
       "results": {
         "swchtml": {
-          "kb": 281,
-          "delta": -0.3,
+          "kb": 279,
+          "delta": -0.9,
           "isBest": false
         },
         "minifier": {
@@ -3629,8 +3709,8 @@
       "kb": 22,
       "results": {
         "swchtml": {
-          "kb": 19,
-          "delta": -13.7,
+          "kb": 18,
+          "delta": -14.4,
           "isBest": false
         },
         "minifier": {
@@ -3671,8 +3751,8 @@
       "kb": 57,
       "results": {
         "swchtml": {
-          "kb": 42,
-          "delta": -26.2,
+          "kb": 40,
+          "delta": -28.8,
           "isBest": false
         },
         "minifier": {
@@ -3713,8 +3793,8 @@
       "kb": 392,
       "results": {
         "swchtml": {
-          "kb": 333,
-          "delta": -14.9,
+          "kb": 329,
+          "delta": -15.9,
           "isBest": false
         },
         "minifier": {
@@ -3751,8 +3831,8 @@
       "kb": 95,
       "results": {
         "swchtml": {
-          "kb": 80,
-          "delta": -15.5,
+          "kb": 79,
+          "delta": -16.6,
           "isBest": false
         },
         "minifier": {
@@ -3793,8 +3873,8 @@
       "kb": 94,
       "results": {
         "swchtml": {
-          "kb": 88,
-          "delta": -6.5,
+          "kb": 87,
+          "delta": -8,
           "isBest": false
         },
         "minifier": {
@@ -3835,8 +3915,8 @@
       "kb": 124,
       "results": {
         "swchtml": {
-          "kb": 105,
-          "delta": -15.3,
+          "kb": 104,
+          "delta": -16.8,
           "isBest": false
         },
         "minifier": {
@@ -3877,8 +3957,8 @@
       "kb": 1123,
       "results": {
         "swchtml": {
-          "kb": 849,
-          "delta": -24.5,
+          "kb": 835,
+          "delta": -25.7,
           "isBest": false
         },
         "minifier": {
@@ -3888,7 +3968,7 @@
         },
         "compressor": null,
         "htmlnano": {
-          "kb": 785,
+          "kb": 786,
           "delta": -30.1,
           "isBest": false
         },
@@ -3912,40 +3992,40 @@
     {
       "name": "Toss Tech",
       "url": "https://toss.tech/",
-      "kb": 285,
+      "kb": 283,
       "results": {
         "swchtml": {
-          "kb": 277,
-          "delta": -2.8,
+          "kb": 274,
+          "delta": -3.4,
           "isBest": false
         },
         "minifier": {
-          "kb": 271,
+          "kb": 270,
           "delta": -4.6,
           "isBest": false
         },
         "compressor": {
-          "kb": 276,
+          "kb": 275,
           "delta": -3.1,
           "isBest": false
         },
         "htmlnano": {
-          "kb": 271,
+          "kb": 270,
           "delta": -4.6,
           "isBest": true
         },
         "minify": {
-          "kb": 274,
+          "kb": 273,
           "delta": -3.7,
           "isBest": false
         },
         "minifyhtml": {
-          "kb": 273,
+          "kb": 272,
           "delta": -4,
           "isBest": false
         },
         "minimize": {
-          "kb": 283,
+          "kb": 282,
           "delta": -0.6,
           "isBest": false
         }
@@ -3957,32 +4037,32 @@
       "kb": 195,
       "results": {
         "swchtml": {
-          "kb": 151,
-          "delta": -22.6,
+          "kb": 148,
+          "delta": -24,
           "isBest": false
         },
         "minifier": {
-          "kb": 132,
-          "delta": -32.1,
+          "kb": 133,
+          "delta": -32,
           "isBest": false
         },
         "compressor": {
-          "kb": 158,
+          "kb": 159,
           "delta": -18.7,
           "isBest": false
         },
         "htmlnano": {
-          "kb": 131,
+          "kb": 132,
           "delta": -32.6,
           "isBest": true
         },
         "minify": {
-          "kb": 150,
-          "delta": -22.9,
+          "kb": 151,
+          "delta": -22.8,
           "isBest": false
         },
         "minifyhtml": {
-          "kb": 153,
+          "kb": 154,
           "delta": -21.3,
           "isBest": false
         },
@@ -3999,8 +4079,8 @@
       "kb": 575,
       "results": {
         "swchtml": {
-          "kb": 520,
-          "delta": -9.6,
+          "kb": 518,
+          "delta": -10,
           "isBest": false
         },
         "minifier": {
@@ -4037,8 +4117,8 @@
       "kb": 161,
       "results": {
         "swchtml": {
-          "kb": 136,
-          "delta": -15.5,
+          "kb": 134,
+          "delta": -16.8,
           "isBest": false
         },
         "minifier": {
@@ -4079,8 +4159,8 @@
       "kb": 93,
       "results": {
         "swchtml": {
-          "kb": 81,
-          "delta": -12.2,
+          "kb": 79,
+          "delta": -14.4,
           "isBest": false
         },
         "minifier": {
@@ -4117,8 +4197,8 @@
       "kb": 49,
       "results": {
         "swchtml": {
-          "kb": 39,
-          "delta": -21.7,
+          "kb": 38,
+          "delta": -23.1,
           "isBest": false
         },
         "minifier": {
@@ -4159,8 +4239,8 @@
       "kb": 253,
       "results": {
         "swchtml": {
-          "kb": 244,
-          "delta": -3.3,
+          "kb": 237,
+          "delta": -6.3,
           "isBest": false
         },
         "minifier": {
@@ -4169,7 +4249,7 @@
           "isBest": true
         },
         "compressor": {
-          "kb": 241,
+          "kb": 240,
           "delta": -4.8,
           "isBest": false
         },
@@ -4201,37 +4281,37 @@
       "kb": 223,
       "results": {
         "swchtml": {
-          "kb": 184,
-          "delta": -17.5,
+          "kb": 181,
+          "delta": -18.9,
           "isBest": false
         },
         "minifier": {
           "kb": 154,
-          "delta": -30.9,
+          "delta": -31,
           "isBest": false
         },
         "compressor": {
           "kb": 193,
-          "delta": -13.4,
+          "delta": -13.5,
           "isBest": false
         },
         "htmlnano": {
-          "kb": 154,
+          "kb": 153,
           "delta": -31.2,
           "isBest": true
         },
         "minify": {
-          "kb": 184,
+          "kb": 183,
           "delta": -17.6,
           "isBest": false
         },
         "minifyhtml": {
           "kb": 191,
-          "delta": -14.3,
+          "delta": -14.4,
           "isBest": false
         },
         "minimize": {
-          "kb": 208,
+          "kb": 207,
           "delta": -7.1,
           "isBest": false
         }
@@ -4243,8 +4323,8 @@
       "kb": 80,
       "results": {
         "swchtml": {
-          "kb": 56,
-          "delta": -29.7,
+          "kb": 54,
+          "delta": -32.5,
           "isBest": false
         },
         "minifier": {
@@ -4285,8 +4365,8 @@
       "kb": 77,
       "results": {
         "swchtml": {
-          "kb": 66,
-          "delta": -14,
+          "kb": 65,
+          "delta": -15.5,
           "isBest": false
         },
         "minifier": {
