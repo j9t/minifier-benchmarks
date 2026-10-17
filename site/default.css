@@ -578,14 +578,13 @@ input {
 
 .benchmark-table .tool-cell {
 	font-weight: 550;
+	padding-right: 0;
 }
 
-/* Lets badges wrap below the name when space is tight */
-.tool-label {
-	align-items: center;
-	display: flex;
-	flex-wrap: wrap;
-	gap: 6px 9px;
+/* Override left padding for output column… */
+th:has([data-sort='kb']),
+.tool-cell + td {
+	padding-left: 0 !important;
 }
 
 .tool-cell a {
@@ -675,6 +674,7 @@ th.numeric {
 	bottom: 1px;
 	color: var(--positive);
 	font: 9px var(--font-mono);
+	margin-left: 8px;
 	padding: 3px 5px;
 	position: relative;
 	text-transform: uppercase;
@@ -887,11 +887,6 @@ th.numeric {
 	.sites-table tbody th {
 		white-space: normal;
 		width: 9em;
-	}
-
-	.tool-label {
-		align-items: flex-start;
-		flex-direction: column;
 	}
 
 	.data-tabs {

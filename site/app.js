@@ -151,7 +151,7 @@ function renderMinifierLink(minifier) {
 function renderPlaceholderRow(minifier, badge) {
   return `<tr class="considered-row">
     <td class="rank">—</td>
-    <th class="tool-cell" scope="row"><span class="tool-label">${renderMinifierLink(minifier)}<span class="badge badge-muted">${badge}</span></span></th>
+    <th class="tool-cell" scope="row">${renderMinifierLink(minifier)}<span class="badge badge-muted">${badge}</span></th>
     ${'<td class="numeric muted">n/a</td>'.repeat(5)}
   </tr>`;
 }
@@ -170,7 +170,7 @@ function renderSummary() {
     ].join('');
     return `<tr${minifier.isSmallest ? ' class="leading-row"' : ''}>
       <td class="rank">${String(idx + 1).padStart(2, '0')}</td>
-      <th class="tool-cell" scope="row"><span class="tool-label">${renderMinifierLink(minifier)}${badges}</span></th>
+      <th class="tool-cell" scope="row">${renderMinifierLink(minifier)}${badges}</th>
       <td class="numeric"><span${minifier.isSmallest ? ' class="best-result"' : ''}>${formatKb(minifier.kb)}</span> <span class="unit">KB</span></td>
       <td class="numeric saving-cell">
         <div class="saving-content">
