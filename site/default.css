@@ -580,6 +580,14 @@ input {
 	font-weight: 550;
 }
 
+/* Lets badges wrap below the name when space is tight */
+.tool-label {
+	align-items: center;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px 9px;
+}
+
 .tool-cell a {
 	align-items: center;
 	display: inline-flex;
@@ -628,10 +636,6 @@ th.numeric {
 	font-weight: 500;
 }
 
-.saving-cell {
-	min-width: 230px;
-}
-
 .benchmark-table .saving-cell {
 	padding-left: 0;
 }
@@ -640,15 +644,15 @@ th.numeric {
 	align-items: center;
 	display: flex;
 	gap: 20px;
+	justify-content: flex-end;
 }
 
 .saving-bar {
 	background: var(--secondary);
 	border-radius: 2px;
-	flex: 1;
 	height: 5px;
-	min-width: 115px;
 	overflow: hidden;
+	width: 120px;
 }
 
 .saving-bar span {
@@ -671,7 +675,6 @@ th.numeric {
 	bottom: 1px;
 	color: var(--positive);
 	font: 9px var(--font-mono);
-	margin-left: 9px;
 	padding: 3px 5px;
 	position: relative;
 	text-transform: uppercase;
@@ -886,9 +889,9 @@ th.numeric {
 		width: 9em;
 	}
 
-	.badge {
-		display: table;
-		margin: 6px 0 0;
+	.tool-label {
+		align-items: flex-start;
+		flex-direction: column;
 	}
 
 	.data-tabs {
