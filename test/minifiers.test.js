@@ -28,11 +28,11 @@ const html = `<!DOCTYPE html>
 </html>
 `;
 
-async function minifyAll(isHtmlOnly) {
+async function minifyAll(isHtmlOnly, input = html) {
   const outputs = {};
   for (const [name, minifier] of Object.entries(createMinifiers({ isHtmlOnly, minifierConfig }))) {
     await minifier.init?.();
-    outputs[name] = String(await minifier.minify(minifier.isBufferInput ? Buffer.from(html) : html, site));
+    outputs[name] = String(await minifier.minify(minifier.isBufferInput ? Buffer.from(input) : input, site));
   }
   return outputs;
 }
@@ -57,6 +57,15 @@ describe('createMinifiers', () => {
       assert.ok(output.includes('class=a'), name);
     }
   });
+
+  for (const isHtmlOnly of [true, false]) {
+    it(`Keeps whitespace between words around inline elements with every minifier (${isHtmlOnly ? 'HTML' : 'max'} mode)`, async () => {
+      const input = '<!DOCTYPE html><title>Test</title><p>Photos and <a href="/">videos</a> and <b>more</b></p>';
+      for (const [name, output] of Object.entries(await minifyAll(isHtmlOnly, input))) {
+        assert.ok(output.replace(/<[^>]*>/g, '').includes('Photos and videos and more'), name);
+      }
+    });
+  }
 
   it('Removes void element slashes with every minifier', async () => {
     for (const [name, output] of Object.entries(await minifyAll(true))) {
