@@ -21,14 +21,14 @@ export function createMinifiers({ isHtmlOnly, minifierConfig }) {
     swchtml: {
       async minify(data) {
         const result = await minifySWC(data, {
-          // Use most aggressive settings
+          // Use most aggressive settings that keep output correct
           forceSetHtml5Doctype: true,
           minifyJs: !isHtmlOnly,
           minifyCss: !isHtmlOnly,
           minifyJson: !isHtmlOnly,
           minifyAdditionalScriptsContent: isHtmlOnly ? [] : [['application/ld+json', 'json']],
           minifyAdditionalAttributes: isHtmlOnly ? [] : [['style', 'css']],
-          collapseWhitespaces: 'all',
+          collapseWhitespaces: 'smart', // `all` removes whitespace between inline elements, fusing words
           removeComments: true,
           removeEmptyAttributes: true,
           removeRedundantAttributes: 'all',
