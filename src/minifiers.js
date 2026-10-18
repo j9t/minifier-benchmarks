@@ -80,8 +80,8 @@ export function createMinifiers({ isHtmlOnly, minifierConfig }) {
               removeUnusedCss: false
             }
           : {
-              minifyUrls: site,
-          };
+              minifyUrls: site
+            };
         const result = await htmlnano.process(data, options, preset);
         return result.html;
       }
