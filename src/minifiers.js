@@ -52,10 +52,11 @@ export function createMinifiers({ isHtmlOnly, minifierConfig }) {
         // @@ Disable or clear the URL cache, too, once HTML Minifier Next allows it
         const config = { ...minifierConfig, minifyURLs: site };
 
-        // HTML-only mode: Disable CSS, JS, SVG, and other minification
+        // HTML-only mode: Disable CSS, JS, JSON, SVG, and other minification
         if (isHtmlOnly) {
           config.minifyCSS = false;
           config.minifyJS = false;
+          config.minifyJSON = false;
           config.minifySVG = false;
           config.minifyURLs = false;
           config.removeUnusedCSS = false;
