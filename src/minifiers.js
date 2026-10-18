@@ -25,8 +25,8 @@ export function createMinifiers({ isHtmlOnly, minifierConfig }) {
           forceSetHtml5Doctype: true,
           minifyJs: !isHtmlOnly,
           minifyCss: !isHtmlOnly,
-          minifyJson: !isHtmlOnly,
-          minifyAdditionalScriptsContent: isHtmlOnly ? [] : [['application/ld+json', 'json']],
+          minifyJson: true,
+          minifyAdditionalScriptsContent: [['application/ld+json', 'json']],
           minifyAdditionalAttributes: isHtmlOnly ? [] : [['style', 'css']],
           collapseWhitespaces: 'smart', // `all` removes whitespace between inline elements, fusing words
           removeComments: true,
@@ -74,7 +74,7 @@ export function createMinifiers({ isHtmlOnly, minifierConfig }) {
           ? {
               minifyCss: false,
               minifyJs: false,
-              minifyJson: false,
+              minifyJson: true,
               minifySvg: false,
               minifyHtmlTemplate: false,
               removeUnusedCss: false
