@@ -178,23 +178,6 @@ input {
 	color: inherit;
 }
 
-.link-button {
-	align-items: center;
-	background: none;
-	border: 0;
-	color: var(--positive);
-	cursor: pointer;
-	display: inline-flex;
-	font: inherit;
-	gap: 6px;
-	padding: 0;
-}
-
-.link-button:hover span {
-	text-decoration: underline;
-	text-underline-offset: 3px;
-}
-
 /* Header */
 
 .site-header {
@@ -454,6 +437,36 @@ input {
 	display: flex;
 	gap: 12px;
 	margin-bottom: 12px;
+}
+
+.view-switch {
+	border: 1px solid var(--border);
+	border-radius: 4px;
+	display: flex;
+	gap: 2px;
+	padding: 2px;
+}
+
+.view-switch button {
+	background: none;
+	border: 0;
+	border-radius: 2px;
+	color: var(--muted-foreground);
+	cursor: pointer;
+	font-size: 12px;
+	font-weight: 500;
+	height: 26px;
+	padding-inline: 12px;
+	transition: background-color 0.2s, color 0.2s;
+}
+
+.view-switch button:hover {
+	color: var(--foreground);
+}
+
+.view-switch button[aria-pressed="true"] {
+	background: var(--positive-soft);
+	color: var(--foreground);
 }
 
 .search-wrap {
@@ -990,17 +1003,25 @@ th.numeric {
 		display: none;
 	}
 
+	.table-controls {
+		flex-wrap: wrap;
+	}
+
+	.view-switch {
+		width: 100%;
+	}
+
+	.view-switch button {
+		flex: 1;
+		height: 34px;
+	}
+
 	.search-wrap {
 		flex: 1;
 	}
 
 	.search-wrap input {
 		width: 100%;
-	}
-
-	.table-context {
-		flex-direction: column;
-		gap: 7px;
 	}
 
 	.benchmark-table th,

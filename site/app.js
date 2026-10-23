@@ -53,7 +53,7 @@ const elements = {
   results: document.getElementById('results'),
   search: document.getElementById('search'),
   exportButton: document.getElementById('export'),
-  viewToggle: document.getElementById('view-toggle'),
+  viewButtons: document.querySelectorAll('[data-view]'),
   context: document.getElementById('context'),
   footnote: document.getElementById('footnote'),
   fullResults: document.getElementById('full-results'),
@@ -290,7 +290,9 @@ function render() {
   });
   elements.results.setAttribute('aria-labelledby', 'tab-' + state.mode);
   elements.context.textContent = `${modes[state.mode].context} · ${getModeData().siteCount} websites`;
-  elements.viewToggle.querySelector('span').textContent = isSites ? 'View minifier summary' : 'View all website results';
+  elements.viewButtons.forEach(function (button) {
+    button.setAttribute('aria-pressed', String(button.dataset.view === state.view));
+  });
   elements.search.placeholder = isSites ? 'Search websites…' : 'Search minifiers…';
   elements.search.setAttribute('aria-label', isSites ? 'Search websites' : 'Search minifiers');
   elements.fullResults.href = `${urlRepo}#${modes[state.mode].anchor}`;
@@ -401,10 +403,8 @@ function writeHash() {
   }
 }
 
-// Selecting a tab shows its summary, so that the HTML tab returns to the default view
 function selectMode(mode) {
   state.mode = mode;
-  state.view = 'summary';
   state.query = '';
   elements.search.value = '';
   writeHash();
@@ -426,12 +426,15 @@ elements.search.addEventListener('input', function (event) {
   render();
 });
 
-elements.viewToggle.addEventListener('click', function () {
-  state.view = state.view === 'sites' ? 'summary' : 'sites';
-  state.query = '';
-  elements.search.value = '';
-  writeHash();
-  render();
+elements.viewButtons.forEach(function (button) {
+  button.addEventListener('click', function () {
+    if (button.dataset.view === state.view) return;
+    state.view = button.dataset.view;
+    state.query = '';
+    elements.search.value = '';
+    writeHash();
+    render();
+  });
 });
 
 elements.results.addEventListener('click', function (event) {
