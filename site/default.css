@@ -413,6 +413,7 @@ input {
 	font-weight: 500;
 	gap: 8px;
 	padding: 0 0 16px;
+	white-space: nowrap;
 }
 
 .data-tab:hover {
@@ -435,7 +436,7 @@ input {
 .table-controls {
 	align-items: center;
 	display: flex;
-	gap: 12px;
+	gap: 8px;
 	margin-bottom: 12px;
 }
 
@@ -856,6 +857,23 @@ th.numeric {
 	display: inline-flex;
 }
 
+@media (width <= 1080px) {
+
+	.table-toolbar {
+		flex-wrap: wrap;
+	}
+
+	.table-controls {
+		margin-top: 8px;
+		width: 100%;
+	}
+
+	.view-switch {
+		margin-right: auto;
+	}
+
+}
+
 @media (width <= 800px) {
 
 	.page-width {
@@ -885,16 +903,6 @@ th.numeric {
 
 	.stat-value {
 		font-size: 25px;
-	}
-
-	.table-toolbar {
-		flex-wrap: wrap;
-	}
-
-	.table-controls {
-		justify-content: space-between;
-		margin-top: 8px;
-		width: 100%;
 	}
 
 	.sites-table tbody th {
@@ -1013,7 +1021,6 @@ th.numeric {
 
 	.view-switch button {
 		flex: 1;
-		height: 34px;
 	}
 
 	.search-wrap {
