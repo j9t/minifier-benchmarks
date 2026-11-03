@@ -1,7 +1,7 @@
 // Local minifiers with their benchmark settings, each taking the input (a string, or a buffer
 // if `isBufferInput`) and the site URL, and resolving to the minified output
 
-import { minify as minifyHMN } from 'html-minifier-next';
+import { minify as minifyHM } from 'html-minifier';
 import htmlnano from 'htmlnano';
 import { minify as minifySWC } from '@swc/html';
 import minifyHTMLPkg from '@minify-html/node';
@@ -43,13 +43,13 @@ export function createMinifiers({ isHtmlOnly, minifierConfig }) {
       }
     },
 
-    // HTML Minifier Next
+    // HTML Minifier
     minifier: {
       minify(data, site) {
         // Load config (with caches disabled, as they persist across calls) and add site-specific minifyURLs;
-        // a fresh object per call, as HTML Minifier Next memoizes options processing per object
+        // a fresh object per call, as HTML Minifier memoizes options processing per object
         //
-        // @@ Disable or clear the URL cache, too, once HTML Minifier Next allows it
+        // @@ Disable or clear the URL cache, too, once HTML Minifier allows it
         const config = { ...minifierConfig, minifyURLs: site };
 
         // HTML-only mode: Disable CSS, JS, JSON, SVG, and other minification
@@ -62,7 +62,7 @@ export function createMinifiers({ isHtmlOnly, minifierConfig }) {
           config.removeUnusedCSS = false;
         }
 
-        return minifyHMN(data, config);
+        return minifyHM(data, config);
       }
     },
 

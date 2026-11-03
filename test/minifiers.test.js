@@ -6,7 +6,7 @@ import { fileURLToPath } from 'url';
 import { createMinifiers } from '../src/minifiers.js';
 
 const dirRoot = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
-const minifierConfig = JSON.parse(await fs.readFile(path.join(dirRoot, 'html-minifier-next.config.json'), 'utf8'));
+const minifierConfig = JSON.parse(await fs.readFile(path.join(dirRoot, 'html-minifier.config.json'), 'utf8'));
 const site = 'https://example.com/';
 const html = `<!DOCTYPE html>
 <html>
