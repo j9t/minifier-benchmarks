@@ -23,8 +23,8 @@
     },
     {
       "id": "minifier",
-      "name": "HTML Minifier Next",
-      "url": "https://github.com/j9t/html-minifier-next",
+      "name": "HTML Minifier",
+      "url": "https://github.com/j9t/html-minifier",
       "isRemote": false,
       "isExcluded": false,
       "processed": 107,

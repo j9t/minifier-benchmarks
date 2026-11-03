@@ -39,10 +39,10 @@ const dirOutput = path.join(dirRoot, 'output', MODE);
 await fs.mkdir(dirOutput, { recursive: true });
 await fs.mkdir(dirInput, { recursive: true });
 
-const user_agent = 'html-minifier-next-benchmarks/0.0';
+const user_agent = 'minifier-benchmarks/0.0';
 const urls = JSON.parse(await fs.readFile(path.join(dirRoot, 'sites.json'), 'utf8'));
 const fileNames = Object.keys(urls);
-const minifierConfig = JSON.parse(await fs.readFile(path.join(dirRoot, 'html-minifier-next.config.json'), 'utf8'));
+const minifierConfig = JSON.parse(await fs.readFile(path.join(dirRoot, 'html-minifier.config.json'), 'utf8'));
 const benchmarkErrors = [];
 
 // Verbose logging flag (run via `VERBOSE=true npm run benchmarks`)
@@ -58,7 +58,7 @@ const minifierNames = ['swchtml', 'minifier', 'compressor', 'htmlnano', 'minify'
 
 const minifierLabels = {
   swchtml: '@swc/html',
-  minifier: 'HTML Minifier Next',
+  minifier: 'HTML Minifier',
   compressor: 'htmlcompressor.com',
   htmlnano: 'htmlnano',
   minify: 'minify',
@@ -68,7 +68,7 @@ const minifierLabels = {
 
 const minifierUrls = {
   swchtml: 'https://github.com/swc-project/swc',
-  minifier: 'https://github.com/j9t/html-minifier-next',
+  minifier: 'https://github.com/j9t/html-minifier',
   compressor: 'https://htmlcompressor.com/',
   htmlnano: 'https://github.com/maltsev/htmlnano',
   minify: 'https://github.com/tdewolff/minify',

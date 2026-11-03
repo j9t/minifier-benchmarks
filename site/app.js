@@ -24,10 +24,10 @@ const modes = {
 // Minifiers deliberately not benchmarked (see README notes)
 const minifiersNotIncluded = [
   {
-    name: 'HTML Minifier',
-    url: 'https://github.com/kangax/html-minifier',
-    badge: 'Deprecated',
-    note: 'HTML Minifier isn’t included as it’s deprecated; HTML Minifier Next is its successor.'
+    name: 'HTML Minifier Next',
+    url: 'https://github.com/j9t/html-minifier-next',
+    badge: 'Merged',
+    note: 'HTML Minifier Next isn’t included anymore as it was merged with and continues as HTML Minifier.'
   },
   {
     name: 'HTML Minifier Terser',

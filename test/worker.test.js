@@ -7,7 +7,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 const dirRoot = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
-const minifierConfig = JSON.parse(await fs.readFile(path.join(dirRoot, 'html-minifier-next.config.json'), 'utf8'));
+const minifierConfig = JSON.parse(await fs.readFile(path.join(dirRoot, 'html-minifier.config.json'), 'utf8'));
 
 // Starts the worker like `benchmark.js` does (plus `execArgv`);
 // requests resolve to the worker’s responses
@@ -102,12 +102,12 @@ registerHooks({
   it('Reports a minifier whose package fails to load as failing to start, without affecting other minifiers', async () => {
     const execArgv = ['--import', path.join(dirTemp, 'no-minify.mjs')];
     const workerMinify = startWorker(execArgv);
-    const workerHMN = startWorker(execArgv);
+    const workerHM = startWorker(execArgv);
     try {
       assert.match((await workerMinify.request('init', { name: 'minify', isHtmlOnly: false, minifierConfig })).error, /Native library not found/);
-      assert.deepEqual(await workerHMN.request('init', { name: 'minifier', isHtmlOnly: false, minifierConfig }), {});
+      assert.deepEqual(await workerHM.request('init', { name: 'minifier', isHtmlOnly: false, minifierConfig }), {});
     } finally {
-      await Promise.all([workerMinify.close(), workerHMN.close()]);
+      await Promise.all([workerMinify.close(), workerHM.close()]);
     }
   });
 
