@@ -1,9 +1,9 @@
 {
   "dependencies": {
     "@minify-html/node": "^0.18.1",
-    "@swc/html": "^1.16.21",
+    "@swc/html": "^1.16.22",
     "@tdewolff/minify": "^2.24.8",
-    "html-minifier": "^5.0.0",
+    "html-minifier": "^5.0.1",
     "htmlnano": "^3.6.1",
     "minimize": "^2.2.0"
   },
