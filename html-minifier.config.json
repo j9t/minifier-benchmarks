@@ -32,6 +32,7 @@
   "maxInputLength": 0,
   "maxLineLength": 0,
   "mergeScripts": true,
+  "mergeStyles": true,
   "minifyCSS": true,
   "minifyJS": {
     "engine": "swc"
