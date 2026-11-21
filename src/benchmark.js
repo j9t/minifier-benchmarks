@@ -39,7 +39,7 @@ const dirOutput = path.join(dirRoot, 'output', MODE);
 await fs.mkdir(dirOutput, { recursive: true });
 await fs.mkdir(dirInput, { recursive: true });
 
-const user_agent = 'minifier-benchmarks/0.0';
+const user_agent = 'minifier-benchmarks (+https://j9t.github.io/minifier-benchmarks/)';
 const urls = JSON.parse(await fs.readFile(path.join(dirRoot, 'sites.json'), 'utf8'));
 const fileNames = Object.keys(urls);
 const minifierConfig = JSON.parse(await fs.readFile(path.join(dirRoot, 'html-minifier.config.json'), 'utf8'));
