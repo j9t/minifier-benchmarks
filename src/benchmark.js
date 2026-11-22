@@ -1027,7 +1027,7 @@ if (benchmarkErrors.length > 0) {
   console.log();
   console.log('Benchmark warnings and errors:');
   benchmarkErrors.forEach(error => {
-    console.log(styleText(['red'], `• ${error}`));
+    console.log(`• ${styleText(['red'], error)}`);
   });
   console.log();
 }
